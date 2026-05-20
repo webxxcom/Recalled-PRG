@@ -48,10 +48,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,17 +116,31 @@ TextureImporter:
       name: Rock4_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 7
-        width: 61
-        height: 44
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape: []
-      tessellationDetail: -1
+      physicsShape:
+      - - {x: 27, y: -12}
+        - {x: 27, y: -3}
+        - {x: 20, y: 7}
+        - {x: 6, y: 17}
+        - {x: -10, y: 18}
+        - {x: -14, y: 13}
+        - {x: -21, y: 10}
+        - {x: -25, y: 5}
+        - {x: -27, y: 0}
+        - {x: -22, y: -6}
+        - {x: -16, y: -17}
+        - {x: -9, y: -22}
+        - {x: 3, y: -21}
+        - {x: 17, y: -13}
+      tessellationDetail: 0
       bones: []
       spriteID: fb9103558ce7509b0800000000000000
       internalID: -5114542402921555521
@@ -138,7 +152,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6d0f17947705a4843b00ee622e0da304
     internalID: 0
     vertices: []
     indices: 
@@ -146,7 +160,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Rock4_0: -5114542402921555521
   mipmapLimitGroupName: 

@@ -1,9 +1,10 @@
 using TMPro.EditorUtilities;
 using UnityEngine;
-
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
+
+[RequireComponent(typeof(HealthComponent))]
 public abstract class EntityController : MonoBehaviour
 {
     // Component attributes
@@ -11,12 +12,11 @@ public abstract class EntityController : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     protected Rigidbody2D rb;
     protected StairMovementComponent stairsMovement;
+    protected HealthComponent healthComponent;
 
     [SerializeField] protected float speed;
     protected float currentSpeed;
-
-    [SerializeField] protected int health;
-    protected int currentHealth;
+    public bool IsFreezed { get; set; }
 
     protected virtual void Awake()
     {
@@ -24,9 +24,9 @@ public abstract class EntityController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         stairsMovement = GetComponent<StairMovementComponent>();
+        healthComponent = GetComponent<HealthComponent>();
 
         currentSpeed = speed;
-        currentHealth = health;
     }
 
     protected virtual void HandleSpriteFlip(Vector2 dir)

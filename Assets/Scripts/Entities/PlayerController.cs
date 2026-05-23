@@ -3,19 +3,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class Movement : EntityController
+public class PlayerController : EntityController, ITargetable
 {
     private static readonly string IsCarryingGoldStr = "isCarryingGold";
 
     public TextMeshProUGUI text;
-    public Slider healthSlider;
     public Slider staminaSlider;
     public float stamina;
     public float sprintingSpeed;
     public float staminaUsage;
     public float staminaRestore;
-
-    StairMovementComponent stairComponent;
 
     Vector2 movement;
     bool isWalking;
@@ -26,24 +23,13 @@ public class Movement : EntityController
     float staminaRestoreLastTime = 0;
     float animatorDefaultSpeed;
 
-    void SetHealthSlider()
-    {
-        currentHealth = health;
-        healthSlider.maxValue = health;
-        healthSlider.value = currentHealth;
-    }
+    public GameObject GameObject => gameObject;
+
     void SetStaminaSlider()
     {
         currentStamina = stamina;
         staminaSlider.maxValue = stamina;
         staminaSlider.value = currentStamina;
-    }
-
-    void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        healthSlider.value = currentHealth;
-        text.SetText("The health is " + currentHealth);
     }
 
     void RestoreStaminaWithTime()
@@ -74,11 +60,9 @@ public class Movement : EntityController
         animator.speed = animatorDefaultSpeed * 2;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         sprintingSpeed = speed * 2;
-        SetHealthSlider();
         SetStaminaSlider();
         animatorDefaultSpeed = animator.speed;
         currentSpeed = speed;
@@ -110,6 +94,9 @@ public class Movement : EntityController
 
     private void HandleMovement()
     {
+        if (IsFreezed)
+            return;
+
         Vector2 finalMovement = ApplyEnvironmentMovement(movement);
 
         if (isSprinting)
@@ -143,7 +130,6 @@ public class Movement : EntityController
         {
             isCarryingGold = true;
 
-            TakeDamage(10);
             Destroy(collision.gameObject);
             animator.SetBool(IsCarryingGoldStr, isCarryingGold);
         }
@@ -157,11 +143,11 @@ public class Movement : EntityController
     private void FixedUpdate()
     {
         HandleMovement();
-        RestoreStaminaWithTime();
     }
 
     // Update is called once per frame
     void Update()
     {
+        RestoreStaminaWithTime();
     }
 }

@@ -8,7 +8,6 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField] float knockbackPower;
 
     new Rigidbody2D rigidbody2D;
-    public Vector2 StartPos { get; set; }
     public Vector2 Destination { get; set; }
     public EntityController Owner { get; set; }
 
@@ -19,7 +18,7 @@ public class ProjectileScript : MonoBehaviour
 
     void InitRotation()
     {
-        direction = (Destination - StartPos).normalized;
+        direction = (Destination - (Vector2)transform.position).normalized;
         float angle;
 
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -34,7 +33,6 @@ public class ProjectileScript : MonoBehaviour
 
     private void Start()
     {
-        transform.position = StartPos;
         InitRotation();
     }
 
@@ -45,6 +43,10 @@ public class ProjectileScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.collider.TryGetComponent(out PlayerController pc))
+        {
+            
+        }
         Destroy(gameObject);
     }
 }

@@ -1,44 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-
 [RequireComponent(typeof(Collider2D))]
+
+[RequireComponent(typeof(EnemyAttackComponent))]
 class ProjectileAttackComponent : MonoBehaviour, IAttackStrategy
 {
     [SerializeField] GameObject projectilePrefab;
 
     new Collider2D collider2D;
-    PlayerController player;
     EntityController entityController;
+    EnemyAttackComponent enemyAttackComponent;
 
     private void Awake()
     {
         collider2D = GetComponent<Collider2D>();
+        enemyAttackComponent = GetComponent<EnemyAttackComponent>();
+
         entityController = GetComponentInParent<EntityController>();
     }
 
     public void SpawnProjectile()
     {
-        GameObject arrow = Instantiate(projectilePrefab);
+        GameObject arrow = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
         ProjectileScript ps = arrow.GetComponent<ProjectileScript>();
-        ps.StartPos = transform.position;
-        ps.Destination = player.transform.position;
+        ps.Destination = enemyAttackComponent.CurrentTarget.transform.position;
         ps.Owner = entityController;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out PlayerController pc))
-        {
-            player = pc;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out PlayerController pc))
-        {
-            player = null;
-        }
     }
 
     public void Execute()
@@ -47,6 +35,6 @@ class ProjectileAttackComponent : MonoBehaviour, IAttackStrategy
 
     public bool CanBeExecuted()
     {
-        return player != null;
+        return true;
     }
 }

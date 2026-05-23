@@ -20,8 +20,7 @@ public class AttackComponent : MonoBehaviour
     private void Awake()
     {
         collider2D = GetComponent<Collider2D>();
-
-        TryGetComponent(out animator);
+        animator = GetComponentInParent<Animator>();
     }
 
     private void Start()

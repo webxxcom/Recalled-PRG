@@ -1,54 +1,45 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(IAttackStrategy))]
 public class EnemyAttackComponent : MonoBehaviour
 {
     [SerializeField] List<HealthComponent> targets;
     [SerializeField] int dealtDamage;
     [SerializeField] float attackTimeout;
-    [SerializeField] GameObject projectilePrefab;
 
-    HealthComponent currentTarget;
     Animator animator;
+    EntityController entityController;
+    IAttackStrategy attackStrategy;
     float timeSinceLastAttack;
+    public bool IsAttackBlocked { get; set; } = false;
+
+    public event Action OnAttack;
 
     private void Awake()
     {
+        attackStrategy = GetComponent<IAttackStrategy>();
         animator = GetComponentInParent<Animator>();
+        entityController = GetComponentInParent<EntityController>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        if (collision.TryGetComponent(out HealthComponent hc) && targets.Contains(hc))
-        {
-            currentTarget = hc;
-        }
+        timeSinceLastAttack = attackTimeout;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out HealthComponent hc) && targets.Contains(hc))
-        {
-            currentTarget = hc;
-        }
-    }
-
-    bool CanAttack() => timeSinceLastAttack >= attackTimeout;
+    bool CanAttack() => timeSinceLastAttack >= attackTimeout && !IsAttackBlocked;
 
     private void Update()
     {
-        if (currentTarget && CanAttack())
+        if (CanAttack() && attackStrategy.CanBeExecuted())
         {
-            if (animator)
-                animator.SetTrigger("attack");
-
-            GameObject arrow = Instantiate(projectilePrefab);
-            ProjectileScript ps = arrow.GetComponent<ProjectileScript>();
-            ps.StartPos = transform.position;
-            ps.Destination = currentTarget.transform.position;
-
             timeSinceLastAttack = 0;
+
+            attackStrategy.Execute();
+            OnAttack?.Invoke();
         }
         timeSinceLastAttack += Time.deltaTime;
     }

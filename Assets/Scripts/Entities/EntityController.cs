@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro.EditorUtilities;
 using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
@@ -16,7 +17,7 @@ public abstract class EntityController : MonoBehaviour
 
     [SerializeField] protected float speed;
     protected float currentSpeed;
-    public bool IsFreezed { get; set; }
+    public bool IsFrozen { get; set; }
 
     protected virtual void Awake()
     {
@@ -27,6 +28,10 @@ public abstract class EntityController : MonoBehaviour
         healthComponent = GetComponent<HealthComponent>();
 
         currentSpeed = speed;
+    }
+
+    protected virtual void Start()
+    {
     }
 
     protected virtual void HandleSpriteFlip(Vector2 dir)
@@ -52,4 +57,33 @@ public abstract class EntityController : MonoBehaviour
     protected virtual void OnTriggerExit2D(Collider2D collision)
     {
     }
+
+    private void FixedUpdate()
+    {
+        if (IsFrozen)
+            return;
+
+        HandleFixedUpdate();
+    }
+
+    protected virtual void HandleFixedUpdate()
+    {
+    }
+
+    public void FreezeFor(float seconds)
+    {
+        StartCoroutine(FrozenCoroutine(seconds));
+    }
+
+    IEnumerator FrozenCoroutine(float seconds)
+    {
+        Freeze();
+
+        yield return new WaitForSeconds(seconds);
+
+        UnFreeze();
+    }
+
+    void Freeze() => IsFrozen = true;
+    void UnFreeze() => IsFrozen = false;
 }

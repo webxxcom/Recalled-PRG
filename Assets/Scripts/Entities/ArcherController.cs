@@ -1,31 +1,53 @@
+using Mono.Cecil.Cil;
 using UnityEngine;
+[RequireComponent(typeof(Animator))]
 
 public class ArcherController : EntityController
 {
     ChaseComponent chase;
+    EnemyAttackComponent enemyAttackComponent;
+    ProjectileAttackComponent projectileAttackComponent;
     Vector2 movement;
+
+    void SpawnArrow() => projectileAttackComponent.SpawnProjectile();
+
+    void PlayAttackAnimation()
+    {
+        animator.SetTrigger("attack");
+    }
 
     protected override void Awake()
     {
         base.Awake();
-        chase = GetComponent<ChaseComponent>();
+        projectileAttackComponent = GetComponentInChildren<ProjectileAttackComponent>();
+        enemyAttackComponent = GetComponentInChildren<EnemyAttackComponent>();
+
+        TryGetComponent(out chase);
+    }
+
+    protected override void Start()
+    {
+        enemyAttackComponent.OnAttack += PlayAttackAnimation;
     }
 
     private void Move(Vector2 dir)
     {
-        if (IsFreezed)
-            return;
-
         movement = ApplyEnvironmentMovement(dir * currentSpeed);
 
         rb.linearVelocity = movement;
         HandleSpriteFlip(movement);
     }
 
-    private void FixedUpdate()
+    protected override void HandleFixedUpdate()
     {
-        if (chase != null)
+        if (chase)
             Move(chase.GetDirection());
+
         animator.SetBool("isWalking", movement.sqrMagnitude > 0.01f);
+    }
+
+    private void Update()
+    {
+        Debug.Log(rb.linearVelocity);
     }
 }

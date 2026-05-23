@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5392467942678612709}
   - component: {fileID: 173077865357078931}
   - component: {fileID: 3318968454496281215}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -179,6 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7f7a64bd8e6c146b4194dce9602b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  advancingSpeed: 1
+  advancingSpeed: 4
   dealtDamage: 10
   knockbackPower: 1

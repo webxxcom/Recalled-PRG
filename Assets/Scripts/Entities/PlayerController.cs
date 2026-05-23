@@ -60,8 +60,10 @@ public class PlayerController : EntityController, ITargetable
         animator.speed = animatorDefaultSpeed * 2;
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         sprintingSpeed = speed * 2;
         SetStaminaSlider();
         animatorDefaultSpeed = animator.speed;
@@ -92,11 +94,26 @@ public class PlayerController : EntityController, ITargetable
         }
     }
 
-    private void HandleMovement()
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (IsFreezed)
-            return;
+        base.OnTriggerEnter2D(collision);
 
+        if (collision.CompareTag("Collectible"))
+        {
+            isCarryingGold = true;
+
+            Destroy(collision.gameObject);
+            animator.SetBool(IsCarryingGoldStr, isCarryingGold);
+        }
+    }
+
+    protected override void OnTriggerExit2D(Collider2D collision)
+    {
+        base.OnTriggerExit2D(collision);
+    }
+
+    protected override void HandleFixedUpdate()
+    {
         Vector2 finalMovement = ApplyEnvironmentMovement(movement);
 
         if (isSprinting)
@@ -120,29 +137,6 @@ public class PlayerController : EntityController, ITargetable
             rb.linearVelocity *= 0.9f;
 
         staminaSlider.value = currentStamina;
-    }
-
-    protected override void OnTriggerEnter2D(Collider2D collision)
-    {
-        base.OnTriggerEnter2D(collision);
-
-        if (collision.CompareTag("Collectible"))
-        {
-            isCarryingGold = true;
-
-            Destroy(collision.gameObject);
-            animator.SetBool(IsCarryingGoldStr, isCarryingGold);
-        }
-    }
-
-    protected override void OnTriggerExit2D(Collider2D collision)
-    {
-        base.OnTriggerExit2D(collision);
-    }
-
-    private void FixedUpdate()
-    {
-        HandleMovement();
     }
 
     // Update is called once per frame

@@ -9,11 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5834628103634691784}
-  - component: {fileID: 3258880000703457685}
   - component: {fileID: 3564894047606665918}
   - component: {fileID: 5356240756973287689}
   m_Layer: 0
-  m_Name: Tree 4
+  m_Name: Stump 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,28 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &3258880000703457685
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4654081416586050726}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 7bad85f3989f26240a0225a8c19c34da, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &3564894047606665918
 SpriteRenderer:
   serializedVersion: 2
@@ -105,16 +82,16 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1597045161386275989, guid: 1745cee98c992e943acd78e7ed24057e, type: 3}
+  m_Sprite: {fileID: 7759314080828431348, guid: 4413d9c1b138184479fe474300ae1c3b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.82, y: 1.24}
+  m_Size: {x: 0.5, y: 0.42}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_SpriteSortPoint: 1
+  m_SpriteSortPoint: 0
 --- !u!61 &5356240756973287689
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -149,15 +126,15 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.024862438, y: -0.043203592}
+  m_Offset: {x: -0.01249662, y: 0.03193581}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.2}
-    oldSize: {x: 3, y: 3}
-    newSize: {x: 0.82, y: 1.24}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.5, y: 0.42}
+    newSize: {x: 0.5, y: 0.42}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.3284371, y: 0.19109297}
+  m_Size: {x: 0.4083581, y: 0.35612836}
   m_EdgeRadius: 0

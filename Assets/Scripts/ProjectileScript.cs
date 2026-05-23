@@ -10,6 +10,7 @@ public class ProjectileScript : MonoBehaviour
     new Rigidbody2D rigidbody2D;
     public Vector2 StartPos { get; set; }
     public Vector2 Destination { get; set; }
+    public EntityController Owner { get; set; }
 
     Vector2 direction;
 
@@ -44,9 +45,6 @@ public class ProjectileScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.TryGetComponent(out HitboxComponent hitbox))
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }

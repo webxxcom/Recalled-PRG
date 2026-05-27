@@ -21,6 +21,9 @@ public class AttackComponent : MonoBehaviour
     {
         collider2D = GetComponent<Collider2D>();
         animator = GetComponentInParent<Animator>();
+
+        if (!collider2D.isTrigger)
+            Debug.LogError("The collider2D for AttackComponent must be a trigger");
     }
 
     private void Start()

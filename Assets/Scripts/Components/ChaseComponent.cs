@@ -7,8 +7,9 @@ using UnityEngine.Assemblies;
 public class ChaseComponent : MonoBehaviour
 {
     [SerializeField] float minDistanceToTarget;
+    [SerializeField] GameObject currentTarget;
 
-    public GameObject Target { get; set; }
+    public GameObject Target { get => currentTarget; set => currentTarget = value; }
 
     public Vector2 GetDirection()
     {

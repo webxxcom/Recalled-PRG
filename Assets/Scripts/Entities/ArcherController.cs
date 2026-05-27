@@ -1,15 +1,15 @@
-using Mono.Cecil.Cil;
 using UnityEngine;
-[RequireComponent(typeof(Animator))]
 
-public class ArcherController : EntityController
+[RequireComponent(typeof(Animator))]
+public class ArcherController : EntityController, IChaser
 {
+    [SerializeField] GameObject currentTarget;
+
     ChaseComponent chase;
     EnemyAttackComponent enemyAttackComponent;
-    ProjectileAttackComponent projectileAttackComponent;
     Vector2 movement;
 
-    void SpawnArrow() => projectileAttackComponent.SpawnProjectile();
+    GameObject IChaser.CurrentTarget { get => currentTarget; set => currentTarget = value; }
 
     void PlayAttackAnimation()
     {
@@ -19,7 +19,6 @@ public class ArcherController : EntityController
     protected override void Awake()
     {
         base.Awake();
-        projectileAttackComponent = GetComponentInChildren<ProjectileAttackComponent>();
         enemyAttackComponent = GetComponentInChildren<EnemyAttackComponent>();
 
         TryGetComponent(out chase);
@@ -48,6 +47,5 @@ public class ArcherController : EntityController
 
     private void Update()
     {
-        Debug.Log(rb.linearVelocity);
     }
 }

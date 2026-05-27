@@ -23,8 +23,6 @@ public class PlayerController : EntityController, ITargetable
     float staminaRestoreLastTime = 0;
     float animatorDefaultSpeed;
 
-    public GameObject GameObject => gameObject;
-
     void SetStaminaSlider()
     {
         currentStamina = stamina;

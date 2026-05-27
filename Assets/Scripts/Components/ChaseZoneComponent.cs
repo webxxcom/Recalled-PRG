@@ -1,11 +1,14 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ChaseZoneComponent : MonoBehaviour
 {
     [SerializeField] List<ChaseComponent> chasers;
 
-    GameObject currentTarget;
+    readonly List<GameObject> currentTargets = new();
+
+    public GameObject CurrentTarget { get => currentTargets.FirstOrDefault(); }
 
     void AllStartChasing(GameObject target)
     {
@@ -14,24 +17,21 @@ public class ChaseZoneComponent : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out ITargetable target))
+        if (collision.TryGetComponent(out ITargetable _))
         {
-            currentTarget = target.GameObject;
+            currentTargets.Add(collision.gameObject);
 
-            AllStartChasing(currentTarget);
+            AllStartChasing(CurrentTarget);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out ITargetable target))
+        if (collision.TryGetComponent(out ITargetable _))
         {
-            if (currentTarget = target.GameObject)
-            {
-                currentTarget = null;
+            currentTargets.Remove(collision.gameObject);
 
-                AllStartChasing(currentTarget);
-            }
+            AllStartChasing(CurrentTarget);
         }
     }
 }

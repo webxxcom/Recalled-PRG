@@ -56,37 +56,6 @@ Transform:
   m_GameObject: {fileID: 244329654840447126}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: -3.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8908723747367862213}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &609497037318958650
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2825049630520358094}
-  m_Layer: 0
-  m_Name: 'StairUpLeft (Missing Prefab with guid: eb9f9fd704215434e8560645880a86f5)'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2825049630520358094
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 609497037318958650}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.5, y: -3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -124,10 +93,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2825049630520358094}
-  - {fileID: 4644549761763986694}
   - {fileID: 1630573838552238899}
-  - {fileID: 8808585665744914329}
+  - {fileID: 4644549761763986694}
+  - {fileID: 3247021487493541070}
+  - {fileID: 5024769252520001510}
   - {fileID: 7509990662374886351}
   - {fileID: 6558058830175786653}
   - {fileID: 2953569536267762284}
@@ -1069,7 +1038,7 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!1 &8786690906812950555
+--- !u!1 &6582224071730456451
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1077,7 +1046,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8808585665744914329}
+  - component: {fileID: 3247021487493541070}
+  m_Layer: 0
+  m_Name: 'StairUpLeft (Missing Prefab with guid: eb9f9fd704215434e8560645880a86f5)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3247021487493541070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582224071730456451}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5, y: -3.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8908723747367862213}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8779272964261705337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5024769252520001510}
   m_Layer: 0
   m_Name: 'StairDownLeft (Missing Prefab with guid: 09cc866e6f0b75c40b7ee2b7bc6bf6ed)'
   m_TagString: Untagged
@@ -1085,13 +1085,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8808585665744914329
+--- !u!4 &5024769252520001510
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8786690906812950555}
+  m_GameObject: {fileID: 8779272964261705337}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.5, y: -4.5, z: 0}
@@ -1310,7 +1310,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7878350319992209165, guid: cfc162fca96c5ad4c9f1736a14447675, type: 3}
   m_PrefabInstance: {fileID: 5019448735430591841}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5121620094511573075
+--- !u!114 &7895214332464807734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,7 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(EntityController))]
 public class HealthComponent : MonoBehaviour, IDamageable
 {
-    [SerializeField] Slider slider;
+    [SerializeField] BarScript healthSlider;
     [SerializeField] float maxHealth;
     float health;
 
@@ -17,8 +18,8 @@ public class HealthComponent : MonoBehaviour, IDamageable
 
     void InitSlider()
     {
-        slider.maxValue = maxHealth;
-        slider.value = health;
+        healthSlider.SetMax((int)maxHealth);
+        healthSlider.SetCurrent((int)maxHealth);
     }
 
     private void Awake()
@@ -28,7 +29,7 @@ public class HealthComponent : MonoBehaviour, IDamageable
         entityController = GetComponent<EntityController>();
         health = maxHealth;
 
-        if (slider)
+        if (healthSlider)
         {
             InitSlider();
         }
@@ -54,10 +55,18 @@ public class HealthComponent : MonoBehaviour, IDamageable
 
     public void TakeDamage(GameObject attacker, int damage, float knockbackPower)
     {
-        health -= damage;
+        if (health - damage <= 0)
+        {
+            health = 0;
+            Destroy(gameObject);
+        }
+        else
+        {
+            health -= damage;
+        }
 
-        if (slider)
-            slider.value = health;
+        if (healthSlider)
+            healthSlider.Change(-damage);
         if (rigidbody2D)
             ApplyKnockback(attacker, knockbackPower);
         if (spriteRenderer)

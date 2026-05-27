@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-[RequireComponent(typeof(Collider2D))]
+﻿using UnityEngine;
 
 [RequireComponent(typeof(EnemyAttackComponent))]
 class ProjectileAttackComponent : MonoBehaviour, IAttackStrategy
 {
     [SerializeField] GameObject projectilePrefab;
 
-    new Collider2D collider2D;
     EntityController entityController;
     EnemyAttackComponent enemyAttackComponent;
 
     private void Awake()
     {
-        collider2D = GetComponent<Collider2D>();
         enemyAttackComponent = GetComponent<EnemyAttackComponent>();
 
         entityController = GetComponentInParent<EntityController>();
+        if (!entityController)
+            Debug.LogError("ProjectileAttackComponent requires EntityController in the parent");
     }
 
     public void SpawnProjectile()
@@ -31,6 +28,7 @@ class ProjectileAttackComponent : MonoBehaviour, IAttackStrategy
 
     public void Execute()
     {
+        SpawnProjectile();
     }
 
     public bool CanBeExecuted()

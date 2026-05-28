@@ -4,22 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(EntityController))]
-public class HealthComponent : MonoBehaviour, IDamageable
+public class HealthComponent : MonoBehaviour
 {
     [SerializeField] BarScript healthSlider;
-    [SerializeField] float maxHealth;
-    float health;
+    [SerializeField] int maxHealth;
+    int health;
 
     EntityController entityController;
     new Rigidbody2D rigidbody2D;
     SpriteRenderer spriteRenderer;
 
-    public new GameObject gameObject { get => base.gameObject; }
-
     void InitSlider()
     {
-        healthSlider.SetMax((int)maxHealth);
-        healthSlider.SetCurrent((int)maxHealth);
+        healthSlider.SetMax(maxHealth);
+        healthSlider.SetCurrent(maxHealth);
     }
 
     private void Awake()
@@ -58,7 +56,6 @@ public class HealthComponent : MonoBehaviour, IDamageable
         if (health - damage <= 0)
         {
             health = 0;
-            Destroy(gameObject);
         }
         else
         {
@@ -71,5 +68,10 @@ public class HealthComponent : MonoBehaviour, IDamageable
             ApplyKnockback(attacker, knockbackPower);
         if (spriteRenderer)
             StartCoroutine(DamageFlash());
+    }
+
+    public void Die()
+    {
+        TakeDamage(gameObject, health, 0);
     }
 }

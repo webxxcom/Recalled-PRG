@@ -7,16 +7,14 @@ using UnityEngine.Assemblies;
 public class ChaseComponent : MonoBehaviour
 {
     [SerializeField] float minDistanceToTarget;
-    [SerializeField] GameObject currentTarget;
-
-    public GameObject Target { get => currentTarget; set => currentTarget = value; }
+    [field: SerializeField] public GameObject CurrentTarget { get; set; }
 
     public Vector2 GetDirection()
     {
-        if (Target == null)
+        if (CurrentTarget == null || CurrentTarget.GetComponent<EntityController>().IsDead)
             return Vector2.zero;
 
-        Vector2 diff = Target.transform.position - gameObject.transform.position;
+        Vector2 diff = CurrentTarget.transform.position - gameObject.transform.position;
         if (diff.magnitude <= minDistanceToTarget)
             return Vector2.zero;
 

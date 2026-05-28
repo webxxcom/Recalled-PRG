@@ -15,9 +15,11 @@ public abstract class EntityController : MonoBehaviour
     protected StairMovementComponent stairsMovement;
     protected HealthComponent healthComponent;
 
+    [field: SerializeField] public bool IsDead { get; set; }
+    [field: SerializeField] public bool IsFrozen { get; set; }
+
     [SerializeField] protected float speed;
     protected float currentSpeed;
-    public bool IsFrozen { get; set; }
 
     protected virtual void Awake()
     {
@@ -60,7 +62,7 @@ public abstract class EntityController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsFrozen)
+        if (IsFrozen || IsDead)
             return;
 
         HandleFixedUpdate();

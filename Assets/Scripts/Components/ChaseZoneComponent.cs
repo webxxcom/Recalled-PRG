@@ -12,12 +12,12 @@ public class ChaseZoneComponent : MonoBehaviour
 
     void AllStartChasing(GameObject target)
     {
-        chasers.ForEach(e => e.Target = target);
+        chasers.ForEach(e => e.CurrentTarget = target);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out ITargetable _))
+        if (collision.TryGetComponent(out ITargetable _) && !collision.GetComponent<EntityController>().IsDead)
         {
             currentTargets.Add(collision.gameObject);
 

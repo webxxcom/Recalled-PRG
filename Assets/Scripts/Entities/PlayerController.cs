@@ -1,95 +1,29 @@
 using TMPro;
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(PlayerMovementComponent))]
+[RequireComponent(typeof(PlayerAttackComponent))]
 public class PlayerController : EntityController, ITargetable
 {
-    private static readonly string IsCarryingGoldStr = "isCarryingGold";
+    PlayerMovementComponent movementComponent;
+    PlayerAttackComponent playerAttackComponent;
 
-    public TextMeshProUGUI text;
-    public Slider staminaSlider;
-    public float stamina;
-    public float sprintingSpeed;
-    public float staminaUsage;
-    public float staminaRestore;
-
-    Vector2 movement;
-    bool isWalking;
-    bool isSprinting;
-    bool isSprintingButtonPressed;
-    bool isCarryingGold;
-    float currentStamina;
-    float staminaRestoreLastTime = 0;
-    float animatorDefaultSpeed;
-
-    void SetStaminaSlider()
+    protected override void Awake()
     {
-        currentStamina = stamina;
-        staminaSlider.maxValue = stamina;
-        staminaSlider.value = currentStamina;
+        base.Awake();
+
+        movementComponent = GetComponent<PlayerMovementComponent>();
+        playerAttackComponent = GetComponent<PlayerAttackComponent>();
     }
 
-    void RestoreStaminaWithTime()
+    void OnAttack(InputValue value)
     {
-        staminaRestoreLastTime += Time.deltaTime;
-
-        bool canRestoreStamina = currentStamina < stamina
-            && !isSprinting
-            && !isSprintingButtonPressed;
-        if (staminaRestoreLastTime > 0.3 && canRestoreStamina)
-        {
-            currentStamina += staminaRestore;
-            staminaRestoreLastTime = 0;
-        }
-    }
-
-    void StopSprinting()
-    {
-        isSprinting = false;
-        currentSpeed = speed;
-        animator.speed = animatorDefaultSpeed;
-    }
-
-    void StartSprinting()
-    {
-        isSprinting = true;
-        currentSpeed = sprintingSpeed;
-        animator.speed = animatorDefaultSpeed * 2;
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-
-        sprintingSpeed = speed * 2;
-        SetStaminaSlider();
-        animatorDefaultSpeed = animator.speed;
-        currentSpeed = speed;
-    }
-
-    private void OnMove(InputValue value)
-    {
-        movement = value.Get<Vector2>();
-        isWalking = movement != Vector2.zero;
-
-        animator.SetBool("isRunning", isWalking);
-    }
-
-    private void OnSprint(InputValue value)
-    {
-        text.SetText("The button is " + (value.isPressed ? "Pressed" : "Released"));
-
-        if (value.isPressed)
-        {
-            StartSprinting();
-            isSprintingButtonPressed = true;
-        }
-        else
-        {
-            StopSprinting();
-            isSprintingButtonPressed = false;
-        }
+        healthComponent.Die();
+        animator.SetTrigger("PlayDeath");
+        IsDead = true;
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -98,10 +32,7 @@ public class PlayerController : EntityController, ITargetable
 
         if (collision.CompareTag("Collectible"))
         {
-            isCarryingGold = true;
-
             Destroy(collision.gameObject);
-            animator.SetBool(IsCarryingGoldStr, isCarryingGold);
         }
     }
 
@@ -112,34 +43,23 @@ public class PlayerController : EntityController, ITargetable
 
     protected override void HandleFixedUpdate()
     {
-        Vector2 finalMovement = ApplyEnvironmentMovement(movement);
-
-        if (isSprinting)
+        if (movementComponent.IsWalking)
         {
-            if (currentStamina - staminaUsage <= 0.3)
-                StopSprinting();
-            else
-                currentStamina -= staminaUsage;
-        }
+            Vector2 movement = movementComponent.GetFinalMovement();
 
-        if (isWalking)
-        {
-            if (isCarryingGold)
-                finalMovement /= 2;
-
-            rb.linearVelocity = finalMovement * currentSpeed;
-
-            HandleSpriteFlip(finalMovement);
+            rb.linearVelocity = movement;
         }
         else
+        {
             rb.linearVelocity *= 0.9f;
+        }
 
-        staminaSlider.value = currentStamina;
+        animator.SetFloat("Speed", rb.linearVelocity.magnitude / movementComponent.SprintingSpeed);
+        animator.SetFloat("MoveX", rb.linearVelocityX);
+        animator.SetFloat("MoveY", rb.linearVelocityY);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        RestoreStaminaWithTime();
     }
 }

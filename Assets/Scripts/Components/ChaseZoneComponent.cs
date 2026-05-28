@@ -1,27 +1,24 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class ChaseZoneComponent : MonoBehaviour
 {
-    [SerializeField] List<ChaseComponent> chasers;
-
     readonly List<GameObject> currentTargets = new();
 
     public GameObject CurrentTarget { get => currentTargets.FirstOrDefault(); }
 
-    void AllStartChasing(GameObject target)
-    {
-        chasers.ForEach(e => e.CurrentTarget = target);
-    }
+    public event Action<GameObject> OnTargetEnteredTheZone;
+    public event Action OnTargetLeftTheZone;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out ITargetable _) && !collision.GetComponent<EntityController>().IsDead)
+        if (collision.TryGetComponent(out ITargetable _))
         {
             currentTargets.Add(collision.gameObject);
 
-            AllStartChasing(CurrentTarget);
+            OnTargetEnteredTheZone?.Invoke(collision.gameObject);
         }
     }
 
@@ -31,7 +28,7 @@ public class ChaseZoneComponent : MonoBehaviour
         {
             currentTargets.Remove(collision.gameObject);
 
-            AllStartChasing(CurrentTarget);
+            OnTargetLeftTheZone?.Invoke();
         }
     }
 }

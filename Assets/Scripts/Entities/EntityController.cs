@@ -1,10 +1,10 @@
 using System.Collections;
 using TMPro.EditorUtilities;
 using UnityEngine;
+
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
-
 [RequireComponent(typeof(HealthComponent))]
 public abstract class EntityController : MonoBehaviour
 {

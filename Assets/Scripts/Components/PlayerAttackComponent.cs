@@ -31,7 +31,7 @@ public class PlayerAttackComponent : MonoBehaviour
 
     bool CanAttack => timeSinceLastAttack >= attackReloadTime;
 
-    private void OnAttack(InputValue value)
+    void OnAttack(InputValue value)
     {
         if (value.isPressed && CanAttack)
         {
@@ -40,7 +40,7 @@ public class PlayerAttackComponent : MonoBehaviour
         }
     }
 
-    private void OnMove(InputValue value)
+    void OnMove(InputValue value)
     {
         Vector2 mov = value.Get<Vector2>();
 

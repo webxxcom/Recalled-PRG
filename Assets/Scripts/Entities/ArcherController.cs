@@ -1,15 +1,12 @@
 using UnityEngine;
-
 [RequireComponent(typeof(Animator))]
-public class ArcherController : EntityController, IChaser
-{
-    [SerializeField] GameObject currentTarget;
 
-    ChaseComponent chase;
+[RequireComponent(typeof(ChaseComponent))]
+public class ArcherController : EntityController
+{
+    ChaseComponent chaseComponent;
     EnemyAttackComponent enemyAttackComponent;
     Vector2 movement;
-
-    GameObject IChaser.CurrentTarget { get => currentTarget; set => currentTarget = value; }
 
     void PlayAttackAnimation()
     {
@@ -19,9 +16,9 @@ public class ArcherController : EntityController, IChaser
     protected override void Awake()
     {
         base.Awake();
-        enemyAttackComponent = GetComponentInChildren<EnemyAttackComponent>();
 
-        TryGetComponent(out chase);
+        chaseComponent = GetComponent<ChaseComponent>();
+        enemyAttackComponent = GetComponentInChildren<EnemyAttackComponent>();
     }
 
     protected override void Start()
@@ -39,8 +36,7 @@ public class ArcherController : EntityController, IChaser
 
     protected override void HandleFixedUpdate()
     {
-        if (chase)
-            Move(chase.GetDirection());
+        Move(chaseComponent.GetDirection());
 
         animator.SetBool("isWalking", movement.sqrMagnitude > 0.01f);
     }

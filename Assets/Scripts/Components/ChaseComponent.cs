@@ -7,7 +7,24 @@ using UnityEngine.Assemblies;
 public class ChaseComponent : MonoBehaviour
 {
     [SerializeField] float minDistanceToTarget;
+    [SerializeField] ChaseZoneComponent chaseZoneComponent;
     [field: SerializeField] public GameObject CurrentTarget { get; set; }
+
+    void SetCurrentTarget(GameObject target)
+    {
+        CurrentTarget = target;
+    }
+
+    void RemoveCurrentTarget()
+    {
+        CurrentTarget = null;
+    }
+
+    private void Awake()
+    {
+        chaseZoneComponent.OnTargetEnteredTheZone += SetCurrentTarget;
+        chaseZoneComponent.OnTargetLeftTheZone += RemoveCurrentTarget;
+    }
 
     public Vector2 GetDirection()
     {

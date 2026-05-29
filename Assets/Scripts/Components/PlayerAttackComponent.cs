@@ -19,9 +19,6 @@ public class PlayerAttackComponent : MonoBehaviour
     private void Awake()
     {
         collider2D = GetComponent<Collider2D>();
-
-        if (!collider2D.isTrigger)
-            Debug.LogError("The collider2D for AttackComponent must be a trigger");
     }
 
     private void Start()

@@ -1,5 +1,4 @@
 using System.Collections;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -18,9 +17,6 @@ public abstract class EntityController : MonoBehaviour
     [field: SerializeField] public bool IsDead { get; set; }
     [field: SerializeField] public bool IsFrozen { get; set; }
 
-    [SerializeField] protected float speed;
-    protected float currentSpeed;
-
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
@@ -28,8 +24,6 @@ public abstract class EntityController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         stairsMovement = GetComponent<StairMovementComponent>();
         healthComponent = GetComponent<HealthComponent>();
-
-        currentSpeed = speed;
     }
 
     protected virtual void Start()

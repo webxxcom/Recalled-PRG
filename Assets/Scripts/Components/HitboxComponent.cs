@@ -9,12 +9,4 @@ public class HitboxComponent : MonoBehaviour
     {
         healthComponent = GetComponentInParent<HealthComponent>();
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.TryGetComponent(out ProjectileScript ps))
-        {
-            healthComponent.TakeDamage(collision.gameObject, ps.GetDealtDamage(), ps.GetKnockbackPower());
-        }
-    }
 }

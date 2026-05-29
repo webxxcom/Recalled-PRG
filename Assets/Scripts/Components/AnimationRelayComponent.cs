@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class AnimationRealyComponent : MonoBehaviour
+public class AnimationRelayComponent : MonoBehaviour
 {
-    [SerializeField] EnemyAttackComponent enemyAttackComponent;
+    [SerializeField] EntityAttackComponent entityAttackComponent;
 
     public void ExecuteAttack()
     {
-        enemyAttackComponent.ExecuteAttack();
+        entityAttackComponent.ExecuteAttack();
     }
 }

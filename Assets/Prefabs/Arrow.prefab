@@ -151,7 +151,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7f7a64bd8e6c146b4194dce9602b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  advancingSpeed: 4
-  dealtDamage: 10
-  knockbackPower: 1
+  <AdvancingSpeed>k__BackingField: 3
+  <DealtDamage>k__BackingField: 10
+  <KnockbackPower>k__BackingField: 1
+  <TimeToLive>k__BackingField: 4

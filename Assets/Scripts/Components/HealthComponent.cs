@@ -14,6 +14,8 @@ public class HealthComponent : MonoBehaviour
     new Rigidbody2D rigidbody2D;
     SpriteRenderer spriteRenderer;
 
+    public event Action<GameObject> OnDamageTaken;
+
     void InitSlider()
     {
         healthSlider.SetMax(maxHealth);
@@ -68,6 +70,8 @@ public class HealthComponent : MonoBehaviour
             ApplyKnockback(attacker, knockbackPower);
         if (spriteRenderer)
             StartCoroutine(DamageFlash());
+
+        OnDamageTaken?.Invoke(attacker);
     }
 
     public void Die()

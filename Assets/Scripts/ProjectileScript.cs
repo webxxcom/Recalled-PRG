@@ -1,52 +1,67 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
 public class ProjectileScript : MonoBehaviour
 {
-    [SerializeField] float advancingSpeed;
-    [SerializeField] int dealtDamage;   
-    [SerializeField] float knockbackPower;
+    [field: SerializeField] public float AdvancingSpeed { get; private set; }
+    [field: SerializeField] public int DealtDamage { get; private set; }
+    [field: SerializeField] public float KnockbackPower { get; private set; }
+    [field: SerializeField] public float TimeToLive { get; private set; }
 
-    new Rigidbody2D rigidbody2D;
     public Vector2 Destination { get; set; }
     public EntityController Owner { get; set; }
 
+    float livingTime = 0;
     Vector2 direction;
-
-    public int GetDealtDamage() => dealtDamage;
-    public float GetKnockbackPower() => knockbackPower;
+    new Rigidbody2D rigidbody2D;
+    new Collider2D collider2D;
 
     void InitRotation()
     {
         direction = (Destination - (Vector2)transform.position).normalized;
-        float angle;
 
-        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.Rotate(0,0, angle);
+    }
+
+    public void Initialize(EntityController owner, Vector2 destination)
+    {
+        Destination = destination;
+        Owner = owner;
+
+        InitRotation();
     }
 
     private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-    }
-
-    private void Start()
-    {
-        InitRotation();
+        collider2D = GetComponent<Collider2D>();
     }
 
     private void FixedUpdate()
     {
-        rigidbody2D.linearVelocity = direction * advancingSpeed;
+        rigidbody2D.linearVelocity = direction * AdvancingSpeed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.TryGetComponent(out PlayerController pc))
+        if (collision.gameObject != Owner.gameObject && collision.gameObject.TryGetComponent(out HealthComponent hc))
         {
-            
+            Debug.Log("Arrow just hit " + collision.gameObject.name);
+            hc.TakeDamage(Owner.gameObject, DealtDamage, KnockbackPower);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+    }
+
+    private void Update()
+    {
+        if (livingTime >= TimeToLive)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        livingTime += Time.deltaTime;
     }
 }

@@ -1,12 +1,13 @@
 using Mono.Cecil.Cil;
 using UnityEngine;
 [RequireComponent(typeof(Animator))]
-
+[RequireComponent(typeof(EntityMovementComponent))]
 public class WarriorController : EntityController
 {
     ChaseComponent chase;
-    EnemyAttackComponent enemyAttackComponent;
+    EntityAttackComponent entityAttackComponent;
     MeleeAttackComponent meleeAttackComponent;
+    EntityMovementComponent entityMovementComponent;
     Vector2 movement;
 
     void PlayAttackAnimation()
@@ -18,33 +19,23 @@ public class WarriorController : EntityController
     {
         base.Awake();
         meleeAttackComponent = GetComponentInChildren<MeleeAttackComponent>();
-        enemyAttackComponent = GetComponentInChildren<EnemyAttackComponent>();
+        entityAttackComponent = GetComponentInChildren<EntityAttackComponent>();
+        entityMovementComponent = GetComponent<EntityMovementComponent>();
 
         TryGetComponent(out chase);
     }
 
     protected override void Start()
     {
-        enemyAttackComponent.OnAttack += PlayAttackAnimation;
-    }
-
-    private void Move(Vector2 dir)
-    {
-        movement = ApplyEnvironmentMovement(dir * currentSpeed);
-
-        rb.linearVelocity = movement;
-        HandleSpriteFlip(movement);
+        entityAttackComponent.OnAttack += PlayAttackAnimation;
     }
 
     protected override void HandleFixedUpdate()
     {
-        if (chase)
-            Move(chase.GetDirection());
+        Vector2 movement = entityMovementComponent.GetFinalMovement();
 
+        rb.linearVelocity = movement;
+        HandleSpriteFlip(movement);
         animator.SetBool("isWalking", movement.sqrMagnitude > 0.01f);
-    }
-
-    private void Update()
-    {
     }
 }

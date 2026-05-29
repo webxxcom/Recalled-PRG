@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Assemblies;
 
-public class ChaseComponent : MonoBehaviour
+public class ChaseComponent : MonoBehaviour, ITargetProvider
 {
-    [SerializeField] float minDistanceToTarget;
+    [SerializeField] int priority;
     [SerializeField] ChaseZoneComponent chaseZoneComponent;
+
     [field: SerializeField] public GameObject CurrentTarget { get; set; }
+
+    public int Priority => priority;
 
     void SetCurrentTarget(GameObject target)
     {
@@ -24,17 +27,5 @@ public class ChaseComponent : MonoBehaviour
     {
         chaseZoneComponent.OnTargetEnteredTheZone += SetCurrentTarget;
         chaseZoneComponent.OnTargetLeftTheZone += RemoveCurrentTarget;
-    }
-
-    public Vector2 GetDirection()
-    {
-        if (CurrentTarget == null || CurrentTarget.GetComponent<EntityController>().IsDead)
-            return Vector2.zero;
-
-        Vector2 diff = CurrentTarget.transform.position - gameObject.transform.position;
-        if (diff.magnitude <= minDistanceToTarget)
-            return Vector2.zero;
-
-        return diff.normalized;
     }
 }

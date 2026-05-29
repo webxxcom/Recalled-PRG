@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6438218901605416969}
   - component: {fileID: 6671789025492406424}
   - component: {fileID: 5875990991873229758}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Archery
   m_TagString: Untagged
   m_Icon: {fileID: 0}

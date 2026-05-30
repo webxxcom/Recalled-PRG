@@ -5,12 +5,14 @@ using UnityEngine;
 public class MeleeAttackComponent : MonoBehaviour, IAttackStrategy
 {
     EntityAttackComponent enemyAttackComponent;
+    EntityController entityController;
     new Collider2D collider2D;
 
     private void Awake()
     {
         collider2D = GetComponent<Collider2D>();
         enemyAttackComponent = GetComponent<EntityAttackComponent>();
+        entityController = GetComponentInParent<EntityController>();
 
         if (!collider2D.isTrigger)
             Debug.LogError("The MeeleAttackComponents's collider must be a trigger");
@@ -24,6 +26,6 @@ public class MeleeAttackComponent : MonoBehaviour, IAttackStrategy
             return;
 
         HealthComponent hc = target.GetComponentInParent<HealthComponent>();
-        hc.TakeDamage(gameObject, 10, 0.1f);
+        hc.TakeDamage(entityController.gameObject, 10, 0.1f);
     }
 }

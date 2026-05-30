@@ -3,13 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(ChaseComponent))]
 [RequireComponent(typeof(AgressionComponent))]
-[RequireComponent(typeof(ChaseZoneComponent))]
+[RequireComponent(typeof(EntityMovementComponent))]
 public class ArcherController : EntityController
 {
     ChaseComponent chaseComponent;
-    ChaseZoneComponent chaseZoneComponent;
     AgressionComponent agressionComponent;
     EntityAttackComponent entityAttackComponent;
+    EntityMovementComponent entityMovementComponent;
     Vector2 movement;
 
     void PlayAttackAnimation()
@@ -24,7 +24,7 @@ public class ArcherController : EntityController
         chaseComponent = GetComponent<ChaseComponent>();
         agressionComponent = GetComponent<AgressionComponent>();
         entityAttackComponent = GetComponentInChildren<EntityAttackComponent>();
-        chaseZoneComponent = GetComponent<ChaseZoneComponent>();
+        entityMovementComponent = GetComponent<EntityMovementComponent>();
     }
 
     protected override void Start()
@@ -35,10 +35,10 @@ public class ArcherController : EntityController
 
     protected override void HandleFixedUpdate()
     {
-        //Vector2 movement = entityMovementComponent.GetFinalMovement();
+        Vector2 movement = entityMovementComponent.GetFinalMovement();
 
-        //rb.linearVelocity = movement;
-        //HandleSpriteFlip(movement);
-        //animator.SetBool("isWalking", movement.sqrMagnitude > 0.01f);
+        rigidbody2D.linearVelocity = movement;
+        HandleSpriteFlip(movement);
+        animator.SetBool("isWalking", movement.sqrMagnitude > 0.01f);
     }
 }

@@ -20,8 +20,8 @@ public class AgressionComponent : MonoBehaviour, ITargetProvider
         healthComponent.OnDamageTaken += BecomeAgressive;
     }
 
-    public void BecomeAgressive(GameObject @object)
+    public void BecomeAgressive(GameObject gameObject)
     {
-        CurrentTarget = @object;
+        CurrentTarget = gameObject;
     }
 }

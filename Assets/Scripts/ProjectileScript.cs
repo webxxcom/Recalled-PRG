@@ -9,13 +9,12 @@ public class ProjectileScript : MonoBehaviour
     [field: SerializeField] public float KnockbackPower { get; private set; }
     [field: SerializeField] public float TimeToLive { get; private set; }
 
-    public Vector2 Destination { get; set; }
-    public EntityController Owner { get; set; }
+    public Vector2 Destination { get; private set; }
+    public EntityController Owner { get; private set; }
 
-    float livingTime = 0;
+    float totalLivingTime = 0;
     Vector2 direction;
     new Rigidbody2D rigidbody2D;
-    new Collider2D collider2D;
 
     void InitRotation()
     {
@@ -36,7 +35,6 @@ public class ProjectileScript : MonoBehaviour
     private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-        collider2D = GetComponent<Collider2D>();
     }
 
     private void FixedUpdate()
@@ -46,9 +44,8 @@ public class ProjectileScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject != Owner.gameObject && collision.gameObject.TryGetComponent(out HealthComponent hc))
+        if (collision.gameObject.TryGetComponent(out HealthComponent hc) && collision.gameObject != Owner.gameObject)
         {
-            Debug.Log("Arrow just hit " + collision.gameObject.name);
             hc.TakeDamage(Owner.gameObject, DealtDamage, KnockbackPower);
             Destroy(gameObject);
         }
@@ -56,12 +53,12 @@ public class ProjectileScript : MonoBehaviour
 
     private void Update()
     {
-        if (livingTime >= TimeToLive)
+        if (totalLivingTime >= TimeToLive)
         {
             Destroy(gameObject);
             return;
         }
 
-        livingTime += Time.deltaTime;
+        totalLivingTime += Time.deltaTime;
     }
 }

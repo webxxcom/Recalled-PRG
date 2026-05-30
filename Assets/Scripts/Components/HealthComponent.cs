@@ -7,19 +7,20 @@ using UnityEngine.UI;
 public class HealthComponent : MonoBehaviour
 {
     [SerializeField] BarScript healthSlider;
-    [SerializeField] int maxHealth;
-    int health;
+    [field: SerializeField] public int MaxHealth { get; private set; }
+    [field: SerializeField] public int Health { get; private set; }
 
     EntityController entityController;
     new Rigidbody2D rigidbody2D;
     SpriteRenderer spriteRenderer;
 
     public event Action<GameObject> OnDamageTaken;
+    public event Action OnDeath;
 
     void InitSlider()
     {
-        healthSlider.SetMax(maxHealth);
-        healthSlider.SetCurrent(maxHealth);
+        healthSlider.SetMax(MaxHealth);
+        healthSlider.SetCurrent(MaxHealth);
     }
 
     private void Awake()
@@ -27,7 +28,7 @@ public class HealthComponent : MonoBehaviour
         TryGetComponent(out rigidbody2D);
         TryGetComponent(out spriteRenderer);
         entityController = GetComponent<EntityController>();
-        health = maxHealth;
+        Health = MaxHealth;
 
         if (healthSlider)
         {
@@ -48,34 +49,29 @@ public class HealthComponent : MonoBehaviour
     {
         Vector2 forceVector = (transform.position - attacker.transform.position).normalized;
 
-        rigidbody2D.linearVelocity = Vector2.zero;
         rigidbody2D.AddForce(forceVector * knockbackPower, ForceMode2D.Impulse);
-        entityController.FreezeFor(0.2f * knockbackPower);
     }
 
     public void TakeDamage(GameObject attacker, int damage, float knockbackPower)
     {
-        if (health - damage <= 0)
+        if (Health - damage <= 0)
         {
-            health = 0;
+            Health = 0;
+
+            OnDeath?.Invoke();
         }
         else
         {
-            health -= damage;
+            Health -= damage;
+            if (rigidbody2D)
+                ApplyKnockback(attacker, knockbackPower);
         }
 
         if (healthSlider)
             healthSlider.Change(-damage);
-        if (rigidbody2D)
-            ApplyKnockback(attacker, knockbackPower);
-        if (spriteRenderer)
-            StartCoroutine(DamageFlash());
+        //if (spriteRenderer)
+        //    StartCoroutine(DamageFlash());
 
         OnDamageTaken?.Invoke(attacker);
-    }
-
-    public void Die()
-    {
-        TakeDamage(gameObject, health, 0);
     }
 }

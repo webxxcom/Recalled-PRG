@@ -40,19 +40,24 @@ public class EntityAttackComponent: MonoBehaviour
 
     private bool IsPriorityTarget(Collider2D collision)
     {
+        // Dependency on the fact that Hitbox must always be an entity's child no matter what !
+
         EntityController entityController = collision.GetComponentInParent<EntityController>();
 
         return entityController
                 && entityController.gameObject == aggressionComponent.CurrentTarget;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (IsPriorityTarget(collision))
         {
             PriorityTarget = collision.gameObject;
         }
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.TryGetComponent(out HealthComponent health)
             && Targets.Contains(health))
         {
@@ -81,7 +86,8 @@ public class EntityAttackComponent: MonoBehaviour
         OnAttack?.Invoke();
     }
 
-    bool CanAttack => timeSinceLastAttack >= AttackTimeout && !IsAttackBlocked && CurrentTarget != null;
+    bool CanAttack => timeSinceLastAttack >= AttackTimeout && !IsAttackBlocked && CurrentTarget != null
+            && CurrentTarget.TryGetComponent(out EntityController ec) && !ec.IsDead;
     private void Update()
     {
         if (CanAttack)

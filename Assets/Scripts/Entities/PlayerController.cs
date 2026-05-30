@@ -2,28 +2,42 @@ using TMPro;
 using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerMovementComponent))]
-[RequireComponent(typeof(PlayerAttackComponent))]
 public class PlayerController : EntityController, ITargetable
 {
-    PlayerMovementComponent movementComponent;
-    PlayerAttackComponent playerAttackComponent;
+    private static readonly int IsArmedHash = Animator.StringToHash("IsArmed");
+
+    public bool IsArmed
+    {
+        get => m_isArmed;
+        
+        private set
+        {
+            m_isArmed = value;
+            animator.SetBool(IsArmedHash, value);
+        }
+    }
+
+    bool m_isArmed;
+
+    PlayerMovementComponent playerMovementComponent;
 
     protected override void Awake()
     {
         base.Awake();
 
-        movementComponent = GetComponent<PlayerMovementComponent>();
-        playerAttackComponent = GetComponent<PlayerAttackComponent>();
+        playerMovementComponent = GetComponent<PlayerMovementComponent>();
+        IsArmed = true;
     }
 
-    void OnAttack(InputValue value)
+    protected override void Start()
     {
-        healthComponent.Die();
-        animator.SetTrigger("PlayDeath");
-        IsDead = true;
+        base.Start();
+
+        healthComponent.OnDamageTaken += _ => PlayHurtAnimation();
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -43,23 +57,19 @@ public class PlayerController : EntityController, ITargetable
 
     protected override void HandleFixedUpdate()
     {
-        if (movementComponent.IsWalking)
+        if (playerMovementComponent.IsWalking)
         {
-            Vector2 movement = movementComponent.GetFinalMovement();
+            Vector2 movement = playerMovementComponent.FinalMovement;
 
-            rb.linearVelocity = movement;
+            rigidbody2D.linearVelocity = movement;
         }
         else
         {
-            rb.linearVelocity *= 0.9f;
+            rigidbody2D.linearVelocity *= 0.9f;
         }
 
-        animator.SetFloat("Speed", rb.linearVelocity.magnitude / movementComponent.SprintingSpeed);
-        animator.SetFloat("MoveX", rb.linearVelocityX);
-        animator.SetFloat("MoveY", rb.linearVelocityY);
-    }
-
-    void Update()
-    {
+        animator.SetFloat("Speed", rigidbody2D.linearVelocity.magnitude / playerMovementComponent.SprintingSpeed);
+        animator.SetFloat("MoveX", playerMovementComponent.FacingDirection.x);
+        animator.SetFloat("MoveY", playerMovementComponent.FacingDirection.y);
     }
 }

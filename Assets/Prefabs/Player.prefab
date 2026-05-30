@@ -136,9 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d3dd6f5182aeea4f99d8a6d956c5a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  attackReloadTime: 0.3
-  dealtDamage: 10
-  knockbackPower: 1
+  <AttackReloadTime>k__BackingField: 0
+  <DealtDamage>k__BackingField: 0
+  <KnockbackPower>k__BackingField: 0
 --- !u!61 &3070435056343494364
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -440,7 +440,6 @@ GameObject:
   - component: {fileID: 8487839362322834453}
   - component: {fileID: 2409675021506303179}
   - component: {fileID: 7162682655650916106}
-  - component: {fileID: 487114115139294370}
   - component: {fileID: 7101408821228708346}
   - component: {fileID: 1507123296944016253}
   - component: {fileID: 4843682388793981076}
@@ -551,21 +550,6 @@ MonoBehaviour:
   <Stamina>k__BackingField: 0
   <StaminaUsage>k__BackingField: 0
   <StaminaRestore>k__BackingField: 0
---- !u!114 &487114115139294370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d3dd6f5182aeea4f99d8a6d956c5a23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackComponent
-  attackReloadTime: 0
-  dealtDamage: 0
-  knockbackPower: 0
 --- !u!114 &7101408821228708346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,6 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   <IsDead>k__BackingField: 0
   <IsFrozen>k__BackingField: 0
+  <IsStatic>k__BackingField: 0
 --- !u!212 &1507123296944016253
 SpriteRenderer:
   serializedVersion: 2
@@ -732,4 +717,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
   healthSlider: {fileID: 0}
-  maxHealth: 10000
+  <MaxHealth>k__BackingField: 0
+  <Health>k__BackingField: 0

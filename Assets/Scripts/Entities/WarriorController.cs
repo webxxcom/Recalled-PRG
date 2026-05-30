@@ -34,7 +34,7 @@ public class WarriorController : EntityController
     {
         Vector2 movement = entityMovementComponent.GetFinalMovement();
 
-        rb.linearVelocity = movement;
+        rigidbody2D.linearVelocity = movement;
         HandleSpriteFlip(movement);
         animator.SetBool("isWalking", movement.sqrMagnitude > 0.01f);
     }

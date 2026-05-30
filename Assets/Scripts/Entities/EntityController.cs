@@ -10,24 +10,38 @@ public abstract class EntityController : MonoBehaviour
     // Component attributes
     protected Animator animator;
     protected SpriteRenderer spriteRenderer;
-    protected Rigidbody2D rb;
+    new protected Rigidbody2D rigidbody2D;
     protected StairMovementComponent stairsMovement;
     protected HealthComponent healthComponent;
 
     [field: SerializeField] public bool IsDead { get; set; }
     [field: SerializeField] public bool IsFrozen { get; set; }
+    [field: SerializeField] public bool IsStatic { get; set; }
+
+    void OnDeath()
+    {
+        IsDead = true;
+        rigidbody2D.linearVelocity = Vector2.zero;
+        animator.SetTrigger("Death");
+    }
+
+    protected void PlayHurtAnimation(string triggerName = "Hurt")
+    {
+        animator.SetTrigger(triggerName);
+    }
 
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
         stairsMovement = GetComponent<StairMovementComponent>();
         healthComponent = GetComponent<HealthComponent>();
     }
 
     protected virtual void Start()
     {
+        healthComponent.OnDeath += OnDeath;
     }
 
     protected virtual void HandleSpriteFlip(Vector2 dir)
@@ -56,7 +70,7 @@ public abstract class EntityController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsFrozen || IsDead)
+        if (IsFrozen || IsDead || IsStatic)
             return;
 
         HandleFixedUpdate();
@@ -80,6 +94,11 @@ public abstract class EntityController : MonoBehaviour
         UnFreeze();
     }
 
-    void Freeze() => IsFrozen = true;
+    void Freeze()
+    {
+        IsFrozen = true;
+        rigidbody2D.linearVelocity *= 0.4f;
+    }
+
     void UnFreeze() => IsFrozen = false;
 }

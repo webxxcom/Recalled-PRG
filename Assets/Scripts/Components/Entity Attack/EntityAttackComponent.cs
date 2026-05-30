@@ -38,11 +38,11 @@ public class EntityAttackComponent: MonoBehaviour
         timeSinceLastAttack = AttackTimeout;
     }
 
-    private bool IsPriorityTarget(Collider2D collision)
+    private bool IsPriorityTarget(Collider2D collision, out EntityController entityController)
     {
         // Dependency on the fact that Hitbox must always be an entity's child no matter what !
 
-        EntityController entityController = collision.GetComponentInParent<EntityController>();
+        entityController = collision.GetComponentInParent<EntityController>();
 
         return entityController
                 && entityController.gameObject == aggressionComponent.CurrentTarget;
@@ -50,9 +50,9 @@ public class EntityAttackComponent: MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (IsPriorityTarget(collision))
+        if (IsPriorityTarget(collision, out EntityController entityController))
         {
-            PriorityTarget = collision.gameObject;
+            PriorityTarget = entityController.gameObject;
         }
     }
 
@@ -67,7 +67,7 @@ public class EntityAttackComponent: MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (IsPriorityTarget(collision))
+        if (IsPriorityTarget(collision, out _))
         {
             PriorityTarget = null;
         }
@@ -86,6 +86,7 @@ public class EntityAttackComponent: MonoBehaviour
         OnAttack?.Invoke();
     }
 
+    // TODO what the hell is happening with these triggers
     bool CanAttack => timeSinceLastAttack >= AttackTimeout && !IsAttackBlocked && CurrentTarget != null
             && CurrentTarget.TryGetComponent(out EntityController ec) && !ec.IsDead;
     private void Update()

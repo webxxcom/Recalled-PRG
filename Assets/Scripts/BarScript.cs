@@ -6,34 +6,43 @@ public class BarScript : MonoBehaviour
 {
     [SerializeField] Image topBar;
     [SerializeField] Image bottomBar;
-    [SerializeField] float animationSpeed;
+    [field: SerializeField] public float AnimationSpeed { get; private set; }
     [field: SerializeField] public int MaxValue { get; private set; }
     [field: SerializeField] public int Value { get; private set; }
+    [field: SerializeField] public ValueProvider ValueProvider { get; private set; }
 
-    float TargetValue => (float)Value / MaxValue;
+    float TargetFill => (float)Value / MaxValue;
 
-    IEnumerator ProgressBottomBar(int amount)
+    IEnumerator ProgressBars(int amount)
     {
         var suddenMoveBar = amount > 0 ? topBar : bottomBar;
         var smoothBar = amount > 0 ? bottomBar : topBar;
 
+        suddenMoveBar.fillAmount = TargetFill;
         while (Mathf.Abs(smoothBar.fillAmount - suddenMoveBar.fillAmount) > 0.01f)
         {
             smoothBar.fillAmount = Mathf.Lerp(
                 smoothBar.fillAmount,
                 suddenMoveBar.fillAmount,
-                Time.deltaTime * animationSpeed);
+                Time.deltaTime * AnimationSpeed);
            
             yield return null;
         }
         smoothBar.fillAmount = topBar.fillAmount;
     }
 
+    private void Start()
+    {
+        SetMax(ValueProvider.MaxValue);
+
+        ValueProvider.OnValueChanged += (obj, val) => Change(val);
+    }
+
     public void SetMax(int val)
     {
         MaxValue = val;
 
-        SetCurrent(Value);
+        SetCurrent(val);
     }
 
     public void Change(int amount)
@@ -45,7 +54,6 @@ public class BarScript : MonoBehaviour
     {
         Value = Mathf.Clamp(val, 0, MaxValue);
 
-        topBar.fillAmount = TargetValue;
-        StartCoroutine(ProgressBottomBar(val));
+        StartCoroutine(ProgressBars(val));
     }
 }

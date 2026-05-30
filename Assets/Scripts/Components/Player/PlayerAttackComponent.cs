@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,16 +11,18 @@ public class PlayerAttackComponent : MonoBehaviour
 
     float timeSinceLastAttack;
 
-    readonly List<HealthComponent> inRange = new();
+    readonly HashSet<EntityController> inRange = new();
     new Collider2D collider2D;
     PlayerMovementComponent playerMovementComponent;
     Animator animator;
+    PlayerController playerController;
 
     private void Awake()
     {
         collider2D = GetComponent<Collider2D>();
         animator = GetComponentInParent<Animator>();
         playerMovementComponent = GetComponentInParent<PlayerMovementComponent>();
+        playerController = GetComponentInParent<PlayerController>();
     }
 
     bool CanAttack => timeSinceLastAttack >= AttackReloadTime;
@@ -29,7 +30,8 @@ public class PlayerAttackComponent : MonoBehaviour
     {
         if (value.isPressed && CanAttack)
         {
-            inRange.ForEach(d => d.TakeDamage(gameObject, DealtDamage, KnockbackPower));
+            foreach (var entityController in inRange)
+                entityController.GetComponent<HealthComponent>().Change(playerController.gameObject, -DealtDamage);
             timeSinceLastAttack = 0;
             animator.SetTrigger("Attack");
         }
@@ -37,21 +39,17 @@ public class PlayerAttackComponent : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        HealthComponent healthComponent = collision.GetComponentInParent<HealthComponent>();
-
-        if (healthComponent)
+        if (collision.TryGetComponent(out HitboxComponent _))
         {
-            inRange.Add(healthComponent);
+            inRange.Add(collision.GetComponentInParent<EntityController>());
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        HealthComponent healthComponent = collision.GetComponentInParent<HealthComponent>();
-        
-        if (healthComponent)
+        if (collision.TryGetComponent(out HitboxComponent _))
         {
-            inRange.Remove(healthComponent);
+            inRange.Remove(collision.GetComponentInParent<EntityController>());
         }
     }
 

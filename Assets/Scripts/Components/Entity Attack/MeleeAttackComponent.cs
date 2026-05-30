@@ -26,6 +26,6 @@ public class MeleeAttackComponent : MonoBehaviour, IAttackStrategy
             return;
 
         HealthComponent hc = target.GetComponentInParent<HealthComponent>();
-        hc.TakeDamage(entityController.gameObject, 10, 0.1f);
+        hc.Change(entityController.gameObject, -10);
     }
 }

@@ -30,7 +30,7 @@ public class ArcherController : EntityController
     protected override void Start()
     {
         entityAttackComponent.OnAttack += PlayAttackAnimation;
-        healthComponent.OnDamageTaken += agressionComponent.BecomeAgressive;
+        //healthComponent.OnValueChanged += agressionComponent.BecomeAgressive;
     }
 
     protected override void HandleFixedUpdate()

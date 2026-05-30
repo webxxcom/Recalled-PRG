@@ -37,7 +37,7 @@ public class PlayerController : EntityController, ITargetable
     {
         base.Start();
 
-        healthComponent.OnDamageTaken += _ => PlayHurtAnimation();
+        healthComponent.OnValueChanged += (_, _) => PlayHurtAnimation();
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)

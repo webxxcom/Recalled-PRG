@@ -41,7 +41,7 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void Start()
     {
-        healthComponent.OnDeath += OnDeath;
+        healthComponent.OnMinValueReached += obj => OnDeath();
     }
 
     protected virtual void HandleSpriteFlip(Vector2 dir)

@@ -1,9 +1,4 @@
-using TMPro;
-using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Playables;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerMovementComponent))]
 public class PlayerController : EntityController, ITargetable
@@ -12,24 +7,26 @@ public class PlayerController : EntityController, ITargetable
 
     public bool IsArmed
     {
-        get => m_isArmed;
+        get => _isArmed;
         
         private set
         {
-            m_isArmed = value;
+            _isArmed = value;
             animator.SetBool(IsArmedHash, value);
         }
     }
 
-    bool m_isArmed;
+    bool _isArmed;
 
     PlayerMovementComponent playerMovementComponent;
+    PlayerAttackComponent playerAttackComponent;
 
     protected override void Awake()
     {
         base.Awake();
 
         playerMovementComponent = GetComponent<PlayerMovementComponent>();
+        playerAttackComponent = GetComponentInChildren<PlayerAttackComponent>();
         IsArmed = true;
     }
 
@@ -59,7 +56,7 @@ public class PlayerController : EntityController, ITargetable
     {
         if (playerMovementComponent.IsWalking)
         {
-            Vector2 movement = playerMovementComponent.FinalMovement;
+            Vector2 movement = playerMovementComponent.GetFinalMovement();
 
             rigidbody2D.linearVelocity = movement;
         }
@@ -67,9 +64,5 @@ public class PlayerController : EntityController, ITargetable
         {
             rigidbody2D.linearVelocity *= 0.9f;
         }
-
-        animator.SetFloat("Speed", rigidbody2D.linearVelocity.magnitude / playerMovementComponent.SprintingSpeed);
-        animator.SetFloat("MoveX", playerMovementComponent.FacingDirection.x);
-        animator.SetFloat("MoveY", playerMovementComponent.FacingDirection.y);
     }
 }

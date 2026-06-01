@@ -5,24 +5,33 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(HealthComponent))]
+[RequireComponent(typeof(MovementBase))]
+[RequireComponent(typeof(Collider2D))]
 public abstract class EntityController : MonoBehaviour
 {
+    private static readonly int DieHash = Animator.StringToHash("Die");
+    private static readonly int SpeedHash = Animator.StringToHash("Speed");
+    private static readonly int MoveYHash = Animator.StringToHash("MoveY");
+    private static readonly int MoveXHash = Animator.StringToHash("MoveX");
+
     // Component attributes
     protected Animator animator;
     protected SpriteRenderer spriteRenderer;
     new protected Rigidbody2D rigidbody2D;
-    protected StairMovementComponent stairsMovement;
     protected HealthComponent healthComponent;
+    new protected Collider2D collider2D;
+    protected MovementBase MovementBase { get; set; }
 
     [field: SerializeField] public bool IsDead { get; set; }
     [field: SerializeField] public bool IsFrozen { get; set; }
-    [field: SerializeField] public bool IsStatic { get; set; }
 
     void OnDeath()
     {
         IsDead = true;
-        rigidbody2D.linearVelocity = Vector2.zero;
-        animator.SetTrigger("Death");
+        rigidbody2D.bodyType = RigidbodyType2D.Static;
+        spriteRenderer.sortingOrder = -1;
+        collider2D.enabled = false;
+        animator.SetTrigger(DieHash);
     }
 
     protected void PlayHurtAnimation(string triggerName = "Hurt")
@@ -35,8 +44,9 @@ public abstract class EntityController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody2D = GetComponent<Rigidbody2D>();
-        stairsMovement = GetComponent<StairMovementComponent>();
         healthComponent = GetComponent<HealthComponent>();
+        MovementBase = GetComponent<MovementBase>();
+        collider2D = GetComponent<Collider2D>();
     }
 
     protected virtual void Start()
@@ -54,9 +64,6 @@ public abstract class EntityController : MonoBehaviour
 
     protected Vector2 ApplyEnvironmentMovement(Vector2 movement)
     {
-        if (stairsMovement)
-            movement = stairsMovement.ModifyMovementIfOnStairs(movement);
-
         return movement;
     }
 
@@ -70,10 +77,17 @@ public abstract class EntityController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsFrozen || IsDead || IsStatic)
+        if (IsFrozen || IsDead)
+        {
+            if (!IsDead)
+                rigidbody2D.linearVelocity *= 0.8f;
             return;
+        }
 
         HandleFixedUpdate();
+        animator.SetFloat(MoveXHash, MovementBase.FacingDirection.x);
+        animator.SetFloat(MoveYHash, MovementBase.FacingDirection.y);
+        animator.SetFloat(SpeedHash, rigidbody2D.linearVelocity.magnitude / 3);
     }
 
     protected virtual void HandleFixedUpdate()
@@ -94,11 +108,11 @@ public abstract class EntityController : MonoBehaviour
         UnFreeze();
     }
 
-    void Freeze()
+    public void Freeze()
     {
         IsFrozen = true;
         rigidbody2D.linearVelocity *= 0.4f;
     }
 
-    void UnFreeze() => IsFrozen = false;
+    public void UnFreeze() => IsFrozen = false;
 }

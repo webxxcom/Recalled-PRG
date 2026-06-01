@@ -1,16 +1,10 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(IMovementStrategy))]
-public class EntityMovementComponent : MonoBehaviour
+public class EntityMovementComponent : MovementBase
 {
-    public Vector2 LastMovement { get; private set; }
-    public Vector2 Movement { get; private set; }
-    public bool IsWalking => Movement != Vector2.zero;
-    public float CurrentSpeed => WalkingSpeed;
-
-    [field: SerializeField] public float WalkingSpeed { get; private set; }
-
     ITargetProvider[] targetProviders;
     IMovementStrategy movementStrategy;
 
@@ -20,9 +14,10 @@ public class EntityMovementComponent : MonoBehaviour
         targetProviders = GetComponents<ITargetProvider>().OrderBy(o => o.Priority).ToArray();
     }
 
-    public Vector2 GetFinalMovement()
+    Vector2 GetMovementIntention()
     {
-        Vector2 finalMovement = Vector2.zero;
+        if (MovementIntention != Vector2.zero)
+            LastMovement = MovementIntention;
 
         foreach (var item in targetProviders)
         {
@@ -31,10 +26,16 @@ public class EntityMovementComponent : MonoBehaviour
                 if (item.CurrentTarget.TryGetComponent(out EntityController ec) && ec.IsDead)
                     continue;
 
-                finalMovement = movementStrategy.GetDirection(item.CurrentTarget);
-                break;
+                return MovementIntention = movementStrategy.GetDirection(item.CurrentTarget);
             }
         }
+        return Vector2.zero;
+    }
+
+    public override Vector2 GetFinalMovement()
+    {
+        Vector2 finalMovement = GetMovementIntention();
+
         return finalMovement * WalkingSpeed;
     }
 }

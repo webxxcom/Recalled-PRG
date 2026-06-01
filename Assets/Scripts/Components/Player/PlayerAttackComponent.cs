@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +13,9 @@ public class PlayerAttackComponent : MonoBehaviour
 
     float timeSinceLastAttack;
 
-    readonly HashSet<EntityController> inRange = new();
+    readonly HashSet<EntityController> targetsInRange = new();
+    readonly HashSet<EntityController> damagedTargets = new();
+
     new Collider2D collider2D;
     PlayerMovementComponent playerMovementComponent;
     Animator animator;
@@ -25,13 +29,28 @@ public class PlayerAttackComponent : MonoBehaviour
         playerController = GetComponentInParent<PlayerController>();
     }
 
+    public void UpdateAttackExecution()
+    {
+        foreach (var entityController in targetsInRange.ToArray())
+        {
+            if (damagedTargets.Contains(entityController) || entityController.IsDead)
+                continue;
+
+            damagedTargets.Add(entityController);
+            entityController.GetComponent<HealthComponent>().Change(playerController.gameObject, -DealtDamage);
+        }
+    }
+
+    public void StartAttackExecution()
+    {
+        damagedTargets.Clear();
+    }
+
     bool CanAttack => timeSinceLastAttack >= AttackReloadTime;
     void OnAttack(InputValue value)
     {
         if (value.isPressed && CanAttack)
         {
-            foreach (var entityController in inRange)
-                entityController.GetComponent<HealthComponent>().Change(playerController.gameObject, -DealtDamage);
             timeSinceLastAttack = 0;
             animator.SetTrigger("Attack");
         }
@@ -41,7 +60,10 @@ public class PlayerAttackComponent : MonoBehaviour
     {
         if (collision.TryGetComponent(out HitboxComponent _))
         {
-            inRange.Add(collision.GetComponentInParent<EntityController>());
+            EntityController entityController = collision.GetComponentInParent<EntityController>();
+
+            if (entityController && !entityController.IsDead)
+                targetsInRange.Add(entityController);
         }
     }
 
@@ -49,7 +71,7 @@ public class PlayerAttackComponent : MonoBehaviour
     {
         if (collision.TryGetComponent(out HitboxComponent _))
         {
-            inRange.Remove(collision.GetComponentInParent<EntityController>());
+            targetsInRange.Remove(collision.GetComponentInParent<EntityController>());
         }
     }
 

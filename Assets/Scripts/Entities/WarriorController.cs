@@ -4,7 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(EntityMovementComponent))]
 public class WarriorController : EntityController
 {
-    ChaseComponent chase;
     EntityAttackComponent entityAttackComponent;
     MeleeAttackComponent meleeAttackComponent;
     EntityMovementComponent entityMovementComponent;
@@ -21,8 +20,6 @@ public class WarriorController : EntityController
         meleeAttackComponent = GetComponentInChildren<MeleeAttackComponent>();
         entityAttackComponent = GetComponentInChildren<EntityAttackComponent>();
         entityMovementComponent = GetComponent<EntityMovementComponent>();
-
-        TryGetComponent(out chase);
     }
 
     protected override void Start()

@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(IAttackStrategy))]
+[RequireComponent(typeof(Collider2D))]
 public class EntityAttackComponent: MonoBehaviour
 {
     [field: SerializeField] public List<HealthComponent> Targets { get; private set; }
@@ -17,7 +18,9 @@ public class EntityAttackComponent: MonoBehaviour
     readonly List<GameObject> currentTargets = new();
     float timeSinceLastAttack;
     IAttackStrategy attackStrategy;
-    AgressionComponent aggressionComponent;
+    AgressionBehaviorComponent agressionComponent;
+    new Collider2D collider2D;
+    EntityMovementComponent entityMovementComponent;
 
     public event Action OnAttack;
 
@@ -29,8 +32,10 @@ public class EntityAttackComponent: MonoBehaviour
     private void Awake()
     {
         attackStrategy = GetComponent<IAttackStrategy>();
+        collider2D = GetComponent<Collider2D>();
 
-        aggressionComponent = GetComponentInParent<AgressionComponent>();
+        agressionComponent = GetComponentInParent<AgressionBehaviorComponent>();
+        entityMovementComponent = GetComponentInParent<EntityMovementComponent>();
     }
 
     private void Start()
@@ -41,11 +46,10 @@ public class EntityAttackComponent: MonoBehaviour
     private bool IsPriorityTarget(Collider2D collision, out EntityController entityController)
     {
         // Dependency on the fact that Hitbox must always be an entity's child no matter what !
-
         entityController = collision.GetComponentInParent<EntityController>();
 
-        return entityController
-                && entityController.gameObject == aggressionComponent.CurrentTarget;
+        return entityController && agressionComponent
+                && entityController.gameObject == agressionComponent.CurrentTarget;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -86,6 +90,15 @@ public class EntityAttackComponent: MonoBehaviour
         OnAttack?.Invoke();
     }
 
+    void SetAttackCollisionOffset()
+    {
+        if (!entityMovementComponent.IsWalking)
+            return;
+
+        float degrees = Vector2.SignedAngle(Vector2.right, entityMovementComponent.MovementIntention);
+        collider2D.transform.rotation = Quaternion.Euler(0, 0, degrees);
+    }
+
     // TODO what the hell is happening with these triggers
     bool CanAttack => timeSinceLastAttack >= AttackTimeout && !IsAttackBlocked && CurrentTarget != null
             && CurrentTarget.TryGetComponent(out EntityController ec) && !ec.IsDead;
@@ -96,5 +109,6 @@ public class EntityAttackComponent: MonoBehaviour
             Attack();
         }
         timeSinceLastAttack += Time.deltaTime;
+        SetAttackCollisionOffset();
     }
 }

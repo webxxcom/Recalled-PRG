@@ -1,35 +1,20 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(StairMovementComponent))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovementComponent : MonoBehaviour
+public class PlayerMovementComponent : MovementBase
 {
-    public Vector2 LastMovement { get; private set; }
-    public Vector2 MovementIntention { get; private set; }
-    public Vector2 FinalMovement => GetFinalMovement();
-    public bool IsWalking => MovementIntention != Vector2.zero;
     public bool IsSprinting { get; private set; }
     public float CurrentSpeed => IsSprinting ? SprintingSpeed : WalkingSpeed;
-    public Vector2 FacingDirection => MovementIntention != Vector2.zero ? MovementIntention : LastMovement;
 
     [field: SerializeField] public float SprintingSpeed { get; private set; }
-    [field: SerializeField] public float WalkingSpeed { get; private set; }
     [field: SerializeField] public float Stamina { get; private set; }
     [field: SerializeField] public float StaminaUsage { get; private set; }
     [field: SerializeField] public float StaminaRestore { get; private set; }
 
-    float currentStamina;
+    float currentStamina = 100;
     float staminaRestoreLastTime = 0;
-
-    StairMovementComponent stairMovementComponent;
-
-    private void Awake()
-    {
-        stairMovementComponent = GetComponent<StairMovementComponent>();
-    }
 
     void OnMove(InputValue value)
     {
@@ -37,10 +22,7 @@ public class PlayerMovementComponent : MonoBehaviour
         MovementIntention = value.Get<Vector2>();
     }
 
-    void OnSprint(InputValue value)
-    {
-        IsSprinting = value.isPressed;
-    }
+    void OnSprint(InputValue value) => IsSprinting = value.isPressed;
 
     void RestoreStaminaWithTime()
     {
@@ -55,7 +37,7 @@ public class PlayerMovementComponent : MonoBehaviour
         }
     }
 
-    Vector2 GetFinalMovement()
+    public override Vector2 GetFinalMovement()
     {
         Vector2 finalMovement = MovementIntention;
 

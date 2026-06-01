@@ -1,13 +1,11 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(ChaseComponent))]
-[RequireComponent(typeof(AgressionComponent))]
+[RequireComponent(typeof(ChaseZoneComponent))]
+[RequireComponent(typeof(AgressionBehaviorComponent))]
 [RequireComponent(typeof(EntityMovementComponent))]
 public class ArcherController : EntityController
 {
-    ChaseComponent chaseComponent;
-    AgressionComponent agressionComponent;
     EntityAttackComponent entityAttackComponent;
     EntityMovementComponent entityMovementComponent;
     Vector2 movement;
@@ -21,8 +19,6 @@ public class ArcherController : EntityController
     {
         base.Awake();
 
-        chaseComponent = GetComponent<ChaseComponent>();
-        agressionComponent = GetComponent<AgressionComponent>();
         entityAttackComponent = GetComponentInChildren<EntityAttackComponent>();
         entityMovementComponent = GetComponent<EntityMovementComponent>();
     }

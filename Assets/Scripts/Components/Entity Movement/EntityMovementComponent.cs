@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 [RequireComponent(typeof(IMovementStrategy))]
 public class EntityMovementComponent : MovementBase
@@ -19,17 +20,7 @@ public class EntityMovementComponent : MovementBase
         if (MovementIntention != Vector2.zero)
             LastMovement = MovementIntention;
 
-        foreach (var item in targetProviders)
-        {
-            if (item.HasTarget)
-            {
-                if (item.CurrentTarget.TryGetComponent(out EntityController ec) && ec.IsDead)
-                    continue;
-
-                return MovementIntention = movementStrategy.GetDirection(item.CurrentTarget);
-            }
-        }
-        return Vector2.zero;
+        return MovementIntention = movementStrategy.GetDirection();
     }
 
     public override Vector2 GetFinalMovement()

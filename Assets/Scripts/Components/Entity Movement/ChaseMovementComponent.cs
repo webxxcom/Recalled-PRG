@@ -6,19 +6,13 @@ public class ChaseMovementComponent: MonoBehaviour, IMovementStrategy
 {
     [SerializeField] float minDistanceToTarget;
 
-    EntityMovementComponent entityMovementComponent;
-
-    private void Awake()
+    public Vector2 GetDirection()
     {
-        entityMovementComponent = GetComponent<EntityMovementComponent>();
-    }
+        //Vector2 diff = target.transform.position - gameObject.transform.position;
+        //if (diff.magnitude <= minDistanceToTarget)
+        //    return Vector2.zero;
 
-    public Vector2 GetDirection(GameObject target)
-    {
-        Vector2 diff = target.transform.position - gameObject.transform.position;
-        if (diff.magnitude <= minDistanceToTarget)
-            return Vector2.zero;
-
-        return diff.normalized;
+        //return diff.normalized;
+        return Vector2.zero; // TODO
     }
 }

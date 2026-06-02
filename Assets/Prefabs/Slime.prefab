@@ -641,7 +641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8146140630946751968
 RectTransform:
   m_ObjectHideFlags: 0
@@ -678,9 +678,10 @@ GameObject:
   - component: {fileID: 4303295007589574839}
   - component: {fileID: 1587604659676026480}
   - component: {fileID: 8023279021401798368}
-  - component: {fileID: 1176398378409222523}
   - component: {fileID: 4945891420777508210}
   - component: {fileID: 7909209022917881383}
+  - component: {fileID: 3323902720562264678}
+  - component: {fileID: 1176398378409222523}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Enemy
@@ -696,7 +697,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6097617918995308611}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.097, y: -8.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -825,7 +826,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -563998149
-  m_SortingLayer: 4
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8224146352627488064, guid: e537756de3845fd4090bf714bd25a871, type: 3}
@@ -887,19 +888,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityMovementComponent
   <WalkingSpeed>k__BackingField: 1.5
---- !u!114 &1176398378409222523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097617918995308611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1114f7e9e43484a919319e26f75933, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChaseMovementComponent
-  minDistanceToTarget: 2
 --- !u!114 &4945891420777508210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,7 +900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56700babf1211154aa60790912451cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
-  <MaxValue>k__BackingField: 100
+  <MaxValue>k__BackingField: 1
   <MinValue>k__BackingField: 0
   <Value>k__BackingField: 0
 --- !u!114 &7909209022917881383
@@ -930,6 +918,33 @@ MonoBehaviour:
   priority: 1
   chaseZoneComponent: {fileID: 0}
   <CurrentTarget>k__BackingField: {fileID: 0}
+--- !u!114 &3323902720562264678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6097617918995308611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89caa6d767f4ab46b81696d6f082865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  <WanderingZone>k__BackingField: {fileID: 0}
+  <TimeToChangeDirection>k__BackingField: 2
+--- !u!114 &1176398378409222523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6097617918995308611}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1114f7e9e43484a919319e26f75933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChaseMovementComponent
+  minDistanceToTarget: 2
 --- !u!1 &7283403785417316623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,7 +1035,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2959119981297933590
 RectTransform:
   m_ObjectHideFlags: 0

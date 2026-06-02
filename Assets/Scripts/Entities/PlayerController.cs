@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerMovementComponent))]
 public class PlayerController : EntityController, ITargetable
@@ -20,12 +22,21 @@ public class PlayerController : EntityController, ITargetable
 
     PlayerMovementComponent playerMovementComponent;
     PlayerAttackComponent playerAttackComponent;
+    InteractionComponent interactionComponent;
+
+    public readonly List<KeyDefinition> inventory = new();
+
+    public void AddKey(KeyDefinition keyDefinition) => inventory.Add(keyDefinition);
+    public void RemoveKey(KeyDefinition keyDefinition) => inventory.Remove(keyDefinition);
+    public int ChestsUnlocked { get; set; } = 0;
+
 
     protected override void Awake()
     {
         base.Awake();
 
         playerMovementComponent = GetComponent<PlayerMovementComponent>();
+        interactionComponent = GetComponentInChildren<InteractionComponent>();
         playerAttackComponent = GetComponentInChildren<PlayerAttackComponent>();
         IsArmed = true;
     }
@@ -65,4 +76,7 @@ public class PlayerController : EntityController, ITargetable
             rigidbody2D.linearVelocity *= 0.9f;
         }
     }
+
+    // Input layer
+    void OnInteract(InputValue _) => interactionComponent.InteractWithCurrent();
 }

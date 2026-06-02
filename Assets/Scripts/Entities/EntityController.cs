@@ -19,7 +19,7 @@ public abstract class EntityController : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     new protected Rigidbody2D rigidbody2D;
     protected HealthComponent healthComponent;
-    new protected Collider2D collider2D;
+    new public Collider2D collider2D { get; protected set; }
     protected MovementBase MovementBase { get; set; }
 
     [field: SerializeField] public bool IsDead { get; set; }

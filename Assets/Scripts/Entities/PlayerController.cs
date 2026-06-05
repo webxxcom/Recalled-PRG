@@ -21,7 +21,6 @@ public class PlayerController : EntityController, ITargetable
     bool _isArmed;
 
     PlayerMovementComponent playerMovementComponent;
-    PlayerAttackComponent playerAttackComponent;
     InteractionComponent interactionComponent;
 
     public readonly List<KeyDefinition> inventory = new();
@@ -37,15 +36,7 @@ public class PlayerController : EntityController, ITargetable
 
         playerMovementComponent = GetComponent<PlayerMovementComponent>();
         interactionComponent = GetComponentInChildren<InteractionComponent>();
-        playerAttackComponent = GetComponentInChildren<PlayerAttackComponent>();
         IsArmed = true;
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-
-        healthComponent.OnValueChanged += (_, _) => PlayHurtAnimation();
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)

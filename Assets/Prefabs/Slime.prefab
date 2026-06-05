@@ -680,8 +680,8 @@ GameObject:
   - component: {fileID: 8023279021401798368}
   - component: {fileID: 4945891420777508210}
   - component: {fileID: 7909209022917881383}
-  - component: {fileID: 3323902720562264678}
   - component: {fileID: 1176398378409222523}
+  - component: {fileID: 3323902720562264678}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Enemy
@@ -918,6 +918,19 @@ MonoBehaviour:
   priority: 1
   chaseZoneComponent: {fileID: 0}
   <CurrentTarget>k__BackingField: {fileID: 0}
+--- !u!114 &1176398378409222523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6097617918995308611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1114f7e9e43484a919319e26f75933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChaseMovementComponent
+  minDistanceToTarget: 2
 --- !u!114 &3323902720562264678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,20 +944,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <WanderingZone>k__BackingField: {fileID: 0}
-  <TimeToChangeDirection>k__BackingField: 2
---- !u!114 &1176398378409222523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097617918995308611}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1114f7e9e43484a919319e26f75933, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChaseMovementComponent
-  minDistanceToTarget: 2
 --- !u!1 &7283403785417316623
 GameObject:
   m_ObjectHideFlags: 0

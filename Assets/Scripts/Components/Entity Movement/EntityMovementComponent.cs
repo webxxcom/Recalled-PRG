@@ -1,5 +1,5 @@
-using System;
 using System.Linq;
+using UnityEditor.ShaderGraph.Configuration;
 using UnityEngine;
 using static UnityEditor.Progress;
 
@@ -7,11 +7,11 @@ using static UnityEditor.Progress;
 public class EntityMovementComponent : MovementBase
 {
     ITargetProvider[] targetProviders;
-    IMovementStrategy movementStrategy;
+    IMovementStrategy[] movementStrategy;
 
     private void Awake()
     {
-        movementStrategy = GetComponent<IMovementStrategy>();
+        movementStrategy = GetComponents<IMovementStrategy>();
         targetProviders = GetComponents<ITargetProvider>().OrderBy(o => o.Priority).ToArray();
     }
 
@@ -20,7 +20,20 @@ public class EntityMovementComponent : MovementBase
         if (MovementIntention != Vector2.zero)
             LastMovement = MovementIntention;
 
-        return MovementIntention = movementStrategy.GetDirection();
+        foreach (var item in targetProviders)
+        {
+            if (item.HasTarget)
+            {
+                if (item.CurrentTarget.TryGetComponent(out EntityController ec) && ec.IsDead)
+                    continue;
+                
+                MovementIntention = movementStrategy[0].GetDirection(item.CurrentTarget);
+                return MovementIntention;
+            }
+        }
+
+        MovementIntention = movementStrategy[1].GetDirection(null);
+        return MovementIntention;
     }
 
     public override Vector2 GetFinalMovement()

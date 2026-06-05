@@ -34,7 +34,7 @@ public class WanderingMovementComponent : MonoBehaviour, IMovementStrategy
     bool isIdle = false;
     float CurrentStateDuration = 0f;
 
-    public Vector2 GetDirection() => IntermediateDirection;
+    public Vector2 GetDirection(GameObject _) => IntermediateDirection;
 
     void FindNewDirection()
     {

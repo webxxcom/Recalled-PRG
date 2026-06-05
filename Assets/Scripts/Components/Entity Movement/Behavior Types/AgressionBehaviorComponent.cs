@@ -17,8 +17,7 @@ public class AgressionBehaviorComponent: MonoBehaviour, ITargetProvider
 
     private void Start()
     {
-        healthComponent.OnValueChanged += 
-            (obj, val) => BecomeAgressive(obj);
+        healthComponent.OnValueChanged += (obj, val) => BecomeAgressive(obj);
     }
 
     public void BecomeAgressive(GameObject gameObject)

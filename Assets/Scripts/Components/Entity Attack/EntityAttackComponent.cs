@@ -5,7 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(IAttackStrategy))]
 [RequireComponent(typeof(Collider2D))]
-public class EntityAttackComponent: MonoBehaviour
+public class EntityAttackComponent : MonoBehaviour
 {
     [field: SerializeField] public List<HealthComponent> Targets { get; private set; }
     [field: SerializeField] public float AttackTimeout { get; private set; }

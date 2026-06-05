@@ -9,6 +9,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public abstract class EntityController : MonoBehaviour
 {
+    private static readonly int HurtHash = Animator.StringToHash("Hurt");
     private static readonly int DieHash = Animator.StringToHash("Die");
     private static readonly int SpeedHash = Animator.StringToHash("Speed");
     private static readonly int MoveYHash = Animator.StringToHash("MoveY");
@@ -34,10 +35,7 @@ public abstract class EntityController : MonoBehaviour
         animator.SetTrigger(DieHash);
     }
 
-    protected void PlayHurtAnimation(string triggerName = "Hurt")
-    {
-        animator.SetTrigger(triggerName);
-    }
+    void OnHurt() => animator.SetTrigger(HurtHash);
 
     protected virtual void Awake()
     {
@@ -52,6 +50,7 @@ public abstract class EntityController : MonoBehaviour
     protected virtual void Start()
     {
         healthComponent.OnMinValueReached += obj => OnDeath();
+        healthComponent.OnValueChanged += (_, value) => { if (value < 0) OnHurt(); };
     }
 
     protected virtual void HandleSpriteFlip(Vector2 dir)

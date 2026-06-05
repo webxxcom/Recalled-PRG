@@ -3,7 +3,6 @@ using UnityEngine;
 public class EnemyController : EntityController
 {
     private static readonly int AttackHash = Animator.StringToHash("Attack");
-    private static readonly int HurtHash = Animator.StringToHash("Hurt");
 
     EntityAttackComponent entityAttackComponent;
     HitboxComponent hitboxComponent;
@@ -26,7 +25,6 @@ public class EnemyController : EntityController
     {
         base.Start();
 
-        healthComponent.OnValueChanged += (_, _) => animator.SetTrigger(HurtHash);
         entityAttackComponent.OnAttack += () => animator.SetTrigger(AttackHash);
         healthComponent.OnMinValueReached += (_) => DeactivateChildrenOnDeath();
     }

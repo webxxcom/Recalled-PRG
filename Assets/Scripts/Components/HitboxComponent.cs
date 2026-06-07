@@ -3,10 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class HitboxComponent : MonoBehaviour
 {
-    HealthComponent healthComponent;
+    public HealthComponent HealthComponent { get; private set; }
 
     private void Awake()
     {
-        healthComponent = GetComponentInParent<HealthComponent>();
+        HealthComponent = GetComponentInParent<HealthComponent>();
     }
 }

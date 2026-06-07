@@ -5,12 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Collider2D))]
-public class PlayerAttackComponent : MonoBehaviour
+public class PlayerAttackComponent : DefaultAttackComponent
 {
-    [field: SerializeField] public float AttackReloadTime { get; private set; }
-    [field: SerializeField] public int DealtDamage { get; private set; }
-    [field: SerializeField] public float KnockbackPower { get; private set; }
-
     float timeSinceLastAttack;
 
     readonly HashSet<EntityController> targetsInRange = new();
@@ -46,7 +42,7 @@ public class PlayerAttackComponent : MonoBehaviour
         damagedTargets.Clear();
     }
 
-    bool CanAttack => timeSinceLastAttack >= AttackReloadTime;
+    bool CanAttack => timeSinceLastAttack >= ReloadTime;
     void OnAttack(InputValue value)
     {
         if (value.isPressed && CanAttack)

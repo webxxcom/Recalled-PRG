@@ -5,10 +5,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(IAttackStrategy))]
 [RequireComponent(typeof(Collider2D))]
-public class EntityAttackComponent : MonoBehaviour
+public class EntityAttackComponent : DefaultAttackComponent
 {
     [field: SerializeField] public List<HealthComponent> Targets { get; private set; }
-    [field: SerializeField] public float AttackTimeout { get; private set; }
 
     public GameObject CurrentTarget => PriorityTarget ? PriorityTarget : CurrentAvailableTarget;
     public GameObject PriorityTarget { get; private set; }
@@ -40,7 +39,7 @@ public class EntityAttackComponent : MonoBehaviour
 
     private void Start()
     {
-        timeSinceLastAttack = AttackTimeout;
+        timeSinceLastAttack = ReloadTime;
     }
 
     private bool IsPriorityTarget(Collider2D collision, out EntityController entityController)
@@ -100,7 +99,7 @@ public class EntityAttackComponent : MonoBehaviour
     }
 
     // TODO what the hell is happening with these triggers
-    bool CanAttack => timeSinceLastAttack >= AttackTimeout && !IsAttackBlocked && CurrentTarget != null
+    bool CanAttack => timeSinceLastAttack >= ReloadTime && !IsAttackBlocked && CurrentTarget != null
             && CurrentTarget.TryGetComponent(out EntityController ec) && !ec.IsDead;
     private void Update()
     {

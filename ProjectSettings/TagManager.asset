@@ -48,13 +48,16 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Shadows
-    uniqueID: 3083440207
+  - name: Ground
+    uniqueID: 1871456163
     locked: 0
   - name: Player
     uniqueID: 3730969147
     locked: 0
-  - name: UI
+  - name: Roof
+    uniqueID: 1673770851
+    locked: 0
+  - name: Foreground
     uniqueID: 3321071701
     locked: 0
   m_RenderingLayers:

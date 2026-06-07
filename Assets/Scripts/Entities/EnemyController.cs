@@ -6,6 +6,7 @@ public class EnemyController : EntityController
 
     EntityAttackComponent entityAttackComponent;
     HitboxComponent hitboxComponent;
+    CanvasHiderScript canvasHiderScript;
 
     protected override void Awake()
     {
@@ -13,6 +14,7 @@ public class EnemyController : EntityController
 
         entityAttackComponent = GetComponentInChildren<EntityAttackComponent>();
         hitboxComponent = GetComponentInChildren<HitboxComponent>();
+        canvasHiderScript = GetComponentInChildren<CanvasHiderScript>();
     }
 
     void DeactivateChildrenOnDeath()
@@ -27,6 +29,7 @@ public class EnemyController : EntityController
 
         entityAttackComponent.OnAttack += () => animator.SetTrigger(AttackHash);
         healthComponent.OnMinValueReached += (_) => DeactivateChildrenOnDeath();
+        healthComponent.OnValueChanged += (_, _) => canvasHiderScript.ShowHealthBar();
     }
 
     protected override void HandleFixedUpdate()

@@ -139,6 +139,7 @@ MonoBehaviour:
   <ReloadTime>k__BackingField: 0
   <DealtDamage>k__BackingField: 10
   <KnockbackPower>k__BackingField: 1.2
+  <Effects>k__BackingField: []
 --- !u!61 &3070435056343494364
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -614,6 +615,9 @@ GameObject:
   - component: {fileID: 3630966448751984796}
   - component: {fileID: 506384641350915718}
   - component: {fileID: 6836397006442588245}
+  - component: {fileID: 107143013260194703}
+  - component: {fileID: 7477225139193990942}
+  - component: {fileID: 3172139938629916995}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -729,7 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <IsDead>k__BackingField: 0
-  <IsFrozen>k__BackingField: 0
+  <CanWalk>k__BackingField: 0
 --- !u!212 &1507123296944016253
 SpriteRenderer:
   serializedVersion: 2
@@ -838,6 +842,7 @@ MonoBehaviour:
   <MaxValue>k__BackingField: 100
   <MinValue>k__BackingField: 0
   <Value>k__BackingField: 0
+  <IsInvincible>k__BackingField: 0
 --- !u!114 &506384641350915718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,3 +895,39 @@ CapsuleCollider2D:
   m_Offset: {x: -0.03597734, y: 0.034003444}
   m_Size: {x: 0.75048494, y: 0.41584843}
   m_Direction: 1
+--- !u!114 &107143013260194703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559287907167481913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e26dbe64af4aed04d91d1c4695527340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlinkingEffectComponent
+--- !u!114 &7477225139193990942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559287907167481913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7af567f829480489cb925839780c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InvincibilityComponent
+--- !u!114 &3172139938629916995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559287907167481913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceaf463d0e9df334f82b0cdb6071b029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'

@@ -24,7 +24,7 @@ public abstract class EntityController : MonoBehaviour
     public MovementBase MovementBase { get; set; }
 
     [field: SerializeField] public bool IsDead { get; set; }
-    [field: SerializeField] public bool IsFrozen { get; set; }
+    [field: SerializeField] public bool CanWalk { get; set; }
 
     void OnDeath()
     {
@@ -56,11 +56,6 @@ public abstract class EntityController : MonoBehaviour
         HealthComponent.OnValueChanged += (_, value) => { if (value < 0) OnHurt(); };
     }
 
-    protected Vector2 ApplyEnvironmentMovement(Vector2 movement)
-    {
-        return movement;
-    }
-
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
     }
@@ -71,10 +66,9 @@ public abstract class EntityController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsFrozen || IsDead)
+        if (CanWalk || IsDead)
         {
             if (!IsDead)
-                Rigidbody2D.linearVelocity *= 0.8f;
             return;
         }
 
@@ -87,26 +81,4 @@ public abstract class EntityController : MonoBehaviour
     protected virtual void HandleFixedUpdate()
     {
     }
-
-    public void FreezeFor(float seconds)
-    {
-        StartCoroutine(FrozenCoroutine(seconds));
-    }
-
-    IEnumerator FrozenCoroutine(float seconds)
-    {
-        Freeze();
-
-        yield return new WaitForSeconds(seconds);
-
-        UnFreeze();
-    }
-
-    public void Freeze()
-    {
-        IsFrozen = true;
-        Rigidbody2D.linearVelocity *= 0.4f;
-    }
-
-    public void UnFreeze() => IsFrozen = false;
 }

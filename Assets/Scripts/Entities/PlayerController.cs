@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerMovementComponent))]
 
 [RequireComponent(typeof(InvincibilityComponent))]
-public class PlayerController : EntityController, ITargetable
+[RequireComponent(typeof(EffectMachineComponent))]
+public class PlayerController : EntityController
 {
     private static readonly int IsArmedHash = Animator.StringToHash("IsArmed");
 
@@ -21,6 +22,8 @@ public class PlayerController : EntityController, ITargetable
     }
 
     bool _isArmed;
+
+    public EffectMachineComponent EffectMachineComponent { get; private set; }
 
     PlayerMovementComponent playerMovementComponent;
     InteractionComponent interactionComponent;
@@ -39,6 +42,7 @@ public class PlayerController : EntityController, ITargetable
 
         playerMovementComponent = GetComponent<PlayerMovementComponent>();
         invincibilityComponent = GetComponent<InvincibilityComponent>();
+        EffectMachineComponent = GetComponent<EffectMachineComponent>();
         interactionComponent = GetComponentInChildren<InteractionComponent>();
         IsArmed = true;
     }
@@ -47,7 +51,7 @@ public class PlayerController : EntityController, ITargetable
     {
         base.Start();
 
-        HealthComponent.OnValueChanged += (_, _) => invincibilityComponent.BecomeInvinsibleFor(1f);
+        //HealthComponent.OnValueChanged += (_, _) => invincibilityComponent.BecomeInvinsibleFor(1f);
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -67,6 +71,9 @@ public class PlayerController : EntityController, ITargetable
 
     protected override void HandleFixedUpdate()
     {
+        if (IsDead)
+            return;
+
         if (playerMovementComponent.IsWalking)
         {
             Vector2 movement = playerMovementComponent.GetFinalMovement();

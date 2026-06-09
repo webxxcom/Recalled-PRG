@@ -29,6 +29,6 @@ public class HealthComponent : ValueProvider
         Vector2 forceVector = (transform.position - attacker.transform.position).normalized;
 
         rigidbody2D.AddForce(forceVector * knockbackPower, ForceMode2D.Impulse);
-        entityController.FreezeFor(0.2f);
+        //entityController.FreezeFor(0.2f);
     }
 }

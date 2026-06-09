@@ -5,7 +5,7 @@ public class ZoneBehaviorComponent: MonoBehaviour, ITargetProvider
     [field: SerializeField] int priority;
     [SerializeField] ChaseZoneComponent chaseZoneComponent;
 
-    [field: SerializeField] public GameObject CurrentTarget { get; set; }
+    public GameObject CurrentTarget { get; set; }
 
     public int Priority => priority;
 

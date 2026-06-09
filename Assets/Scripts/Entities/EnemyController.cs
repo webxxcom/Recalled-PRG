@@ -24,7 +24,7 @@ public class EnemyController : EntityController
     }
 
     void ProcessAttackToTargetsWithinRange() => entityAttackComponent.ExecuteAttack();
-
+    
     protected override void Start()
     {
         base.Start();
@@ -36,6 +36,9 @@ public class EnemyController : EntityController
 
     protected override void HandleFixedUpdate()
     {
+        if (IsDead)
+            return;
+
         Vector2 finalMovement = MovementBase.GetFinalMovement();
 
         if (finalMovement != Vector2.zero)

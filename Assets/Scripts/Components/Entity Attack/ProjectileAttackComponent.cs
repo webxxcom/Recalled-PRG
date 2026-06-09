@@ -19,13 +19,13 @@ class ProjectileAttackComponent : MonoBehaviour, IAttackStrategy
 
     public void SpawnProjectile()
     {
-        if (!enemyAttackComponent.CurrentTarget)
+        if (!enemyAttackComponent.PlayerController)
             return;
 
         GameObject arrow = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
         arrow.GetComponent<ProjectileScript>()
-            .Initialize(entityController, enemyAttackComponent.CurrentTarget.transform.position);
+            .Initialize(entityController, enemyAttackComponent.PlayerController.transform.position);
     }
 
     public void Execute()

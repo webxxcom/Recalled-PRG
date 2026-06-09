@@ -5,18 +5,16 @@ using UnityEngine;
 
 public class ChaseZoneComponent : MonoBehaviour
 {
-    readonly List<GameObject> currentTargets = new();
-
-    public GameObject CurrentTarget { get => currentTargets.FirstOrDefault(); }
+    public GameObject CurrentTarget { get; private set; }
 
     public event Action<GameObject> OnTargetEnteredTheZone;
     public event Action OnTargetLeftTheZone;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out ITargetable _))
+        if (collision.CompareTag("Player"))
         {
-            currentTargets.Add(collision.gameObject);
+            CurrentTarget = collision.gameObject;
 
             OnTargetEnteredTheZone?.Invoke(collision.gameObject);
         }
@@ -24,9 +22,9 @@ public class ChaseZoneComponent : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out ITargetable _))
+        if (collision.CompareTag("Player"))
         {
-            currentTargets.Remove(collision.gameObject);
+            CurrentTarget = null;
 
             OnTargetLeftTheZone?.Invoke();
         }

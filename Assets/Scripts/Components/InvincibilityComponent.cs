@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(EntityController))]
 [RequireComponent(typeof(BlinkingEffectComponent))]
-public class InvincibilityComponent : MonoBehaviour, IState
+public class InvincibilityComponent : MonoBehaviour
 {
     BlinkingEffectComponent blinkingEffectComponent;
     EntityController entityController;

@@ -62,7 +62,7 @@ public class InteractionComponent : MonoBehaviour
     {
         interactable = null;
         GameObject gameObject = interactables
-            .OrderBy(i => Physics2D.Distance(i.GetComponent<Collider2D>(), playerController.collider2D).distance)
+            .OrderBy(i => Physics2D.Distance(i.GetComponent<Collider2D>(), playerController.Collider2D).distance)
              .FirstOrDefault();
 
         if (!gameObject)

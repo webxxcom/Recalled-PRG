@@ -16,12 +16,12 @@ public abstract class EntityController : MonoBehaviour
     private static readonly int MoveXHash = Animator.StringToHash("MoveX");
 
     // Component attributes
-    protected Animator animator;
-    protected SpriteRenderer spriteRenderer;
-    new protected Rigidbody2D rigidbody2D;
-    protected HealthComponent healthComponent;
-    new public Collider2D collider2D { get; protected set; }
-    protected MovementBase MovementBase { get; set; }
+    public Animator Animator { get; private set; }
+    public SpriteRenderer SpriteRenderer { get; private set; }
+    public Rigidbody2D Rigidbody2D { get; private set; }
+    public HealthComponent HealthComponent { get; private set; }
+    public Collider2D Collider2D { get; private set; }
+    public MovementBase MovementBase { get; set; }
 
     [field: SerializeField] public bool IsDead { get; set; }
     [field: SerializeField] public bool IsFrozen { get; set; }
@@ -29,36 +29,31 @@ public abstract class EntityController : MonoBehaviour
     void OnDeath()
     {
         IsDead = true;
-        rigidbody2D.bodyType = RigidbodyType2D.Static;
-        spriteRenderer.sortingOrder = -1;
-        collider2D.enabled = false;
-        animator.SetTrigger(DieHash);
+        Rigidbody2D.bodyType = RigidbodyType2D.Static;
+        SpriteRenderer.sortingOrder = -1;
+        Collider2D.enabled = false;
+        Animator.SetTrigger(DieHash);
     }
 
-    void OnHurt() => animator.SetTrigger(HurtHash);
+    void OnHurt()
+    {
+        Animator.SetTrigger(HurtHash);
+    }
 
     protected virtual void Awake()
     {
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        healthComponent = GetComponent<HealthComponent>();
+        Animator = GetComponent<Animator>();
+        SpriteRenderer = GetComponent<SpriteRenderer>();
+        Rigidbody2D = GetComponent<Rigidbody2D>();
+        HealthComponent = GetComponent<HealthComponent>();
         MovementBase = GetComponent<MovementBase>();
-        collider2D = GetComponent<Collider2D>();
+        Collider2D = GetComponent<Collider2D>();
     }
 
     protected virtual void Start()
     {
-        healthComponent.OnMinValueReached += obj => OnDeath();
-        healthComponent.OnValueChanged += (_, value) => { if (value < 0) OnHurt(); };
-    }
-
-    protected virtual void HandleSpriteFlip(Vector2 dir)
-    {
-        if (dir.x > 0.01f)
-            spriteRenderer.flipX = false;
-        else if (dir.x < -0.01f)
-            spriteRenderer.flipX = true;
+        HealthComponent.OnMinValueReached += obj => OnDeath();
+        HealthComponent.OnValueChanged += (_, value) => { if (value < 0) OnHurt(); };
     }
 
     protected Vector2 ApplyEnvironmentMovement(Vector2 movement)
@@ -79,14 +74,14 @@ public abstract class EntityController : MonoBehaviour
         if (IsFrozen || IsDead)
         {
             if (!IsDead)
-                rigidbody2D.linearVelocity *= 0.8f;
+                Rigidbody2D.linearVelocity *= 0.8f;
             return;
         }
 
         HandleFixedUpdate();
-        animator.SetFloat(MoveXHash, MovementBase.FacingDirection.x);
-        animator.SetFloat(MoveYHash, MovementBase.FacingDirection.y);
-        animator.SetFloat(SpeedHash, rigidbody2D.linearVelocity.magnitude / 3);
+        Animator.SetFloat(MoveXHash, MovementBase.FacingDirection.x);
+        Animator.SetFloat(MoveYHash, MovementBase.FacingDirection.y);
+        Animator.SetFloat(SpeedHash, Rigidbody2D.linearVelocity.magnitude / 3);
     }
 
     protected virtual void HandleFixedUpdate()
@@ -110,7 +105,7 @@ public abstract class EntityController : MonoBehaviour
     public void Freeze()
     {
         IsFrozen = true;
-        rigidbody2D.linearVelocity *= 0.4f;
+        Rigidbody2D.linearVelocity *= 0.4f;
     }
 
     public void UnFreeze() => IsFrozen = false;

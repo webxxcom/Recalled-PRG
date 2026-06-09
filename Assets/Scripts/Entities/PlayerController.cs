@@ -1,8 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 [RequireComponent(typeof(PlayerMovementComponent))]
+
+[RequireComponent(typeof(InvincibilityComponent))]
 public class PlayerController : EntityController, ITargetable
 {
     private static readonly int IsArmedHash = Animator.StringToHash("IsArmed");
@@ -14,7 +16,7 @@ public class PlayerController : EntityController, ITargetable
         private set
         {
             _isArmed = value;
-            animator.SetBool(IsArmedHash, value);
+            Animator.SetBool(IsArmedHash, value);
         }
     }
 
@@ -22,6 +24,7 @@ public class PlayerController : EntityController, ITargetable
 
     PlayerMovementComponent playerMovementComponent;
     InteractionComponent interactionComponent;
+    InvincibilityComponent invincibilityComponent;
 
     public readonly List<KeyDefinition> inventory = new();
 
@@ -35,8 +38,16 @@ public class PlayerController : EntityController, ITargetable
         base.Awake();
 
         playerMovementComponent = GetComponent<PlayerMovementComponent>();
+        invincibilityComponent = GetComponent<InvincibilityComponent>();
         interactionComponent = GetComponentInChildren<InteractionComponent>();
         IsArmed = true;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        HealthComponent.OnValueChanged += (_, _) => invincibilityComponent.BecomeInvinsibleFor(1f);
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -60,14 +71,14 @@ public class PlayerController : EntityController, ITargetable
         {
             Vector2 movement = playerMovementComponent.GetFinalMovement();
 
-            rigidbody2D.linearVelocity = movement;
+            Rigidbody2D.linearVelocity = movement;
         }
         else
         {
-            rigidbody2D.linearVelocity *= 0.9f;
+            Rigidbody2D.linearVelocity *= 0.9f;
         }
     }
-
+    
     // Input layer
     void OnInteract(InputValue _) => interactionComponent.InteractWithCurrent();
 }

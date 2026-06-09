@@ -16,7 +16,7 @@ public abstract class ValueProvider : MonoBehaviour
         Value = MaxValue;
     }
 
-    public void Change(GameObject changer, int value)
+    public virtual void Change(GameObject changer, int value)
     {
         if (Value + value <= MinValue)
         {

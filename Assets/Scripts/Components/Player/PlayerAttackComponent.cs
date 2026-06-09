@@ -33,7 +33,7 @@ public class PlayerAttackComponent : DefaultAttackComponent
                 continue;
 
             damagedTargets.Add(entityController);
-            entityController.GetComponent<HealthComponent>().Change(playerController.gameObject, -DealtDamage);
+            entityController.HealthComponent.Change(playerController.gameObject, -DealtDamage);
         }
     }
 

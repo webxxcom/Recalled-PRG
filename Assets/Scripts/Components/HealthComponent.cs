@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class HealthComponent : ValueProvider
 {
+    [field: SerializeField] public bool IsInvincible { get; set; } = false;
+
     EntityController entityController;
     new Rigidbody2D rigidbody2D;
 
@@ -14,6 +16,12 @@ public class HealthComponent : ValueProvider
         entityController = GetComponent<EntityController>();
 
         //OnValueChanged += (obj, val) => ApplyKnockback(obj, 1.1f);
+    }
+
+    public override void Change(GameObject changer, int value)
+    {
+        if (!IsInvincible)
+            base.Change(changer, value);
     }
 
     private void ApplyKnockback(GameObject attacker, float knockbackPower)

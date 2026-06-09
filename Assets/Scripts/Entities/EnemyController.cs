@@ -23,13 +23,15 @@ public class EnemyController : EntityController
         hitboxComponent.gameObject.SetActive(false);
     }
 
+    void ProcessAttackToTargetsWithinRange() => entityAttackComponent.ExecuteAttack();
+
     protected override void Start()
     {
         base.Start();
 
-        entityAttackComponent.OnAttack += () => animator.SetTrigger(AttackHash);
-        healthComponent.OnMinValueReached += (_) => DeactivateChildrenOnDeath();
-        healthComponent.OnValueChanged += (_, _) => canvasHiderScript.ShowHealthBar();
+        entityAttackComponent.OnAttack += () => Animator.SetTrigger(AttackHash);
+        HealthComponent.OnMinValueReached += (_) => DeactivateChildrenOnDeath();
+        HealthComponent.OnValueChanged += (_, _) => canvasHiderScript.ShowHealthBar();
     }
 
     protected override void HandleFixedUpdate()
@@ -37,6 +39,6 @@ public class EnemyController : EntityController
         Vector2 finalMovement = MovementBase.GetFinalMovement();
 
         if (finalMovement != Vector2.zero)
-            rigidbody2D.linearVelocity = finalMovement;
+            Rigidbody2D.linearVelocity = finalMovement;
     }
 }

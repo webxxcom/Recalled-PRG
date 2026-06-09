@@ -38,8 +38,10 @@ public class EntityMovementComponent : MovementBase
 
     public override Vector2 GetFinalMovement()
     {
-        Vector2 finalMovement = GetMovementIntention();
+        if (!enabled)
+            return Vector2.zero;
 
+        Vector2 finalMovement = GetMovementIntention();
         return finalMovement * WalkingSpeed;
     }
 }

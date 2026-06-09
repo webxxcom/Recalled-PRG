@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class MovementBase: MonoBehaviour
+public abstract class MovementBase : MonoBehaviour
 {
     [field: SerializeField] public float WalkingSpeed { get; protected set; }
 
@@ -11,4 +11,6 @@ public abstract class MovementBase: MonoBehaviour
     public Vector2 FacingDirection => MovementIntention != Vector2.zero ? MovementIntention : LastMovement;
 
     public abstract Vector2 GetFinalMovement();
+
+    private void OnDisable() => MovementIntention = Vector2.zero;
 }

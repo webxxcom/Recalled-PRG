@@ -8,6 +8,7 @@ public class CandleLightFlicker : MonoBehaviour
 
     Light2D light2D;
     float baseIntensity;
+    float baseRadius;
 
     private void Awake()
     {
@@ -17,6 +18,7 @@ public class CandleLightFlicker : MonoBehaviour
     private void Start()
     {
         baseIntensity = light2D.intensity;
+        baseRadius = light2D.pointLightOuterRadius;
     }
 
     private void Update()
@@ -26,5 +28,6 @@ public class CandleLightFlicker : MonoBehaviour
         float noise = slow + fast; // roughly 0–1, weighted toward slow
 
         light2D.intensity = baseIntensity * Mathf.Lerp(0.3f, 1.0f, noise);
+        light2D.pointLightOuterRadius = baseRadius * Mathf.Lerp(0.95f, 1.05f, noise);
     }
 }

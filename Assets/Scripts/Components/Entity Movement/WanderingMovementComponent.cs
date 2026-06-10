@@ -26,7 +26,12 @@ public class WanderingMovementComponent : MovementStrategy
     bool isIdle = false;
     float CurrentStateDuration = 0f;
 
-    public override Vector2 GetDirection(GameObject _) => IntermediateDirection;
+    public override Vector2 GetDirection(GameObject _, out bool reachedDestination)
+    {
+        reachedDestination = false;
+
+        return IntermediateDirection;
+    }
 
     void FindNewDirection()
     {

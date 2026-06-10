@@ -1,16 +1,13 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(EntityAttackComponent))]
-class ProjectileAttackComponent : MonoBehaviour, IAttackStrategy
+class ProjectileAttackComponent : AttackStrategy
 {
     [SerializeField] GameObject projectilePrefab;
 
-    EntityController entityController;
-    EntityAttackComponent enemyAttackComponent;
-
     private void Awake()
     {
-        enemyAttackComponent = GetComponent<EntityAttackComponent>();
+        entityAttackComponent = GetComponent<EntityAttackComponent>();
 
         entityController = GetComponentInParent<EntityController>();
         if (!entityController)
@@ -19,16 +16,16 @@ class ProjectileAttackComponent : MonoBehaviour, IAttackStrategy
 
     public void SpawnProjectile()
     {
-        if (!enemyAttackComponent.PlayerController)
+        if (!entityAttackComponent.PlayerController)
             return;
 
         GameObject arrow = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
         arrow.GetComponent<ProjectileScript>()
-            .Initialize(entityController, enemyAttackComponent.PlayerController.transform.position);
+            .Initialize(entityController, entityAttackComponent.PlayerController.transform.position);
     }
 
-    public void Execute()
+    public override void Execute()
     {
         SpawnProjectile();
     }

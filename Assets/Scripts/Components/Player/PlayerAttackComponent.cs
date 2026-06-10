@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,37 +6,13 @@ public class PlayerAttackComponent : DefaultAttackComponent
 {
     float timeSinceLastAttack;
 
-    readonly HashSet<EntityController> targetsInRange = new();
-    readonly HashSet<EntityController> damagedTargets = new();
-
     new Collider2D collider2D;
-    PlayerMovementComponent playerMovementComponent;
-    Animator animator;
-    PlayerController playerController;
 
-    private void Awake()
+    new private void Awake()
     {
+        base.Awake();
+
         collider2D = GetComponent<Collider2D>();
-        animator = GetComponentInParent<Animator>();
-        playerMovementComponent = GetComponentInParent<PlayerMovementComponent>();
-        playerController = GetComponentInParent<PlayerController>();
-    }
-
-    public void UpdateAttackExecution()
-    {
-        foreach (var entityController in targetsInRange.ToArray())
-        {
-            if (damagedTargets.Contains(entityController) || entityController.IsDead)
-                continue;
-
-            damagedTargets.Add(entityController);
-            entityController.HealthComponent.Change(playerController.gameObject, -DealtDamage);
-        }
-    }
-
-    public void StartAttackExecution()
-    {
-        damagedTargets.Clear();
     }
 
     bool CanAttack => timeSinceLastAttack >= ReloadTime;
@@ -48,7 +21,7 @@ public class PlayerAttackComponent : DefaultAttackComponent
         if (value.isPressed && CanAttack)
         {
             timeSinceLastAttack = 0;
-            animator.SetTrigger("Attack");
+            entityController.Animator.SetTrigger("Attack");
         }
     }
 
@@ -59,7 +32,7 @@ public class PlayerAttackComponent : DefaultAttackComponent
             EntityController entityController = collision.GetComponentInParent<EntityController>();
 
             if (entityController && !entityController.IsDead)
-                targetsInRange.Add(entityController);
+                TargetsInRange.Add(entityController);
         }
     }
 
@@ -67,16 +40,16 @@ public class PlayerAttackComponent : DefaultAttackComponent
     {
         if (collision.TryGetComponent(out HitboxComponent _))
         {
-            targetsInRange.Remove(collision.GetComponentInParent<EntityController>());
+            TargetsInRange.Remove(collision.GetComponentInParent<EntityController>());
         }
     }
 
     void SetAttackCollisionOffset()
     {
-        if (!playerMovementComponent.IsWalking)
+        if (!entityController.MovementBase.IsWalking)
             return;
 
-        float degrees = Vector2.SignedAngle(Vector2.right, playerMovementComponent.MovementIntention);
+        float degrees = Vector2.SignedAngle(Vector2.right, entityController.MovementBase.MovementIntention);
         collider2D.transform.rotation = Quaternion.Euler(0, 0, degrees);
     }
 

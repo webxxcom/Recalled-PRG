@@ -3,5 +3,5 @@
 [RequireComponent(typeof(EntityMovementComponent))]
 public abstract class MovementStrategy : MonoBehaviour
 {
-    public abstract Vector2 GetDirection(GameObject target);
+    public abstract Vector2 GetDirection(GameObject target, out bool reachedDestination);
 }

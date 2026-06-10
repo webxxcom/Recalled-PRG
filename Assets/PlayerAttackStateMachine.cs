@@ -3,27 +3,29 @@ using UnityEngine;
 public class PlayerAttackStateMachine : StateMachineBehaviour
 {
     [SerializeField] float impactTime = 0.3f;
+    [SerializeField] float finishTime = 0.8f;
+    [SerializeField] float speedMultiplier = 0.3f;
 
-    PlayerAttackComponent playerAttackComponent;
+    DefaultAttackComponent defaultAttackComponent;
     MovementBase movementBase;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         movementBase = animator.GetComponent<MovementBase>();
-        playerAttackComponent = animator.GetComponentInChildren<PlayerAttackComponent>();
+        defaultAttackComponent = animator.GetComponentInChildren<DefaultAttackComponent>();
 
-        playerAttackComponent.StartAttackExecution();
-        movementBase.SpeedAggregator.Add(0.3f);
+        defaultAttackComponent.StartAttackExecution();
+        movementBase.SpeedAggregator.Add(speedMultiplier);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (stateInfo.normalizedTime > impactTime)
-            playerAttackComponent.UpdateAttackExecution();
+        if (stateInfo.normalizedTime > impactTime && stateInfo.normalizedTime < finishTime)
+            defaultAttackComponent.UpdateAttackExecution();
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        movementBase.SpeedAggregator.Remove(0.3f);
+        movementBase.SpeedAggregator.Remove(speedMultiplier);
     }
 }

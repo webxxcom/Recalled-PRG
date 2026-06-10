@@ -1,24 +1,18 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(EntityAttackComponent))]
-public class MeleeAttackComponent : MonoBehaviour, IAttackStrategy
+public class MeleeAttackComponent : AttackStrategy
 {
-    EntityAttackComponent enemyAttackComponent;
-    EntityController entityController;
-
-    private void Awake()
+    public override void Execute()
     {
-        enemyAttackComponent = GetComponent<EntityAttackComponent>();
-        entityController = GetComponentInParent<EntityController>();
-    }
-
-    public void Execute()
-    {
-        PlayerController target = enemyAttackComponent.PlayerController;
+        PlayerController target = entityAttackComponent.PlayerController;
 
         if (!target)
             return;
-        target.HealthComponent.Change(entityController.gameObject, -10);
+        target.HealthComponent.Change(entityController.gameObject, -entityAttackComponent.DealtDamage);
+    }
+
+    private void Update()
+    {
+        SetAttackCollisionOffset();
     }
 }

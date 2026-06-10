@@ -24,9 +24,9 @@ public class EntityMovementComponent : MovementBase
         Vector2 dir = Vector2.zero;
         foreach (var item in movementStrategies)
         {
-            dir = item.GetDirection(targetProvider?.CurrentTarget);
+            dir = item.GetDirection(targetProvider?.CurrentTarget, out bool reachedDestination);
 
-            if (dir != Vector2.zero)
+            if (reachedDestination || dir != Vector2.zero)
                 break;
         }
 

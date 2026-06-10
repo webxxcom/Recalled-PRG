@@ -1,18 +1,22 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(IAttackStrategy))]
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(AttackStrategy))]
 public class EntityAttackComponent : DefaultAttackComponent
 {
-    public PlayerController PlayerController { get; private set; }
+    public PlayerController PlayerController
+    {
+        get
+        {
+            EntityController ec = TargetsInRange.FirstOrDefault();
+
+            return ec ? ec.GetComponent<PlayerController>() : null;
+        }
+    }
 
     float timeSinceLastAttack;
-    IAttackStrategy attackStrategy;
-    new Collider2D collider2D;
-    EntityMovementComponent entityMovementComponent;
+    AttackStrategy attackStrategy;
 
     public event Action OnAttack;
 
@@ -24,12 +28,11 @@ public class EntityAttackComponent : DefaultAttackComponent
             Effects.ForEach(e => PlayerController.EffectMachineComponent.ApplyEffect(e));
     }
 
-    private void Awake()
+    new private void Awake()
     {
-        attackStrategy = GetComponent<IAttackStrategy>();
-        collider2D = GetComponent<Collider2D>();
+        base.Awake();
 
-        entityMovementComponent = GetComponentInParent<EntityMovementComponent>();
+        attackStrategy = GetComponent<AttackStrategy>();
     }
 
     private void Start()
@@ -39,18 +42,24 @@ public class EntityAttackComponent : DefaultAttackComponent
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Get Hitbox component and if PlayerController exists in parent then it's the player
         if (collision.TryGetComponent(out HitboxComponent hc))
         {
-            PlayerController = hc.GetComponentInParent<PlayerController>();
+            PlayerController pc = hc.GetComponentInParent<PlayerController>();
+
+            if (pc)
+                TargetsInRange.Add(pc);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // Get Hitbox component and if PlayerController exists in parent then it's the player
-        if (collision.TryGetComponent(out HitboxComponent hc) && hc.GetComponentInParent<PlayerController>())
+        if (collision.TryGetComponent(out HitboxComponent hc))
         {
-            PlayerController = null;
+            PlayerController pc = hc.GetComponentInParent<PlayerController>();
+
+            if (pc)
+                TargetsInRange.Remove(pc);
         }
     }
 
@@ -59,15 +68,6 @@ public class EntityAttackComponent : DefaultAttackComponent
         timeSinceLastAttack = 0;
 
         OnAttack?.Invoke();
-    }
-
-    void SetAttackCollisionOffset()
-    {
-        if (!entityMovementComponent.IsWalking)
-            return;
-
-        float degrees = Vector2.SignedAngle(Vector2.right, entityMovementComponent.MovementIntention);
-        collider2D.transform.rotation = Quaternion.Euler(0, 0, degrees);
     }
 
     bool CanAttack => timeSinceLastAttack >= ReloadTime && PlayerController != null && !PlayerController.IsDead;
@@ -79,6 +79,5 @@ public class EntityAttackComponent : DefaultAttackComponent
         }
 
         timeSinceLastAttack += Time.deltaTime;
-        SetAttackCollisionOffset();
     }
 }

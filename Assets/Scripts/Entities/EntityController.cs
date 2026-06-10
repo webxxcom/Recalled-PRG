@@ -24,7 +24,6 @@ public abstract class EntityController : MonoBehaviour
     public MovementBase MovementBase { get; set; }
 
     [field: SerializeField] public bool IsDead { get; set; }
-    [field: SerializeField] public bool CanWalk { get; set; }
 
     void OnDeath()
     {
@@ -33,6 +32,10 @@ public abstract class EntityController : MonoBehaviour
         SpriteRenderer.sortingOrder = -1;
         Collider2D.enabled = false;
         Animator.SetTrigger(DieHash);
+        Animator.SetFloat(SpeedHash, 0);
+
+        foreach (var c in GetComponentsInChildren<MonoBehaviour>())
+            c.enabled = false;
     }
 
     void OnHurt()
@@ -66,15 +69,17 @@ public abstract class EntityController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (CanWalk || IsDead)
-        {
-            if (!IsDead)
+        if (IsDead)
             return;
-        }
 
         HandleFixedUpdate();
-        Animator.SetFloat(MoveXHash, MovementBase.FacingDirection.x);
-        Animator.SetFloat(MoveYHash, MovementBase.FacingDirection.y);
+        
+        if (MovementBase)
+        {
+            Animator.SetFloat(MoveXHash, MovementBase.FacingDirection.x);
+            Animator.SetFloat(MoveYHash, MovementBase.FacingDirection.y);
+        }
+
         Animator.SetFloat(SpeedHash, Rigidbody2D.linearVelocity.magnitude / 3);
     }
 

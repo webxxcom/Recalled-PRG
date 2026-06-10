@@ -19,7 +19,9 @@ public class EntityAttackComponent : DefaultAttackComponent
     public void ExecuteAttack()
     {
         attackStrategy.Execute();
-        Effects.ForEach(e => PlayerController.EffectMachineComponent.ApplyEffect(e));
+
+        if (PlayerController)
+            Effects.ForEach(e => PlayerController.EffectMachineComponent.ApplyEffect(e));
     }
 
     private void Awake()

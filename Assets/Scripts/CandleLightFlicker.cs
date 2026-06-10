@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -22,6 +21,10 @@ public class CandleLightFlicker : MonoBehaviour
 
     private void Update()
     {
-        light2D.intensity = baseIntensity * Mathf.PerlinNoise1D(Time.time * Speed);
+        float slow = Mathf.PerlinNoise1D(Time.time * 0.5f) * 0.7f;
+        float fast = Mathf.PerlinNoise1D(Time.time * 8f) * 0.3f;
+        float noise = slow + fast; // roughly 0–1, weighted toward slow
+
+        light2D.intensity = baseIntensity * Mathf.Lerp(0.3f, 1.0f, noise);
     }
 }

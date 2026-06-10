@@ -3,12 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Effects/Freeze")]
 public class FreezeEffect : EffectAsset
 {
+    readonly float speedMultiplier = 0.4f;
+
     public override void PutOn(EntityController entityController)
     {
         entityController.SpriteRenderer.color =
-            new Color(0.5f, 1f, 1f);
+            new(0.5f, 1f, 1f);
 
-        entityController.MovementBase.SpeedMultiplier *= 0.4f;
+        entityController.MovementBase.SpeedAggregator.Add(speedMultiplier);
     }
 
     public override void PutOff(EntityController entityController)
@@ -16,10 +18,10 @@ public class FreezeEffect : EffectAsset
         entityController.SpriteRenderer.color =
             Color.white;
 
-        entityController.MovementBase.SpeedMultiplier /= 0.4f;
+        entityController.MovementBase.SpeedAggregator.Remove(speedMultiplier);
     }
 
-    public override void Update(EntityController entityController)
+    public override void Tick(EntityController entityController)
     {
     }
 }

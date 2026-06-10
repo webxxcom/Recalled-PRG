@@ -150,6 +150,113 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2063747092676226615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2869754728550968540}
+  - component: {fileID: 1179690286843222458}
+  - component: {fileID: 8106176005161717567}
+  m_Layer: 11
+  m_Name: Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2869754728550968540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063747092676226615}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.03, y: 0.27, z: 0}
+  m_LocalScale: {x: 0.3673185, y: 0.3673185, z: 0.3673185}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8526230742337842442}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1179690286843222458
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063747092676226615}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 338c95145231e2e40bb3ac4dc7f36b4b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8106176005161717567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063747092676226615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.Light2D
+  m_ComponentVersion: 2
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.7
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Intensity: 1
+  m_LightVolumeIntensity: 1
+  m_LightVolumeEnabled: 0
+  m_ApplyToSortingLayers: 835d390700000000a3278c6f3b1262de
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowsEnabled: 1
+  m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0.3
+  m_ShadowSoftnessFalloffIntensity: 0.5
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1.15
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 8.64
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -1.989949, y: -8.396729, z: 0}
+  - {x: 1.8782023, y: -8.210485, z: 0}
+  - {x: 1.7292075, y: -2.6288931, z: 0}
+  - {x: -1.952701, y: -1.0271976, z: 0}
 --- !u!1 &2363700448473275082
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +449,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.039, y: 0.994}
+  m_AnchoredPosition: {x: 0.039, y: 1.206}
   m_SizeDelta: {x: 451.1086, y: 89.9866}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3542581605157556199
@@ -476,7 +583,7 @@ GameObject:
   - component: {fileID: 7085225572803684528}
   - component: {fileID: 8293097748507972211}
   - component: {fileID: 6340957461064517328}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -492,7 +599,7 @@ Transform:
   m_GameObject: {fileID: 3947751842682473356}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -0.034, z: 0}
+  m_LocalPosition: {x: 0.013, y: 0.339, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -656,7 +763,7 @@ Transform:
   m_GameObject: {fileID: 4738529277594835524}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.307, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -724,8 +831,8 @@ MonoBehaviour:
   <ReloadTime>k__BackingField: 2.5
   <DealtDamage>k__BackingField: 5
   <KnockbackPower>k__BackingField: 1.5
-  <Targets>k__BackingField:
-  - {fileID: 0}
+  <Effects>k__BackingField:
+  - {fileID: 11400000, guid: 43992c6f007da154b8c12aa835d6f296, type: 2}
 --- !u!114 &4942653029831453320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,7 +901,7 @@ GameObject:
   - component: {fileID: 7909209022917881383}
   - component: {fileID: 1176398378409222523}
   - component: {fileID: 3323902720562264678}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Slime 3
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -817,6 +924,7 @@ Transform:
   - {fileID: 109880808415225223}
   - {fileID: 7085225572803684528}
   - {fileID: 529466297735456631}
+  - {fileID: 2869754728550968540}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &181632092390176455
@@ -880,17 +988,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.026946723, y: -0.25585008}
+  m_Offset: {x: 0.026946723, y: 0.0842371}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.42105263, y: 0.45454547}
-    oldSize: {x: 1.1875, y: 1.375}
+    pivot: {x: 0.4, y: 0.13333336}
+    oldSize: {x: 1.25, y: 1.6875}
     newSize: {x: 0.19, y: 0.22}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.952098, y: 0.5184746}
+  m_Size: {x: 0.952098, y: 0.3849249}
   m_EdgeRadius: 0
 --- !u!212 &1105381566837732817
 SpriteRenderer:
@@ -941,7 +1049,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8224146352627488064, guid: e537756de3845fd4090bf714bd25a871, type: 3}
+  m_Sprite: {fileID: 5912972855781346698, guid: 2b806029fa4cbc1439cb1a40d134cc93, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -961,7 +1069,7 @@ Animator:
   m_GameObject: {fileID: 6097617918995308611}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9ee22a9486e123744b11cea9fd2586e3, type: 2}
+  m_Controller: {fileID: 22100000, guid: 1e35a009cdcbfb94aa41579ec5aea73a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -986,7 +1094,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <IsDead>k__BackingField: 0
-  <IsFrozen>k__BackingField: 0
 --- !u!114 &8023279021401798368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1000,6 +1107,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityMovementComponent
   <WalkingSpeed>k__BackingField: 1.5
+  movementStrategies:
+  - {fileID: 1176398378409222523}
+  - {fileID: 3323902720562264678}
 --- !u!114 &4945891420777508210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,9 +1122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56700babf1211154aa60790912451cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
-  <MaxValue>k__BackingField: 100
+  <MaxValue>k__BackingField: 1
   <MinValue>k__BackingField: 0
-  <Value>k__BackingField: 0
+  <Value>k__BackingField: 1
+  <IsInvincible>k__BackingField: 0
 --- !u!114 &7909209022917881383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,7 +1140,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ZoneBehaviorComponent
   priority: 1
   chaseZoneComponent: {fileID: 0}
-  <CurrentTarget>k__BackingField: {fileID: 0}
 --- !u!114 &1176398378409222523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,7 +1152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c1114f7e9e43484a919319e26f75933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChaseMovementComponent
-  minDistanceToTarget: 2
+  minDistanceToTarget: 1.2
 --- !u!114 &3323902720562264678
 MonoBehaviour:
   m_ObjectHideFlags: 0

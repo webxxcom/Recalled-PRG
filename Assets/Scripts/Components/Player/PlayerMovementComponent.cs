@@ -51,7 +51,7 @@ public class PlayerMovementComponent : MovementBase
 
         if (IsWalking)
         {
-            finalMovement *= CurrentSpeed * SpeedMultiplier;
+            finalMovement *= CurrentSpeed * SpeedAggregator.Get();
         }
         else
             finalMovement = Vector2.zero;

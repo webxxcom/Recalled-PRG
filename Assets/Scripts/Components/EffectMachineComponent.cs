@@ -26,7 +26,7 @@ public class EffectMachineComponent : MonoBehaviour
         float timeSinceStart = 0;
         while (timeSinceStart < effect.duration)
         {
-            effect.Update(entityController);
+            effect.Tick(entityController);
             timeSinceStart += Time.deltaTime;
 
             yield return null;

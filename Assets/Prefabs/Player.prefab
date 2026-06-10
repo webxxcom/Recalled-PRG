@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d3dd6f5182aeea4f99d8a6d956c5a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  <ReloadTime>k__BackingField: 0
+  <ReloadTime>k__BackingField: 1.3
   <DealtDamage>k__BackingField: 10
   <KnockbackPower>k__BackingField: 1.2
   <Effects>k__BackingField: []
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Intensity: 0.69
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 835d390700000000a3278c6f3b1262de63b7c3635588f3c5
+  m_ApplyToSortingLayers: 835d390700000000a3278c6f3b1262de
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -733,7 +733,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <IsDead>k__BackingField: 0
-  <CanWalk>k__BackingField: 0
 --- !u!212 &1507123296944016253
 SpriteRenderer:
   serializedVersion: 2
@@ -839,7 +838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56700babf1211154aa60790912451cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
-  <MaxValue>k__BackingField: 100
+  <MaxValue>k__BackingField: 10000
   <MinValue>k__BackingField: 0
   <Value>k__BackingField: 0
   <IsInvincible>k__BackingField: 0
@@ -902,7 +901,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e26dbe64af4aed04d91d1c4695527340, type: 3}
   m_Name: 
@@ -914,7 +913,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef7af567f829480489cb925839780c3f, type: 3}
   m_Name: 

@@ -5,11 +5,11 @@ public class AttackStateMachine : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponent<EntityController>().CanWalk = false;
+        animator.GetComponent<MovementBase>().MovementBlocked = true;
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponent<EntityController>().CanWalk = true;
+        animator.GetComponent<MovementBase>().MovementBlocked = false;
     }
 }

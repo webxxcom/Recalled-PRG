@@ -35,7 +35,6 @@ public class PlayerController : EntityController
     public void RemoveKey(KeyDefinition keyDefinition) => inventory.Remove(keyDefinition);
     public int ChestsUnlocked { get; set; } = 0;
 
-
     protected override void Awake()
     {
         base.Awake();
@@ -71,7 +70,7 @@ public class PlayerController : EntityController
 
     protected override void HandleFixedUpdate()
     {
-        if (IsDead)
+        if (MovementBase.MovementBlocked)
             return;
 
         if (playerMovementComponent.IsWalking)

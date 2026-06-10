@@ -1,17 +1,15 @@
 using System.Linq;
-using UnityEditor.ShaderGraph.Configuration;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-[RequireComponent(typeof(IMovementStrategy))]
+[RequireComponent(typeof(MovementStrategy))]
 public class EntityMovementComponent : MovementBase
 {
+    [field: SerializeField] MovementStrategy[] movementStrategies;
     ITargetProvider[] targetProviders;
-    IMovementStrategy[] movementStrategy;
 
     private void Awake()
     {
-        movementStrategy = GetComponents<IMovementStrategy>();
         targetProviders = GetComponents<ITargetProvider>().OrderBy(o => o.Priority).ToArray();
     }
 
@@ -20,19 +18,19 @@ public class EntityMovementComponent : MovementBase
         if (MovementIntention != Vector2.zero)
             LastMovement = MovementIntention;
 
-        foreach (var item in targetProviders)
+        ITargetProvider targetProvider = targetProviders
+            .FirstOrDefault(e => e.HasTarget && e.CurrentTarget.TryGetComponent(out EntityController ec) && !ec.IsDead);
+
+        Vector2 dir = Vector2.zero;
+        foreach (var item in movementStrategies)
         {
-            if (item.HasTarget)
-            {
-                if (item.CurrentTarget.TryGetComponent(out EntityController ec) && ec.IsDead)
-                    continue;
-                
-                MovementIntention = movementStrategy[0].GetDirection(item.CurrentTarget);
-                return MovementIntention;
-            }
+            dir = item.GetDirection(targetProvider?.CurrentTarget);
+
+            if (dir != Vector2.zero)
+                break;
         }
 
-        MovementIntention = movementStrategy[1].GetDirection(null);
+        MovementIntention = dir;
         return MovementIntention;
     }
 

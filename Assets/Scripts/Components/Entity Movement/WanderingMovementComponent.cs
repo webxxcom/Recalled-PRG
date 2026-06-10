@@ -1,11 +1,8 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EntityMovementComponent))]
-public class WanderingMovementComponent : MonoBehaviour, IMovementStrategy
+public class WanderingMovementComponent : MovementStrategy
 {
     [field: SerializeField] public Collider2D WanderingZone { get; private set; }
-
-    EntityMovementComponent entityMovementComponent;
 
     private static readonly Vector2[] Directions =
         {
@@ -14,11 +11,6 @@ public class WanderingMovementComponent : MonoBehaviour, IMovementStrategy
             Vector2.down,
             Vector2.up
         };
-
-    private void Awake()
-    {
-        entityMovementComponent = GetComponent<EntityMovementComponent>();
-    }
 
     public Vector2 IntermediateDirection
     {
@@ -34,7 +26,7 @@ public class WanderingMovementComponent : MonoBehaviour, IMovementStrategy
     bool isIdle = false;
     float CurrentStateDuration = 0f;
 
-    public Vector2 GetDirection(GameObject _) => IntermediateDirection;
+    public override Vector2 GetDirection(GameObject _) => IntermediateDirection;
 
     void FindNewDirection()
     {

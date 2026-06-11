@@ -28,7 +28,7 @@ public class EntityAttackComponent : DefaultAttackComponent
             Effects.ForEach(e => PlayerController.EffectMachineComponent.ApplyEffect(e));
     }
 
-    new private void Awake()
+    protected override void Awake()
     {
         base.Awake();
 

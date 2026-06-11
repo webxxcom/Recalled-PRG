@@ -2,30 +2,17 @@ using UnityEngine;
 
 public class ChestScript : InteractableObjectScript
 {
-    [field: SerializeField] public KeyDefinition RequiredKey { get; private set; }
+    [field: SerializeField] public InventoryItem RequiredKey { get; private set; }
 
-    public override void Interact(PlayerController interacter)
-    {
-       
-    }
+    public override void Interact() => Open();
 
-    void OpenChest(PlayerController interacter)
+    void Open()
     {
         IsInteracted = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override bool PlayerCanInteract(PlayerController playerController)
     {
-        if (collision.TryGetComponent(out PlayerInteractionComponent _))
-        {
-            InteractionText.SetActive(true);
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out PlayerInteractionComponent _))
-        {
-            InteractionText.SetActive(false);
-        }
+        return playerController && playerController.Inventory.Contains(RequiredKey);
     }
 }

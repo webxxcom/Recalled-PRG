@@ -14,7 +14,11 @@ public abstract class InteractableObjectScript : MonoBehaviour
         get => _IsInteracted;
         protected set
         {
-            animator.SetTrigger(InteractHash);
+            if (value)
+            {
+                animator.SetTrigger(InteractHash);
+                InteractionText.SetActive(false);
+            }
             _IsInteracted = value;
         }
     }
@@ -22,7 +26,7 @@ public abstract class InteractableObjectScript : MonoBehaviour
     bool _IsInteracted;
     Animator animator;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
         InteractionText = GetComponentInChildren<TextMeshProUGUI>().gameObject;
@@ -33,5 +37,26 @@ public abstract class InteractableObjectScript : MonoBehaviour
         InteractionText.SetActive(false);
     }
 
-    public abstract void Interact(PlayerController interacter);
+    // Method used in the trigger to decide if at the current moment player can interact with the object
+    // whether it's an availability of a key in player's inventory to open a chest or a specific looking into the picture
+    protected abstract bool PlayerCanInteract(PlayerController playerController);
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!IsInteracted && collision.TryGetComponent(out PlayerInteractionComponent _)
+            && PlayerCanInteract(collision.GetComponentInParent<PlayerController>()))
+        {
+            InteractionText.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!IsInteracted && collision.TryGetComponent(out PlayerInteractionComponent _))
+        {
+            InteractionText.SetActive(false);
+        }
+    }
+
+    public abstract void Interact();
 }

@@ -5,21 +5,20 @@ public class StageDoorScript : InteractableObjectScript
 {
     new Collider2D collider2D;
 
-    new private void Awake()
+    protected override void Awake()
     {
         base.Awake();
 
         collider2D = GetComponent<Collider2D>();
     }
 
-    public void Open()
+    void Open()
     {
         IsInteracted = true;
         collider2D.enabled = false;
     }
 
-    public override void Interact(PlayerController interacter)
-    {
-        throw new System.NotImplementedException();
-    }
+    public override void Interact() => Open();
+
+    protected override bool PlayerCanInteract(PlayerController _) => true;
 }

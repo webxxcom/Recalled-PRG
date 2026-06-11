@@ -28,4 +28,6 @@ public class PlayerInventoryComponent : MonoBehaviour
             items[item] += count;
         }
     }
+
+    public bool Contains(InventoryItem item) => items.ContainsKey(item);
 }

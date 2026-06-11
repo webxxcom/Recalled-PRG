@@ -14,7 +14,7 @@ public abstract class DefaultAttackComponent : MonoBehaviour
 
     protected EntityController entityController;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         entityController = GetComponentInParent<EntityController>();
     }

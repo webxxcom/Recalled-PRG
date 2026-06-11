@@ -23,7 +23,7 @@ public class PlayerController : EntityController
     bool _isArmed;
 
     public EffectMachineComponent EffectMachineComponent { get; private set; }
-    public PlayerInventoryComponent Inventoty { get; private set; }
+    public PlayerInventoryComponent Inventory { get; private set; }
 
     PlayerInteractionComponent interactionComponent;
     InvincibilityComponent invincibilityComponent;
@@ -34,7 +34,7 @@ public class PlayerController : EntityController
 
         invincibilityComponent = GetComponent<InvincibilityComponent>();
         EffectMachineComponent = GetComponent<EffectMachineComponent>();
-        Inventoty = GetComponent<PlayerInventoryComponent>();
+        Inventory = GetComponent<PlayerInventoryComponent>();
         interactionComponent = GetComponentInChildren<PlayerInteractionComponent>();
         IsArmed = true;
     }

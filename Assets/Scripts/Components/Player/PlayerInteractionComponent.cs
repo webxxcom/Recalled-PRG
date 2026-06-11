@@ -3,6 +3,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class PlayerInteractionComponent : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI interactionText;
@@ -15,13 +16,13 @@ public class PlayerInteractionComponent : MonoBehaviour
     {
         if (TryGetClosestInteractable(out InteractableObjectScript interactable))
         {
-            interactable.Interact(playerController);
+            interactable.Interact();
         }
     }
 
     private void Awake()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        playerController = GetComponentInParent<PlayerController>();
     }
 
     void SetInteractionText(string text)

@@ -8,7 +8,7 @@ public class PlayerAttackComponent : DefaultAttackComponent
 
     new Collider2D collider2D;
 
-    new private void Awake()
+    protected override void Awake()
     {
         base.Awake();
 

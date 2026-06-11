@@ -31,7 +31,7 @@ public class EnemyController : EntityController
 
         entityAttackComponent.OnAttack += () => Animator.SetTrigger(AttackHash);
         HealthComponent.OnMinValueReached += (_) => DeactivateChildrenOnDeath();
-        HealthComponent.OnValueChanged += (_, _) => canvasHiderScript.ShowHealthBar();
+        HealthComponent.OnValueChanged += (_, _) => canvasHiderScript.ShowCanvas();
     }
 
     protected override void HandleFixedUpdate()

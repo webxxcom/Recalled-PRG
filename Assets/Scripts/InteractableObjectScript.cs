@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
 public abstract class InteractableObjectScript : MonoBehaviour
 {
     private static readonly int InteractHash = Animator.StringToHash("Interact");
+
+    public GameObject InteractionText { get; protected set; }
 
     public bool IsInteracted
     {
@@ -18,12 +21,17 @@ public abstract class InteractableObjectScript : MonoBehaviour
 
     bool _IsInteracted;
     Animator animator;
-    SpriteRenderer spriteRenderer;
 
     protected void Awake()
     {
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        InteractionText = GetComponentInChildren<TextMeshProUGUI>().gameObject;
     }
 
+    private void Start()
+    {
+        InteractionText.SetActive(false);
+    }
+
+    public abstract void Interact(PlayerController interacter);
 }

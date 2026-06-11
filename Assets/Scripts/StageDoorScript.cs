@@ -17,4 +17,9 @@ public class StageDoorScript : InteractableObjectScript
         IsInteracted = true;
         collider2D.enabled = false;
     }
+
+    public override void Interact(PlayerController interacter)
+    {
+        throw new System.NotImplementedException();
+    }
 }

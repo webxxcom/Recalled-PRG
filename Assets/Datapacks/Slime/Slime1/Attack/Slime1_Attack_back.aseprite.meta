@@ -76,8 +76,8 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 0
-    customPivotPosition: {x: 0.5, y: 0.5}
+    defaultPivotAlignment: 9
+    customPivotPosition: {x: 0.5, y: 0.4}
     mosaicPadding: 0
     spritePadding: 0
     generateModelPrefab: 1
@@ -91,8 +91,8 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 0
-    customPivotPosition: {x: 0.5, y: 0.5}
+    defaultPivotAlignment: 9
+    customPivotPosition: {x: 0.5, y: 0.4}
     mosaicPadding: 0
     spritePadding: 0
     generateModelPrefab: 1
@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639159405310474710
+  platformSettingsDirtyTick: 639167704439036123
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -129,7 +129,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Frame_0
     originalName: 
-    pivot: {x: 0.47058824, y: 0.625}
+    pivot: {x: 0.47058824, y: 0.22500002}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -150,7 +150,7 @@ ScriptedImporter:
     uvTransform: {x: 63, y: 43}
   - name: Frame_1
     originalName: 
-    pivot: {x: 0.47619048, y: 0.8333334}
+    pivot: {x: 0.47619048, y: 0.30000004}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -171,7 +171,7 @@ ScriptedImporter:
     uvTransform: {x: 63, y: 59}
   - name: Frame_2
     originalName: 
-    pivot: {x: 0.4615385, y: 0.4166667}
+    pivot: {x: 0.4615385, y: 0.15000002}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -192,7 +192,7 @@ ScriptedImporter:
     uvTransform: {x: 48, y: 101}
   - name: Frame_3
     originalName: 
-    pivot: {x: 0.4615385, y: 0.3703704}
+    pivot: {x: 0.4615385, y: 0.13333336}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -213,7 +213,7 @@ ScriptedImporter:
     uvTransform: {x: 35, y: 101}
   - name: Frame_4
     originalName: 
-    pivot: {x: 0.5, y: 0.7692308}
+    pivot: {x: 0.5, y: 0.27692312}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -234,7 +234,7 @@ ScriptedImporter:
     uvTransform: {x: 63, y: 30}
   - name: Frame_5
     originalName: 
-    pivot: {x: 0.4857143, y: 0.5263158}
+    pivot: {x: 0.4857143, y: 0.1894737}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -255,7 +255,7 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 101}
   - name: Frame_6
     originalName: 
-    pivot: {x: 0.5, y: 0.33333334}
+    pivot: {x: 0.5, y: 0.12000002}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -276,7 +276,7 @@ ScriptedImporter:
     uvTransform: {x: 63, y: 0}
   - name: Frame_7
     originalName: 
-    pivot: {x: 0.5, y: 0.3125}
+    pivot: {x: 0.5, y: 0.11250001}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -297,7 +297,7 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 69}
   - name: Frame_8
     originalName: 
-    pivot: {x: 0.49180326, y: 0.29411766}
+    pivot: {x: 0.49180326, y: 0.10588236}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -318,7 +318,7 @@ ScriptedImporter:
     uvTransform: {x: 0, y: 35}
   - name: Frame_9
     originalName: 
-    pivot: {x: 0.49206352, y: 0.2857143}
+    pivot: {x: 0.49206352, y: 0.10285716}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 

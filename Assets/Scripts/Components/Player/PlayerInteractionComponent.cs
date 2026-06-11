@@ -1,0 +1,72 @@
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using UnityEngine;
+
+public class PlayerInteractionComponent : MonoBehaviour
+{
+    [SerializeField] TextMeshProUGUI interactionText;
+
+    PlayerController playerController;
+
+    readonly List<GameObject> interactables = new();
+
+    public void InteractWithCurrent()
+    {
+        if (TryGetClosestInteractable(out InteractableObjectScript interactable))
+        {
+            interactable.Interact(playerController);
+        }
+    }
+
+    private void Awake()
+    {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
+
+    void SetInteractionText(string text)
+    {
+        if (!interactionText)
+            return;
+
+        if (text == null || text.Length == 0)
+        {
+            interactionText.enabled = false;
+        }
+        else
+        {
+            interactionText.enabled = true;
+            interactionText.SetText(text);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out InteractableObjectScript _))
+        {
+            interactables.Add(collision.gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (interactables.Contains(collision.gameObject))
+        {
+            interactables.Remove(collision.gameObject);
+        }
+    }
+
+    bool TryGetClosestInteractable(out InteractableObjectScript interactable)
+    {
+        interactable = null;
+        GameObject gameObject = interactables
+            .OrderBy(i => Physics2D.Distance(i.GetComponent<Collider2D>(), playerController.Collider2D).distance)
+             .FirstOrDefault();
+
+        if (!gameObject)
+            return false;
+
+        interactable = gameObject.GetComponent<InteractableObjectScript>();
+        return interactable != null;
+    }
+}

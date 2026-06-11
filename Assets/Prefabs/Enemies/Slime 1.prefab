@@ -342,7 +342,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.039, y: 0.994}
+  m_AnchoredPosition: {x: 0.039, y: 1.135}
   m_SizeDelta: {x: 451.1086, y: 89.9866}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3542581605157556199
@@ -492,7 +492,7 @@ Transform:
   m_GameObject: {fileID: 3947751842682473356}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -0.034, z: 0}
+  m_LocalPosition: {x: 0.01, y: 0.364, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -637,9 +637,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 529466297735456631}
-  - component: {fileID: 3574846672579478102}
+  - component: {fileID: 2221800321453083045}
   - component: {fileID: 8238773066907892438}
-  - component: {fileID: 4942653029831453320}
+  - component: {fileID: 7398168361144481108}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
@@ -656,15 +656,15 @@ Transform:
   m_GameObject: {fileID: 4738529277594835524}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.309, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6823753800305201289}
   m_Father: {fileID: 8526230742337842442}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &3574846672579478102
-BoxCollider2D:
+--- !u!70 &2221800321453083045
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -697,18 +697,9 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.9999877, y: 0.05106306}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.87234235, y: 1.4765892}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.04565645, y: 0.36}
+  m_Size: {x: 3.69, y: 1.74}
+  m_Direction: 1
 --- !u!114 &8238773066907892438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -725,7 +716,7 @@ MonoBehaviour:
   <DealtDamage>k__BackingField: 5
   <KnockbackPower>k__BackingField: 1.5
   <Effects>k__BackingField: []
---- !u!114 &4942653029831453320
+--- !u!114 &7398168361144481108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -734,9 +725,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4738529277594835524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a5c81a1c66ec9d4894984ff189471e6, type: 3}
+  m_Script: {fileID: 11500000, guid: c3f459a67f5a6dc40ac50ded40a4ab77, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackComponent
+  m_EditorClassIdentifier: '::'
 --- !u!1 &5046599424978369931
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,7 +775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8526230742337842442}
   - component: {fileID: 181632092390176455}
-  - component: {fileID: 709522701639608767}
+  - component: {fileID: 1807106667663726009}
   - component: {fileID: 1105381566837732817}
   - component: {fileID: 4303295007589574839}
   - component: {fileID: 1587604659676026480}
@@ -845,8 +836,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &709522701639608767
-BoxCollider2D:
+--- !u!70 &1807106667663726009
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -879,18 +870,9 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.026946723, y: -0.3292526}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.42105263, y: 0.45454547}
-    oldSize: {x: 1.1875, y: 1.375}
-    newSize: {x: 0.19, y: 0.22}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.952098, y: 0.37166953}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.027368564, y: 0.12860514}
+  m_Size: {x: 1.0753337, y: 0.36942956}
+  m_Direction: 1
 --- !u!212 &1105381566837732817
 SpriteRenderer:
   serializedVersion: 2
@@ -998,7 +980,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityMovementComponent
   <WalkingSpeed>k__BackingField: 1.5
-  movementStrategies: []
+  movementStrategies:
+  - {fileID: 1176398378409222523}
+  - {fileID: 3323902720562264678}
 --- !u!114 &4945891420777508210
 MonoBehaviour:
   m_ObjectHideFlags: 0

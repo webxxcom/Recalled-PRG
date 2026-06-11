@@ -1,21 +1,31 @@
 using UnityEngine;
 
-public class ChestScript : InteractableObjectScript, IPlayerInteractable
+public class ChestScript : InteractableObjectScript
 {
     [field: SerializeField] public KeyDefinition RequiredKey { get; private set; }
 
-    public string InteractionText => "Press E to open chest";
-
-    public void Interact(PlayerController interacter)
+    public override void Interact(PlayerController interacter)
     {
-        if (interacter.inventory.Contains(RequiredKey))
-            OpenChest(interacter);
+       
     }
 
     void OpenChest(PlayerController interacter)
     {
         IsInteracted = true;
-        interacter.ChestsUnlocked++;
-        interacter.RemoveKey(RequiredKey);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out PlayerInteractionComponent _))
+        {
+            InteractionText.SetActive(true);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out PlayerInteractionComponent _))
+        {
+            InteractionText.SetActive(false);
+        }
     }
 }

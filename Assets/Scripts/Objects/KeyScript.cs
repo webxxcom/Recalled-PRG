@@ -9,10 +9,6 @@ public class KeyScript : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameObject.FindGameObjectWithTag("Player")
-                .GetComponent<PlayerController>()
-                .AddKey(Definition);
-
             Destroy(gameObject);
         }
     }

@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-[RequireComponent(typeof(PlayerMovementComponent))]
 
+[RequireComponent(typeof(PlayerMovementComponent))]
 [RequireComponent(typeof(InvincibilityComponent))]
 [RequireComponent(typeof(EffectMachineComponent))]
+[RequireComponent(typeof(PlayerInventoryComponent))]
 public class PlayerController : EntityController
 {
     private static readonly int IsArmedHash = Animator.StringToHash("IsArmed");
@@ -24,25 +23,19 @@ public class PlayerController : EntityController
     bool _isArmed;
 
     public EffectMachineComponent EffectMachineComponent { get; private set; }
+    public PlayerInventoryComponent Inventoty { get; private set; }
 
-    PlayerMovementComponent playerMovementComponent;
-    InteractionComponent interactionComponent;
+    PlayerInteractionComponent interactionComponent;
     InvincibilityComponent invincibilityComponent;
-
-    public readonly List<KeyDefinition> inventory = new();
-
-    public void AddKey(KeyDefinition keyDefinition) => inventory.Add(keyDefinition);
-    public void RemoveKey(KeyDefinition keyDefinition) => inventory.Remove(keyDefinition);
-    public int ChestsUnlocked { get; set; } = 0;
 
     protected override void Awake()
     {
         base.Awake();
 
-        playerMovementComponent = GetComponent<PlayerMovementComponent>();
         invincibilityComponent = GetComponent<InvincibilityComponent>();
         EffectMachineComponent = GetComponent<EffectMachineComponent>();
-        interactionComponent = GetComponentInChildren<InteractionComponent>();
+        Inventoty = GetComponent<PlayerInventoryComponent>();
+        interactionComponent = GetComponentInChildren<PlayerInteractionComponent>();
         IsArmed = true;
     }
 
@@ -73,9 +66,9 @@ public class PlayerController : EntityController
         if (MovementBase.MovementBlocked)
             return;
 
-        if (playerMovementComponent.IsWalking)
+        if (MovementBase.IsWalking)
         {
-            Vector2 movement = playerMovementComponent.GetFinalMovement();
+            Vector2 movement = MovementBase.GetFinalMovement();
 
             Rigidbody2D.linearVelocity = movement;
         }

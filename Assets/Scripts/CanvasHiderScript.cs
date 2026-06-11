@@ -8,6 +8,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CanvasGroup))]
 public class CanvasHiderScript : MonoBehaviour
 {
+    [field: SerializeField] public float Offset { get; private set; }
     [field: SerializeField] public float Speed { get; private set; }
 
     CanvasGroup canvasGroup;
@@ -23,9 +24,17 @@ public class CanvasHiderScript : MonoBehaviour
     }
 
     Coroutine hideCoroutine;
-    IEnumerator WaitAndHideHealthBar()
+    IEnumerator WaitAndHideCanvas()
     {
+        while (canvasGroup.alpha < 0.95f)
+        {
+            canvasGroup.alpha += Time.deltaTime * 10;
+
+            yield return null;
+        }
         canvasGroup.alpha = 1;
+
+        yield return new WaitForSeconds(Offset);
 
         while (canvasGroup.alpha > 0.1f)
         {
@@ -36,11 +45,11 @@ public class CanvasHiderScript : MonoBehaviour
         canvasGroup.alpha = 0;
     }
 
-    public void ShowHealthBar()
+    public void ShowCanvas()
     {
         if (hideCoroutine != null)
             StopCoroutine(hideCoroutine);
 
-        hideCoroutine = StartCoroutine(WaitAndHideHealthBar());
+        hideCoroutine = StartCoroutine(WaitAndHideCanvas());
     }
 }

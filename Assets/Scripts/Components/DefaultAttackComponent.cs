@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public abstract class DefaultAttackComponent : MonoBehaviour
     public HashSet<EntityController> DamagedTargets { get; } = new();
 
     protected EntityController entityController;
+
+    public Action OnAttackEvent;
 
     protected virtual void Awake()
     {

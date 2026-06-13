@@ -22,6 +22,7 @@ public class PlayerAttackComponent : DefaultAttackComponent
         {
             timeSinceLastAttack = 0;
             entityController.Animator.SetTrigger("Attack");
+            OnAttackEvent?.Invoke();
         }
     }
 

@@ -1,6 +1,5 @@
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 [RequireComponent(typeof(MovementStrategy))]
 public class EntityMovementComponent : MovementBase
@@ -13,7 +12,7 @@ public class EntityMovementComponent : MovementBase
         targetProviders = GetComponents<ITargetProvider>().OrderBy(o => o.Priority).ToArray();
     }
 
-    Vector2 GetMovementIntention()
+    protected override Vector2 GetMovementIntention()
     {
         if (MovementIntention != Vector2.zero)
             LastMovement = MovementIntention;
@@ -31,15 +30,6 @@ public class EntityMovementComponent : MovementBase
         }
 
         MovementIntention = dir;
-        return MovementIntention;
-    }
-
-    public override Vector2 GetFinalMovement()
-    {
-        if (!enabled)
-            return Vector2.zero;
-
-        Vector2 finalMovement = GetMovementIntention();
-        return finalMovement * WalkingSpeed;
+        return MovementIntention * WalkingSpeed;
     }
 }

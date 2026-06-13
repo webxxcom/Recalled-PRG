@@ -18,8 +18,6 @@ public class EntityAttackComponent : DefaultAttackComponent
     float timeSinceLastAttack;
     AttackStrategy attackStrategy;
 
-    public event Action OnAttack;
-
     public void ExecuteAttack()
     {
         attackStrategy.Execute();
@@ -67,7 +65,7 @@ public class EntityAttackComponent : DefaultAttackComponent
     {
         timeSinceLastAttack = 0;
 
-        OnAttack?.Invoke();
+        OnAttackEvent?.Invoke();
     }
 
     bool CanAttack => timeSinceLastAttack >= ReloadTime && PlayerController != null && !PlayerController.IsDead;

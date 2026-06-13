@@ -357,28 +357,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: d727949c-fee5-465b-81f8-0fc210b7a295-removebg-preview_23
-      rect:
-        serializedVersion: 2
-        x: 518
-        y: 162
-        width: 13
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 596f9f29e3f211cb0800000000000000
-      internalID: -4895079374174685547
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []

@@ -37,7 +37,7 @@ public class PlayerMovementComponent : MovementBase
         }
     }
 
-    public override Vector2 GetFinalMovement()
+    protected override Vector2 GetMovementIntention()
     {
         Vector2 finalMovement = MovementIntention;
 
@@ -51,7 +51,7 @@ public class PlayerMovementComponent : MovementBase
 
         if (IsWalking)
         {
-            finalMovement *= CurrentSpeed * SpeedAggregator.Get();
+            finalMovement *= CurrentSpeed;
         }
         else
             finalMovement = Vector2.zero;

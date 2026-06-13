@@ -29,7 +29,7 @@ public class EnemyController : EntityController
     {
         base.Start();
 
-        entityAttackComponent.OnAttack += () => Animator.SetTrigger(AttackHash);
+        entityAttackComponent.OnAttackEvent += () => Animator.SetTrigger(AttackHash);
         HealthComponent.OnMinValueReached += (_) => DeactivateChildrenOnDeath();
         HealthComponent.OnValueChanged += (_, _) => canvasHiderScript.ShowCanvas();
     }

@@ -464,6 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d449da01801937e4a91336c9da272024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  <Offset>k__BackingField: 0
   <Speed>k__BackingField: 1.58
 --- !u!1 &3947751842682473356
 GameObject:

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -29,6 +30,7 @@ public abstract class EntityController : MonoBehaviour
     {
         IsDead = true;
         Rigidbody2D.bodyType = RigidbodyType2D.Static;
+        GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(s => s.sortingOrder = -1);
         SpriteRenderer.sortingOrder = -1;
         Collider2D.enabled = false;
         Animator.SetTrigger(DieHash);

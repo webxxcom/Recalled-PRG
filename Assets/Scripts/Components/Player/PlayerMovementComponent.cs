@@ -5,13 +5,12 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovementComponent : MovementBase
 {
-    public bool IsSprinting { get; private set; }
-    public float CurrentSpeed => IsSprinting ? SprintingSpeed : WalkingSpeed;
-
-    [field: SerializeField] public float SprintingSpeed { get; private set; }
+    [field: SerializeField] public float SprintingSpeedMultiplier { get; private set; }
     [field: SerializeField] public float Stamina { get; private set; }
     [field: SerializeField] public float StaminaUsage { get; private set; }
     [field: SerializeField] public float StaminaRestore { get; private set; }
+
+    public bool IsSprinting { get; private set; }
 
     float currentStamina = 100;
     float staminaRestoreLastTime = 0;
@@ -22,14 +21,21 @@ public class PlayerMovementComponent : MovementBase
         MovementIntention = value.Get<Vector2>();
     }
 
-    void OnSprint(InputValue value) => IsSprinting = value.isPressed;
+    void OnSprint(InputValue value)
+    {
+        IsSprinting = value.isPressed;
+
+        if (IsSprinting)
+            SpeedAggregator.Add(SprintingSpeedMultiplier);
+        else
+            SpeedAggregator.Remove(SprintingSpeedMultiplier);
+    }
 
     void RestoreStaminaWithTime()
     {
         staminaRestoreLastTime += Time.deltaTime;
 
-        bool canRestoreStamina = currentStamina < Stamina
-            && !IsSprinting;
+        bool canRestoreStamina = currentStamina < Stamina && !IsSprinting;
         if (staminaRestoreLastTime > 0.3 && canRestoreStamina)
         {
             currentStamina += StaminaRestore;
@@ -51,7 +57,7 @@ public class PlayerMovementComponent : MovementBase
 
         if (IsWalking)
         {
-            finalMovement *= CurrentSpeed;
+            finalMovement *= WalkingSpeed;
         }
         else
             finalMovement = Vector2.zero;

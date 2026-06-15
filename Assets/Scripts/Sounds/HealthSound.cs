@@ -1,18 +1,17 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EntityAudioController))]
 public class HealthSound : EntitySoundComponent
 {
     [SerializeField] AudioClip _hurtSound;
     [SerializeField] AudioClip _healingSound;
     [SerializeField] AudioClip _deathSound;
 
-    EntityAudioController entityAudioController;
     HealthComponent healthComponent;
 
-    private void Awake()
+    protected override void Awake()
     {
-        entityAudioController = GetComponent<EntityAudioController>();
+        base.Awake();
+
         healthComponent = GetComponentInParent<HealthComponent>();
     }
 
@@ -30,14 +29,14 @@ public class HealthSound : EntitySoundComponent
 
     void HandleDeathSound(GameObject _)
     {
-        entityAudioController.AudioSource.PlayOneShot(_deathSound);
+        AudioSource.PlayOneShot(_deathSound);
     }
 
     void HandleHurtHealingSound(GameObject _, int val)
     {
         if (val < 0)
-            entityAudioController.AudioSource.PlayOneShot(_hurtSound);
+            AudioSource.PlayOneShot(_hurtSound);
         else if (val > 0)
-            entityAudioController.AudioSource.PlayOneShot(_healingSound);
+            AudioSource.PlayOneShot(_healingSound);
     }
 }

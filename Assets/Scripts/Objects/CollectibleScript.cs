@@ -2,12 +2,14 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class CollectibleScript : MonoBehaviour
 {
     private static readonly int CollectedHash = Animator.StringToHash("Collected");
 
     [field: SerializeField] public InventoryItem InventoryItemDefinition { get; private set; }
     [field: SerializeField] public int Quantity { get; private set; }
+    [field: SerializeField] public AudioClip PickUpSound { get; private set; }
 
     public bool IsCollected { get; private set; }
     Animator animator;

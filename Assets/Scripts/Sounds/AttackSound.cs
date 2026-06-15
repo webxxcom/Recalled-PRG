@@ -1,17 +1,9 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EntityAudioController))]
 public class AttackSound : EntitySoundComponent
 {
     [SerializeField] AudioClip _attackSound;
     [SerializeField] DefaultAttackComponent entityAttackComponent;
-
-    EntityAudioController entityAudioController;
-
-    private void Awake()
-    {
-        entityAudioController = GetComponent<EntityAudioController>();
-    }
 
     public override void Activate()
     {
@@ -25,6 +17,6 @@ public class AttackSound : EntitySoundComponent
 
     void HandleAttackSound()
     {
-         entityAudioController.AudioSource.PlayOneShot(_attackSound);
+         AudioSource.PlayOneShot(_attackSound);
     }
 }

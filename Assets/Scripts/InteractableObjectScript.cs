@@ -3,9 +3,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public abstract class InteractableObjectScript : MonoBehaviour
 {
     private static readonly int InteractHash = Animator.StringToHash("Interact");
+
+    [field: SerializeField] public AudioClip FirstStateAudio { get; private set; }
+    [field: SerializeField] public AudioClip SecondStateAudio { get; private set; }
 
     public GameObject InteractionText { get; protected set; }
 
@@ -17,7 +21,12 @@ public abstract class InteractableObjectScript : MonoBehaviour
             if (value)
             {
                 animator.SetTrigger(InteractHash);
+                audioSource.PlayOneShot(FirstStateAudio);
                 InteractionText.SetActive(false);
+            }
+            else
+            {
+                audioSource.PlayOneShot(SecondStateAudio);
             }
             _IsInteracted = value;
         }
@@ -25,10 +34,12 @@ public abstract class InteractableObjectScript : MonoBehaviour
 
     bool _IsInteracted;
     Animator animator;
+    AudioSource audioSource;
 
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         InteractionText = GetComponentInChildren<TextMeshProUGUI>().gameObject;
     }
 

@@ -12,6 +12,7 @@ public abstract class MovementBase : MonoBehaviour
     public Vector2 LastMovement { get; protected set; }
     public Vector2 MovementIntention { get; protected set; }
     public bool IsWalking => MovementIntention != Vector2.zero;
+    public float CurrentSpeed => WalkingSpeed * SpeedAggregator.Get();
     public Vector2 FacingDirection => MovementIntention != Vector2.zero ? MovementIntention : LastMovement;
 
     public event Action OnMovement;

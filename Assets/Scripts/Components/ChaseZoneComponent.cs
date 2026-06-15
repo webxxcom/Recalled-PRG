@@ -8,7 +8,7 @@ public class ChaseZoneComponent : MonoBehaviour
     public GameObject CurrentTarget { get; private set; }
 
     public event Action<GameObject> OnTargetEnteredTheZone;
-    public event Action OnTargetLeftTheZone;
+    public event Action<GameObject> OnTargetLeftTheZone;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,7 +26,7 @@ public class ChaseZoneComponent : MonoBehaviour
         {
             CurrentTarget = null;
 
-            OnTargetLeftTheZone?.Invoke();
+            OnTargetLeftTheZone?.Invoke(collision.gameObject);
         }
     }
 }

@@ -1,23 +1,23 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
-public class ZoneBehaviorComponent: MonoBehaviour, ITargetProvider
+public class ZoneBehaviorComponent : TargetProvider
 {
-    [field: SerializeField] int priority;
     [SerializeField] ChaseZoneComponent chaseZoneComponent;
 
-    public GameObject CurrentTarget { get; set; }
-
-    public int Priority => priority;
-
-    private void Awake()
+    private void OnEnable ()
     {
-        if (!chaseZoneComponent)
-        {
-            Debug.LogError("ZoneBehavior component MUST have the ChaseZoneComponent attached");
-            return; 
-        }
-
-        chaseZoneComponent.OnTargetEnteredTheZone += target => CurrentTarget = target;
-        chaseZoneComponent.OnTargetLeftTheZone += () => CurrentTarget = null;
+        chaseZoneComponent.OnTargetEnteredTheZone += SetTarget;
+        chaseZoneComponent.OnTargetLeftTheZone += UnsetTarget;
     }
+
+    private void OnDisable()
+    {
+        chaseZoneComponent.OnTargetEnteredTheZone -= SetTarget;
+        chaseZoneComponent.OnTargetLeftTheZone -= UnsetTarget;
+    }
+
+    void SetTarget(GameObject trgt) => CurrentTarget = trgt;
+
+    void UnsetTarget(GameObject _) => CurrentTarget = null;
 }

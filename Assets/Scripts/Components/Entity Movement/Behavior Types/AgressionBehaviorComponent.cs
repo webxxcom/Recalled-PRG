@@ -1,13 +1,8 @@
 using UnityEngine;
 
 [RequireComponent(typeof(HealthComponent))]
-public class AgressionBehaviorComponent: MonoBehaviour, ITargetProvider
+public class AgressionBehaviorComponent : TargetProvider
 {
-    [SerializeField] int priority;
-    [field: SerializeField] public GameObject CurrentTarget { get; set; }
-
-    public int Priority => priority;
-
     HealthComponent healthComponent;
 
     private void Awake()
@@ -15,12 +10,17 @@ public class AgressionBehaviorComponent: MonoBehaviour, ITargetProvider
         healthComponent = GetComponent<HealthComponent>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        healthComponent.OnValueChanged += (obj, val) => BecomeAgressive(obj);
+        healthComponent.OnValueChanged += BecomeAgressive;
     }
 
-    public void BecomeAgressive(GameObject gameObject)
+    private void OnDisable()
+    {
+        healthComponent.OnValueChanged -= BecomeAgressive;
+    }
+
+    public void BecomeAgressive(GameObject gameObject, int _)
     {
         CurrentTarget = gameObject;
     }

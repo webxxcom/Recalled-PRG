@@ -1,12 +1,10 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class EntityMovementSound : EntitySoundComponent
 {
     [SerializeField] AudioClip _walkingSound;
     [SerializeField] float _delayBetween;
 
-    AudioSource _audioSource;
     MovementBase _movementBase;
     bool _isPlaying;
 
@@ -14,7 +12,6 @@ public class EntityMovementSound : EntitySoundComponent
     {
         base.Awake();
 
-        _audioSource = GetComponent<AudioSource>();
         _movementBase = GetComponentInParent<MovementBase>();
     }
 

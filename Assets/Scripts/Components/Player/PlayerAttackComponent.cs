@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Collider2D))]
 public class PlayerAttackComponent : DefaultAttackComponent
 {
-    float timeSinceLastAttack;
-
     new Collider2D collider2D;
 
     protected override void Awake()
@@ -21,7 +19,7 @@ public class PlayerAttackComponent : DefaultAttackComponent
         if (value.isPressed && CanAttack)
         {
             timeSinceLastAttack = 0;
-            entityController.Animator.SetTrigger("Attack");
+
             OnAttackEvent?.Invoke();
         }
     }

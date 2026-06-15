@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class DefaultAttackComponent : MonoBehaviour
 {
+    private static readonly int AttackHash = Animator.StringToHash("Attack");
+
     [field: SerializeField] public float ReloadTime { get; private set; }
     [field: SerializeField] public int DealtDamage { get; private set; }
     [field: SerializeField] public float KnockbackPower { get; private set; }
@@ -15,11 +17,15 @@ public abstract class DefaultAttackComponent : MonoBehaviour
 
     protected EntityController entityController;
 
+    protected float timeSinceLastAttack;
+
     public Action OnAttackEvent;
 
     protected virtual void Awake()
     {
         entityController = GetComponentInParent<EntityController>();
+
+        OnAttackEvent += () => entityController.Animator.SetTrigger(AttackHash);
     }
 
     public void UpdateAttackExecution()

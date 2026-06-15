@@ -15,7 +15,6 @@ public class EntityAttackComponent : DefaultAttackComponent
         }
     }
 
-    float timeSinceLastAttack;
     AttackStrategy attackStrategy;
 
     public void ExecuteAttack()

@@ -1,12 +1,12 @@
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-public class MovementSound : EntitySoundComponent
+public class PlayerMovementSound : EntitySoundComponent
 {
     [SerializeField] AudioClip _walkingSound;
-    [SerializeField] float _deltaTime;
 
     PlayerMovementComponent playerMovementComponent;
+    bool _isPlaying;
 
     protected override void Awake()
     {
@@ -17,30 +17,18 @@ public class MovementSound : EntitySoundComponent
 
     public override void Activate()
     {
-        playerMovementComponent.OnMovement += HandleMovementSound;
-    }
-
-    private void OnDisable()
-    {
-        Deactivate();
+        playerMovementComponent.OnMovementStarted += StartPlaying;
+        playerMovementComponent.OnMovementStopped += StopPlaying;
     }
 
     public override void Deactivate()
     {
-        playerMovementComponent.OnMovement -= HandleMovementSound;
+        playerMovementComponent.OnMovementStarted -= StartPlaying;
+        playerMovementComponent.OnMovementStopped -= StopPlaying;
     }
 
-    float timeSince = 0;
-    void HandleMovementSound()
-    {
-        timeSince += Time.deltaTime;
-
-        if (timeSince > _deltaTime && playerMovementComponent.IsWalking)
-        {
-            AudioSource.PlayOneShot(_walkingSound);
-            timeSince = 0;
-        }
-    }
+    void StartPlaying() => _isPlaying = true;
+    void StopPlaying() => _isPlaying = false;
 
     float DelayBeetweenPlays()
     {
@@ -53,14 +41,21 @@ public class MovementSound : EntitySoundComponent
         else
             return 0.3f / kf;
     }
-    private void Update()
+    float timeSince = 0;
+    void UpdateMovementSound()
     {
-        timeSince += Time.deltaTime;
-
         if (timeSince > DelayBeetweenPlays() && playerMovementComponent.IsWalking)
         {
             AudioSource.PlayOneShot(_walkingSound);
             timeSince = 0;
         }
+    }
+
+    private void Update()
+    {
+        timeSince += Time.deltaTime;
+
+        if (_isPlaying)
+            UpdateMovementSound();
     }
 }

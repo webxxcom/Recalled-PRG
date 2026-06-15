@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639164628089041190
+  platformSettingsDirtyTick: 639171548522887746
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -364,7 +364,7 @@ ScriptedImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
-  generatePhysicsShape: 0
+  generatePhysicsShape: 1
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 48, y: 48}

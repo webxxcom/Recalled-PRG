@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class EnemyController : EntityController
 {
-    private static readonly int AttackHash = Animator.StringToHash("Attack");
-
     EntityAttackComponent entityAttackComponent;
     HitboxComponent hitboxComponent;
     CanvasHiderScript canvasHiderScript;
@@ -29,7 +27,6 @@ public class EnemyController : EntityController
     {
         base.Start();
 
-        entityAttackComponent.OnAttackEvent += () => Animator.SetTrigger(AttackHash);
         HealthComponent.OnMinValueReached += (_) => DeactivateChildrenOnDeath();
         HealthComponent.OnValueChanged += (_, _) => canvasHiderScript.ShowCanvas();
     }

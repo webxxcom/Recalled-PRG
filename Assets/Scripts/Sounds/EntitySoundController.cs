@@ -8,7 +8,7 @@ public class EntityAudioController : MonoBehaviour
 
     private void Awake()
     {
-        soundComponents = GetComponents<EntitySoundComponent>().ToList();
+        soundComponents = GetComponentsInChildren<EntitySoundComponent>().ToList();
     }
 
     private void OnEnable()

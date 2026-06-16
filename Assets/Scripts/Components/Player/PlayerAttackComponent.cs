@@ -20,7 +20,7 @@ public class PlayerAttackComponent : DefaultAttackComponent
         {
             timeSinceLastAttack = 0;
 
-            OnAttackEvent?.Invoke();
+            OnAttackStarted?.Invoke();
         }
     }
 

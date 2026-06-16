@@ -18,6 +18,9 @@ public class EntityMovementComponent : MovementBase
         Vector2 dir = Vector2.zero;
         foreach (var item in movementStrategies)
         {
+            if (!item.enabled)
+                continue;
+
             dir = item.GetDirection(targetProvider != null ? targetProvider.CurrentTarget : null, out bool reachedDestination);
 
             if (reachedDestination || dir != Vector2.zero)

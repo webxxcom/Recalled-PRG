@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(EntityController))]
 public class BlinkingEffectComponent : MonoBehaviour
 {
-    private static readonly WaitForSeconds _waitForSeconds0_2 = new(0.1f);
+    private static readonly WaitForSeconds _waitForSeconds0_1 = new(0.1f);
 
     EntityController entityController;
     int referenceCounter = 0;
@@ -17,10 +17,10 @@ public class BlinkingEffectComponent : MonoBehaviour
         while (true)
         {
             entityController.SpriteRenderer.enabled = false;
-            yield return _waitForSeconds0_2;
+            yield return _waitForSeconds0_1;
 
             entityController.SpriteRenderer.enabled = true;
-            yield return _waitForSeconds0_2;
+            yield return _waitForSeconds0_1;
         }
     }
 
@@ -28,8 +28,10 @@ public class BlinkingEffectComponent : MonoBehaviour
     {
         referenceCounter++;
 
-        if (referenceCounter == 1)
-            blinkingCoroutine = StartCoroutine(BlinkCoroutine());
+        if (blinkingCoroutine != null)
+            StopCoroutine(blinkingCoroutine);
+
+        blinkingCoroutine = StartCoroutine(BlinkCoroutine());
     }
 
     public void Exit()

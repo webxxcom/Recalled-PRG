@@ -33,9 +33,6 @@ public class EnemyController : EntityController
 
     protected override void HandleFixedUpdate()
     {
-        if (MovementBase.MovementBlocked)
-            return;
-
         Vector2 finalMovement = MovementBase.GetFinalMovement();
 
         if (finalMovement != Vector2.zero)

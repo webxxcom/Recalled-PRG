@@ -43,7 +43,7 @@ public class PlayerController : EntityController
     {
         base.Start();
 
-        //HealthComponent.OnValueChanged += (_, _) => invincibilityComponent.BecomeInvinsibleFor(1f);
+        HealthComponent.OnValueChanged += (_, _) => invincibilityComponent.BecomeInvinsibleFor(1f);
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -63,13 +63,10 @@ public class PlayerController : EntityController
 
     protected override void HandleFixedUpdate()
     {
-        if (MovementBase.MovementBlocked)
-            return;
-
-        if (MovementBase.IsWalking)
+        Vector2 movement = MovementBase.GetFinalMovement(); 
+        
+        if (movement != Vector2.zero)
         {
-            Vector2 movement = MovementBase.GetFinalMovement();
-
             Rigidbody2D.linearVelocity = movement;
         }
         else

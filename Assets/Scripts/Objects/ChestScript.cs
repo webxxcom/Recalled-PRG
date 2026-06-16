@@ -4,15 +4,19 @@ public class ChestScript : InteractableObjectScript
 {
     [field: SerializeField] public InventoryItem RequiredKey { get; private set; }
 
-    public override void Interact() => Open();
+    public override void Interact()
+    {
+        if (!IsInteracted && PlayerCanInteract())
+            Open();
+    }
 
     void Open()
     {
         IsInteracted = true;
     }
 
-    protected override bool PlayerCanInteract(PlayerController playerController)
+    protected override bool PlayerCanInteract()
     {
-        return playerController && playerController.Inventory.Contains(RequiredKey);
+        return FindAnyObjectByType<PlayerController>().Inventory.Contains(RequiredKey);
     }
 }

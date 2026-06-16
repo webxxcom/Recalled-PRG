@@ -14,21 +14,13 @@ public class HealthComponent : ValueProvider
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         entityController = GetComponent<EntityController>();
-
-        //OnValueChanged += (obj, val) => ApplyKnockback(obj, 1.1f);
     }
 
     public override void Change(GameObject changer, int value)
     {
-        if (!IsInvincible)
-            base.Change(changer, value);
-    }
+        if (IsInvincible)
+            value = 0;
 
-    private void ApplyKnockback(GameObject attacker, float knockbackPower)
-    {
-        Vector2 forceVector = (transform.position - attacker.transform.position).normalized;
-
-        rigidbody2D.AddForce(forceVector * knockbackPower, ForceMode2D.Impulse);
-        //entityController.FreezeFor(0.2f);
+        base.Change(changer, value);
     }
 }

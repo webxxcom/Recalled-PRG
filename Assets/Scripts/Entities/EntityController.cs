@@ -58,7 +58,7 @@ public abstract class EntityController : MonoBehaviour
     protected virtual void Start()
     {
         HealthComponent.OnMinValueReached += obj => OnDeath();
-        HealthComponent.OnValueChanged += (_, value) => { if (value < 0) OnHurt(); };
+        HealthComponent.OnValueChanged += (_, value) => { if (value <= 0) OnHurt(); };
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)

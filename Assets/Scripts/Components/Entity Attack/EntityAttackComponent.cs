@@ -64,7 +64,7 @@ public class EntityAttackComponent : DefaultAttackComponent
     {
         timeSinceLastAttack = 0;
 
-        OnAttackEvent?.Invoke();
+        OnAttackStarted?.Invoke();
     }
 
     bool CanAttack => timeSinceLastAttack >= ReloadTime && PlayerController != null && !PlayerController.IsDead;

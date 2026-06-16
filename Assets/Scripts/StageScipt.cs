@@ -19,7 +19,7 @@ public class StageScipt : MonoBehaviour
     {
         if (!doorScript.IsInteracted && enemies.Count(e => e.IsDead) == enemies.Length)
         {
-            doorScript.Interact();
+            doorScript.Open();
             stageLight.enabled = true;
             stageLight.GetComponent<Animator>().SetTrigger("Interact");
         }

@@ -19,13 +19,22 @@ public abstract class DefaultAttackComponent : MonoBehaviour
 
     protected float timeSinceLastAttack;
 
-    public Action OnAttackEvent;
+    public Action OnAttackStarted;
+    public Action<EntityController> OnAttackApplied;
 
     protected virtual void Awake()
     {
         entityController = GetComponentInParent<EntityController>();
 
-        OnAttackEvent += () => entityController.Animator.SetTrigger(AttackHash);
+        OnAttackStarted += () => entityController.Animator.SetTrigger(AttackHash);
+        OnAttackApplied += ApplyKnockback;
+    }
+
+    void ApplyKnockback(EntityController target)
+    {
+        Vector2 attackDir = (target.transform.position - entityController.transform.position).normalized;
+
+        target.MovementBase.externalVelocityComponent.Add(attackDir * KnockbackPower);
     }
 
     public void UpdateAttackExecution()
@@ -37,6 +46,8 @@ public abstract class DefaultAttackComponent : MonoBehaviour
 
             DamagedTargets.Add(entityController);
             entityController.HealthComponent.Change(this.entityController.gameObject, -DealtDamage);
+
+            OnAttackApplied?.Invoke(entityController);
         }
     }
 

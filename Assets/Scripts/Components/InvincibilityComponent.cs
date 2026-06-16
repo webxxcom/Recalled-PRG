@@ -35,10 +35,8 @@ public class InvincibilityComponent : MonoBehaviour
         Exit();
     }
 
-
     public void BecomeInvinsibleFor(float seconds)
     {
         StartCoroutine(InvincibleCoroutine(seconds));
     }
-
 }

@@ -50,12 +50,12 @@ public abstract class InteractableObjectScript : MonoBehaviour
 
     // Method used in the trigger to decide if at the current moment player can interact with the object
     // whether it's an availability of a key in player's inventory to open a chest or a specific looking into the picture
-    protected abstract bool PlayerCanInteract(PlayerController playerController);
+    protected abstract bool PlayerCanInteract();
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!IsInteracted && collision.TryGetComponent(out PlayerInteractionComponent _)
-            && PlayerCanInteract(collision.GetComponentInParent<PlayerController>()))
+            && PlayerCanInteract())
         {
             InteractionText.SetActive(true);
         }

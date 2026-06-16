@@ -7,12 +7,12 @@ public class AttackSound : EntitySoundComponent
 
     public override void Activate()
     {
-        entityAttackComponent.OnAttackEvent += HandleAttackSound;
+        entityAttackComponent.OnAttackStarted += HandleAttackSound;
     }
 
     public override void Deactivate()
     {
-        entityAttackComponent.OnAttackEvent -= HandleAttackSound;
+        entityAttackComponent.OnAttackStarted -= HandleAttackSound;
     }
 
     void HandleAttackSound()

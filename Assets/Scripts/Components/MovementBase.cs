@@ -15,6 +15,13 @@ public abstract class MovementBase : MonoBehaviour
     public float CurrentSpeed => WalkingSpeed * SpeedAggregator.Get();
     public Vector2 FacingDirection => MovementIntention != Vector2.zero ? MovementIntention : LastMovement;
 
+    public ExternalVelocityComponent externalVelocityComponent;
+
+    private void Awake()
+    {
+        TryGetComponent(out externalVelocityComponent);
+    }
+
     public Vector2 MovementIntention
     {
         get => _movementIntention;
@@ -37,12 +44,13 @@ public abstract class MovementBase : MonoBehaviour
 
     public Vector2 GetFinalMovement()
     {
-        if (!enabled)
+        if (!enabled || MovementBlocked)
             return Vector2.zero;
 
         Vector2 finalMovement = GetMovementIntention();
 
-        return finalMovement * SpeedAggregator.Get();
+        return (finalMovement * SpeedAggregator.Get())
+            + (externalVelocityComponent != null ? externalVelocityComponent.TickAndGet(Time.fixedDeltaTime) : Vector2.zero);
     }
 
     private void OnDisable() => MovementIntention = Vector2.zero;

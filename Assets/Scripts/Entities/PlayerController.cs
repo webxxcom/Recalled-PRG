@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(InvincibilityComponent))]
 [RequireComponent(typeof(EffectMachineComponent))]
 [RequireComponent(typeof(PlayerInventoryComponent))]
+[RequireComponent(typeof(MovementBase))]
 public class PlayerController : EntityController
 {
     private static readonly int IsArmedHash = Animator.StringToHash("IsArmed");
@@ -24,6 +25,7 @@ public class PlayerController : EntityController
 
     public EffectMachineComponent EffectMachineComponent { get; private set; }
     public PlayerInventoryComponent Inventory { get; private set; }
+    public PlayerMovementComponent MovementComponent { get; private set; }
 
     PlayerInteractionComponent interactionComponent;
     InvincibilityComponent invincibilityComponent;
@@ -32,6 +34,7 @@ public class PlayerController : EntityController
     {
         base.Awake();
 
+        MovementComponent = GetComponent<PlayerMovementComponent>();
         invincibilityComponent = GetComponent<InvincibilityComponent>();
         EffectMachineComponent = GetComponent<EffectMachineComponent>();
         Inventory = GetComponent<PlayerInventoryComponent>();
@@ -63,7 +66,7 @@ public class PlayerController : EntityController
 
     protected override void HandleFixedUpdate()
     {
-        Vector2 movement = MovementBase.GetFinalMovement(); 
+        Vector2 movement = MovementComponent.GetFinalMovement(); 
         
         if (movement != Vector2.zero)
         {
@@ -73,6 +76,10 @@ public class PlayerController : EntityController
         {
             Rigidbody2D.linearVelocity *= 0.9f;
         }
+
+        Animator.SetFloat(MovementBase.MoveXHash, MovementComponent.FacingDirection.x);
+        Animator.SetFloat(MovementBase.MoveYHash, MovementComponent.FacingDirection.y);
+        Animator.SetFloat(MovementBase.SpeedHash, Rigidbody2D.linearVelocity.magnitude / MovementComponent.WalkingSpeed);
     }
     
     // Input layer

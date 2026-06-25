@@ -5,12 +5,14 @@ using UnityEngine.InputSystem;
 public class PlayerAttackComponent : DefaultAttackComponent
 {
     new Collider2D collider2D;
+    PlayerController playerController;
 
     protected override void Awake()
     {
         base.Awake();
 
         collider2D = GetComponent<Collider2D>();
+        playerController = entityController as PlayerController;
     }
 
     bool CanAttack => timeSinceLastAttack >= ReloadTime;
@@ -24,31 +26,12 @@ public class PlayerAttackComponent : DefaultAttackComponent
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out HitboxComponent _))
-        {
-            EntityController entityController = collision.GetComponentInParent<EntityController>();
-
-            if (entityController && !entityController.IsDead)
-                TargetsInRange.Add(entityController);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out HitboxComponent _))
-        {
-            TargetsInRange.Remove(collision.GetComponentInParent<EntityController>());
-        }
-    }
-
     void SetAttackCollisionOffset()
     {
-        if (!entityController.MovementBase.IsWalking)
+        if (!playerController.MovementComponent.IsWalking)
             return;
 
-        float degrees = Vector2.SignedAngle(Vector2.right, entityController.MovementBase.MovementIntention);
+        float degrees = Vector2.SignedAngle(Vector2.right, playerController.MovementComponent.MovementIntention);
         collider2D.transform.rotation = Quaternion.Euler(0, 0, degrees);
     }
 

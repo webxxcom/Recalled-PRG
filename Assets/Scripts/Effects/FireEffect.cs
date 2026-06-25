@@ -8,18 +8,18 @@ public class FireEffect : EffectAsset
 
     public override void PutOn(EntityController entityController)
     {
-        entityController.SpriteRenderer.color =
-            new Color(0.5f, 1f, 1f);
+        entityController.SpriteRenderer.color = new Color(0.5f, 1f, 1f);
 
-        entityController.MovementBase.SpeedAggregator.Add(speedMultiplier);
+        if (entityController.TryGetComponent(out MovementBase movementBase))
+            movementBase.SpeedAggregator.Add(speedMultiplier);
     }
 
     public override void PutOff(EntityController entityController)
     {
-        entityController.SpriteRenderer.color =
-            Color.white;
+        entityController.SpriteRenderer.color = Color.white;
 
-        entityController.MovementBase.SpeedAggregator.Remove(speedMultiplier);
+        if (entityController.TryGetComponent(out MovementBase movementBase))
+            movementBase.SpeedAggregator.Add(speedMultiplier);
     }
 
     float timeSinceDamage = 0;

@@ -5,7 +5,7 @@ public class MeleeAttackComponent : AttackStrategy
 {
     public override void Execute()
     {
-        PlayerController target = entityAttackComponent.PlayerController;
+        PlayerController target = entityAttackComponent.Target;
 
         if (!target)
             return;

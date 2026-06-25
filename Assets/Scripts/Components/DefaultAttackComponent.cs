@@ -11,6 +11,7 @@ public abstract class DefaultAttackComponent : MonoBehaviour
     [field: SerializeField] public int DealtDamage { get; private set; }
     [field: SerializeField] public float KnockbackPower { get; private set; }
     [field: SerializeField] public List<EffectAsset> Effects { get; private set; }
+    [field: SerializeField] public List<FactionSO> HostileFactions { get; private set; }
 
     public HashSet<EntityController> TargetsInRange { get; } = new();
     public HashSet<EntityController> DamagedTargets { get; } = new();
@@ -34,7 +35,8 @@ public abstract class DefaultAttackComponent : MonoBehaviour
     {
         Vector2 attackDir = (target.transform.position - entityController.transform.position).normalized;
 
-        target.MovementBase.externalVelocityComponent.Add(attackDir * KnockbackPower);
+        if (target.TryGetComponent(out ExternalVelocityComponent externalVelocityComponent))
+            externalVelocityComponent.Add(attackDir * KnockbackPower);
     }
 
     public void UpdateAttackExecution()
@@ -54,5 +56,28 @@ public abstract class DefaultAttackComponent : MonoBehaviour
     public void StartAttackExecution()
     {
         DamagedTargets.Clear();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // If hitbox is triggered then check if we're hostile to this faction
+        if (collision.TryGetComponent(out HitboxComponent hc))
+        {
+            FactionComponent fc = collision.GetComponentInParent<FactionComponent>();
+            if (!fc || !HostileFactions.Contains(fc.Faction))
+                return;
+
+            EntityController ec = hc.GetComponentInParent<EntityController>();
+            if (ec)
+                TargetsInRange.Add(ec);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out HitboxComponent hc))
+        {
+            TargetsInRange.Remove(hc.GetComponentInParent<EntityController>());
+        }
     }
 }

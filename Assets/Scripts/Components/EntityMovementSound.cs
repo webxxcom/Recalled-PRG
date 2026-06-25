@@ -8,15 +8,11 @@ public class EntityMovementSound : EntitySoundComponent
     MovementBase _movementBase;
     bool _isPlaying;
 
-    protected override void Awake()
-    {
-        base.Awake();
-
-        _movementBase = GetComponentInParent<MovementBase>();
-    }
-
     public override void Activate()
     {
+        if (!_movementBase)
+            _movementBase = GetComponentInParent<MovementBase>();
+
         _movementBase.OnMovementStarted += StartPlaying;
         _movementBase.OnMovementStopped += StopPlaying;
     }

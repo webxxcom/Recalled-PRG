@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(AttackStrategy))]
 public class EntityAttackComponent : DefaultAttackComponent
 {
-    public PlayerController PlayerController
+    public PlayerController Target
     {
         get
         {
@@ -21,8 +21,8 @@ public class EntityAttackComponent : DefaultAttackComponent
     {
         attackStrategy.Execute();
 
-        if (PlayerController)
-            Effects.ForEach(e => PlayerController.EffectMachineComponent.ApplyEffect(e));
+        if (Target)
+            Effects.ForEach(e => Target.EffectMachineComponent.ApplyEffect(e));
     }
 
     protected override void Awake()
@@ -37,29 +37,6 @@ public class EntityAttackComponent : DefaultAttackComponent
         timeSinceLastAttack = ReloadTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Get Hitbox component and if PlayerController exists in parent then it's the player
-        if (collision.TryGetComponent(out HitboxComponent hc))
-        {
-            PlayerController pc = hc.GetComponentInParent<PlayerController>();
-
-            if (pc)
-                TargetsInRange.Add(pc);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out HitboxComponent hc))
-        {
-            PlayerController pc = hc.GetComponentInParent<PlayerController>();
-
-            if (pc)
-                TargetsInRange.Remove(pc);
-        }
-    }
-
     void Attack()
     {
         timeSinceLastAttack = 0;
@@ -67,7 +44,7 @@ public class EntityAttackComponent : DefaultAttackComponent
         OnAttackStarted?.Invoke();
     }
 
-    bool CanAttack => timeSinceLastAttack >= ReloadTime && PlayerController != null && !PlayerController.IsDead;
+    bool CanAttack => timeSinceLastAttack >= ReloadTime && Target != null && !Target.IsDead;
     private void Update()
     {
         if (CanAttack)

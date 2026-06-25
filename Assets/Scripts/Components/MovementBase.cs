@@ -1,10 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(ExternalVelocityComponent))]
 public abstract class MovementBase : MonoBehaviour
 {
+    public static readonly int MoveYHash = Animator.StringToHash("MoveY");
+    public static readonly int MoveXHash = Animator.StringToHash("MoveX");
+    public static readonly int SpeedHash = Animator.StringToHash("Speed");
+
     [field: SerializeField] public float WalkingSpeed { get; protected set; }
 
     public bool MovementBlocked { get; set; }
@@ -14,12 +17,12 @@ public abstract class MovementBase : MonoBehaviour
     public bool IsWalking => MovementIntention != Vector2.zero;
     public float CurrentSpeed => WalkingSpeed * SpeedAggregator.Get();
     public Vector2 FacingDirection => MovementIntention != Vector2.zero ? MovementIntention : LastMovement;
-
-    public ExternalVelocityComponent externalVelocityComponent;
+   
+    ExternalVelocityComponent externalVelocityComponent;
 
     private void Awake()
     {
-        TryGetComponent(out externalVelocityComponent);
+        externalVelocityComponent = GetComponent<ExternalVelocityComponent>();
     }
 
     public Vector2 MovementIntention

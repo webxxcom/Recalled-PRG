@@ -4,7 +4,7 @@ public class PopupAttackComponent : AttackStrategy
 {
     public override void Execute()
     {
-        PlayerController target = entityAttackComponent.PlayerController;
+        PlayerController target = entityAttackComponent.Target;
 
         if (!target || entityAttackComponent.DamagedTargets.Contains(target))
             return;

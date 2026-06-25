@@ -8,15 +8,11 @@ public class HealthSound : EntitySoundComponent
 
     HealthComponent healthComponent;
 
-    protected override void Awake()
-    {
-        base.Awake();
-
-        healthComponent = GetComponentInParent<HealthComponent>();
-    }
-
     public override void Activate()
     {
+        if(!healthComponent)
+            healthComponent = GetComponentInParent<HealthComponent>();
+
         healthComponent.OnMinValueReached += HandleDeathSound;
         healthComponent.OnValueChanged += HandleHurtHealingSound;
     }

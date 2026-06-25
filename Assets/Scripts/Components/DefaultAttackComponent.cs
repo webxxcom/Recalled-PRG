@@ -73,6 +73,7 @@ public abstract class DefaultAttackComponent : MonoBehaviour
         }
     }
 
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out HitboxComponent hc))

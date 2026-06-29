@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(EntityAttackComponent))]
+[RequireComponent(typeof(EnemyAttackComponent))]
 public abstract class AttackStrategy : MonoBehaviour
 {
     protected new Collider2D collider2D;
     protected MovementBase movementBase;
-    protected EntityAttackComponent entityAttackComponent;
+    protected EnemyAttackComponent entityAttackComponent;
     protected EntityController entityController;
 
     private void Awake()
     {
         entityController = GetComponentInParent<EntityController>();
         movementBase = GetComponentInParent<MovementBase>();
-        entityAttackComponent = GetComponent<EntityAttackComponent>();
+        entityAttackComponent = GetComponent<EnemyAttackComponent>();
         collider2D = GetComponent<Collider2D>();
     }
 

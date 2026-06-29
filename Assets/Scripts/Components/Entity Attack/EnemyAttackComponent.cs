@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(AttackStrategy))]
-public class EntityAttackComponent : DefaultAttackComponent
+public class EnemyAttackComponent : EntityAttackComponent
 {
     public PlayerController Target
     {

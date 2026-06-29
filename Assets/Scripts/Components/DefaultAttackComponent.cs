@@ -1,84 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 using UnityEngine;
 
 public abstract class DefaultAttackComponent : MonoBehaviour
 {
-    private static readonly int AttackHash = Animator.StringToHash("Attack");
-
-    [field: SerializeField] public float ReloadTime { get; private set; }
     [field: SerializeField] public int DealtDamage { get; private set; }
     [field: SerializeField] public float KnockbackPower { get; private set; }
     [field: SerializeField] public List<EffectAsset> Effects { get; private set; }
     [field: SerializeField] public List<FactionSO> HostileFactions { get; private set; }
 
-    public HashSet<EntityController> TargetsInRange { get; } = new();
-    public HashSet<EntityController> DamagedTargets { get; } = new();
+    protected  Transform knockbackOriginPosition;
 
-    protected EntityController entityController;
-
-    protected float timeSinceLastAttack;
-
-    public Action OnAttackStarted;
     public Action<EntityController> OnAttackApplied;
 
     protected virtual void Awake()
     {
-        entityController = GetComponentInParent<EntityController>();
-
-        OnAttackStarted += () => entityController.Animator.SetTrigger(AttackHash);
         OnAttackApplied += ApplyKnockback;
     }
 
-    void ApplyKnockback(EntityController target)
+    public void ApplyKnockback(EntityController target)
     {
-        Vector2 attackDir = (target.transform.position - entityController.transform.position).normalized;
+        Vector2 attackDir = (target.transform.position - knockbackOriginPosition.position).normalized;
 
         if (target.TryGetComponent(out ExternalVelocityComponent externalVelocityComponent))
             externalVelocityComponent.Add(attackDir * KnockbackPower);
     }
 
-    public void UpdateAttackExecution()
-    {
-        foreach (var entityController in TargetsInRange.ToArray())
-        {
-            if (DamagedTargets.Contains(entityController) || entityController.IsDead)
-                continue;
-
-            DamagedTargets.Add(entityController);
-            entityController.HealthComponent.Change(this.entityController.gameObject, -DealtDamage);
-
-            OnAttackApplied?.Invoke(entityController);
-        }
-    }
-
-    public void StartAttackExecution()
-    {
-        DamagedTargets.Clear();
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // If hitbox is triggered then check if we're hostile to this faction
-        if (collision.TryGetComponent(out HitboxComponent hc))
+        if (collision.TryGetComponent(out HitboxComponent _))
         {
             FactionComponent fc = collision.GetComponentInParent<FactionComponent>();
             if (!fc || !HostileFactions.Contains(fc.Faction))
                 return;
 
-            EntityController ec = hc.GetComponentInParent<EntityController>();
-            if (ec)
-                TargetsInRange.Add(ec);
+            HandleOnTriggerEnter2D(collision);
         }
     }
 
-
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out HitboxComponent hc))
+        if (collision.TryGetComponent(out HitboxComponent _))
         {
-            TargetsInRange.Remove(hc.GetComponentInParent<EntityController>());
+            HandleOnTriggerExit2D(collision);
         }
+    }
+
+    protected virtual void HandleOnTriggerEnter2D(Collider2D collision)
+    {
+
+    }
+    protected virtual void HandleOnTriggerExit2D(Collider2D collision)
+    {
+
     }
 }

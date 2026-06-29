@@ -7,7 +7,7 @@ public class PlayerAttackStateMachine : StateMachineBehaviour
     [SerializeField] float speedMultiplier = 0.3f;
 
     EntityController entityController;
-    DefaultAttackComponent defaultAttackComponent;
+    EntityAttackComponent defaultAttackComponent;
     MovementBase movementBase;
 
     void CacheAll(Animator animator)
@@ -19,7 +19,7 @@ public class PlayerAttackStateMachine : StateMachineBehaviour
             movementBase = entityController.GetComponent<MovementBase>();
 
         if (!defaultAttackComponent)
-            defaultAttackComponent = entityController.GetComponentInChildren<DefaultAttackComponent>();
+            defaultAttackComponent = entityController.GetComponentInChildren<EntityAttackComponent>();
     }
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

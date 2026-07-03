@@ -14,7 +14,7 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     public void InteractWithCurrent()
     {
-        if (TryGetClosestInteractable(out InteractableObjectScript interactable))
+        if (TryGetClosestInteractable(out IInteractable interactable))
         {
             interactable.Interact();
         }
@@ -43,7 +43,7 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out InteractableObjectScript _))
+        if (collision.TryGetComponent(out IInteractable _))
         {
             interactables.Add(collision.gameObject);
         }
@@ -57,7 +57,7 @@ public class PlayerInteractionComponent : MonoBehaviour
         }
     }
 
-    bool TryGetClosestInteractable(out InteractableObjectScript interactable)
+    bool TryGetClosestInteractable(out IInteractable interactable)
     {
         interactable = null;
         GameObject gameObject = interactables
@@ -67,7 +67,7 @@ public class PlayerInteractionComponent : MonoBehaviour
         if (!gameObject)
             return false;
 
-        interactable = gameObject.GetComponent<InteractableObjectScript>();
+        interactable = gameObject.GetComponent<IInteractable>();
         return interactable != null;
     }
 }

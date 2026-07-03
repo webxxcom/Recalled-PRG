@@ -31,7 +31,7 @@ public abstract class EntityAttackComponent : DefaultAttackComponent
     {
         foreach (var entityController in TargetsInRange.ToArray())
         {
-            if (DamagedTargets.Contains(entityController) || entityController.IsDead)
+            if (DamagedTargets.Contains(entityController) || entityController.HealthComponent.IsDead)
                 continue;
 
             DamagedTargets.Add(entityController);

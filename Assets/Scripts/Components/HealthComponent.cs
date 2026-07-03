@@ -7,6 +7,19 @@ public class HealthComponent : ValueProvider
 {
     [field: SerializeField] public bool IsInvincible { get; set; } = false;
 
+    public bool IsDead
+    {
+        get => Value <= MinValue;
+        set
+        {
+            if (value)
+                Change(entityController.gameObject, -Value);
+            else
+                Change(entityController.gameObject, MaxValue);
+        }
+    }
+
+
     EntityController entityController;
     new Rigidbody2D rigidbody2D;
 

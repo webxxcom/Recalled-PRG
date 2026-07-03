@@ -44,7 +44,7 @@ public class EnemyAttackComponent : EntityAttackComponent
         OnAttackStarted?.Invoke();
     }
 
-    bool CanAttack => timeSinceLastAttack >= ReloadTime && Target != null && !Target.IsDead;
+    bool CanAttack => timeSinceLastAttack >= ReloadTime && Target != null && !Target.HealthComponent.IsDead;
     private void Update()
     {
         if (CanAttack)

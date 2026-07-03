@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(HealthComponent))]
-[RequireComponent(typeof(MovementBase))]
 [RequireComponent(typeof(Collider2D))]
 public abstract class EntityController : MonoBehaviour
 {
@@ -18,11 +16,9 @@ public abstract class EntityController : MonoBehaviour
     public HealthComponent HealthComponent { get; private set; }
     public Collider2D Collider2D { get; private set; }
 
-    [field: SerializeField] public bool IsDead { get; set; }
-
     void OnDeath()
     {
-        IsDead = true;
+        HealthComponent.IsDead = true;
         Rigidbody2D.bodyType = RigidbodyType2D.Static;
         GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(s => s.sortingOrder = -1);
         SpriteRenderer.sortingOrder = -1;
@@ -46,7 +42,6 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void Awake()
     {
-        SpriteRenderer = GetComponent<SpriteRenderer>();
         Rigidbody2D = GetComponent<Rigidbody2D>();
         HealthComponent = GetComponent<HealthComponent>();
         Collider2D = GetComponent<Collider2D>();
@@ -71,7 +66,7 @@ public abstract class EntityController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsDead)
+        if (HealthComponent.IsDead)
             return;
 
         HandleFixedUpdate();

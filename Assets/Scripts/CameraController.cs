@@ -1,34 +1,19 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour
 {
-    public GameObject player;
-    public Camera cam;
+    GameObject player;
+    new Camera camera;
+
+    private void Awake()
+    {
+        player = GameObject.Find("Player");
+        camera = GetComponent<Camera>();
+    }
 
     void Start()
     {
-        player = GameObject.Find("Player");
-        cam = gameObject.GetComponent<Camera>();
-
         transform.position = new(player.transform.position.x, player.transform.position.y, transform.position.z);
     }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "DungeonScene")
-        {
-            cam.backgroundColor = Color.black;
-        }
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void Update()
-    {
-    }
-
 }

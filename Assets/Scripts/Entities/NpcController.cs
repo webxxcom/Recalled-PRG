@@ -15,6 +15,6 @@ public class NpcController : EntityController, IInteractable
 
     public void Interact()
     {
-        _dialogueManager.BeginDialogue(_dialogueData);
+        _dialogueManager.BeginDialogue(_dialogueData, true);
     }
 }

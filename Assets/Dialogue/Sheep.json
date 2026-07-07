@@ -1,0 +1,38 @@
+{
+  "speaker": "Sheep",
+  "lines": [
+    {
+      "id": 1,
+      "text": "Hello",
+      "choices": [
+        {
+          "text": "Hello",
+          "next": 2
+        },
+        {
+          "text": "What are you doing here?",
+          "next": 3
+        },
+        {
+          "text": "Bye",
+          "next": 4
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "I see no point in talking with you",
+      "next": 0
+    },
+    {
+      "id": 3,
+      "text": "I'm just a sheep, nothing special",
+      "next": 1
+    },
+    {
+      "id": 4,
+      "text": "See you!",
+      "next": 0
+    }
+  ]
+}

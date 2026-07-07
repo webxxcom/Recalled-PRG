@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SheepDialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   <EntitySprite>k__BackingField: {fileID: -5734172099687798273, guid: ca47bc93092755945a2151f15ef6c9a3, type: 3}
-  <TextFile>k__BackingField: {fileID: 4900000, guid: 2a3362b3507027542b1ade352dd48a8d, type: 3}
+  <TextFile>k__BackingField: {fileID: 4900000, guid: ab88bb0d484124849abc78aee5af8b16, type: 3}

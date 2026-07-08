@@ -2,7 +2,7 @@
 
 public class NpcController : EntityController, IInteractable
 {
-    [SerializeField] DialogueData _dialogueData;
+    [SerializeField] DialogueSource _dialogueData;
 
     DialogueManager _dialogueManager;
 

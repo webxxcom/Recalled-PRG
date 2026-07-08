@@ -63,7 +63,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a981dcfdf41a0c64bba60e96eb639860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthSound
-  _hurtSound: {fileID: 8300000, guid: a7f25f533d94dc842b5cdcb346ba0d99, type: 3}
+  _hurtSound: {fileID: 8300000, guid: 8e3ad7af1067fdf40b43f4dfb50ee4e8, type: 3}
   _healingSound: {fileID: 0}
   _deathSound: {fileID: 8300000, guid: 86f39359da3d5ef4e82008b0e51f0190, type: 3}
 --- !u!1 &2511438768263475401
@@ -424,12 +424,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d3dd6f5182aeea4f99d8a6d956c5a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  <ReloadTime>k__BackingField: 0.8
   <DealtDamage>k__BackingField: 10
   <KnockbackPower>k__BackingField: 6
   <Effects>k__BackingField: []
   <HostileFactions>k__BackingField:
   - {fileID: 11400000, guid: 899230750ac8a5b4bb3776956ccb326b, type: 2}
+  <ReloadTime>k__BackingField: 0.8
 --- !u!61 &3070435056343494364
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -699,8 +699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d76231564389684687154f229ab021a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  player: {fileID: 7559287907167481913}
-  cam: {fileID: 1286123485302981824}
 --- !u!1 &4510067057338008398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,10 +1015,10 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1286123485302981824}
 --- !u!50 &2409675021506303179
 Rigidbody2D:
   serializedVersion: 5
@@ -1077,7 +1075,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e28ac1af5e01f4da013d12e70509a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  <IsDead>k__BackingField: 0
 --- !u!212 &1507123296944016253
 SpriteRenderer:
   serializedVersion: 2

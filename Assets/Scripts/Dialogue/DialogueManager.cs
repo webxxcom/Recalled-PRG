@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class DialogueManager : MonoBehaviour
 {
     [SerializeField] Object _playerDialogueButtonPrefab;
@@ -19,7 +20,8 @@ public class DialogueManager : MonoBehaviour
     PlayerDialogueController _player;
     Canvas _canvas;
     DialogueData _dialogueData;
-    List<Button> _playerButtons;
+    AudioSource _audioSource;
+    readonly List<Button> _playerButtons = new();
     ConsumableValue<bool >_enterPressed;
     ConsumableValue<DialogueData.Line.Choice> _buttonPressedData;
 
@@ -32,6 +34,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         _canvas = GetComponentInChildren<Canvas>();
 
         _leftEntity = FindAnyObjectByType<LeftEntityDialogController>();
@@ -65,7 +68,7 @@ public class DialogueManager : MonoBehaviour
     {
         ddc.AudioSource.Play();
 
-        yield return Utils.RevealTextOverTime(ddc.MainText, ddc.DelayTime, text, ddc.MaxTextLength);
+        yield return Utils.RevealTextOverTime(ddc.MainText, ddc.DelayTime, text, ddc.MaxTextLength, _audioSource);
 
         ddc.AudioSource.Stop();
     }
@@ -96,6 +99,7 @@ public class DialogueManager : MonoBehaviour
 
                     yield return new WaitUntil(() => _buttonPressedData.Value != null);
 
+                    DestroyButtons();
                     currentLine = GetNext(_buttonPressedData.Consume().next);
                     if (currentLine == null)
                     {
@@ -130,11 +134,16 @@ public class DialogueManager : MonoBehaviour
         return null;
     }
 
+    void DestroyButtons()
+    {
+        _playerButtons.ForEach(b => Destroy(b.gameObject));
+        _playerButtons.Clear();
+    }
+
     IEnumerator PutPlayersChoices(DialogueData.Line.Choice[] choices)
     {
         int i = 0;
 
-        _playerButtons = new();
         foreach (var choice in choices)
         {
             _playerButtons.Add(Instantiate(
@@ -146,7 +155,8 @@ public class DialogueManager : MonoBehaviour
                 _playerButtons.Last().GetComponentInChildren<TextMeshProUGUI>(),
                 _player.DelayTime,
                 (i + 1) + ". " + choice.text,
-                200)
+                200,
+                _audioSource)
                 );
             ++i;
         }

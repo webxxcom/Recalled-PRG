@@ -17,13 +17,11 @@ public class CanvasBobbleEffect : MonoBehaviour
         transform = GetComponent<Transform>();
     }
 
-    private void Start()
-    {
-        basePosition = transform.position;
-    }
-
     void Update()
     {
+        if (basePosition == Vector2.zero)
+            basePosition = transform.position;
+
         float offset = Mathf.Sin(Time.time * Frequency) * Amplitude;
 
         if (Direction == DirectionEnum.Vertical)

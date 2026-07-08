@@ -4,10 +4,18 @@ using UnityEngine;
 
 static public class Utils
 {
-    static public IEnumerator RevealTextOverTime(TextMeshProUGUI textMeshpro, float timeDelay, string text, int maxLength)
+    static public IEnumerator RevealTextOverTime(
+        TextMeshProUGUI textMeshpro,
+        float timeDelay,
+        string text,
+        int maxLength,
+        AudioSource audioSource = null)
     {
         textMeshpro.maxVisibleCharacters = 0;
         textMeshpro.text = text;
+
+        if (audioSource)
+            audioSource.Play();
 
         while (textMeshpro.maxVisibleCharacters != text.Length && textMeshpro.maxVisibleCharacters != maxLength)
         {
@@ -15,5 +23,8 @@ static public class Utils
 
             yield return new WaitForSeconds(timeDelay);
         }
+
+        if (audioSource)
+            audioSource.Stop();
     }
 }

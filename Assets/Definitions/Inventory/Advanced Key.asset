@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf2c10e58e18502489bf659c81525f3e, type: 3}
-  m_Name: Mundane Key
+  m_Name: Advanced Key
   m_EditorClassIdentifier: Assembly-CSharp::InventoryItem
-  <Name>k__BackingField: Mundane Key
-  <Icon>k__BackingField: {fileID: -2636191377049176668, guid: a0eade7109ac35541b7c7580922ac115, type: 3}
+  <Name>k__BackingField: Advanced Key
+  <Icon>k__BackingField: {fileID: -249422396151011416, guid: c39daed2fdff75b4dbcfc4a2464ec136, type: 3}

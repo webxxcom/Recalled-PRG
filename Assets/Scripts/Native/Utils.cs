@@ -27,4 +27,15 @@ static public class Utils
         if (audioSource)
             audioSource.Stop();
     }
+
+
+    public static T FindOrThrow<T>(System.Func<T> finder) where T : UnityEngine.Object
+    {
+        T val = finder.Invoke();
+
+        if (!val)
+            throw new UnityEngine.MissingReferenceException($"The object of type {typeof(T).Name} was not found ");
+
+        return val;
+    }
 }

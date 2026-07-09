@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Coin
   m_EditorClassIdentifier: Assembly-CSharp::InventoryItem
   <Name>k__BackingField: Coin
-  <Icon>k__BackingField: {fileID: 1540707658442283120, guid: 731f06b1e43fc514883b4517cde94368, type: 3}
+  <Icon>k__BackingField: {fileID: 3526159475910077712, guid: 0daa3ba3dddbbca448bb810d864562d8, type: 3}

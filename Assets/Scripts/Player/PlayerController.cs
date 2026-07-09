@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerMovementComponent))]
+[RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(InvincibilityComponent))]
 [RequireComponent(typeof(EffectMachineComponent))]
-[RequireComponent(typeof(PlayerInventoryComponent))]
+[RequireComponent(typeof(PlayerInventory))]
 [RequireComponent(typeof(MovementBase))]
 public class PlayerController : EntityController
 {
@@ -24,21 +24,20 @@ public class PlayerController : EntityController
     bool _isArmed;
 
     public EffectMachineComponent EffectMachineComponent { get; private set; }
-    public PlayerInventoryComponent Inventory { get; private set; }
-    public PlayerMovementComponent MovementComponent { get; private set; }
-
-    PlayerInteractionComponent interactionComponent;
-    InvincibilityComponent invincibilityComponent;
+    public PlayerInventory Inventory { get; private set; }
+    public PlayerMovement MovementComponent { get; private set; }
+    public PlayerInteraction InteractionComponent { get; private set; }
+    public InvincibilityComponent InvincibilityComponent { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
 
-        MovementComponent = GetComponent<PlayerMovementComponent>();
-        invincibilityComponent = GetComponent<InvincibilityComponent>();
+        MovementComponent = GetComponent<PlayerMovement>();
+        InvincibilityComponent = GetComponent<InvincibilityComponent>();
         EffectMachineComponent = GetComponent<EffectMachineComponent>();
-        Inventory = GetComponent<PlayerInventoryComponent>();
-        interactionComponent = GetComponentInChildren<PlayerInteractionComponent>();
+        Inventory =  GetComponent<PlayerInventory>();
+        InteractionComponent = GetComponentInChildren<PlayerInteraction>();
         IsArmed = true;
     }
 
@@ -46,7 +45,19 @@ public class PlayerController : EntityController
     {
         base.Start();
 
-        HealthComponent.OnValueChanged += (_, _) => invincibilityComponent.BecomeInvinsibleFor(1f);
+        
+    }
+
+    void Invinsibility(GameObject _, int _2) => InvincibilityComponent.BecomeInvinsibleFor(1f);
+
+    private void OnEnable()
+    {
+        HealthComponent.OnValueChanged += Invinsibility;
+    }
+
+    private void OnDisable()
+    {
+        HealthComponent.OnValueChanged -= Invinsibility;
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -83,5 +94,5 @@ public class PlayerController : EntityController
     }
     
     // Input layer
-    void OnInteract(InputValue _) => interactionComponent.InteractWithCurrent();
+    void OnInteract(InputValue _) => InteractionComponent.InteractWithCurrent();
 }

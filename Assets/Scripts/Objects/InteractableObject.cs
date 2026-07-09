@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
-public abstract class InteractableObjectScript : MonoBehaviour, IInteractable
+public abstract class InteractableObject : MonoBehaviour, IInteractable
 {
     private static readonly int InteractHash = Animator.StringToHash("Interact");
 
@@ -54,7 +54,7 @@ public abstract class InteractableObjectScript : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!IsInteracted && collision.TryGetComponent(out PlayerInteractionComponent _)
+        if (!IsInteracted && collision.TryGetComponent(out PlayerInteraction _)
             && PlayerCanInteract())
         {
             InteractionText.SetActive(true);
@@ -63,7 +63,7 @@ public abstract class InteractableObjectScript : MonoBehaviour, IInteractable
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!IsInteracted && collision.TryGetComponent(out PlayerInteractionComponent _))
+        if (!IsInteracted && collision.TryGetComponent(out PlayerInteraction _))
         {
             InteractionText.SetActive(false);
         }

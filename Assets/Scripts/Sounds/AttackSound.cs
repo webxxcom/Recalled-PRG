@@ -3,7 +3,7 @@ using UnityEngine;
 public class AttackSound : EntitySoundComponent
 {
     [SerializeField] AudioClip _attackSound;
-    [SerializeField] EntityAttackComponent entityAttackComponent;
+    [SerializeField] EntityAttack entityAttackComponent;
 
     public override void Activate()
     {

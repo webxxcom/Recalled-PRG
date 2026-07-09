@@ -5,7 +5,7 @@ public class EnemyController : EntityController
 {
     EnemyAttackComponent entityAttackComponent;
     HitboxComponent hitboxComponent;
-    CanvasHiderScript canvasHiderScript;
+    CanvasHider canvasHiderScript;
 
     public EntityMovementComponent MovementComponent { get; private set; }
 
@@ -16,7 +16,7 @@ public class EnemyController : EntityController
         MovementComponent = GetComponent<EntityMovementComponent>();
         entityAttackComponent = GetComponentInChildren<EnemyAttackComponent>();
         hitboxComponent = GetComponentInChildren<HitboxComponent>();
-        canvasHiderScript = GetComponentInChildren<CanvasHiderScript>();
+        canvasHiderScript = GetComponentInChildren<CanvasHider>();
     }
 
     void DeactivateChildrenOnDeath()

@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class ChestScript : InteractableObjectScript
+public class Chest : InteractableObject
 {
-    [field: SerializeField] public InventoryItem RequiredKey { get; private set; }
+    [field: SerializeField] public ItemDefinition RequiredKey { get; private set; }
 
-    PlayerInventoryComponent _playerInventory;
+    PlayerInventory _playerInventory;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _playerInventory = Utils.FindOrThrow(FindAnyObjectByType<PlayerInventoryComponent>);
+        _playerInventory = Utils.FindOrThrow(FindAnyObjectByType<PlayerInventory>);
     }
 
     public override void Interact()

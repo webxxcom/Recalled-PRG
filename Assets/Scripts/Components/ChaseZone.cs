@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class ChaseZoneComponent : MonoBehaviour
+public class ChaseZone : MonoBehaviour
 {
     public GameObject CurrentTarget { get; private set; }
 

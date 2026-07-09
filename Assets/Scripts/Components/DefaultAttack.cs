@@ -1,22 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
-public abstract class DefaultAttackComponent : MonoBehaviour
+public abstract class DefaultAttack : MonoBehaviour
 {
     [field: SerializeField] public int DealtDamage { get; private set; }
     [field: SerializeField] public float KnockbackPower { get; private set; }
     [field: SerializeField] public List<EffectAsset> Effects { get; private set; }
     [field: SerializeField] public List<FactionSO> HostileFactions { get; private set; }
 
-    protected  Transform knockbackOriginPosition;
+    protected Transform knockbackOriginPosition;
 
     public Action<EntityController> OnAttackApplied;
 
     protected virtual void Awake()
     {
+    }
+
+    protected virtual void OnEnable()
+    {
         OnAttackApplied += ApplyKnockback;
+    }
+
+    protected virtual void OnDisable()
+    {
+        OnAttackApplied -= ApplyKnockback;
     }
 
     public void ApplyKnockback(EntityController target)

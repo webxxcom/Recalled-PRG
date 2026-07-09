@@ -1,15 +1,15 @@
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(CanvasHiderScript))]
+[RequireComponent(typeof(CanvasHider))]
 public class CoinCountScript : MonoBehaviour
 {
     TextMeshProUGUI textMeshProUGUI;
-    CanvasHiderScript canvasHiderScript;
+    CanvasHider canvasHiderScript;
 
     private void Awake()
     {
-        canvasHiderScript = GetComponent<CanvasHiderScript>();
+        canvasHiderScript = GetComponent<CanvasHider>();
         textMeshProUGUI = GetComponentInChildren<TextMeshProUGUI>();
     }
 

@@ -4,13 +4,12 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class PlayerInteractionComponent : MonoBehaviour
+public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI interactionText;
 
-    PlayerController playerController;
-
-    readonly List<GameObject> interactables = new();
+    PlayerController _playerController;
+    readonly List<GameObject> _interactables = new();
 
     public void InteractWithCurrent()
     {
@@ -22,7 +21,7 @@ public class PlayerInteractionComponent : MonoBehaviour
 
     private void Awake()
     {
-        playerController = GetComponentInParent<PlayerController>();
+        _playerController = Utils.FindOrThrow(GetComponentInParent<PlayerController>);
     }
 
     void SetInteractionText(string text)
@@ -45,23 +44,23 @@ public class PlayerInteractionComponent : MonoBehaviour
     {
         if (collision.TryGetComponent(out IInteractable _))
         {
-            interactables.Add(collision.gameObject);
+            _interactables.Add(collision.gameObject);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (interactables.Contains(collision.gameObject))
+        if (_interactables.Contains(collision.gameObject))
         {
-            interactables.Remove(collision.gameObject);
+            _interactables.Remove(collision.gameObject);
         }
     }
 
     bool TryGetClosestInteractable(out IInteractable interactable)
     {
         interactable = null;
-        GameObject gameObject = interactables
-            .OrderBy(i => Physics2D.Distance(i.GetComponent<Collider2D>(), playerController.Collider2D).distance)
+        GameObject gameObject = _interactables
+            .OrderBy(i => Physics2D.Distance(i.GetComponent<Collider2D>(), _playerController.Collider2D).distance)
              .FirstOrDefault();
 
         if (!gameObject)

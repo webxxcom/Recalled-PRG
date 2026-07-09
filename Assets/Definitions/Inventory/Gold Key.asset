@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf2c10e58e18502489bf659c81525f3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e183e6339ed2b04fb2956ad3fc77a77, type: 3}
   m_Name: Gold Key
   m_EditorClassIdentifier: Assembly-CSharp::InventoryItem
-  <Name>k__BackingField: Mundane Key
+  <Name>k__BackingField: Gold Key
   <Icon>k__BackingField: {fileID: -5280557718241775356, guid: 0daa3ba3dddbbca448bb810d864562d8, type: 3}
-  <Description>k__BackingField: The Gold Key which can be used to open some chests
-    in the dungeon.\n\nIf the key can open the chest the one will tell about this.
+  <Description>k__BackingField: Just a normal golder key which can open some chests\n\nP.S.
+    Come up to the chest and it will tell you if you can open it..
+  <IsStockable>k__BackingField: 0

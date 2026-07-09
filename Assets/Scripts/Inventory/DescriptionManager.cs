@@ -12,7 +12,7 @@ public class DescriptionManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Show(InventoryItem inventoryItem)
+    public void Show(ItemInstance inventoryItem)
     {
         if (!IsActive)
         {

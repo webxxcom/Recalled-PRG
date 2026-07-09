@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(ExternalVelocityComponent))]
 public abstract class MovementBase : MonoBehaviour
 {

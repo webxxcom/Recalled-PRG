@@ -1,12 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class CanvasHiderScript : MonoBehaviour
+public class CanvasHider : MonoBehaviour
 {
     [field: SerializeField] public float Offset { get; private set; }
     [field: SerializeField] public float Speed { get; private set; }
@@ -15,7 +11,7 @@ public class CanvasHiderScript : MonoBehaviour
 
     private void Awake()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup = Utils.FindOrThrow(GetComponent<CanvasGroup>);
     }
 
     private void Start()

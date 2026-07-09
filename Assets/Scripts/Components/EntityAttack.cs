@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class EntityAttackComponent : DefaultAttackComponent
+public abstract class EntityAttack : DefaultAttack
 {
     private static readonly int AttackHash = Animator.StringToHash("Attack");
 

@@ -5,14 +5,14 @@ public class PlayerMovementSound : EntitySoundComponent
 {
     [SerializeField] AudioClip _walkingSound;
 
-    PlayerMovementComponent playerMovementComponent;
+    PlayerMovement playerMovementComponent;
     bool _isPlaying;
 
     protected override void Awake()
     {
         base.Awake();
 
-        playerMovementComponent = GetComponentInParent<PlayerMovementComponent>();
+        playerMovementComponent = GetComponentInParent<PlayerMovement>();
     }
 
     public override void Activate()

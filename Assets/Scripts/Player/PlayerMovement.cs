@@ -1,9 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(StairMovementComponent))]
-[RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovementComponent : MovementBase
+public class PlayerMovement : MovementBase
 {
     [field: SerializeField] public float SprintingSpeedMultiplier { get; private set; }
     [field: SerializeField] public float Stamina { get; private set; }
@@ -12,8 +10,8 @@ public class PlayerMovementComponent : MovementBase
 
     public bool IsSprinting { get; private set; }
 
-    float currentStamina = 100;
-    float staminaRestoreLastTime = 0;
+    float _currentStamina = 100;
+    float _staminaRestoreLastTime = 0;
 
     void OnMove(InputValue value)
     {
@@ -37,13 +35,13 @@ public class PlayerMovementComponent : MovementBase
 
     void RestoreStaminaWithTime()
     {
-        staminaRestoreLastTime += Time.deltaTime;
+        _staminaRestoreLastTime += Time.deltaTime;
 
-        bool canRestoreStamina = currentStamina < Stamina && !IsSprinting;
-        if (staminaRestoreLastTime > 0.3 && canRestoreStamina)
+        bool canRestoreStamina = _currentStamina < Stamina && !IsSprinting;
+        if (_staminaRestoreLastTime > 0.3 && canRestoreStamina)
         {
-            currentStamina += StaminaRestore;
-            staminaRestoreLastTime = 0;
+            _currentStamina += StaminaRestore;
+            _staminaRestoreLastTime = 0;
         }
     }
 
@@ -53,10 +51,10 @@ public class PlayerMovementComponent : MovementBase
 
         if (IsSprinting)
         {
-            if (currentStamina - StaminaUsage <= 0.3)
+            if (_currentStamina - StaminaUsage <= 0.3)
                 IsSprinting = false;
             else
-                currentStamina -= StaminaUsage;
+                _currentStamina -= StaminaUsage;
         }
 
         if (IsWalking)

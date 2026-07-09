@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Collider2D))]
-public class PlayerAttackComponent : EntityAttackComponent
+public class PlayerAttack : EntityAttack
 {
     new Collider2D collider2D;
     PlayerController playerController;

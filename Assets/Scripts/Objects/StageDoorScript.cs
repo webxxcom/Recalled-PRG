@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class StageDoorScript : InteractableObjectScript
+public class StageDoorScript : InteractableObject
 {
     new Collider2D collider2D;
 

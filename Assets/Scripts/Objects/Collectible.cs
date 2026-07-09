@@ -3,11 +3,11 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
-public class CollectibleScript : MonoBehaviour
+public class Collectible : MonoBehaviour
 {
     private static readonly int CollectedHash = Animator.StringToHash("Collected");
 
-    [field: SerializeField] public InventoryItem InventoryItemDefinition { get; private set; }
+    [field: SerializeField] public ItemDefinition InventoryItemDefinition { get; private set; }
     [field: SerializeField] public int Quantity { get; private set; }
     [field: SerializeField] public AudioClip PickUpSound { get; private set; }
 
@@ -34,7 +34,7 @@ public class CollectibleScript : MonoBehaviour
         }
     }
 
-    static public CollectibleScript Instantiate(InventoryItem inventoryItem, int quantity)
+    static public Collectible Instantiate(ItemDefinition inventoryItem, int quantity)
     {
         return new()
         {

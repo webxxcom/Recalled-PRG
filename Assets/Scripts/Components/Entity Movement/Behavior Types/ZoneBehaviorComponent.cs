@@ -3,7 +3,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class ZoneBehaviorComponent : TargetProvider
 {
-    [SerializeField] ChaseZoneComponent chaseZoneComponent;
+    [SerializeField] ChaseZone chaseZoneComponent;
 
     private void OnEnable ()
     {

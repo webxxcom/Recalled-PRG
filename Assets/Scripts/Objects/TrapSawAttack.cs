@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Collider2D))]
-public class TrapSawAttack : DefaultAttackComponent
+public class TrapSawAttack : DefaultAttack
 {
     new Collider2D collider2D;
 

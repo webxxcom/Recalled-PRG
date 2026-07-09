@@ -23,6 +23,10 @@ public class PlayerMovementComponent : MovementBase
 
     void OnSprint(InputValue value)
     {
+        // If we already sprint but the unpress event was not called
+        if (IsSprinting && value.isPressed)
+            return;
+
         IsSprinting = value.isPressed;
 
         if (IsSprinting)

@@ -2,7 +2,9 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using static UnityEditor.Progress;
 
 public class InventoryManagerScript : MonoBehaviour
 {
@@ -10,9 +12,12 @@ public class InventoryManagerScript : MonoBehaviour
     [field: SerializeField] GameObject _inventoryItemPrefab;
     [field: SerializeField] InventoryItemScript _swordInventoryItem;
     [field: SerializeField] InventoryItemScript _armorInventoryItem;
-    [field: SerializeField] InventoryItemScript _coinInventoryItem;
+    [field: SerializeField] InventoryItemScript _bootsInventoryItem;
+    [field: SerializeField] GameObject _highlighter;
+    [field: SerializeField] DescriptionManager _descriptionManager;
     [SerializeField] InputActionAsset _inputActionAsset;
 
+    EventSystem _eventSystem;
     Canvas _canvas;
     PlayerInput _playerInput;
     PlayerInventoryComponent _playerInventory;
@@ -24,6 +29,8 @@ public class InventoryManagerScript : MonoBehaviour
     {
         _canvas = Utils.FindOrThrow(GetComponentInChildren<Canvas>);
 
+        _eventSystem = Utils.FindOrThrow(FindAnyObjectByType<EventSystem>);
+        _descriptionManager = Utils.FindOrThrow(FindAnyObjectByType<DescriptionManager>);
         _playerInput = Utils.FindOrThrow(FindAnyObjectByType<PlayerInput>);
         _playerInventory = Utils.FindOrThrow(FindAnyObjectByType<PlayerInventoryComponent>);
     }
@@ -57,7 +64,7 @@ public class InventoryManagerScript : MonoBehaviour
         {
             GameObject inventoryItem = Instantiate(_inventoryItemPrefab, Vector3.zero, Quaternion.identity, _basicItemsInventoryGrid.transform);
 
-            inventoryItem.GetComponent<InventoryItemScript>().Initialize(item.Key.Icon, item.Value);
+            inventoryItem.GetComponent<InventoryItemScript>().Initialize(item.Key, item.Value);
 
             _createdInventoryItems.Add(inventoryItem);
         }
@@ -65,10 +72,14 @@ public class InventoryManagerScript : MonoBehaviour
 
     void InitBasicItems()
     {
-        _coinInventoryItem.CountText.text = _playerInventory.Coins.ToString();
-
         _swordInventoryItem.Image.sprite = _playerInventory.Sword.Icon;
+        _swordInventoryItem.GetComponent<InventoryItemScript>().Initialize(_playerInventory.Sword);
+
         _armorInventoryItem.Image.sprite = _playerInventory.Armor.Icon;
+        _armorInventoryItem.GetComponent<InventoryItemScript>().Initialize(_playerInventory.Armor);
+
+        _bootsInventoryItem.Image.sprite = _playerInventory.Boots.Icon;
+        _bootsInventoryItem.GetComponent<InventoryItemScript>().Initialize(_playerInventory.Boots);
     }
 
     public void Open()
@@ -89,5 +100,20 @@ public class InventoryManagerScript : MonoBehaviour
         IsActive = false;
         _canvas.enabled = false;
         _playerInput.SwitchCurrentActionMap("Player");
+    }
+
+    private void Update()
+    {
+        if (_eventSystem.currentSelectedGameObject)
+        {
+            _highlighter.SetActive(true);
+            _highlighter.transform.position = _eventSystem.currentSelectedGameObject.transform.position;
+            _descriptionManager.Show(_eventSystem.currentSelectedGameObject.GetComponent<InventoryItemScript>().InventoryItem);
+        }
+        else if (_highlighter.activeInHierarchy)
+        {
+            _highlighter.SetActive(false);
+            _descriptionManager.Hide();
+        }
     }
 }

@@ -18,7 +18,6 @@ public abstract class EntityController : MonoBehaviour
 
     void OnDeath()
     {
-        HealthComponent.IsDead = true;
         Rigidbody2D.bodyType = RigidbodyType2D.Static;
         GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(s => s.sortingOrder = -1);
         SpriteRenderer.sortingOrder = -1;

@@ -2564,18 +2564,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FaceDilate: -0.757
+    - _FaceDilate: -0.23
     - _FaceUVSpeedX: 0
     - _GradientScale: 8
-    - _OutlineSoftness: 0.275
-    - _OutlineWidth: 0
+    - _OutlineSoftness: 0.098
+    - _OutlineWidth: 0.616
     - _ScaleRatioA: 0.875
-    - _ScaleRatioB: 1.3733125
-    - _ScaleRatioC: 1.3733125
+    - _ScaleRatioB: 0.9121875
+    - _ScaleRatioC: 0.9121875
     - _UnderlayOffsetX: -1
     - _UnderlayOffsetY: -1
     - _WeightBold: 0.75
     m_Colors:
-    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FaceColor: {r: 0.86346257, g: 0.759434, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

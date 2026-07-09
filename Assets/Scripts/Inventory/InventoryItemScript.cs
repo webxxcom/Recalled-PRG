@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
 public class InventoryItemScript : MonoBehaviour
 {
+    public InventoryItem InventoryItem { get; private set; }
     public Image Image { get; private set; }
     public TextMeshProUGUI CountText { get; private set; }
 
@@ -14,19 +16,11 @@ public class InventoryItemScript : MonoBehaviour
         CountText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    public void Initialize(Sprite image)
+    public void Initialize(InventoryItem inventoryItem, int count = 1)
     {
-        Image.sprite = image;
-        CountText.text = null;
-    }
+        InventoryItem = inventoryItem;
 
-    public void Initialize(Sprite image, int count)
-    {
-        if (!image)
-            Image.color = new Color(1, 1, 1, 0);
-        else
-            Image.sprite = image;
-
+        Image.sprite = inventoryItem.Icon;
         CountText.text = count != 1 ? count.ToString() : null;
     }
 }

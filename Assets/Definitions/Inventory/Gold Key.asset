@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf2c10e58e18502489bf659c81525f3e, type: 3}
-  m_Name: Mundane Key
+  m_Name: Gold Key
   m_EditorClassIdentifier: Assembly-CSharp::InventoryItem
   <Name>k__BackingField: Mundane Key
-  <Icon>k__BackingField: {fileID: -2636191377049176668, guid: a0eade7109ac35541b7c7580922ac115, type: 3}
+  <Icon>k__BackingField: {fileID: -5280557718241775356, guid: 0daa3ba3dddbbca448bb810d864562d8, type: 3}
+  <Description>k__BackingField: The Gold Key which can be used to open some chests
+    in the dungeon.\n\nIf the key can open the chest the one will tell about this.

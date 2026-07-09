@@ -1238,10 +1238,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0e163c60faf474ba274d75ee2ac1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityAttackComponent
-  <ReloadTime>k__BackingField: 2.5
   <DealtDamage>k__BackingField: 5
   <KnockbackPower>k__BackingField: 5
   <Effects>k__BackingField: []
+  <HostileFactions>k__BackingField:
+  - {fileID: 11400000, guid: 4d32c107c077aaf41bf67c1cb369f0f8, type: 2}
+  <ReloadTime>k__BackingField: 2.5
 --- !u!114 &7398168361144481108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1311,6 +1313,7 @@ GameObject:
   - component: {fileID: 1176398378409222523}
   - component: {fileID: 3323902720562264678}
   - component: {fileID: 3302160121922179893}
+  - component: {fileID: 6335082357148409875}
   m_Layer: 11
   m_Name: Slime 1
   m_TagString: Enemy
@@ -1494,7 +1497,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267b376786447e94f85c3f58c2047d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  <IsDead>k__BackingField: 0
 --- !u!114 &8023279021401798368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1528,7 +1530,7 @@ MonoBehaviour:
   <MaxValue>k__BackingField: 100
   <MinValue>k__BackingField: 0
   <Value>k__BackingField: 0
-  <IsInvincible>k__BackingField: 1
+  <IsInvincible>k__BackingField: 0
 --- !u!114 &7909209022917881383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1583,6 +1585,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   decayRate: 8
   restThreshold: 0.05
+--- !u!114 &6335082357148409875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6097617918995308611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74239ee26380792478d9af4223e70b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FactionComponent
+  <Faction>k__BackingField: {fileID: 11400000, guid: 899230750ac8a5b4bb3776956ccb326b, type: 2}
 --- !u!1 &7283403785417316623
 GameObject:
   m_ObjectHideFlags: 0

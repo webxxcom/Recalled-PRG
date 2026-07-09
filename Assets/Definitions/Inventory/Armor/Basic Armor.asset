@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Basic Armor
   m_EditorClassIdentifier: Assembly-CSharp::ArmorInventoryItem
   <Name>k__BackingField: Basic Armor
-  <Icon>k__BackingField: {fileID: -2407785993354806246, guid: bd53ca4c87d7d814cb9a8da826a46a73, type: 3}
+  <Icon>k__BackingField: {fileID: -2407785993354806246, guid: 1a65b3f4372800f40a20f414fbed9cc7, type: 3}
+  <Description>k__BackingField: Armor\nasd\nasd
   <Protection>k__BackingField: 0
   <Weight>k__BackingField: 1

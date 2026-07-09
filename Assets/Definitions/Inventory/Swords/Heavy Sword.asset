@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Heavy Sword
   m_EditorClassIdentifier: Assembly-CSharp::SwordInventoryItem
   <Name>k__BackingField: Heavy Sword
-  <Icon>k__BackingField: {fileID: -3552689575471052349, guid: bd53ca4c87d7d814cb9a8da826a46a73, type: 3}
+  <Icon>k__BackingField: {fileID: -3552689575471052349, guid: 1a65b3f4372800f40a20f414fbed9cc7, type: 3}
   <Damage>k__BackingField: 15
   <KnockbackPower>k__BackingField: 6
   <Weight>k__BackingField: 4

@@ -1,31 +1,55 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class DescriptionManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _text;
+    [SerializeField] TextMeshProUGUI _mainText;
+    [SerializeField] GameObject _buttons;
 
-    public bool IsActive { get; private set; }
+    [SerializeField] GameObject _equipButton;
+    [SerializeField] GameObject _removeButton;
+
+    public bool IsActive => gameObject.activeInHierarchy;
 
     private void Start()
     {
         gameObject.SetActive(false);
     }
 
-    public void Show(ItemInstance inventoryItem)
+    void ShowButtons(InventorySlot inventorySlot)
+    {
+        HideButtons();
+
+        if (inventorySlot.Item.IsEquippable)
+            _equipButton.SetActive(true);
+
+        if (inventorySlot.IsRemovable)
+            _removeButton.SetActive(true);
+    }
+
+    void HideButtons()
+    {
+        _equipButton.SetActive(false);
+        _removeButton.SetActive(false);
+    }
+
+    public void Show(InventorySlot inventorySlot)
     {
         if (!IsActive)
         {
-            IsActive = true;
             gameObject.SetActive(true);
         }
-        _text.text = inventoryItem.Description;
+        _mainText.text = inventorySlot.Item.Description;
+
+        ShowButtons(inventorySlot);
     }
 
     public void Hide()
     {
-        IsActive = false;
         gameObject.SetActive(false);
-        _text.text = null;
+        _mainText.text = null;
+        HideButtons();
     }
 }

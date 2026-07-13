@@ -3,6 +3,7 @@ using UnityEngine;
 public class Chest : InteractableObject
 {
     [field: SerializeField] public ItemDefinition RequiredKey { get; private set; }
+    [SerializeField] LootTable _lootTable;
 
     PlayerInventory _playerInventory;
 
@@ -23,6 +24,7 @@ public class Chest : InteractableObject
     {
         IsInteracted = true;
         _playerInventory.Remove(RequiredKey);
+        _playerInventory.Add(_lootTable.GetItem());
     }
 
     protected override bool PlayerCanInteract()

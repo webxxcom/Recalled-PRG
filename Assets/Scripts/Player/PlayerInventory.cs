@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -11,30 +9,22 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] BootsDefinition _basicBootsPrefab;
     [field: SerializeField] public List<ItemInstance> Items { get; private set; }
 
-    Sword _sword;
-    public Sword Sword { get => _sword; set
-        {
-            _sword = value;
-            OnSwordEquipped?.Invoke(value);
-        }
-}
-    public ArmorDefinition Armor { get; set; }
-    public BootsDefinition Boots { get; set; }
+    public Sword Sword { get; set; }
+    public Armor Armor { get; set; }
+    public Boots Boots { get; set; }
 
-    public Action<ItemInstance> OnSwordEquipped;
-
-    CoinCounter _coinCountScript;
+    CoinCounter _coinCounter;
 
     private void Awake()
     {
-        _coinCountScript = GetComponentInChildren<CoinCounter>();
+        _coinCounter = GetComponentInChildren<CoinCounter>();
     }
 
     private void Start()
     {
         Sword = _basicSwordPrefab.CreateInstance() as Sword;
-        Armor = _basicArmorPrefab;
-        Boots = _basicBootsPrefab;
+        Armor = _basicArmorPrefab.CreateInstance() as Armor;
+        Boots = _basicBootsPrefab.CreateInstance() as Boots;
     }
 
     public void Add(ItemInstance itemInstance, int count = 1)

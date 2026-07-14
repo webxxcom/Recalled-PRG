@@ -22,7 +22,7 @@ public class DescriptionManager : MonoBehaviour
     {
         HideButtons();
 
-        if (inventorySlot.Item.IsEquippable)
+        if (inventorySlot.Item is IEquippable && !inventorySlot.IsEquipped)
             _equipButton.SetActive(true);
 
         if (inventorySlot.IsRemovable)

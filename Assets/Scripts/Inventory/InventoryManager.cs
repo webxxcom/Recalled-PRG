@@ -48,10 +48,8 @@ public class InventoryManager : MonoBehaviour
         _inputActionAsset.FindActionMap("Player").FindAction("InventoryToggle").performed += ToggleInventory;
         _inputActionAsset.FindActionMap("Inventory").FindAction("InventoryToggle").performed += ToggleInventory;
 
-        _uiEventRaiser.OnUIElementSelected += OnSelect;
-        _uiEventRaiser.OnUIElementDeselected += OnDeselect;
-
-        _playerInventory.OnSwordEquipped += _swordInventoryItem.Initialize;
+        _uiEventRaiser.OnUIElementSelected += ItemSelected;
+        _uiEventRaiser.OnUIElementDeselected += ItemDeselected;
     }
 
     private void OnDisable()
@@ -59,29 +57,27 @@ public class InventoryManager : MonoBehaviour
         _inputActionAsset.FindActionMap("Player").FindAction("InventoryToggle").performed -= ToggleInventory;
         _inputActionAsset.FindActionMap("Inventory").FindAction("InventoryToggle").performed -= ToggleInventory;
 
-        _uiEventRaiser.OnUIElementSelected -= OnSelect;
-        _uiEventRaiser.OnUIElementDeselected -= OnDeselect;
-
-        _playerInventory.OnSwordEquipped -= _swordInventoryItem.Initialize;
+        _uiEventRaiser.OnUIElementSelected -= ItemSelected;
+        _uiEventRaiser.OnUIElementDeselected -= ItemDeselected;
     }
 
-    void InitGeneralItems()
+    void RefreshGeneralSlots()
     {
         foreach (var item in _playerInventory.Items)
         {
-            GameObject inventoryItem = Instantiate(_inventoryItemPrefab, Vector3.zero, Quaternion.identity, _basicItemsInventoryGrid.transform);
+            GameObject inventoryItem = Instantiate(_inventoryItemPrefab, _basicItemsInventoryGrid.transform);
 
-            inventoryItem.GetComponent<InventorySlot>().Initialize(item, true);
+            inventoryItem.GetComponent<InventorySlot>().Initialize(item);
 
             _createdInventoryItems.Add(inventoryItem);
         }
     }
 
-    void InitBasicItems()
+    void RefreshEquipSlots()
     {
-        _swordInventoryItem.Initialize(_playerInventory.Sword);
-        _armorInventoryItem.Initialize(_playerInventory.Armor);
-        _bootsInventoryItem.Initialize(_playerInventory.Boots);
+        _swordInventoryItem.Initialize(_playerInventory.Sword, false, true);
+        _armorInventoryItem.Initialize(_playerInventory.Armor, false, true);
+        _bootsInventoryItem.Initialize(_playerInventory.Boots, false, true);
     }
 
     public void Open()
@@ -89,8 +85,8 @@ public class InventoryManager : MonoBehaviour
         _canvas.enabled = true;
         _playerInput.SwitchCurrentActionMap("Inventory");
 
-        InitGeneralItems();
-        InitBasicItems();
+        RefreshGeneralSlots();
+        RefreshEquipSlots();
     }
 
     public void Close()
@@ -103,7 +99,7 @@ public class InventoryManager : MonoBehaviour
         _highlighter.SetActive(false);
     }
 
-    public void OnSelect(GameObject gameObject)
+    public void ItemSelected(GameObject gameObject)
     {
         if (gameObject.TryGetComponent(out InventorySlot inventorySlot))
         {
@@ -115,7 +111,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void OnDeselect()
+    public void ItemDeselected()
     {
         _selectedInventorySlot = null;
 
@@ -123,26 +119,25 @@ public class InventoryManager : MonoBehaviour
         _descriptionManager.Hide();
     }
 
-    public void OnRemoveButtonClick()
-    {
-        RemoveItem(_selectedInventorySlot);
-    }
-
-    public void OnEquipButtonClick()
-    {
-        EquipItem(_selectedInventorySlot);
-    }
+    public void OnRemoveButtonClick() => RemoveItem(_selectedInventorySlot);
+    public void OnEquipButtonClick() => EquipItem(_selectedInventorySlot);
 
     void RemoveItem(InventorySlot inventorySlot)
     {
         _playerInventory.Remove(inventorySlot.Item);
         Destroy(inventorySlot.gameObject);
 
-        OnDeselect();
+        ItemDeselected();
     }
 
     void EquipItem(InventorySlot inventorySlot)
     {
-        inventorySlot.Item.Equip(_playerInventory);
+        if (inventorySlot.Item is IEquippable equippable)
+        {
+            ItemInstance replaced = equippable.Equip(_playerInventory);
+
+            inventorySlot.Initialize(replaced);
+            RefreshEquipSlots();
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(EnemyAttackComponent))]
+[RequireComponent(typeof(EnemyAttack))]
 class ProjectileAttackComponent : AttackStrategy
 {
     [SerializeField] GameObject projectilePrefab;

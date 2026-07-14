@@ -1,15 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
 {
-    [field: SerializeField] GameObject _basicItemsInventoryGrid;
-    [field: SerializeField] GameObject _inventoryItemPrefab;
-    [field: SerializeField] InventorySlot _swordInventoryItem;
-    [field: SerializeField] InventorySlot _armorInventoryItem;
-    [field: SerializeField] InventorySlot _bootsInventoryItem;
-    [field: SerializeField] GameObject _highlighter;
+    [SerializeField] GameObject _basicItemsInventoryGrid;
+    [SerializeField] GameObject _inventoryItemPrefab;
+    [SerializeField] InventorySlot _swordInventoryItem;
+    [SerializeField] InventorySlot _armorInventoryItem;
+    [SerializeField] InventorySlot _bootsInventoryItem;
+    [SerializeField] Sprite _absentSwordSprite;
+    [SerializeField] Sprite _absentArmorSprite;
+    [SerializeField] Sprite _absentBootsSprite;
+    [SerializeField] GameObject _highlighter;
     [SerializeField] InputActionAsset _inputActionAsset;
 
     UIEventRaiser _uiEventRaiser;
@@ -61,23 +65,28 @@ public class InventoryManager : MonoBehaviour
         _uiEventRaiser.OnUIElementDeselected -= ItemDeselected;
     }
 
-    void RefreshGeneralSlots()
+    void CreateGeneralItemSlot(ItemInstance itemInstance)
     {
-        foreach (var item in _playerInventory.Items)
-        {
-            GameObject inventoryItem = Instantiate(_inventoryItemPrefab, _basicItemsInventoryGrid.transform);
+        GameObject inventoryItem = Instantiate(_inventoryItemPrefab, _basicItemsInventoryGrid.transform);
 
-            inventoryItem.GetComponent<InventorySlot>().Initialize(item);
-
-            _createdInventoryItems.Add(inventoryItem);
-        }
+        inventoryItem.GetComponent<InventorySlot>().Initialize(itemInstance);
+        _createdInventoryItems.Add(inventoryItem);
     }
+    void RefreshGeneralSlots() =>  _playerInventory.Items.ForEach(CreateGeneralItemSlot);
 
     void RefreshEquipSlots()
     {
-        _swordInventoryItem.Initialize(_playerInventory.Sword, false, true);
-        _armorInventoryItem.Initialize(_playerInventory.Armor, false, true);
-        _bootsInventoryItem.Initialize(_playerInventory.Boots, false, true);
+        if (_playerInventory.Sword != null)
+            _swordInventoryItem.Initialize(_playerInventory.Sword, false, true);
+        else _swordInventoryItem.Absent(_absentSwordSprite);
+
+        if (_playerInventory.Armor != null)
+            _armorInventoryItem.Initialize(_playerInventory.Armor, false, true);
+        else _armorInventoryItem.Absent(_absentArmorSprite);
+
+        if (_playerInventory.Boots != null)
+            _bootsInventoryItem.Initialize(_playerInventory.Boots, false, true);
+        else _bootsInventoryItem.Absent(_absentBootsSprite);
     }
 
     public void Open()
@@ -121,12 +130,24 @@ public class InventoryManager : MonoBehaviour
 
     public void OnRemoveButtonClick() => RemoveItem(_selectedInventorySlot);
     public void OnEquipButtonClick() => EquipItem(_selectedInventorySlot);
+    public void OnUnequipButtonClick() => UnequipItem(_selectedInventorySlot);
+
+    void UnequipItem(InventorySlot inventorySlot)
+    {
+        if (inventorySlot.Item is IEquippable equippable)
+        {
+            ItemInstance unequipped = equippable.Unequip(_playerInventory);
+
+            CreateGeneralItemSlot(unequipped);
+            ItemDeselected();
+            RefreshEquipSlots();
+        }
+    }
 
     void RemoveItem(InventorySlot inventorySlot)
     {
         _playerInventory.Remove(inventorySlot.Item);
         Destroy(inventorySlot.gameObject);
-
         ItemDeselected();
     }
 
@@ -136,7 +157,11 @@ public class InventoryManager : MonoBehaviour
         {
             ItemInstance replaced = equippable.Equip(_playerInventory);
 
-            inventorySlot.Initialize(replaced);
+            if (replaced != null)
+                inventorySlot.Initialize(replaced);
+            else
+                RemoveItem(inventorySlot);
+
             RefreshEquipSlots();
         }
     }

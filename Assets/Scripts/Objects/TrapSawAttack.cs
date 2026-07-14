@@ -20,7 +20,7 @@ public class TrapSawAttack : DefaultAttack
 
         if (ec)
         {
-            ec.HealthComponent.Change(gameObject, -DealtDamage);
+            ec.HealthComponent.Change(gameObject, -BasicDealtDamage);
 
             OnAttackApplied?.Invoke(ec);
         }

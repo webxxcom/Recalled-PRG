@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32.SafeHandles;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -35,7 +34,7 @@ public abstract class EntityAttack : DefaultAttack
                 continue;
 
             DamagedTargets.Add(entityController);
-            entityController.HealthComponent.Change(this.entityController.gameObject, -DealtDamage);
+            entityController.HealthComponent.Change(this.entityController.gameObject, -BasicDealtDamage);
 
             OnAttackApplied?.Invoke(entityController);
         }

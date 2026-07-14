@@ -29,6 +29,6 @@ public class Chest : InteractableObject
 
     protected override bool PlayerCanInteract()
     {
-        return FindAnyObjectByType<PlayerController>().Inventory.Contains(RequiredKey);
+        return RequiredKey == null || FindAnyObjectByType<PlayerController>().Inventory.Contains(RequiredKey);
     }
 }

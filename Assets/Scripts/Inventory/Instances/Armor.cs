@@ -11,14 +11,6 @@
 
     public Armor(ItemDefinition itemDefinition) : base(itemDefinition) { }
 
-    public ItemInstance Equip(PlayerInventory playerInventory)
-    {
-        ItemInstance replaced = playerInventory.Sword;
-
-        playerInventory.Add(playerInventory.Sword);
-        playerInventory.Armor = this;
-        playerInventory.Remove(this);
-
-        return replaced;
-    }
+    ItemInstance IEquippable.GetInTheInventory(PlayerInventory pi) => pi.Armor;
+    void IEquippable.SetInTheInventory(PlayerInventory pi, ItemInstance val) => pi.Armor = val as Armor;
 }

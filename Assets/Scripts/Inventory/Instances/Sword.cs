@@ -1,4 +1,6 @@
-﻿public class Sword : ItemInstance, IEquippable
+﻿using Unity.VisualScripting;
+
+public class Sword : ItemInstance, IEquippable
 {
     public SwordDefinition SwordDefinition => (SwordDefinition)Definition;
 
@@ -14,14 +16,6 @@
     }
     public Sword(ItemDefinition itemDefinition) : base(itemDefinition) { }
 
-    public ItemInstance Equip(PlayerInventory playerInventory)
-    {
-        ItemInstance replaced = playerInventory.Sword;
-
-        playerInventory.Add(playerInventory.Sword);
-        playerInventory.Sword = this;
-        playerInventory.Remove(this);
-
-        return replaced;
-    }
+    ItemInstance IEquippable.GetInTheInventory(PlayerInventory pi) => pi.Sword;
+    void IEquippable.SetInTheInventory(PlayerInventory pi, ItemInstance val) =>  pi.Sword = val as Sword;
 }

@@ -4,12 +4,12 @@ using UnityEngine;
 public class AttackHitboxScript : MonoBehaviour
 {
     EntityController entityController;
-    EnemyAttackComponent entityAttackComponent;
+    EnemyAttack entityAttackComponent;
     new Collider2D collider2D;
 
     private void Awake()
     {
-        entityAttackComponent = GetComponentInParent<EnemyAttackComponent>();
+        entityAttackComponent = GetComponentInParent<EnemyAttack>();
         entityController = GetComponentInParent<EntityController>();
         collider2D = GetComponent<Collider2D>();
     }

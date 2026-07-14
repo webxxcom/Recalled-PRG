@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class DefaultAttack : MonoBehaviour
 {
-    [field: SerializeField] public int DealtDamage { get; private set; }
-    [field: SerializeField] public float KnockbackPower { get; private set; }
+    [field: SerializeField] public int BasicDealtDamage { get; private set; }
+    [field: SerializeField] public float BasicKnockbackPower { get; private set; }
     [field: SerializeField] public List<EffectAsset> Effects { get; private set; }
     [field: SerializeField] public List<FactionSO> HostileFactions { get; private set; }
 
@@ -32,7 +32,7 @@ public abstract class DefaultAttack : MonoBehaviour
         Vector2 attackDir = (target.transform.position - knockbackOriginPosition.position).normalized;
 
         if (target.TryGetComponent(out ExternalVelocityComponent externalVelocityComponent))
-            externalVelocityComponent.Add(attackDir * KnockbackPower);
+            externalVelocityComponent.Add(attackDir * BasicKnockbackPower);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

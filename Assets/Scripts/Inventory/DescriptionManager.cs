@@ -9,6 +9,7 @@ public class DescriptionManager : MonoBehaviour
     [SerializeField] GameObject _buttons;
 
     [SerializeField] GameObject _equipButton;
+    [SerializeField] GameObject _unequipButton;
     [SerializeField] GameObject _removeButton;
 
     public bool IsActive => gameObject.activeInHierarchy;
@@ -20,13 +21,25 @@ public class DescriptionManager : MonoBehaviour
 
     void ShowButtons(InventorySlot inventorySlot)
     {
-        HideButtons();
-
-        if (inventorySlot.Item is IEquippable && !inventorySlot.IsEquipped)
-            _equipButton.SetActive(true);
+        if (inventorySlot.Item is IEquippable)
+        {
+            if (inventorySlot.IsEquipped)
+            {
+                _equipButton.SetActive(false);
+                _unequipButton.SetActive(true);
+            }
+            else
+            {
+                _equipButton.SetActive(true);
+                _unequipButton.SetActive(false);
+            }
+        }
 
         if (inventorySlot.IsRemovable)
             _removeButton.SetActive(true);
+        else
+            _removeButton.SetActive(false);
+
     }
 
     void HideButtons()

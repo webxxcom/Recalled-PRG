@@ -10,6 +10,6 @@ public class PopupAttackComponent : AttackStrategy
             return;
 
         entityAttackComponent.DamagedTargets.Add(target);
-        target.HealthComponent.Change(entityController.gameObject, -entityAttackComponent.DealtDamage);
+        target.HealthComponent.Change(entityController.gameObject, -entityAttackComponent.BasicDealtDamage);
     }
 }

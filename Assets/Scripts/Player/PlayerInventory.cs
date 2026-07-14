@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] SwordDefinition _basicSwordPrefab;
-    [SerializeField] ArmorDefinition _basicArmorPrefab;
-    [SerializeField] BootsDefinition _basicBootsPrefab;
     [field: SerializeField] public List<ItemInstance> Items { get; private set; }
 
     public Sword Sword { get; set; }
@@ -20,16 +17,9 @@ public class PlayerInventory : MonoBehaviour
         _coinCounter = GetComponentInChildren<CoinCounter>();
     }
 
-    private void Start()
-    {
-        Sword = _basicSwordPrefab.CreateInstance() as Sword;
-        Armor = _basicArmorPrefab.CreateInstance() as Armor;
-        Boots = _basicBootsPrefab.CreateInstance() as Boots;
-    }
-
     public void Add(ItemInstance itemInstance, int count = 1)
     {
-        if (count <= 0)
+        if (count <= 0 || itemInstance == null)
             return;
 
         // If we can stack item then try to find it

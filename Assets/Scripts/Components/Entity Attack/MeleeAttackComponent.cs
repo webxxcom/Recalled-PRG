@@ -9,7 +9,7 @@ public class MeleeAttackComponent : AttackStrategy
 
         if (!target)
             return;
-        target.HealthComponent.Change(entityController.gameObject, -entityAttackComponent.DealtDamage);
+        target.HealthComponent.Change(entityController.gameObject, -entityAttackComponent.BasicDealtDamage);
     }
 
     private void Update()

@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(MovementBase))]
 public class EnemyController : EntityController
 {
-    EnemyAttackComponent entityAttackComponent;
+    EnemyAttack entityAttackComponent;
     HitboxComponent hitboxComponent;
     CanvasHider canvasHiderScript;
 
@@ -14,7 +14,7 @@ public class EnemyController : EntityController
         base.Awake();
 
         MovementComponent = GetComponent<EntityMovementComponent>();
-        entityAttackComponent = GetComponentInChildren<EnemyAttackComponent>();
+        entityAttackComponent = GetComponentInChildren<EnemyAttack>();
         hitboxComponent = GetComponentInChildren<HitboxComponent>();
         canvasHiderScript = GetComponentInChildren<CanvasHider>();
     }

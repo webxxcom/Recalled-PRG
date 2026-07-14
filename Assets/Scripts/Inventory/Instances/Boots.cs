@@ -1,4 +1,6 @@
-﻿public class Boots : ItemInstance, IEquippable
+﻿using Unity.AppUI.UI;
+
+public class Boots : ItemInstance, IEquippable
 {
     public BootsDefinition BootsDefinition => (BootsDefinition)Definition;
 
@@ -12,14 +14,7 @@
     }
     public Boots(ItemDefinition itemDefinition) : base(itemDefinition) { }
 
-    public ItemInstance Equip(PlayerInventory playerInventory)
-    {
-        ItemInstance replaced = playerInventory.Sword;
+    ItemInstance IEquippable.GetInTheInventory(PlayerInventory pi) => pi.Boots;
+    void IEquippable.SetInTheInventory(PlayerInventory pi, ItemInstance val) => pi.Boots = val as Boots;
 
-        playerInventory.Add(playerInventory.Sword);
-        playerInventory.Boots = this;
-        playerInventory.Remove(this);
-
-        return replaced;
-    }
 }

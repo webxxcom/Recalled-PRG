@@ -5,7 +5,7 @@ public class BarSwitchComponent : MonoBehaviour
     [field: SerializeField] public GameObject AliveBar { get; private set; }
     [field: SerializeField] public GameObject DeadBar { get; private set; }
 
-    [SerializeField] HealthComponent healthComponent;
+    [SerializeField] HealthProvider healthComponent;
 
     void EnableAlivebar(bool flag)
     {

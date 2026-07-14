@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(InvincibilityComponent))]
-[RequireComponent(typeof(EffectMachineComponent))]
+[RequireComponent(typeof(InvincibilityProvider))]
+[RequireComponent(typeof(EffectMachine))]
 [RequireComponent(typeof(PlayerInventory))]
 [RequireComponent(typeof(MovementBase))]
 public class PlayerController : EntityController
@@ -23,40 +23,35 @@ public class PlayerController : EntityController
 
     bool _isArmed;
 
-    public EffectMachineComponent EffectMachineComponent { get; private set; }
+    public EffectMachine EffectMachineComponent { get; private set; }
     public PlayerInventory Inventory { get; private set; }
     public PlayerMovement MovementComponent { get; private set; }
     public PlayerInteraction InteractionComponent { get; private set; }
-    public InvincibilityComponent InvincibilityComponent { get; private set; }
+    public InvincibilityProvider InvincibilityComponent { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
 
         MovementComponent = GetComponent<PlayerMovement>();
-        InvincibilityComponent = GetComponent<InvincibilityComponent>();
-        EffectMachineComponent = GetComponent<EffectMachineComponent>();
+        InvincibilityComponent = GetComponent<InvincibilityProvider>();
+        EffectMachineComponent = GetComponent<EffectMachine>();
         Inventory =  GetComponent<PlayerInventory>();
-        InteractionComponent = GetComponentInChildren<PlayerInteraction>();
-    }
+        InteractionComponent = Utils.FindOrThrow(GetComponentInChildren<PlayerInteraction>);
 
-    protected override void Start()
-    {
-        base.Start();
-
-        
+        IsArmed = true;
     }
 
     void Invinsibility(GameObject _, int _2) => InvincibilityComponent.BecomeInvinsibleFor(1f);
 
     private void OnEnable()
     {
-        HealthComponent.OnValueChanged += Invinsibility;
+        Health.OnValueChanged += Invinsibility;
     }
 
     private void OnDisable()
     {
-        HealthComponent.OnValueChanged -= Invinsibility;
+        Health.OnValueChanged -= Invinsibility;
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -67,11 +62,6 @@ public class PlayerController : EntityController
         {
             Destroy(collision.gameObject);
         }
-    }
-
-    protected override void OnTriggerExit2D(Collider2D collision)
-    {
-        base.OnTriggerExit2D(collision);
     }
 
     protected override void HandleFixedUpdate()

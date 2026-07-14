@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Effects/Freeze")]
-public class FreezeEffect : EffectAsset
+public class FreezeEffectDefinition : EffectDefinition
 {
     readonly float speedMultiplier = 0.4f;
 

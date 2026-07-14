@@ -31,11 +31,14 @@ public abstract class MovementBase : MonoBehaviour
         get => _movementIntention;
         protected set
         {
+            _movementIntention = value;
+
             if (_movementIntention == Vector2.zero && value != Vector2.zero)
                 OnMovementStarted?.Invoke();
             else if (_movementIntention != Vector2.zero && value == Vector2.zero)
                 OnMovementStopped?.Invoke();
-            _movementIntention = value;
+            else
+                OnMovement?.Invoke();
         }
     }
 
@@ -43,6 +46,7 @@ public abstract class MovementBase : MonoBehaviour
 
     public event Action OnMovementStarted;
     public event Action OnMovementStopped;
+    public event Action OnMovement;
 
     protected abstract Vector2 GetMovementIntention();
 

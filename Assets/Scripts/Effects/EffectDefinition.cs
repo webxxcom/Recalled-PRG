@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class EffectAsset : ScriptableObject
+public abstract class EffectDefinition : ScriptableObject
 {
     public float duration;
 

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(EntityController))]
-public class BlinkingEffectComponent : MonoBehaviour
+public class BlinkingEffectProvider : MonoBehaviour
 {
     private static readonly WaitForSeconds _waitForSeconds0_1 = new(0.1f);
 

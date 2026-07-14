@@ -8,17 +8,20 @@ public class EnemyAttack : EntityAttack
     {
         get
         {
-            EntityController ec = TargetsInRange.FirstOrDefault();
+            //HealthProvider ec = TargetsInRange.FirstOrDefault();
 
-            return ec ? ec.GetComponent<PlayerController>() : null;
+            return null;//ec ? ec.GetComponent<PlayerController>() : null;
         }
     }
 
-    AttackStrategy attackStrategy;
+    AttackStrategy _attackStrategy;
+
+    public override int DealtDamage => BasicAttackData.DealtDamage;
+    public override float DealtKnockbackPower => BasicAttackData.KnockbackPower;
 
     public void ExecuteAttack()
     {
-        attackStrategy.Execute();
+        _attackStrategy.Execute();
 
         if (Target)
             Effects.ForEach(e => Target.EffectMachineComponent.ApplyEffect(e));
@@ -28,7 +31,7 @@ public class EnemyAttack : EntityAttack
     {
         base.Awake();
 
-        attackStrategy = GetComponent<AttackStrategy>();
+        _attackStrategy = GetComponent<AttackStrategy>();
     }
 
     private void Start()
@@ -43,7 +46,7 @@ public class EnemyAttack : EntityAttack
         OnAttackStarted?.Invoke();
     }
 
-    bool CanAttack => timeSinceLastAttack >= ReloadTime && Target != null && !Target.HealthComponent.IsDead;
+    bool CanAttack => timeSinceLastAttack >= ReloadTime && Target != null && !Target.Health.IsDead;
     private void Update()
     {
         if (CanAttack)

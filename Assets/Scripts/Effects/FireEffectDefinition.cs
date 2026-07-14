@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Effects/Fire")]
-public class FireEffect : EffectAsset
+public class FireEffectDefinition : EffectDefinition
 {
     readonly int damagePerSecond = 2;
     readonly float speedMultiplier = 0.8f;
@@ -28,7 +28,7 @@ public class FireEffect : EffectAsset
     {
         if (timeSinceDamage > reloadTime)
         {
-            entityController.HealthComponent.Change(null, -damagePerSecond);
+            entityController.Health.Change(null, -damagePerSecond);
             timeSinceDamage = 0;
         }
 

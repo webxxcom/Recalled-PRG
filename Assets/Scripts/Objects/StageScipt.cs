@@ -17,7 +17,7 @@ public class StageScipt : MonoBehaviour
 
     void IfAllEnemiesAreDead()
     {
-        if (!doorScript.IsInteracted && enemies.Count(e => e.HealthComponent.IsDead) == enemies.Length)
+        if (!doorScript.IsInteracted && enemies.Count(e => e.Health.IsDead) == enemies.Length)
         {
             doorScript.Open();
             stageLight.enabled = true;

@@ -4,26 +4,18 @@
 [RequireComponent(typeof(EnemyAttack))]
 public abstract class AttackStrategy : MonoBehaviour
 {
-    protected new Collider2D collider2D;
-    protected MovementBase movementBase;
-    protected EnemyAttack entityAttackComponent;
-    protected EntityController entityController;
+    protected Collider2D _collider2D;
+    protected MovementBase _movementBase;
+    protected EnemyAttack _entityAttack;
+    protected EntityController _entityController;
 
     private void Awake()
     {
-        entityController = GetComponentInParent<EntityController>();
-        movementBase = GetComponentInParent<MovementBase>();
-        entityAttackComponent = GetComponent<EnemyAttack>();
-        collider2D = GetComponent<Collider2D>();
-    }
+        _entityAttack = GetComponent<EnemyAttack>();
+        _collider2D = GetComponent<Collider2D>();
 
-    public void SetAttackCollisionOffset()
-    {
-        if (!movementBase.IsWalking)
-            return;
-
-        float degrees = Vector2.SignedAngle(Vector2.right, movementBase.MovementIntention);
-        collider2D.transform.rotation = Quaternion.Euler(0, 0, degrees);
+        _entityController = Utils.FindOrThrow(GetComponentInParent<EntityController>);
+        _movementBase = Utils.FindOrThrow(GetComponentInParent<MovementBase>);
     }
 
     public abstract void Execute();

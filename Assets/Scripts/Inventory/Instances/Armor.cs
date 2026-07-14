@@ -1,12 +1,15 @@
 ﻿public class Armor : ItemInstance, IEquippable
 {
-    public ArmorDefinition ArmorDefinition => (ArmorDefinition)Definition;
+    public new ArmorDefinition Definition => base.Definition as ArmorDefinition;
 
     public override string Description
     {
-        get => $"{ArmorDefinition.Description}\n\n" +
-                $"Protection: {ArmorDefinition.Protection}\n" +
-                $"Weight: {ArmorDefinition.Weight}";
+        get
+        {
+            return $"{Definition.Description}\n\n" +
+                $"Protection: {Definition.Protection}\n" +
+                $"Weight: {Definition.Weight}";
+        }
     }
 
     public Armor(ItemDefinition itemDefinition) : base(itemDefinition) { }

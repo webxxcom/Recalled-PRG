@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(HealthComponent))]
+[RequireComponent(typeof(HealthProvider))]
 [RequireComponent(typeof(Collider2D))]
 public abstract class EntityController : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public abstract class EntityController : MonoBehaviour
     public Animator Animator { get; private set; }
     public SpriteRenderer SpriteRenderer { get; private set; }
     public Rigidbody2D Rigidbody2D { get; private set; }
-    public HealthComponent HealthComponent { get; private set; }
+    public HealthProvider Health { get; private set; }
     public Collider2D Collider2D { get; private set; }
 
     void OnDeath()
@@ -34,25 +34,20 @@ public abstract class EntityController : MonoBehaviour
         Animator.SetTrigger(HurtHash);
     }
 
-    T GetComponentInChildrenIfNotPresent<T>()
-    {
-        return TryGetComponent(out T component) ? component : GetComponentInChildren<T>();
-    }
-
     protected virtual void Awake()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
-        HealthComponent = GetComponent<HealthComponent>();
+        Health = GetComponent<HealthProvider>();
         Collider2D = GetComponent<Collider2D>();
 
-        Animator = GetComponentInChildrenIfNotPresent<Animator>();
-        SpriteRenderer = GetComponentInChildrenIfNotPresent<SpriteRenderer>();
+        Animator = Utils.GetComponentInChildrenIfNotPresent<Animator>(gameObject);
+        SpriteRenderer = Utils.GetComponentInChildrenIfNotPresent<SpriteRenderer>(gameObject);
     }
 
     protected virtual void Start()
     {
-        HealthComponent.OnMinValueReached += obj => OnDeath();
-        HealthComponent.OnValueChanged += (_, value) => { if (value <= 0) OnHurt(); };
+        Health.OnMinValueReached += obj => OnDeath();
+        Health.OnValueChanged += (_, value) => { if (value <= 0) OnHurt(); };
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
@@ -65,7 +60,7 @@ public abstract class EntityController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (HealthComponent.IsDead)
+        if (Health.IsDead)
             return;
 
         HandleFixedUpdate();

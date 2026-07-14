@@ -2,16 +2,16 @@
 
 public class Sword : ItemInstance, IEquippable
 {
-    public SwordDefinition SwordDefinition => (SwordDefinition)Definition;
+    public new SwordDefinition Definition => base.Definition as SwordDefinition;
 
     public override string Description
     {
         get
         {
-            return $"{SwordDefinition.Description}\n\n" +
-                $"Power: {SwordDefinition.Damage}\n" +
-                $"Knockback Power: {SwordDefinition.KnockbackPower}\n" +
-                $"Weight: {SwordDefinition.Weight}";
+            return $"{Definition.Description}\n\n" +
+                $"Power: {Definition.Damage}\n" +
+                $"Knockback Power: {Definition.KnockbackPower}\n" +
+                $"Weight: {Definition.Weight}";
         }
     }
     public Sword(ItemDefinition itemDefinition) : base(itemDefinition) { }

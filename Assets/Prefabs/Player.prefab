@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7103029191301751210}
-  - component: {fileID: 3350280649987019114}
-  - component: {fileID: 5946347303125538966}
-  m_Layer: 8
-  m_Name: Hitbox
+  - component: {fileID: 7648009776092296695}
+  - component: {fileID: 2511745154895722241}
+  m_Layer: 6
+  m_Name: Hurtbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,8 +33,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6805291076679127406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &3350280649987019114
-BoxCollider2D:
+--- !u!70 &7648009776092296695
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -46,10 +46,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 4294967295
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -63,23 +63,14 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.02982968, y: 0.59546125}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.69123054, y: 1.2575643}
-  m_EdgeRadius: 0
---- !u!114 &5946347303125538966
+  m_Offset: {x: -0.034803063, y: 0.5794718}
+  m_Size: {x: 0.8056588, y: 1.408505}
+  m_Direction: 0
+--- !u!114 &2511745154895722241
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,9 +79,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1515305421710409048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 765b9f6544dc24b409f4e0d096f66593, type: 3}
+  m_Script: {fileID: 11500000, guid: bfe6f3a3319d4c14582e88498e0092bf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HitboxComponent
+  m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
 --- !u!1 &1822602623840076642
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,10 +379,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1589811766139957309}
+  - component: {fileID: 7809330539225864080}
   - component: {fileID: 4452931388105062793}
-  - component: {fileID: 3070435056343494364}
-  m_Layer: 8
-  m_Name: Attack Range
+  m_Layer: 7
+  m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -412,26 +403,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6805291076679127406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4452931388105062793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2511438768263475401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d3dd6f5182aeea4f99d8a6d956c5a23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  <DealtDamage>k__BackingField: 10
-  <KnockbackPower>k__BackingField: 6
-  <Effects>k__BackingField: []
-  <HostileFactions>k__BackingField:
-  - {fileID: 11400000, guid: 899230750ac8a5b4bb3776956ccb326b, type: 2}
-  <ReloadTime>k__BackingField: 0.8
---- !u!61 &3070435056343494364
-BoxCollider2D:
+--- !u!70 &7809330539225864080
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -443,10 +416,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -460,22 +433,32 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.84101635, y: 0.061483413}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1.1810969, y: 2.0126712}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.84032935, y: 0.10430336}
+  m_Size: {x: 1.1838481, y: 2.1224318}
+  m_Direction: 0
+--- !u!114 &4452931388105062793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2511438768263475401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3dd6f5182aeea4f99d8a6d956c5a23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  <BasicAttackData>k__BackingField:
+    <DealtDamage>k__BackingField: 10
+    <KnockbackPower>k__BackingField: 1.5
+  <Effects>k__BackingField: []
+  <HostileFactions>k__BackingField:
+  - {fileID: 11400000, guid: 899230750ac8a5b4bb3776956ccb326b, type: 2}
+  <ReloadTime>k__BackingField: 0.8
 --- !u!1 &4065532710990153870
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,20 +922,19 @@ GameObject:
   - component: {fileID: 6730954019777126062}
   - component: {fileID: 8487839362322834453}
   - component: {fileID: 2409675021506303179}
-  - component: {fileID: 7162682655650916106}
-  - component: {fileID: 7101408821228708346}
   - component: {fileID: 1507123296944016253}
   - component: {fileID: 4843682388793981076}
-  - component: {fileID: 3479678971008296659}
-  - component: {fileID: 3630966448751984796}
-  - component: {fileID: 506384641350915718}
   - component: {fileID: 6836397006442588245}
-  - component: {fileID: 107143013260194703}
-  - component: {fileID: 7477225139193990942}
-  - component: {fileID: 3172139938629916995}
+  - component: {fileID: 7162682655650916106}
+  - component: {fileID: 7101408821228708346}
   - component: {fileID: 3313467692676741098}
+  - component: {fileID: 506384641350915718}
+  - component: {fileID: 3172139938629916995}
   - component: {fileID: 8895237871161846097}
   - component: {fileID: 4290745298189894023}
+  - component: {fileID: 7001661983157172225}
+  - component: {fileID: 7477225139193990942}
+  - component: {fileID: 5006608323033705435}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -973,11 +955,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7103029191301751210}
   - {fileID: 6150754871880796512}
+  - {fileID: 7103029191301751210}
   - {fileID: 1589811766139957309}
-  - {fileID: 3435552501325350831}
   - {fileID: 6329567971803542181}
+  - {fileID: 3435552501325350831}
   - {fileID: 2897182995258291296}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1046,35 +1028,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7162682655650916106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aee9dd943d1e0d54a9d789a014f366f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementComponent
-  <WalkingSpeed>k__BackingField: 2
-  <SprintingSpeedMultiplier>k__BackingField: 2
-  <Stamina>k__BackingField: 100
-  <StaminaUsage>k__BackingField: 0
-  <StaminaRestore>k__BackingField: 0
---- !u!114 &7101408821228708346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13e28ac1af5e01f4da013d12e70509a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!212 &1507123296944016253
 SpriteRenderer:
   serializedVersion: 2
@@ -1156,49 +1109,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3479678971008296659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 447a13bd089514248876a027b60a0194, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StairMovementComponent
---- !u!114 &3630966448751984796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56700babf1211154aa60790912451cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
-  <MaxValue>k__BackingField: 10000
-  <MinValue>k__BackingField: 0
-  <Value>k__BackingField: 0
-  <IsInvincible>k__BackingField: 0
---- !u!114 &506384641350915718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9837663d5d51566429d97eb93b1c3ea0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  <MaxValue>k__BackingField: 0
-  <MinValue>k__BackingField: 0
-  <Value>k__BackingField: 0
 --- !u!70 &6836397006442588245
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1215,7 +1125,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 192
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1233,34 +1143,10 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.03597734, y: 0.034003444}
-  m_Size: {x: 0.75048494, y: 0.41584843}
+  m_Offset: {x: -0.026332354, y: 0.037299313}
+  m_Size: {x: 0.7548744, y: 0.3412516}
   m_Direction: 1
---- !u!114 &107143013260194703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e26dbe64af4aed04d91d1c4695527340, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BlinkingEffectComponent
---- !u!114 &7477225139193990942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef7af567f829480489cb925839780c3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InvincibilityComponent
---- !u!114 &3172139938629916995
+--- !u!114 &7162682655650916106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1269,7 +1155,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 7559287907167481913}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceaf463d0e9df334f82b0cdb6071b029, type: 3}
+  m_Script: {fileID: 11500000, guid: aee9dd943d1e0d54a9d789a014f366f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementComponent
+  <WalkingSpeed>k__BackingField: 2
+  <SprintingSpeedMultiplier>k__BackingField: 2
+  <Stamina>k__BackingField: 100
+  <StaminaUsage>k__BackingField: 0
+  <StaminaRestore>k__BackingField: 0
+--- !u!114 &7101408821228708346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559287907167481913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e28ac1af5e01f4da013d12e70509a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
 --- !u!114 &3313467692676741098
@@ -1282,6 +1185,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 111572f9c5f35da459d5833904a1f76f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  <Items>k__BackingField: []
+--- !u!114 &506384641350915718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559287907167481913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9837663d5d51566429d97eb93b1c3ea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  <MaxValue>k__BackingField: 0
+  <MinValue>k__BackingField: 0
+  <Value>k__BackingField: 0
+  <IsStatic>k__BackingField: 0
+--- !u!114 &3172139938629916995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559287907167481913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceaf463d0e9df334f82b0cdb6071b029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
 --- !u!114 &8895237871161846097
@@ -1311,6 +1243,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <Faction>k__BackingField: {fileID: 11400000, guid: 4d32c107c077aaf41bf67c1cb369f0f8, type: 2}
+--- !u!114 &7001661983157172225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559287907167481913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a79a0ea00109294d987ca291fa2e781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlinkingEffectProvider
+--- !u!114 &7477225139193990942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559287907167481913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7af567f829480489cb925839780c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InvincibilityComponent
+--- !u!114 &5006608323033705435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559287907167481913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32b0800f4e22ef4380519b4d1a7e6fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
+  <MaxValue>k__BackingField: 100
+  <MinValue>k__BackingField: 0
+  <Value>k__BackingField: 0
+  <IsStatic>k__BackingField: 0
+  <IsInvincible>k__BackingField: 0
 --- !u!1 &8651081815912003749
 GameObject:
   m_ObjectHideFlags: 0

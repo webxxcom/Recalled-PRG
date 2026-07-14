@@ -6,12 +6,12 @@ public class HealthSound : EntitySoundComponent
     [SerializeField] AudioClip _healingSound;
     [SerializeField] AudioClip _deathSound;
 
-    HealthComponent healthComponent;
+    HealthProvider healthComponent;
 
     public override void Activate()
     {
         if(!healthComponent)
-            healthComponent = GetComponentInParent<HealthComponent>();
+            healthComponent = GetComponentInParent<HealthProvider>();
 
         healthComponent.OnMinValueReached += HandleDeathSound;
         healthComponent.OnValueChanged += HandleHurtHealingSound;

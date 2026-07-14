@@ -44,7 +44,7 @@ public class ProjectileScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out HealthComponent hc) && collision.gameObject != Owner.gameObject)
+        if (collision.gameObject.TryGetComponent(out HealthProvider hc) && collision.gameObject != Owner.gameObject)
         {
             hc.Change(Owner.gameObject, -DealtDamage);
             Destroy(gameObject);

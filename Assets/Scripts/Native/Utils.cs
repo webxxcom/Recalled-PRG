@@ -38,4 +38,9 @@ static public class Utils
 
         return val;
     }
+
+    public static T GetComponentInChildrenIfNotPresent<T>(GameObject gameObject)
+    {
+        return gameObject.TryGetComponent(out T component) ? component : gameObject.GetComponentInChildren<T>();
+    }
 }

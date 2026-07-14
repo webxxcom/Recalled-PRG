@@ -1,9 +1,7 @@
-using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(EntityController))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class HealthComponent : ValueProvider
+public class HealthProvider : ValueProvider
 {
     [field: SerializeField] public bool IsInvincible { get; set; } = false;
 
@@ -13,20 +11,18 @@ public class HealthComponent : ValueProvider
         set
         {
             if (value)
-                Change(entityController.gameObject, -Value);
+                Change(gameObject, -Value);
             else
-                Change(entityController.gameObject, MaxValue);
+                Change(gameObject, MaxValue);
         }
     }
 
 
-    EntityController entityController;
-    new Rigidbody2D rigidbody2D;
+    Rigidbody2D _rigidbody2D;
 
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        entityController = GetComponent<EntityController>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     public override void Change(GameObject changer, int value)

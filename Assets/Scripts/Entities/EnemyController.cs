@@ -1,22 +1,38 @@
 using UnityEngine;
-
 [RequireComponent(typeof(MovementBase))]
+
+[RequireComponent(typeof(EntityMovementComponent))]
+[RequireComponent(typeof(InvincibilityProvider))]
 public class EnemyController : EntityController
 {
     EnemyAttack entityAttackComponent;
-    HitboxComponent hitboxComponent;
+    Hurtbox hitboxComponent;
     CanvasHider canvasHiderScript;
 
     public EntityMovementComponent MovementComponent { get; private set; }
+    public InvincibilityProvider InvincibilityProvider { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
 
         MovementComponent = GetComponent<EntityMovementComponent>();
+        InvincibilityProvider = GetComponent<InvincibilityProvider>();
         entityAttackComponent = GetComponentInChildren<EnemyAttack>();
-        hitboxComponent = GetComponentInChildren<HitboxComponent>();
+        hitboxComponent = GetComponentInChildren<Hurtbox>();
         canvasHiderScript = GetComponentInChildren<CanvasHider>();
+    }
+
+    void Invinsibility(GameObject _, int _2) => InvincibilityProvider.BecomeInvinsibleFor(1f);
+
+    private void OnEnable()
+    {
+        Health.OnValueChanged += Invinsibility;
+    }
+
+    private void OnDisable()
+    {
+        Health.OnValueChanged -= Invinsibility;
     }
 
     void DeactivateChildrenOnDeath()
@@ -31,8 +47,8 @@ public class EnemyController : EntityController
     {
         base.Start();
 
-        HealthComponent.OnMinValueReached += (_) => DeactivateChildrenOnDeath();
-        HealthComponent.OnValueChanged += (_, _) => canvasHiderScript.ShowCanvas();
+        Health.OnMinValueReached += (_) => DeactivateChildrenOnDeath();
+        Health.OnValueChanged += (_, _) => canvasHiderScript.ShowCanvas();
     }
 
     protected override void HandleFixedUpdate()

@@ -2,14 +2,14 @@
 
 public class Boots : ItemInstance, IEquippable
 {
-    public BootsDefinition BootsDefinition => (BootsDefinition)Definition;
+    public new BootsDefinition Definition => base.Definition as BootsDefinition;
 
     public override string Description
     {
         get
         {
-            return $"{BootsDefinition.Description}\n\n" +
-                $"Speed Multiplier: {BootsDefinition.SpeedMultiplier}";
+            return $"{Definition.Description}\n\n" +
+                $"Speed Multiplier: {Definition.SpeedMultiplier}";
         }
     }
     public Boots(ItemDefinition itemDefinition) : base(itemDefinition) { }

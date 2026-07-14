@@ -1,13 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(HealthComponent))]
+[RequireComponent(typeof(HealthProvider))]
 public class AgressionBehaviorComponent : TargetProvider
 {
-    HealthComponent healthComponent;
+    HealthProvider healthComponent;
 
     private void Awake()
     {
-        healthComponent = GetComponent<HealthComponent>();
+        healthComponent = GetComponent<HealthProvider>();
     }
 
     private void OnEnable()

@@ -7,13 +7,13 @@ class ProjectileAttackComponent : AttackStrategy
 
     public void SpawnProjectile()
     {
-        if (!entityAttackComponent.Target)
+        if (!_entityAttack.Target)
             return;
 
         GameObject arrow = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
         arrow.GetComponent<ProjectileScript>()
-            .Initialize(entityController, entityAttackComponent.Target.transform.position);
+            .Initialize(_entityController, _entityAttack.Target.transform.position);
     }
 
     public override void Execute()

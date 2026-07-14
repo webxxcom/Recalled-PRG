@@ -38,7 +38,6 @@ public class PlayerController : EntityController
         EffectMachineComponent = GetComponent<EffectMachineComponent>();
         Inventory =  GetComponent<PlayerInventory>();
         InteractionComponent = GetComponentInChildren<PlayerInteraction>();
-        IsArmed = true;
     }
 
     protected override void Start()

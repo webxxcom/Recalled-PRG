@@ -62,6 +62,6 @@ public class EnemyController : EntityController
 
         Animator.SetFloat(MovementBase.MoveXHash, Mathf.Abs(MovementComponent.FacingDirection.x) > 0.01f ? MovementComponent.FacingDirection.x : 0f);
         Animator.SetFloat(MovementBase.MoveYHash, Mathf.Abs(MovementComponent.FacingDirection.x) < 0.01f ? MovementComponent.FacingDirection.y : 0f);
-        Animator.SetFloat(MovementBase.SpeedHash, Rigidbody2D.linearVelocity.magnitude / MovementComponent.WalkingSpeed);
+        Animator.SetFloat(MovementBase.SpeedHash, Rigidbody2D.linearVelocity.magnitude / 4f);
     }
 }

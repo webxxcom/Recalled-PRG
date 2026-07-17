@@ -83,7 +83,8 @@ public class PlayerController : EntityController
 
         Animator.SetFloat(MovementBase.MoveXHash, MovementComponent.FacingDirection.x);
         Animator.SetFloat(MovementBase.MoveYHash, MovementComponent.FacingDirection.y);
-        Animator.SetFloat(MovementBase.SpeedHash, Rigidbody2D.linearVelocity.magnitude / MovementComponent.WalkingSpeed);
+        Animator.SetFloat(MovementBase.SpeedHash,
+            Rigidbody2D.linearVelocity.magnitude / (MovementComponent.WalkingSpeed * MovementComponent.SprintingSpeedMultiplier));
     }
     
     // Input layer

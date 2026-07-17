@@ -44,13 +44,17 @@ public class PlayerController : EntityController
 
     void Invinsibility(GameObject _, int _2) => InvincibilityComponent.BecomeInvinsibleFor(1f);
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         Health.OnValueChanged += Invinsibility;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+
         Health.OnValueChanged -= Invinsibility;
     }
 

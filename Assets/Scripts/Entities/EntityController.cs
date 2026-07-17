@@ -16,11 +16,11 @@ public abstract class EntityController : MonoBehaviour
     public HealthProvider Health { get; private set; }
     public Collider2D Collider2D { get; private set; }
 
-    void OnDeath()
+    void OnDeath(GameObject _)
     {
+        // TODO on death we should put the sprite rendering on -1 order
         Rigidbody2D.bodyType = RigidbodyType2D.Static;
         GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(s => s.sortingOrder = -1);
-        SpriteRenderer.sortingOrder = -1;
         Collider2D.enabled = false;
         Animator.SetTrigger(DieHash);
         Animator.SetFloat(MovementBase.SpeedHash, 0);
@@ -29,9 +29,10 @@ public abstract class EntityController : MonoBehaviour
             c.enabled = false;
     }
 
-    void OnHurt()
+    void OnHurt(GameObject _, int damage)
     {
-        Animator.SetTrigger(HurtHash);
+        if (damage < 0)
+            Animator.SetTrigger(HurtHash);
     }
 
     protected virtual void Awake()
@@ -41,22 +42,24 @@ public abstract class EntityController : MonoBehaviour
         Collider2D = GetComponent<Collider2D>();
 
         Animator = Utils.GetComponentInChildrenIfNotPresent<Animator>(gameObject);
-        SpriteRenderer = Utils.GetComponentInChildrenIfNotPresent<SpriteRenderer>(gameObject);
     }
 
-    protected virtual void Start()
+    protected virtual void Start() { }
+
+    protected virtual void OnEnable()
     {
-        Health.OnMinValueReached += obj => OnDeath();
-        Health.OnValueChanged += (_, value) => { if (value <= 0) OnHurt(); };
+        Health.OnMinValueReached += OnDeath;
+        Health.OnValueChanged += OnHurt;
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnDisable()
     {
+        Health.OnMinValueReached -= OnDeath;
+        Health.OnValueChanged -= OnHurt;
     }
 
-    protected virtual void OnTriggerExit2D(Collider2D collision)
-    {
-    }
+    protected virtual void OnTriggerEnter2D(Collider2D collision) { }
+    protected virtual void OnTriggerExit2D(Collider2D collision) { }
 
     private void FixedUpdate()
     {
@@ -66,7 +69,5 @@ public abstract class EntityController : MonoBehaviour
         HandleFixedUpdate();
     }
 
-    protected virtual void HandleFixedUpdate()
-    {
-    }
+    protected virtual void HandleFixedUpdate() { }
 }

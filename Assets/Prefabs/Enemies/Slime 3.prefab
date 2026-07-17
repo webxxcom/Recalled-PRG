@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackSound
   _attackSound: {fileID: 8300000, guid: d8660723a432bdf4e92aff578949b7ab, type: 3}
-  entityAttackComponent: {fileID: 0}
+  entityAttackComponent: {fileID: 8238773066907892438}
 --- !u!1 &1162990602833070097
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,7 +851,7 @@ MonoBehaviour:
   <TopBar>k__BackingField: {fileID: 370142447445774477}
   <BottomBar>k__BackingField: {fileID: 8180292811091545600}
   <AnimationSpeed>k__BackingField: 1.5
-  <ValueProvider>k__BackingField: {fileID: 0}
+  <ValueProvider>k__BackingField: {fileID: 3659476714238881766}
 --- !u!114 &892592156849737773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,9 +864,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146c7b45e04b5a14a83b6c037e6919a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  <AliveBar>k__BackingField: {fileID: 7748800164084045486}
-  <DeadBar>k__BackingField: {fileID: 5046599424978369931}
-  healthComponent: {fileID: 0}
+  _health: {fileID: 3659476714238881766}
+  _aliveBar: {fileID: 7748800164084045486}
+  _deadBar: {fileID: 5046599424978369931}
 --- !u!114 &2390632386251594846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -891,9 +891,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7085225572803684528}
   - component: {fileID: 8293097748507972211}
-  - component: {fileID: 6340957461064517328}
+  - component: {fileID: 8583105901760560879}
   m_Layer: 9
-  m_Name: Hitbox
+  m_Name: Hurtbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -950,7 +950,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.03, y: 0.39}
   m_Radius: 0.55
---- !u!114 &6340957461064517328
+--- !u!114 &8583105901760560879
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -959,9 +959,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3947751842682473356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 765b9f6544dc24b409f4e0d096f66593, type: 3}
+  m_Script: {fileID: 11500000, guid: bfe6f3a3319d4c14582e88498e0092bf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HitboxComponent
+  m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
 --- !u!1 &4280673928685088914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,7 +1595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8526230742337842442
 Transform:
   m_ObjectHideFlags: 0
@@ -1850,7 +1850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32b0800f4e22ef4380519b4d1a7e6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
-  <MaxValue>k__BackingField: 0
+  <MaxValue>k__BackingField: 100
   <MinValue>k__BackingField: 0
   <Value>k__BackingField: 0
   <IsStatic>k__BackingField: 0

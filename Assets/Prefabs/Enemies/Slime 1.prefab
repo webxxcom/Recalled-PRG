@@ -1001,7 +1001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7085225572803684528}
   - component: {fileID: 8293097748507972211}
-  - component: {fileID: 6340957461064517328}
+  - component: {fileID: 5272616755474947490}
   m_Layer: 7
   m_Name: Hitbox
   m_TagString: Untagged
@@ -1060,7 +1060,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.6
---- !u!114 &6340957461064517328
+--- !u!114 &5272616755474947490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1069,9 +1069,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3947751842682473356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 765b9f6544dc24b409f4e0d096f66593, type: 3}
+  m_Script: {fileID: 11500000, guid: bfe6f3a3319d4c14582e88498e0092bf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HitboxComponent
+  m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
 --- !u!1 &4280673928685088914
 GameObject:
   m_ObjectHideFlags: 0

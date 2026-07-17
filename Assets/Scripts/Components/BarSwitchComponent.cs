@@ -2,19 +2,29 @@ using UnityEngine;
 
 public class BarSwitchComponent : MonoBehaviour
 {
-    [field: SerializeField] public GameObject AliveBar { get; private set; }
-    [field: SerializeField] public GameObject DeadBar { get; private set; }
+    [SerializeField] HealthProvider _health;
+    [SerializeField] GameObject _aliveBar;
+    [SerializeField] GameObject _deadBar;
 
-    [SerializeField] HealthProvider healthComponent;
-
-    void EnableAlivebar(bool flag)
+    void ToggleBars(GameObject _)
     {
-        AliveBar.SetActive(flag);
-        DeadBar.SetActive(!flag);
+        _aliveBar.SetActive(!_aliveBar.activeInHierarchy);
+        _deadBar.SetActive(!_deadBar.activeInHierarchy);
     }
 
     private void Start()
     {
-        healthComponent.OnMinValueReached += (_) => EnableAlivebar(false);
+        _aliveBar.SetActive(!_health.IsDead);
+        _deadBar.SetActive(_health.IsDead);
+    }
+
+    private void OnEnable()
+    {
+        _health.OnMinValueReached += ToggleBars;
+    }
+
+    private void OnDisable()
+    {
+        _health.OnMinValueReached -= ToggleBars;
     }
 }

@@ -8,6 +8,7 @@ public class EnemyAttack : EntityAttack
     {
         get
         {
+            // TODO do not forget about the attack component
             //HealthProvider ec = TargetsInRange.FirstOrDefault();
 
             return null;//ec ? ec.GetComponent<PlayerController>() : null;

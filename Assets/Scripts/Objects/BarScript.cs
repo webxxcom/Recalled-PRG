@@ -9,6 +9,7 @@ public class BarScript : MonoBehaviour
     [field: SerializeField] public Image BottomBar { get; private set; }
     [field: SerializeField] public float AnimationSpeed { get; private set; }
     [field: SerializeField] public ValueProvider ValueProvider { get; private set; }
+
     public float MaxValue { get; set; }
     public float Value { get; private set; }
 

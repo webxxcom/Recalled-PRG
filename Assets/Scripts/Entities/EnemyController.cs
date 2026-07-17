@@ -1,6 +1,6 @@
 using UnityEngine;
-[RequireComponent(typeof(MovementBase))]
 
+[RequireComponent(typeof(MovementBase))]
 [RequireComponent(typeof(EntityMovementComponent))]
 [RequireComponent(typeof(InvincibilityProvider))]
 public class EnemyController : EntityController
@@ -25,13 +25,17 @@ public class EnemyController : EntityController
 
     void Invinsibility(GameObject _, int _2) => InvincibilityProvider.BecomeInvinsibleFor(1f);
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         Health.OnValueChanged += Invinsibility;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+
         Health.OnValueChanged -= Invinsibility;
     }
 
@@ -41,8 +45,6 @@ public class EnemyController : EntityController
         hitboxComponent.gameObject.SetActive(false);
     }
 
-    void ProcessAttackToTargetsWithinRange() => entityAttackComponent.ExecuteAttack();
-    
     protected override void Start()
     {
         base.Start();

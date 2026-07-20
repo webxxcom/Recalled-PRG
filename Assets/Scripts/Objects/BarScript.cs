@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(UnityEngine.Canvas))]
 public class BarScript : MonoBehaviour
 {
     [field: SerializeField] public Image TopBar { get; private set; }

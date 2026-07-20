@@ -12,12 +12,6 @@ public class BarSwitchComponent : MonoBehaviour
         _deadBar.SetActive(!_deadBar.activeInHierarchy);
     }
 
-    private void Start()
-    {
-        _aliveBar.SetActive(!_health.IsDead);
-        _deadBar.SetActive(_health.IsDead);
-    }
-
     private void OnEnable()
     {
         _health.OnMinValueReached += ToggleBars;

@@ -31517,7 +31517,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1286123485302981824, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
       propertyPath: orthographic size
-      value: 9.625
+      value: 8.4375
       objectReference: {fileID: 0}
     - target: {fileID: 1286123485302981824, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
@@ -31590,6 +31590,30 @@ PrefabInstance:
     - target: {fileID: 7559287907167481913, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7648009776092296695, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7648009776092296695, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 3959
+      objectReference: {fileID: 0}
+    - target: {fileID: 7648009776092296695, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809330539225864080, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809330539225864080, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 4023
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809330539225864080, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8487839362322834453, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
       propertyPath: m_UIInputModule
@@ -44876,6 +44900,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1399167219}
     m_Modifications:
+    - target: {fileID: 1081485131990550246, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568211846895578413, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568211846895578413, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 4023
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568211846895578413, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2098798121662283207, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2098798121662283207, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2098798121662283207, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2832268961003762796, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
       propertyPath: <WanderingZone>k__BackingField
       value: 
@@ -44920,21 +44972,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3069183978697590651, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
+      propertyPath: _health
+      value: 
+      objectReference: {fileID: 2106123647}
     - target: {fileID: 5303303991858507566, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
       propertyPath: chaseZoneComponent
       value: 
       objectReference: {fileID: 2115573532}
+    - target: {fileID: 6805550951992017357, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1679015882}
     - target: {fileID: 6824792419597319425, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
       propertyPath: m_Name
       value: Vampire
       objectReference: {fileID: 0}
-    - target: {fileID: 7555395542361720920, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 4294967295
+    - target: {fileID: 7583836377103258956, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7555395542361720920, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
+    - target: {fileID: 7583836377103258956, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 3959
+      objectReference: {fileID: 0}
+    - target: {fileID: 7583836377103258956, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
       propertyPath: m_IncludeLayers.m_Bits
-      value: 2048
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9090072530132137595, guid: 79d04e0aedfafec498b8e5c828966e8c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -7,38 +7,38 @@ public class CanvasHider : MonoBehaviour
     [field: SerializeField] public float Offset { get; private set; }
     [field: SerializeField] public float Speed { get; private set; }
 
-    CanvasGroup canvasGroup;
+    CanvasGroup _canvasGroup;
 
     private void Awake()
     {
-        canvasGroup = Utils.FindOrThrow(GetComponent<CanvasGroup>);
+        _canvasGroup = Utils.FindOrThrow(GetComponent<CanvasGroup>);
     }
 
     private void Start()
     {
-        canvasGroup.alpha = 0;
+        _canvasGroup.alpha = 0;
     }
 
     Coroutine hideCoroutine;
     IEnumerator WaitAndHideCanvas()
     {
-        while (canvasGroup.alpha < 0.95f)
+        while (_canvasGroup.alpha < 0.95f)
         {
-            canvasGroup.alpha += Time.deltaTime * 10;
+            _canvasGroup.alpha += Time.deltaTime * 10;
 
             yield return null;
         }
-        canvasGroup.alpha = 1;
+        _canvasGroup.alpha = 1;
 
         yield return new WaitForSeconds(Offset);
 
-        while (canvasGroup.alpha > 0.1f)
+        while (_canvasGroup.alpha > 0.1f)
         {
-            canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, 0, Time.deltaTime * Speed);
+            _canvasGroup.alpha = Mathf.Lerp(_canvasGroup.alpha, 0, Time.deltaTime * Speed);
 
             yield return null;
         }
-        canvasGroup.alpha = 0;
+        _canvasGroup.alpha = 0;
     }
 
     public void ShowCanvas()

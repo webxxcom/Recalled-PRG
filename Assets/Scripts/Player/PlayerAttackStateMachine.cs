@@ -13,6 +13,7 @@ public class PlayerAttackStateMachine : StateMachineBehaviour
     MovementBase movementBase;
 
     readonly List<Collider2D> _damagedTargets = new();
+    readonly List<Collider2D> _hits = new();
 
     void CacheAll(Animator animator)
     {
@@ -38,21 +39,16 @@ public class PlayerAttackStateMachine : StateMachineBehaviour
         if (stateInfo.normalizedTime < impactTime || stateInfo.normalizedTime > recoveryTime)
             return;
 
-        Vector2 pos = _entityAttack.Hitbox.transform.position;
-        pos.x += _entityAttack.Hitbox.offset.x;
-        pos.y += _entityAttack.Hitbox.offset.y;
-        Collider2D[] hits = Physics2D.OverlapBoxAll(pos, _entityAttack.Hitbox.size, 0f, _entityAttack.Hitbox.includeLayers);
-
-        foreach (Collider2D hit in hits)
+        _hits.Clear();
+        _entityAttack.Hitbox.Overlap(_hits);
+        foreach (Collider2D hit in _hits)
         {
             if (_damagedTargets.Contains(hit) || !_entityAttack.HostileFactions.Contains(hit.GetComponentInParent<FactionComponent>().Faction))
                 continue;
 
             _damagedTargets.Add(hit);
 
-            HealthProvider hp = hit.GetComponentInParent<HealthProvider>();
-            if (hp)
-                _entityAttack.DealDamage(hp, _entityAttack.gameObject);
+            _entityAttack.DealDamage(hit.GetComponentInParent<HealthProvider>(), _entityAttack.gameObject);
         }
     }
 

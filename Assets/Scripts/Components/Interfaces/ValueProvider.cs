@@ -12,10 +12,7 @@ public abstract class ValueProvider : MonoBehaviour
     public event Action<GameObject> OnMinValueReached;
     public event Action<GameObject> OnMaxValueReached;
 
-    private void Start()
-    {
-        Value = MaxValue;
-    }
+    protected virtual void Start() => Value = MaxValue;
 
     public virtual void Change(GameObject changer, int value)
     {

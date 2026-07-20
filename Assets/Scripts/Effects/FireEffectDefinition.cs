@@ -3,23 +3,24 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Effects/Fire")]
 public class FireEffectDefinition : EffectDefinition
 {
-    readonly int damagePerSecond = 2;
-    readonly float speedMultiplier = 0.8f;
+    static readonly int DamagePerSecond = 2;
+    static readonly float SpeedMultiplier = 0.8f;
+    static readonly Color Color = new(0.5f, 1f, 1f);
 
     public override void PutOn(EntityController entityController)
     {
-        entityController.SpriteRenderer.color = new Color(0.5f, 1f, 1f);
+        entityController.SpriteRendererGroup.SetColor(Color);
 
         if (entityController.TryGetComponent(out MovementBase movementBase))
-            movementBase.SpeedAggregator.Add(speedMultiplier);
+            movementBase.SpeedAggregator.Add(SpeedMultiplier);
     }
 
     public override void PutOff(EntityController entityController)
     {
-        entityController.SpriteRenderer.color = Color.white;
+        entityController.SpriteRendererGroup.SetColor(Color.white);
 
         if (entityController.TryGetComponent(out MovementBase movementBase))
-            movementBase.SpeedAggregator.Add(speedMultiplier);
+            movementBase.SpeedAggregator.Add(SpeedMultiplier);
     }
 
     float timeSinceDamage = 0;
@@ -28,7 +29,7 @@ public class FireEffectDefinition : EffectDefinition
     {
         if (timeSinceDamage > reloadTime)
         {
-            entityController.Health.Change(null, -damagePerSecond);
+            entityController.Health.Change(null, -DamagePerSecond);
             timeSinceDamage = 0;
         }
 

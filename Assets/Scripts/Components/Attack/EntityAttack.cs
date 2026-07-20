@@ -1,28 +1,36 @@
 ﻿using System;
 using UnityEngine;
 
-[RequireComponent(typeof(CapsuleCollider2D))]
+/// <summary>
+/// EntityAttack component describes an object which has an animator and reload time.
+/// Used for enemies and player
+/// </summary>
 public abstract class EntityAttack : DefaultAttack
 {
     private static readonly int AttackHash = Animator.StringToHash("Attack");
 
-    [field: SerializeField] public float ReloadTime { get; private set; }
-
-    public CapsuleCollider2D Hitbox { get; private set; }
-
     protected EntityController _entityController;
-    protected float timeSinceLastAttack;
+    protected float _timeSinceLastAttack;
 
-    public Action OnAttackStarted;
+    public event Action OnAttackStarted;
 
     protected override void Awake()
     {
         base.Awake();
 
         _entityController = Utils.FindOrThrow(GetComponentInParent<EntityController>);
-        Hitbox = GetComponent<CapsuleCollider2D>();
+        Hitbox = Utils.GetComponentInChildrenIfNotPresent<CapsuleCollider2D>(gameObject);
+    }
 
-        knockbackOriginPosition = _entityController.transform;
-        OnAttackStarted += () => _entityController.Animator.SetTrigger(AttackHash);
+    private void Start()
+    {
+        _timeSinceLastAttack = AttackData.ReloadTime;
+    }
+
+    protected void Attack()
+    {
+        _entityController.Animator.SetTrigger(AttackHash);
+
+        OnAttackStarted?.Invoke();
     }
 }

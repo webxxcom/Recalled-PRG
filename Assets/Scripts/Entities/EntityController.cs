@@ -11,22 +11,15 @@ public abstract class EntityController : MonoBehaviour
 
     // Component attributes
     public Animator Animator { get; private set; }
-    public SpriteRenderer SpriteRenderer { get; private set; }
+    public SpriteRendererGroup SpriteRendererGroup { get; private set; }
     public Rigidbody2D Rigidbody2D { get; private set; }
     public HealthProvider Health { get; private set; }
     public Collider2D Collider2D { get; private set; }
 
     void OnDeath(GameObject _)
     {
-        // TODO on death we should put the sprite rendering on -1 order
         Rigidbody2D.bodyType = RigidbodyType2D.Static;
-        GetComponentsInChildren<SpriteRenderer>().ToList().ForEach(s => s.sortingOrder = -1);
-        Collider2D.enabled = false;
         Animator.SetTrigger(DieHash);
-        Animator.SetFloat(MovementBase.SpeedHash, 0);
-
-        foreach (var c in GetComponentsInChildren<MonoBehaviour>())
-            c.enabled = false;
     }
 
     void OnHurt(GameObject _, int damage)
@@ -42,6 +35,7 @@ public abstract class EntityController : MonoBehaviour
         Collider2D = GetComponent<Collider2D>();
 
         Animator = Utils.GetComponentInChildrenIfNotPresent<Animator>(gameObject);
+        SpriteRendererGroup = GetComponentInChildren<SpriteRendererGroup>();
     }
 
     protected virtual void Start() { }

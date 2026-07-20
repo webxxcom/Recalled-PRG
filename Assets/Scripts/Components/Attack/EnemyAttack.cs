@@ -1,60 +1,37 @@
-using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(AttackStrategy))]
+/// <summary>
+/// EnemyAttack requires detection zone for the enemy to start attacking when their target is in the range
+/// </summary>
 public class EnemyAttack : EntityAttack
 {
-    public PlayerController Target
-    {
-        get
-        {
-            // TODO do not forget about the attack component
-            //HealthProvider ec = TargetsInRange.FirstOrDefault();
+    Collider2D currentTarget;
 
-            return null;//ec ? ec.GetComponent<PlayerController>() : null;
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            currentTarget = collision;
         }
     }
 
-    AttackStrategy _attackStrategy;
-
-    public override int DealtDamage => BasicAttackData.DealtDamage;
-    public override float DealtKnockbackPower => BasicAttackData.KnockbackPower;
-
-    public void ExecuteAttack()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        _attackStrategy.Execute();
-
-        if (Target)
-            Effects.ForEach(e => Target.EffectMachineComponent.ApplyEffect(e));
+        if (collision == currentTarget)
+        {
+            currentTarget = null;
+        }
     }
 
-    protected override void Awake()
+    void Update()
     {
-        base.Awake();
+        _timeSinceLastAttack += Time.deltaTime;
 
-        _attackStrategy = GetComponent<AttackStrategy>();
-    }
-
-    private void Start()
-    {
-        timeSinceLastAttack = ReloadTime;
-    }
-
-    void Attack()
-    {
-        timeSinceLastAttack = 0;
-
-        OnAttackStarted?.Invoke();
-    }
-
-    bool CanAttack => timeSinceLastAttack >= ReloadTime && Target != null && !Target.Health.IsDead;
-    private void Update()
-    {
-        if (CanAttack)
+        if (currentTarget && _timeSinceLastAttack > AttackData.ReloadTime)
         {
             Attack();
-        }
 
-        timeSinceLastAttack += Time.deltaTime;
+            _timeSinceLastAttack = 0;
+        }
     }
 }

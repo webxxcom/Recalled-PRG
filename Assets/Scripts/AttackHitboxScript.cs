@@ -21,11 +21,6 @@ public class AttackHitboxScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Hurtbox hc) && hc.GetComponentInParent<PlayerController>())
-        {
-            entityAttackComponent.ExecuteAttack();
-            //hitboxComponent.HealthComponent
-            //    .Change(entityController.gameObject, -entityAttackComponent.DealtDamage);
-        }
+        
     }
 }

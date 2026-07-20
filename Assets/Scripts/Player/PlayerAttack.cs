@@ -17,13 +17,11 @@ public class PlayerAttack : EntityAttack
         _playerController = _entityController as PlayerController;
     }
 
-    bool CanAttack => timeSinceLastAttack >= ReloadTime;
-
     public override int DealtDamage
     {
         get
         {
-            int totalDamage = BasicAttackData.DealtDamage;
+            int totalDamage = AttackData.DealtDamage;
             if (_playerController.Inventory.Sword != null)
                 totalDamage += _playerController.Inventory.Sword.Definition.Damage;
             return totalDamage;
@@ -33,7 +31,7 @@ public class PlayerAttack : EntityAttack
     {
         get
         {
-            float totalKnockback = BasicAttackData.KnockbackPower;
+            float totalKnockback = AttackData.KnockbackPower;
             if (_playerController.Inventory.Sword != null)
                 totalKnockback += _playerController.Inventory.Sword.Definition.KnockbackPower;
             return totalKnockback;
@@ -56,16 +54,17 @@ public class PlayerAttack : EntityAttack
 
     void OnAttack(InputValue value)
     {
-        if (value.isPressed && CanAttack)
+        if (value.isPressed && _timeSinceLastAttack >= AttackData.ReloadTime)
         {
-            timeSinceLastAttack = 0;
+            _timeSinceLastAttack = 0;
 
-            OnAttackStarted?.Invoke();
+            Attack();
         }
     }
 
     void SetAttackCollisionOffset()
     {
+        // TODO the same is in the melee attack strategy
         if (!_playerController.MovementComponent.IsWalking)
             return;
 
@@ -75,6 +74,6 @@ public class PlayerAttack : EntityAttack
 
     private void Update()
     {
-        timeSinceLastAttack += Time.deltaTime;
+        _timeSinceLastAttack += Time.deltaTime;
     }
 }

@@ -6,27 +6,30 @@ public class BlinkingEffectProvider : MonoBehaviour
 {
     private static readonly WaitForSeconds _waitForSeconds0_1 = new(0.1f);
 
-    EntityController entityController;
-    int referenceCounter = 0;
+    EntityController _entityController;
+    int _referenceCounter = 0;
 
-    private void Awake() => entityController = GetComponent<EntityController>();
+    private void Awake()
+    {
+        _entityController = GetComponent<EntityController>();
+    }
 
     Coroutine blinkingCoroutine;
     IEnumerator BlinkCoroutine()
     {
         while (true)
         {
-            entityController.SpriteRenderer.enabled = false;
+            _entityController.SpriteRendererGroup.SetAlpha(0);
             yield return _waitForSeconds0_1;
 
-            entityController.SpriteRenderer.enabled = true;
+            _entityController.SpriteRendererGroup.SetAlpha(1);
             yield return _waitForSeconds0_1;
         }
     }
 
     public void Enter()
     {
-        referenceCounter++;
+        _referenceCounter++;
 
         if (blinkingCoroutine != null)
             StopCoroutine(blinkingCoroutine);
@@ -36,11 +39,11 @@ public class BlinkingEffectProvider : MonoBehaviour
 
     public void Exit()
     {
-        referenceCounter--;
+        _referenceCounter--;
 
-        if (referenceCounter <= 0)
+        if (_referenceCounter <= 0)
         {
-            referenceCounter = 0;
+            _referenceCounter = 0;
 
             if (blinkingCoroutine != null)
             {
@@ -48,7 +51,7 @@ public class BlinkingEffectProvider : MonoBehaviour
                 blinkingCoroutine = null;
             }
 
-            entityController.SpriteRenderer.enabled = true;
+            _entityController.SpriteRendererGroup.SetAlpha(1);
         }
     }
 }

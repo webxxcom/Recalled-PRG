@@ -19,7 +19,6 @@ public abstract class EntityAttack : DefaultAttack
         base.Awake();
 
         _entityController = Utils.FindOrThrow(GetComponentInParent<EntityController>);
-        Hitbox = Utils.GetComponentInChildrenIfNotPresent<CapsuleCollider2D>(gameObject);
     }
 
     private void Start()

@@ -765,9 +765,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146c7b45e04b5a14a83b6c037e6919a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  <AliveBar>k__BackingField: {fileID: 7748800164084045486}
-  <DeadBar>k__BackingField: {fileID: 5046599424978369931}
-  healthComponent: {fileID: 0}
+  _health: {fileID: 0}
+  _aliveBar: {fileID: 0}
+  _deadBar: {fileID: 0}
 --- !u!114 &2390632386251594846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1118,13 +1118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0e163c60faf474ba274d75ee2ac1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityAttackComponent
-  <BasicAttackData>k__BackingField:
-    <DealtDamage>k__BackingField: 0
-    <KnockbackPower>k__BackingField: 0
+  <AttackData>k__BackingField: {fileID: 0}
   <Effects>k__BackingField:
   - {fileID: 11400000, guid: b3a4278390d4a854ebaee5c4f3796f1a, type: 2}
-  <HostileFactions>k__BackingField: []
-  <ReloadTime>k__BackingField: 2.5
 --- !u!114 &4942653029831453320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1230,7 +1226,6 @@ GameObject:
   - component: {fileID: 1176398378409222523}
   - component: {fileID: 3323902720562264678}
   - component: {fileID: 2583970441013822405}
-  - component: {fileID: 3714560951730790473}
   - component: {fileID: 1332064429310887525}
   - component: {fileID: 6414543018664610763}
   - component: {fileID: 3659476714238881766}
@@ -1498,19 +1493,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExternalVelocityComponent
   decayRate: 8
   restThreshold: 0.05
---- !u!114 &3714560951730790473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097617918995308611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74239ee26380792478d9af4223e70b45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FactionComponent
-  <Faction>k__BackingField: {fileID: 11400000, guid: 899230750ac8a5b4bb3776956ccb326b, type: 2}
 --- !u!114 &1332064429310887525
 MonoBehaviour:
   m_ObjectHideFlags: 0

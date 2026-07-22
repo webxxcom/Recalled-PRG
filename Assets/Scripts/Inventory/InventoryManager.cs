@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
 {
+    [SerializeField] InventorySO _inventory;
+    [SerializeField] InputActionAsset _inputActionAsset;
+
+    [Header("UI")]
     [SerializeField] GameObject _basicItemsInventoryGrid;
     [SerializeField] GameObject _inventoryItemPrefab;
     [SerializeField] InventorySlot _swordInventoryItem;
@@ -14,12 +17,10 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] Sprite _absentArmorSprite;
     [SerializeField] Sprite _absentBootsSprite;
     [SerializeField] GameObject _highlighter;
-    [SerializeField] InputActionAsset _inputActionAsset;
 
     UIEventRaiser _uiEventRaiser;
     Canvas _canvas;
     PlayerInput _playerInput;
-    PlayerInventory _playerInventory;
     DescriptionManager _descriptionManager;
     InventorySlot _selectedInventorySlot;
     readonly List<GameObject> _createdInventoryItems = new();
@@ -33,7 +34,6 @@ public class InventoryManager : MonoBehaviour
         _uiEventRaiser = Utils.FindOrThrow(FindAnyObjectByType<UIEventRaiser>);
         _descriptionManager = Utils.FindOrThrow(FindAnyObjectByType<DescriptionManager>);
         _playerInput = Utils.FindOrThrow(FindAnyObjectByType<PlayerInput>);
-        _playerInventory = Utils.FindOrThrow(FindAnyObjectByType<PlayerInventory>);
     }
 
     private void Start()
@@ -72,20 +72,20 @@ public class InventoryManager : MonoBehaviour
         inventoryItem.GetComponent<InventorySlot>().Initialize(itemInstance);
         _createdInventoryItems.Add(inventoryItem);
     }
-    void RefreshGeneralSlots() =>  _playerInventory.Items.ForEach(CreateGeneralItemSlot);
+    void RefreshGeneralSlots() => _inventory.Items.ForEach(CreateGeneralItemSlot);
 
     void RefreshEquipSlots()
     {
-        if (_playerInventory.Sword != null)
-            _swordInventoryItem.Initialize(_playerInventory.Sword, false, true);
+        if (_inventory.Sword != null)
+            _swordInventoryItem.Initialize(_inventory.Sword, false, true);
         else _swordInventoryItem.Absent(_absentSwordSprite);
 
-        if (_playerInventory.Armor != null)
-            _armorInventoryItem.Initialize(_playerInventory.Armor, false, true);
+        if (_inventory.Armor != null)
+            _armorInventoryItem.Initialize(_inventory.Armor, false, true);
         else _armorInventoryItem.Absent(_absentArmorSprite);
 
-        if (_playerInventory.Boots != null)
-            _bootsInventoryItem.Initialize(_playerInventory.Boots, false, true);
+        if (_inventory.Boots != null)
+            _bootsInventoryItem.Initialize(_inventory.Boots, false, true);
         else _bootsInventoryItem.Absent(_absentBootsSprite);
     }
 
@@ -136,7 +136,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (inventorySlot.Item is IEquippable equippable)
         {
-            ItemInstance unequipped = equippable.Unequip(_playerInventory);
+            ItemInstance unequipped = equippable.Unequip(_inventory);
 
             CreateGeneralItemSlot(unequipped);
             ItemDeselected();
@@ -146,7 +146,7 @@ public class InventoryManager : MonoBehaviour
 
     void RemoveItem(InventorySlot inventorySlot)
     {
-        _playerInventory.Remove(inventorySlot.Item);
+        _inventory.Remove(inventorySlot.Item);
         Destroy(inventorySlot.gameObject);
         ItemDeselected();
     }
@@ -155,7 +155,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (inventorySlot.Item is IEquippable equippable)
         {
-            ItemInstance replaced = equippable.Equip(_playerInventory);
+            ItemInstance replaced = equippable.Equip(_inventory);
 
             if (replaced != null)
                 inventorySlot.Initialize(replaced);

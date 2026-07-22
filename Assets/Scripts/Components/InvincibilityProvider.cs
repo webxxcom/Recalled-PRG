@@ -16,13 +16,13 @@ public class InvincibilityProvider : MonoBehaviour
 
     public void Enter()
     {
-        _entityController.Health.IsInvincible = true;
+        _entityController.HealthProvider.IsInvincible = true;
         _blinkingEffectProvider.Enter();
     }
 
     public void Exit()
     {
-        _entityController.Health.IsInvincible = false;
+        _entityController.HealthProvider.IsInvincible = false;
         _blinkingEffectProvider.Exit();
     }
 

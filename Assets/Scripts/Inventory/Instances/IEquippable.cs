@@ -1,25 +1,25 @@
 ﻿internal interface IEquippable
 {
-    ItemInstance Equip(PlayerInventory playerInventory)
+    ItemInstance Equip(InventorySO inventory)
     {
         ItemInstance toSet = this as ItemInstance;
-        ItemInstance replaced = GetInTheInventory(playerInventory);
+        ItemInstance replaced = GetInTheInventory(inventory);
 
-        playerInventory.Add(replaced);
-        SetInTheInventory(playerInventory, toSet);
-        playerInventory.Remove(toSet);
+        inventory.Add(replaced);
+        SetInTheInventory(inventory, toSet);
+        inventory.Remove(toSet);
 
         return replaced;
     }
-    ItemInstance Unequip(PlayerInventory playerInventory)
+    ItemInstance Unequip(InventorySO inventory)
     {
-        ItemInstance cpy = GetInTheInventory(playerInventory);
+        ItemInstance cpy = GetInTheInventory(inventory);
 
-        playerInventory.Add(cpy);
-        SetInTheInventory(playerInventory, null);
+        inventory.Add(cpy);
+        SetInTheInventory(inventory, null);
         return cpy;
     }
 
-    protected ItemInstance GetInTheInventory(PlayerInventory playerInventory);
-    protected void SetInTheInventory(PlayerInventory playerInventory, ItemInstance val);
+    protected ItemInstance GetInTheInventory(InventorySO inventory);
+    protected void SetInTheInventory(InventorySO inventory, ItemInstance val);
 }

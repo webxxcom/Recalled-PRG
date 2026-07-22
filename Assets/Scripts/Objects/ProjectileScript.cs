@@ -46,7 +46,7 @@ public class ProjectileScript : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out HealthProvider hc) && collision.gameObject != Owner.gameObject)
         {
-            hc.Change(Owner.gameObject, -DealtDamage);
+            hc.DealDamage(Owner.gameObject, -DealtDamage);
             Destroy(gameObject);
         }
     }

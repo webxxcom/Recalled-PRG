@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 1614906266074812132}
   - component: {fileID: 2106326233406549787}
   - component: {fileID: 8080906468532238491}
-  - component: {fileID: 8461897905070243269}
   m_Layer: 11
   m_Name: Training Dummy
   m_TagString: Untagged
@@ -213,19 +212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c0fd3485b931c74881c5170f6f28592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
---- !u!114 &8461897905070243269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8822795234151242890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74239ee26380792478d9af4223e70b45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FactionComponent
-  <Faction>k__BackingField: {fileID: 11400000, guid: 899230750ac8a5b4bb3776956ccb326b, type: 2}
 --- !u!1001 &2638589704726934692
 PrefabInstance:
   m_ObjectHideFlags: 0

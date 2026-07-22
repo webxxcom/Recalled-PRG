@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class SpawnScript : MonoBehaviour
 {
+    [SerializeField] GameObject _playerPrefab;
+
     void Start()
     {
-        GameObject.FindWithTag("Player").transform.position = gameObject.transform.position;
+        Instantiate(_playerPrefab, transform);
     }
 }

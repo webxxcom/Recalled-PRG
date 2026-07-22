@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackDataSO
   <DealtDamage>k__BackingField: 10
   <ReloadTime>k__BackingField: 2.5
-  <KnockbackPower>k__BackingField: 1.6
-  <ImpactTime>k__BackingField: 0.3
+  <KnockbackPower>k__BackingField: 0.4
+  <ImpactTime>k__BackingField: 0.45
   <RecoveryTime>k__BackingField: 0.8
   <SpeedMultiplier>k__BackingField: 0.4
   <ColliderSizeX>k__BackingField:

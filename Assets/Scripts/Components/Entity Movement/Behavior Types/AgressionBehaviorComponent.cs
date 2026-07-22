@@ -12,12 +12,13 @@ public class AgressionBehaviorComponent : TargetProvider
 
     private void OnEnable()
     {
-        healthComponent.OnValueChanged += BecomeAgressive;
+        //TODO
+        //healthComponent.OnValueChanged += BecomeAgressive;
     }
 
     private void OnDisable()
     {
-        healthComponent.OnValueChanged -= BecomeAgressive;
+        //healthComponent.OnValueChanged -= BecomeAgressive;
     }
 
     public void BecomeAgressive(GameObject gameObject, int _)

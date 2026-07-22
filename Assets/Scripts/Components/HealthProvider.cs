@@ -2,25 +2,33 @@ using UnityEngine;
 
 public class HealthProvider : ValueProvider
 {
-    [field: SerializeField] public bool IsInvincible { get; set; } = false;
+    [field: SerializeField] public bool IsInvincible { get; set; }
 
     public bool IsDead
     {
-        get => Value <= MinValue;
+        get => Health.CurrentValue <= 0;
         set
         {
             if (value)
-                Change(gameObject, -Value);
+                Health.Change(gameObject, 0);
             else
-                Change(gameObject, MaxValue);
+                Health.Change(gameObject, Health.MaxValue);
         }
     }
 
-    public override void Change(GameObject changer, int value)
+    private void Start()
+    {
+        if (Health == null) // Create health SO instance for enemies and other entities
+            Health = ScriptableObject.CreateInstance<ValueProviderSO>();
+
+        Health.Init(Config);
+    }
+
+    public void DealDamage(GameObject changer, int value)
     {
         if (IsInvincible)
-            value = 0;
+            return;
 
-        base.Change(changer, value);
+        Health.Change(changer, value);
     }
 }

@@ -1,10 +1,10 @@
+using CsvHelper.Configuration.Attributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(InvincibilityProvider))]
 [RequireComponent(typeof(EffectMachine))]
-[RequireComponent(typeof(PlayerInventory))]
 [RequireComponent(typeof(MovementBase))]
 public class PlayerController : EntityController
 {
@@ -23,8 +23,11 @@ public class PlayerController : EntityController
 
     bool _isArmed;
 
+    [Header("Broadcasts to")]
+    [SerializeField] GameobjectIntGameEvent OnHpChanged;
+    [SerializeField] GameobjectGameEvent OnDeath;
+
     public EffectMachine EffectMachineComponent { get; private set; }
-    public PlayerInventory Inventory { get; private set; }
     public PlayerMovement MovementComponent { get; private set; }
     public PlayerInteraction InteractionComponent { get; private set; }
     public InvincibilityProvider InvincibilityComponent { get; private set; }
@@ -36,7 +39,6 @@ public class PlayerController : EntityController
         MovementComponent = GetComponent<PlayerMovement>();
         InvincibilityComponent = GetComponent<InvincibilityProvider>();
         EffectMachineComponent = GetComponent<EffectMachine>();
-        Inventory =  GetComponent<PlayerInventory>();
         InteractionComponent = Utils.FindOrThrow(GetComponentInChildren<PlayerInteraction>);
 
         IsArmed = true;
@@ -48,15 +50,22 @@ public class PlayerController : EntityController
     {
         base.OnEnable();
 
-        Health.OnValueChanged += Invinsibility;
+        HealthProvider.Health.OnValueChanged += Invinsibility;
+        HealthProvider.Health.OnValueChanged += HandleOnHpValueChanged;
+        HealthProvider.Health.OnMinValueReached += HandleOnMinHpReached;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
 
-        Health.OnValueChanged -= Invinsibility;
+        HealthProvider.Health.OnValueChanged -= Invinsibility;
+        HealthProvider.Health.OnValueChanged -= HandleOnHpValueChanged;
+        HealthProvider.Health.OnMinValueReached -= HandleOnMinHpReached;
     }
+
+    void HandleOnHpValueChanged(GameObject changer, int val) => OnHpChanged.Invoke(changer, val);
+    void HandleOnMinHpReached(GameObject changer) => OnDeath.Invoke(changer);
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {

@@ -14,7 +14,7 @@ public class EntityMovementComponent : MovementBase
 
         TargetProvider targetProvider = targetProviders
             .FirstOrDefault(e => e.HasTarget);
-
+            
         Vector2 dir = Vector2.zero;
         foreach (var item in movementStrategies)
         {

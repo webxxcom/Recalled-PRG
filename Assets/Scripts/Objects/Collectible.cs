@@ -10,6 +10,7 @@ public class Collectible : MonoBehaviour
     [field: SerializeField] public ItemDefinition InventoryItemDefinition { get; private set; }
     [field: SerializeField] public int Quantity { get; private set; }
     [field: SerializeField] public AudioClip PickUpSound { get; private set; }
+    [SerializeField] InventorySO _inventory;
 
     public bool IsCollected { get; private set; }
     Animator animator;
@@ -24,9 +25,9 @@ public class Collectible : MonoBehaviour
         if (IsCollected)
             return;
 
-        if (collision.TryGetComponent(out PlayerController pc))
+        if (collision.CompareTag("Player"))
         {
-            pc.Inventory.Add(InventoryItemDefinition, Quantity);
+            _inventory.Add(InventoryItemDefinition, Quantity);
 
             IsCollected = true;
             if (animator)

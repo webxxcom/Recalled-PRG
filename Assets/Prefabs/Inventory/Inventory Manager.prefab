@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1a5c12b133d6548bcb6b09067c7725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  _inventory: {fileID: 11400000, guid: c1a2f0f5e6e68d343a75a6474e974407, type: 2}
+  _inputActionAsset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   _basicItemsInventoryGrid: {fileID: 8183790407262611107}
   _inventoryItemPrefab: {fileID: 4218260559176138138, guid: 801bef71b84d9414cb194b926ab14ebe, type: 3}
   _swordInventoryItem: {fileID: 6440917912434526955}
@@ -54,7 +56,6 @@ MonoBehaviour:
   _absentArmorSprite: {fileID: 1643337203, guid: 1a65b3f4372800f40a20f414fbed9cc7, type: 3}
   _absentBootsSprite: {fileID: -1404412370, guid: 1a65b3f4372800f40a20f414fbed9cc7, type: 3}
   _highlighter: {fileID: 3288859104658812839}
-  _inputActionAsset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!1 &2301214806166798781
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +151,7 @@ MonoBehaviour:
   _mainText: {fileID: 1813082459023315142}
   _buttons: {fileID: 8776465520195100904}
   _equipButton: {fileID: 7339946159688411514}
-  _unequipButton: {fileID: 0}
+  _unequipButton: {fileID: 1499921385325000013}
   _removeButton: {fileID: 3997607631813561228}
 --- !u!114 &411320216898160522
 MonoBehaviour:
@@ -602,7 +603,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4520889039890653451}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -1483,6 +1484,11 @@ PrefabInstance:
 --- !u!224 &841166975704665720 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4465154120303393128, guid: b062d530423f1bd438f59046b0ef3ace, type: 3}
+  m_PrefabInstance: {fileID: 3916731909591578384}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1499921385325000013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2489307957861958237, guid: b062d530423f1bd438f59046b0ef3ace, type: 3}
   m_PrefabInstance: {fileID: 3916731909591578384}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4362411870282488616

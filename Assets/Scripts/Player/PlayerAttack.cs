@@ -17,27 +17,6 @@ public class PlayerAttack : EntityAttack
         _playerController = _entityController as PlayerController;
     }
 
-    public override int DealtDamage
-    {
-        get
-        {
-            int totalDamage = AttackData.DealtDamage;
-            if (_playerController.Inventory.Sword != null)
-                totalDamage += _playerController.Inventory.Sword.Definition.Damage;
-            return totalDamage;
-        }
-    }
-    public override float DealtKnockbackPower
-    {
-        get
-        {
-            float totalKnockback = AttackData.KnockbackPower;
-            if (_playerController.Inventory.Sword != null)
-                totalKnockback += _playerController.Inventory.Sword.Definition.KnockbackPower;
-            return totalKnockback;
-        }
-    }
-
     protected override void OnEnable()
     {
         base.OnEnable();

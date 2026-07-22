@@ -12,6 +12,8 @@ public class EnemyController : EntityController
     public EntityMovementComponent MovementComponent { get; private set; }
     public InvincibilityProvider InvincibilityProvider { get; private set; }
 
+    [SerializeField] HealthProvider _healthProvider;
+
     protected override void Awake()
     {
         base.Awake();
@@ -23,34 +25,22 @@ public class EnemyController : EntityController
         canvasHiderScript = GetComponentInChildren<CanvasHider>();
     }
 
-    void Invinsibility(GameObject _, int _2) => InvincibilityProvider.BecomeInvinsibleFor(1f);
+    void Invinsibility(GameObject _, int val)
+    { if (val < 0) InvincibilityProvider.BecomeInvinsibleFor(1f); }
+
 
     protected override void OnEnable()
     {
         base.OnEnable();
 
-        Health.OnValueChanged += Invinsibility;
+        _healthProvider.Health.OnValueChanged += Invinsibility;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
 
-        Health.OnValueChanged -= Invinsibility;
-    }
-
-    void DeactivateChildrenOnDeath()
-    {
-        entityAttackComponent.gameObject.SetActive(false);
-        hitboxComponent.gameObject.SetActive(false);
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-
-        Health.OnMinValueReached += (_) => DeactivateChildrenOnDeath();
-        Health.OnValueChanged += (_, _) => canvasHiderScript.ShowCanvas();
+        _healthProvider.Health.OnValueChanged -= Invinsibility;
     }
 
     protected override void HandleFixedUpdate()

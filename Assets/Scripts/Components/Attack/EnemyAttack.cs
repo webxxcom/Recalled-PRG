@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -5,29 +7,25 @@ using UnityEngine;
 /// </summary>
 public class EnemyAttack : EntityAttack
 {
-    Collider2D currentTarget;
+    bool _wantsAttack;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        {
-            currentTarget = collision;
-        }
+            _wantsAttack = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision == currentTarget)
-        {
-            currentTarget = null;
-        }
+        if (collision.CompareTag("Player"))
+            _wantsAttack = false;
     }
 
     void Update()
     {
         _timeSinceLastAttack += Time.deltaTime;
 
-        if (currentTarget && _timeSinceLastAttack > AttackData.ReloadTime)
+        if (_wantsAttack && _timeSinceLastAttack > AttackData.ReloadTime)
         {
             Attack();
 

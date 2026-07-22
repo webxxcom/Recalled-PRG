@@ -13,7 +13,7 @@ public abstract class EntityController : MonoBehaviour
     public Animator Animator { get; private set; }
     public SpriteRendererGroup SpriteRendererGroup { get; private set; }
     public Rigidbody2D Rigidbody2D { get; private set; }
-    public HealthProvider Health { get; private set; }
+    public HealthProvider HealthProvider { get; private set; }
     public Collider2D Collider2D { get; private set; }
 
     void OnDeath(GameObject _)
@@ -22,7 +22,7 @@ public abstract class EntityController : MonoBehaviour
         Animator.SetTrigger(DieHash);
     }
 
-    void OnHurt(GameObject _, int damage)
+    void OnHpValueChanged(GameObject _, int damage)
     {
         if (damage < 0)
             Animator.SetTrigger(HurtHash);
@@ -31,7 +31,7 @@ public abstract class EntityController : MonoBehaviour
     protected virtual void Awake()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
-        Health = GetComponent<HealthProvider>();
+        HealthProvider = GetComponent<HealthProvider>();
         Collider2D = GetComponent<Collider2D>();
 
         Animator = Utils.GetComponentInChildrenIfNotPresent<Animator>(gameObject);
@@ -42,14 +42,14 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        Health.OnMinValueReached += OnDeath;
-        Health.OnValueChanged += OnHurt;
+        HealthProvider.Health.OnMinValueReached += OnDeath;
+        HealthProvider.Health.OnValueChanged += OnHpValueChanged;
     }
 
     protected virtual void OnDisable()
     {
-        Health.OnMinValueReached -= OnDeath;
-        Health.OnValueChanged -= OnHurt;
+        HealthProvider.Health.OnMinValueReached += OnDeath;
+        HealthProvider.Health.OnValueChanged += OnHpValueChanged;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision) { }
@@ -57,7 +57,7 @@ public abstract class EntityController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Health.IsDead)
+        if (HealthProvider.IsDead)
             return;
 
         HandleFixedUpdate();

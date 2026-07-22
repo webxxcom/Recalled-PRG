@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Inventory Items/Sword")]
+[CreateAssetMenu(menuName = "InventorySO Items/Sword")]
 public class SwordDefinition : ItemDefinition
 {
     [field: SerializeField] public int Damage { get; private set; }

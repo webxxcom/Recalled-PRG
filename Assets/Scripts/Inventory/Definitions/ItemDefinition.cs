@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GeneralInventoryItem", menuName = "Inventory Items/General")]
+[CreateAssetMenu(fileName = "GeneralInventoryItem", menuName = "InventorySO Items/General")]
 public class ItemDefinition : ScriptableObject
 {
     [field: SerializeField] public string Name { get; private set; }

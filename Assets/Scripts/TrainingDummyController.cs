@@ -30,6 +30,7 @@ public class TrainingDummyController : MonoBehaviour
         }
     }
 
-    private void OnEnable() => _healthProvider.OnValueChanged += OnHurt;
-    private void OnDisable() => _healthProvider.OnValueChanged -= OnHurt;
+    //TODO
+    //private void OnEnable() => _healthProvider.OnValueChanged += OnHurt;
+    //private void OnDisable() => _healthProvider.OnValueChanged -= OnHurt;
 }

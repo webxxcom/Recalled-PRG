@@ -14,6 +14,6 @@
 
     public Armor(ItemDefinition itemDefinition) : base(itemDefinition) { }
 
-    ItemInstance IEquippable.GetInTheInventory(PlayerInventory pi) => pi.Armor;
-    void IEquippable.SetInTheInventory(PlayerInventory pi, ItemInstance val) => pi.Armor = val as Armor;
+    ItemInstance IEquippable.GetInTheInventory(InventorySO pi) => pi.Armor;
+    void IEquippable.SetInTheInventory(InventorySO pi, ItemInstance val) => pi.Armor = val as Armor;
 }

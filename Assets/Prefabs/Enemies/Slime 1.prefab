@@ -364,9 +364,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a981dcfdf41a0c64bba60e96eb639860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthSound
-  _hurtSound: {fileID: 8300000, guid: 7f4b6fc4e693a7d48a6cab9fd4e750d5, type: 3}
+  _hurtSound: {fileID: 8300000, guid: 54c15e2b384bbcf4c92f79cf35c3c9a3, type: 3}
   _healingSound: {fileID: 0}
   _deathSound: {fileID: 8300000, guid: 0fc66c57e15b9594c9f2d0b7a54d3510, type: 3}
+  _healthProvider: {fileID: 3659476714238881766}
 --- !u!1 &1189511145535284869
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,7 +695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackSound
   _attackSound: {fileID: 8300000, guid: 149d181bc1cb96d43adf45e3fdbe7d10, type: 3}
-  entityAttackComponent: {fileID: 0}
+  entityAttackComponent: {fileID: 7912021147809363513}
 --- !u!1 &2363700448473275082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,10 +1323,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6adb27a1278eb64c8d4188a4a79a056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BarScript
-  <TopBar>k__BackingField: {fileID: 370142447445774477}
-  <BottomBar>k__BackingField: {fileID: 8180292811091545600}
-  <AnimationSpeed>k__BackingField: 1.5
-  <ValueProvider>k__BackingField: {fileID: 3659476714238881766}
+  _topBar: {fileID: 370142447445774477}
+  _bottomBar: {fileID: 8180292811091545600}
+  _animationSpeed: 1.5
+  _valueProvider: {fileID: 3659476714238881766}
 --- !u!114 &892592156849737773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1338,9 +1339,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146c7b45e04b5a14a83b6c037e6919a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _health: {fileID: 3659476714238881766}
   _aliveBar: {fileID: 7748800164084045486}
   _deadBar: {fileID: 5046599424978369931}
+  _healthProvider: {fileID: 3659476714238881766}
 --- !u!114 &2390632386251594846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1518,11 +1519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0e163c60faf474ba274d75ee2ac1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
-  <BasicAttackData>k__BackingField: {fileID: 11400000, guid: e71c6577981f54f43b354d5516fc1f75, type: 2}
+  <AttackData>k__BackingField: {fileID: 11400000, guid: e71c6577981f54f43b354d5516fc1f75, type: 2}
   <Effects>k__BackingField: []
-  <HostileFactions>k__BackingField:
-  - {fileID: 11400000, guid: 4d32c107c077aaf41bf67c1cb369f0f8, type: 2}
-  <ReloadTime>k__BackingField: 2.5
 --- !u!1 &5046599424978369931
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,7 +1639,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4794613563771886156, guid: 0e30c5f645a5e894499ebaa402b70a33, type: 3}
+  m_Sprite: {fileID: 2922591768964341447, guid: 4873eefaf200f3e4c895c3df257afb53, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1668,7 +1666,6 @@ GameObject:
   - component: {fileID: 1176398378409222523}
   - component: {fileID: 3323902720562264678}
   - component: {fileID: 3302160121922179893}
-  - component: {fileID: 6335082357148409875}
   - component: {fileID: 1332064429310887525}
   - component: {fileID: 6414543018664610763}
   - component: {fileID: 3659476714238881766}
@@ -1775,6 +1772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267b376786447e94f85c3f58c2047d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  _healthProvider: {fileID: 0}
 --- !u!114 &8023279021401798368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1847,19 +1845,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   decayRate: 8
   restThreshold: 0.05
---- !u!114 &6335082357148409875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097617918995308611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74239ee26380792478d9af4223e70b45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FactionComponent
-  <Faction>k__BackingField: {fileID: 11400000, guid: 899230750ac8a5b4bb3776956ccb326b, type: 2}
 --- !u!114 &1332064429310887525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1896,10 +1881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32b0800f4e22ef4380519b4d1a7e6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
-  <MaxValue>k__BackingField: 100
-  <MinValue>k__BackingField: 0
-  <Value>k__BackingField: 0
-  <IsStatic>k__BackingField: 0
+  <Config>k__BackingField: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
+  <Health>k__BackingField: {fileID: 0}
   <IsInvincible>k__BackingField: 0
 --- !u!1 &6584024271604664051
 GameObject:

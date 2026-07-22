@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class BarSwitchComponent : MonoBehaviour
 {
-    [SerializeField] HealthProvider _health;
     [SerializeField] GameObject _aliveBar;
     [SerializeField] GameObject _deadBar;
+    [SerializeField] HealthProvider _healthProvider;
 
     void ToggleBars(GameObject _)
     {
@@ -14,11 +14,11 @@ public class BarSwitchComponent : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.OnMinValueReached += ToggleBars;
+        _healthProvider.Health.OnMinValueReached += ToggleBars;
     }
 
     private void OnDisable()
     {
-        _health.OnMinValueReached -= ToggleBars;
+        _healthProvider.Health.OnMinValueReached -= ToggleBars;
     }
 }

@@ -3,16 +3,9 @@ using UnityEngine;
 public class Chest : InteractableObject
 {
     [field: SerializeField] public ItemDefinition RequiredKey { get; private set; }
+
     [SerializeField] LootTable _lootTable;
-
-    PlayerInventory _playerInventory;
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        _playerInventory = Utils.FindOrThrow(FindAnyObjectByType<PlayerInventory>);
-    }
+    [SerializeField] InventorySO _inventory;
 
     public override void Interact()
     {
@@ -23,12 +16,12 @@ public class Chest : InteractableObject
     void Open()
     {
         IsInteracted = true;
-        _playerInventory.Remove(RequiredKey);
-        _playerInventory.Add(_lootTable.GetItem());
+        _inventory.Remove(RequiredKey);
+        _inventory.Add(_lootTable.GetItem());
     }
 
     protected override bool PlayerCanInteract()
     {
-        return RequiredKey == null || FindAnyObjectByType<PlayerController>().Inventory.Contains(RequiredKey);
+        return RequiredKey == null || _inventory.Contains(RequiredKey);
     }
 }

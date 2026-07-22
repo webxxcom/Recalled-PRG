@@ -29,7 +29,7 @@ public class FireEffectDefinition : EffectDefinition
     {
         if (timeSinceDamage > reloadTime)
         {
-            entityController.Health.Change(null, -DamagePerSecond);
+            entityController.HealthProvider.DealDamage(null, -DamagePerSecond);
             timeSinceDamage = 0;
         }
 

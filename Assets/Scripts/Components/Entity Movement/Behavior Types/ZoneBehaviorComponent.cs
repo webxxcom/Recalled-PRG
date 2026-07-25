@@ -2,18 +2,20 @@ using UnityEngine;
 
 public class ZoneBehaviorComponent : TargetProvider
 {
-    [SerializeField] ChaseZone chaseZoneComponent;
+    [Header("Listens to")]
+    [SerializeField] GameobjectGameEvent OnTargetEnteredZone;
+    [SerializeField] GameobjectGameEvent OnTargetLeftZone;
 
     private void OnEnable ()
     {
-        chaseZoneComponent.OnTargetEnteredTheZone += SetTarget;
-        chaseZoneComponent.OnTargetLeftTheZone += UnsetTarget;
+        OnTargetEnteredZone.OnEventRaised += SetTarget;
+        OnTargetLeftZone.OnEventRaised += UnsetTarget;
     }
 
     private void OnDisable()
     {
-        chaseZoneComponent.OnTargetEnteredTheZone -= SetTarget;
-        chaseZoneComponent.OnTargetLeftTheZone -= UnsetTarget;
+        OnTargetEnteredZone.OnEventRaised -= SetTarget;
+        OnTargetLeftZone.OnEventRaised -= UnsetTarget;
     }
 
     void SetTarget(GameObject trgt) => CurrentTarget = trgt;

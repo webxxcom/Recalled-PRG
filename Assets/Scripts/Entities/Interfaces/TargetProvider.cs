@@ -5,5 +5,5 @@ public abstract class TargetProvider : MonoBehaviour
 {
     public bool HasTarget => CurrentTarget != null;
 
-    [field: SerializeField][ReadOnly(true)] public GameObject CurrentTarget { get; protected set; }
+    [field: SerializeField] public GameObject CurrentTarget { get; protected set; }
 }

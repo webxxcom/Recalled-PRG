@@ -4,19 +4,24 @@ using UnityEngine;
 /// <summary>
 /// EntityAttack component describes an object which has an animator and reload time.
 /// Used for enemies and player
-/// </summary>
-public abstract class EntityAttack : DefaultAttack
+/// </summary
+[RequireComponent(typeof(CapsuleCollider2D))]
+public abstract class EntityAttack : MonoBehaviour
 {
     private static readonly int AttackHash = Animator.StringToHash("Attack");
+
+    [field: SerializeField] public AttackData AttackData { get; private set; }
+    public CapsuleCollider2D Hitbox { get; private set; }
+
 
     protected EntityController _entityController;
     protected float _timeSinceLastAttack;
 
     public event Action OnAttackStarted;
 
-    protected override void Awake()
+    protected virtual void Awake()
     {
-        base.Awake();
+        Hitbox = GetComponent<CapsuleCollider2D>();
 
         _entityController = Utils.FindOrThrow(GetComponentInParent<EntityController>);
     }
@@ -24,6 +29,7 @@ public abstract class EntityAttack : DefaultAttack
     private void Start()
     {
         _timeSinceLastAttack = AttackData.ReloadTime;
+        AttackData.KnockbackOriginTransform = transform;
     }
 
     protected void Attack()

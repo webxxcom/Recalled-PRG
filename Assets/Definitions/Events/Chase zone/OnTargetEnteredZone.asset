@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65298fb4402e4e64f8253b872992b067, type: 3}
-  m_Name: OnPlayerDeath
-  m_EditorClassIdentifier: Assembly-CSharp::GameEvent
-  OnEventRaised: []
+  m_Script: {fileID: 11500000, guid: e86be9c069d4bfe4da06a5cdef2963f2, type: 3}
+  m_Name: OnTargetEnteredZone
+  m_EditorClassIdentifier: Assembly-CSharp::GameobjectGameEvent

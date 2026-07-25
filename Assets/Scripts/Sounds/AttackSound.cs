@@ -5,18 +5,18 @@ public class AttackSound : EntitySoundComponent
     [SerializeField] AudioClip _attackSound;
     [SerializeField] EntityAttack entityAttackComponent;
 
-    public override void Activate()
+    private void OnEnable()
     {
         entityAttackComponent.OnAttackStarted += HandleAttackSound;
     }
 
-    public override void Deactivate()
+    private void OnDisable()
     {
         entityAttackComponent.OnAttackStarted -= HandleAttackSound;
     }
 
     void HandleAttackSound()
     {
-         AudioSource.PlayOneShot(_attackSound);
+         _audioSource.PlayOneShot(_attackSound);
     }
 }

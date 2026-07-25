@@ -3,17 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour
 {
-    GameObject player;
-    new Camera camera;
+    [SerializeField] GameObject _following;
 
-    private void Awake()
+    void Update()
     {
-        player = GameObject.Find("Player");
-        camera = GetComponent<Camera>();
-    }
-
-    void Start()
-    {
-        transform.position = new(player.transform.position.x, player.transform.position.y, transform.position.z);
+        transform.position = new(
+            _following.transform.position.x,
+            _following.transform.position.y,
+            transform.position.z);
     }
 }

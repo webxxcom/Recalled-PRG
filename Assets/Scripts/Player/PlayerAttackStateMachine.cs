@@ -1,6 +1,4 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerAttackStateMachine : StateMachineBehaviour
@@ -38,18 +36,15 @@ public class PlayerAttackStateMachine : StateMachineBehaviour
         if (stateInfo.normalizedTime < _attackData.ImpactTime || stateInfo.normalizedTime > _attackData.RecoveryTime)
             return;
 
-        if (_attackData.ColliderSizeX.length != 0 || _attackData.ColliderSizeY.length != 0)
+        if (_attackData.Curves)
         {
             _entityAttack.Hitbox.size = new(
-                _attackData.ColliderSizeX.Evaluate(stateInfo.normalizedTime),
-                _attackData.ColliderSizeY.Evaluate(stateInfo.normalizedTime)
+                _attackData.Curves.ColliderSizeX.Evaluate(stateInfo.normalizedTime),
+                _attackData.Curves.ColliderSizeY.Evaluate(stateInfo.normalizedTime)
                 );
-        }
-        if (_attackData.ColliderOffsetX.length != 0 || _attackData.ColliderOffsetY.length != 0)
-        {
             _entityAttack.Hitbox.offset = new(
-                _attackData.ColliderOffsetX.Evaluate(stateInfo.normalizedTime),
-                _attackData.ColliderOffsetY.Evaluate(stateInfo.normalizedTime)
+                _attackData.Curves.ColliderOffsetX.Evaluate(stateInfo.normalizedTime),
+                _attackData.Curves.ColliderOffsetY.Evaluate(stateInfo.normalizedTime)
                 );
         }
 
@@ -62,7 +57,7 @@ public class PlayerAttackStateMachine : StateMachineBehaviour
 
             _damagedTargets.Add(hit);
 
-            _entityAttack.DealDamage(hit.GetComponentInParent<HealthProvider>(), _entityAttack.gameObject);
+            _entityAttack.AttackData.DealDamage(hit.GetComponentInParent<HealthProvider>(), _entityAttack.gameObject);
         }
     }
 

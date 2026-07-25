@@ -8,10 +8,11 @@ public class MeleeAttackComponent : AttackStrategy
 
     private void Update()
     {
-        if (!_movementBase.IsWalking)
-            return;
+        //TODO
+        //if (!_movementBase.IsWalking)
+        //    return;
         
-        float degrees = Vector2.SignedAngle(Vector2.right, _movementBase.MovementIntention);
-        _entityAttack.Hitbox.transform.rotation = Quaternion.Euler(0, 0, degrees);
+        //float degrees = Vector2.SignedAngle(Vector2.right, _movementBase.MovementIntention);
+        //_entityAttack.Hitbox.transform.rotation = Quaternion.Euler(0, 0, degrees);
     }
 }

@@ -1,27 +1,33 @@
 using UnityEngine;
 
+public abstract class ValueProvider : MonoBehaviour
+{
+    [field: SerializeField] public ValueProviderConfig Config { get; private set; }
+    [SerializeField] ValueProviderSO _valueProviderSO;
+
+    // Lazy init SO
+    public ValueProviderSO Value => _valueProviderSO = _valueProviderSO != null ? _valueProviderSO : ScriptableObject.CreateInstance<ValueProviderSO>();
+}
+
 public class HealthProvider : ValueProvider
 {
     [field: SerializeField] public bool IsInvincible { get; set; }
 
     public bool IsDead
     {
-        get => Health.CurrentValue <= 0;
+        get => Value.CurrentValue <= 0;
         set
         {
             if (value)
-                Health.Change(gameObject, 0);
+                Value.Change(gameObject, 0);
             else
-                Health.Change(gameObject, Health.MaxValue);
+                Value.Change(gameObject, Value.MaxValue);
         }
     }
 
     private void Start()
     {
-        if (Health == null) // Create health SO instance for enemies and other entities
-            Health = ScriptableObject.CreateInstance<ValueProviderSO>();
-
-        Health.Init(Config);
+        Value.Init(Config);
     }
 
     public void DealDamage(GameObject changer, int value)
@@ -29,6 +35,6 @@ public class HealthProvider : ValueProvider
         if (IsInvincible)
             return;
 
-        Health.Change(changer, value);
+        Value.Change(changer, value);
     }
 }

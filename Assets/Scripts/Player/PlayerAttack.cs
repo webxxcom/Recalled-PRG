@@ -17,17 +17,13 @@ public class PlayerAttack : EntityAttack
         _playerController = _entityController as PlayerController;
     }
 
-    protected override void OnEnable()
+    protected virtual void OnEnable()
     {
-        base.OnEnable();
-
         _playerMovement.OnMovement += SetAttackCollisionOffset;
     }
 
-    protected override void OnDisable()
+    protected virtual void OnDisable()
     {
-        base.OnDisable();
-
         _playerMovement.OnMovement -= SetAttackCollisionOffset;
     }
 

@@ -9,32 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4722edebc8adf4da39dab4a4b09768, type: 3}
-  m_Name: SlimeAttackData
-  m_EditorClassIdentifier: Assembly-CSharp::AttackDataSO
-  <DealtDamage>k__BackingField: 10
-  <ReloadTime>k__BackingField: 2.5
-  <KnockbackPower>k__BackingField: 0.4
-  <ImpactTime>k__BackingField: 0.45
-  <RecoveryTime>k__BackingField: 0.8
-  <SpeedMultiplier>k__BackingField: 0.4
+  m_Script: {fileID: 11500000, guid: 93f0c7e91fd7eca43863e6edafc67f72, type: 3}
+  m_Name: SlimeAttackCurves
+  m_EditorClassIdentifier: Assembly-CSharp::AttackCurves
   <ColliderSizeX>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.0048828125
-      value: 1.4411774
-      inSlope: 1.9943832
-      outSlope: 1.9943832
+      time: -0.0039978027
+      value: 1.4266357
+      inSlope: 2.0320873
+      outSlope: 2.0320873
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.0073242
-      value: 3.4404297
-      inSlope: 1.9943832
-      outSlope: 1.9943832
+      time: 0.9879761
+      value: 3.4424133
+      inSlope: 2.0320873
+      outSlope: 2.0320873
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -46,19 +40,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.0012207031
-      value: 0.9753418
-      inSlope: 0.8052205
-      outSlope: 0.8052205
+      time: -0.0052490234
+      value: 0.935791
+      inSlope: 0.8474203
+      outSlope: 0.8474203
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.9879761
-      value: 1.7698975
-      inSlope: 0.8052205
-      outSlope: 0.8052205
+      time: 0.9920044
+      value: 1.7808838
+      inSlope: 0.8474203
+      outSlope: 0.8474203
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -70,19 +64,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.0016860962
-      value: 0.0017776489
-      inSlope: -0.0035552166
-      outSlope: -0.0035552166
+      time: 0.0000026966445
+      value: -0.008357763
+      inSlope: 0.0039593764
+      outSlope: 0.0039593764
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.001709
-      value: -0.0017776489
-      inSlope: -0.0035552166
-      outSlope: -0.0035552166
+      time: 1.0009766
+      value: -0.0043945312
+      inSlope: 0.0039593764
+      outSlope: 0.0039593764
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -94,19 +88,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.001045227
-      value: 0.36273193
-      inSlope: 0.3910569
-      outSlope: 0.3910569
+      time: -0.003753662
+      value: 0.3555298
+      inSlope: 0.40023106
+      outSlope: 0.40023106
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.9989624
-      value: 0.7537918
-      inSlope: 0.3910569
-      outSlope: 0.3910569
+      time: 1
+      value: 0.7572632
+      inSlope: 0.40023106
+      outSlope: 0.40023106
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

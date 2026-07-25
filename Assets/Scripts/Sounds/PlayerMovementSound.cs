@@ -1,30 +1,22 @@
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class PlayerMovementSound : EntitySoundComponent
 {
     [SerializeField] AudioClip _walkingSound;
+    [SerializeField] PlayerMovement _playerMovementComponent;
 
-    PlayerMovement playerMovementComponent;
     bool _isPlaying;
 
-    protected override void Awake()
+    void OnEnable()
     {
-        base.Awake();
-
-        playerMovementComponent = GetComponentInParent<PlayerMovement>();
+        _playerMovementComponent.OnMovementStarted += StartPlaying;
+        _playerMovementComponent.OnMovementStopped += StopPlaying;
     }
 
-    public override void Activate()
+    void OnDisable()
     {
-        playerMovementComponent.OnMovementStarted += StartPlaying;
-        playerMovementComponent.OnMovementStopped += StopPlaying;
-    }
-
-    public override void Deactivate()
-    {
-        playerMovementComponent.OnMovementStarted -= StartPlaying;
-        playerMovementComponent.OnMovementStopped -= StopPlaying;
+        _playerMovementComponent.OnMovementStarted -= StartPlaying;
+        _playerMovementComponent.OnMovementStopped -= StopPlaying;
     }
 
     void StartPlaying() => _isPlaying = true;
@@ -32,21 +24,22 @@ public class PlayerMovementSound : EntitySoundComponent
 
     float DelayBeetweenPlays()
     {
-        float kf = playerMovementComponent.SpeedAggregator.Get();
+        float kf = _playerMovementComponent.SpeedAggregator.Get();
 
-        if (playerMovementComponent.IsSprinting)
+        if (_playerMovementComponent.IsSprinting)
         {
-            return 0.4f / kf * playerMovementComponent.SprintingSpeedMultiplier;
+            return 0.4f / kf * _playerMovementComponent.SprintingSpeedMultiplier;
         }
         else
             return 0.3f / kf;
     }
+
     float timeSince = 0;
     void UpdateMovementSound()
     {
-        if (timeSince > DelayBeetweenPlays() && playerMovementComponent.IsWalking)
+        if (timeSince > DelayBeetweenPlays() && _playerMovementComponent.IsWalking)
         {
-            AudioSource.PlayOneShot(_walkingSound);
+            _audioSource.PlayOneShot(_walkingSound);
             timeSince = 0;
         }
     }

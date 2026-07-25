@@ -42,14 +42,14 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        HealthProvider.Health.OnMinValueReached += OnDeath;
-        HealthProvider.Health.OnValueChanged += OnHpValueChanged;
+        HealthProvider.Value.OnMinValueReached += OnDeath;
+        HealthProvider.Value.OnValueChanged += OnHpValueChanged;
     }
 
     protected virtual void OnDisable()
     {
-        HealthProvider.Health.OnMinValueReached += OnDeath;
-        HealthProvider.Health.OnValueChanged += OnHpValueChanged;
+        HealthProvider.Value.OnMinValueReached += OnDeath;
+        HealthProvider.Value.OnValueChanged += OnHpValueChanged;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision) { }

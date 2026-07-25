@@ -7,28 +7,28 @@ public class HealthSound : EntitySoundComponent
     [SerializeField] AudioClip _deathSound;
     [SerializeField] HealthProvider _healthProvider;
 
-    public override void Activate()
+    void OnEnable()
     {
-        _healthProvider.Health.OnMinValueReached += HandleDeathSound;
-        _healthProvider.Health.OnValueChanged += HandleHurtHealingSound;
+        _healthProvider.Value.OnMinValueReached += HandleDeathSound;
+        _healthProvider.Value.OnValueChanged += HandleHurtHealingSound;
     }
 
-    public override void Deactivate()
+    void OnDisable()
     {
-        _healthProvider.Health.OnMinValueReached += HandleDeathSound;
-        _healthProvider.Health.OnValueChanged += HandleHurtHealingSound;
+        _healthProvider.Value.OnMinValueReached += HandleDeathSound;
+        _healthProvider.Value.OnValueChanged += HandleHurtHealingSound;
     }
 
     public void HandleDeathSound(GameObject _)
     {
-        AudioSource.PlayOneShot(_deathSound);
+        _audioSource.PlayOneShot(_deathSound);
     }
 
     public void HandleHurtHealingSound(GameObject _, int val)
     {
         if (val < 0)
-            AudioSource.PlayOneShot(_hurtSound);
+            _audioSource.PlayOneShot(_hurtSound);
         else if (val > 0)
-            AudioSource.PlayOneShot(_healingSound);
+            _audioSource.PlayOneShot(_healingSound);
     }
 }

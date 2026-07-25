@@ -50,22 +50,22 @@ public class PlayerController : EntityController
     {
         base.OnEnable();
 
-        HealthProvider.Health.OnValueChanged += Invinsibility;
-        HealthProvider.Health.OnValueChanged += HandleOnHpValueChanged;
-        HealthProvider.Health.OnMinValueReached += HandleOnMinHpReached;
+        HealthProvider.Value.OnValueChanged += Invinsibility;
+        HealthProvider.Value.OnValueChanged += HandleOnHpChangedGameEvent;
+        HealthProvider.Value.OnMinValueReached += HandleOnDeathGameEvent;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
 
-        HealthProvider.Health.OnValueChanged -= Invinsibility;
-        HealthProvider.Health.OnValueChanged -= HandleOnHpValueChanged;
-        HealthProvider.Health.OnMinValueReached -= HandleOnMinHpReached;
+        HealthProvider.Value.OnValueChanged -= Invinsibility;
+        HealthProvider.Value.OnValueChanged -= HandleOnHpChangedGameEvent;
+        HealthProvider.Value.OnMinValueReached -= HandleOnDeathGameEvent;
     }
 
-    void HandleOnHpValueChanged(GameObject changer, int val) => OnHpChanged.Invoke(changer, val);
-    void HandleOnMinHpReached(GameObject changer) => OnDeath.Invoke(changer);
+    void HandleOnHpChangedGameEvent(GameObject changer, int val) => OnHpChanged.Invoke(changer, val);
+    void HandleOnDeathGameEvent(GameObject changer) => OnDeath.Invoke(changer);
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {

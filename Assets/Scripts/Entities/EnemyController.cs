@@ -12,8 +12,6 @@ public class EnemyController : EntityController
     public EntityMovementComponent MovementComponent { get; private set; }
     public InvincibilityProvider InvincibilityProvider { get; private set; }
 
-    [SerializeField] HealthProvider _healthProvider;
-
     protected override void Awake()
     {
         base.Awake();
@@ -33,14 +31,14 @@ public class EnemyController : EntityController
     {
         base.OnEnable();
 
-        _healthProvider.Health.OnValueChanged += Invinsibility;
+        HealthProvider.Value.OnValueChanged += Invinsibility;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
 
-        _healthProvider.Health.OnValueChanged -= Invinsibility;
+        HealthProvider.Value.OnValueChanged -= Invinsibility;
     }
 
     protected override void HandleFixedUpdate()

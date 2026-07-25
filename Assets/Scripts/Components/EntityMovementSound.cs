@@ -4,20 +4,17 @@ public class EntityMovementSound : EntitySoundComponent
 {
     [SerializeField] AudioClip _walkingSound;
     [SerializeField] float _delayBetween;
+    [SerializeField] MovementBase _movementBase;
 
-    MovementBase _movementBase;
     bool _isPlaying;
 
-    public override void Activate()
+    void OnEnable()
     {
-        if (!_movementBase)
-            _movementBase = GetComponentInParent<MovementBase>();
-
         _movementBase.OnMovementStarted += StartPlaying;
         _movementBase.OnMovementStopped += StopPlaying;
     }
 
-    public override void Deactivate()
+    void OnDisable()
     {
         _movementBase.OnMovementStarted -= StartPlaying;
         _movementBase.OnMovementStopped -= StopPlaying;
@@ -31,7 +28,7 @@ public class EntityMovementSound : EntitySoundComponent
     {
         if (timeSince > _delayBetween / _movementBase.SpeedAggregator.Get() && _movementBase.IsWalking)
         {
-            AudioSource.PlayOneShot(_walkingSound);
+            _audioSource.PlayOneShot(_walkingSound);
             timeSince = 0;
         }
     }

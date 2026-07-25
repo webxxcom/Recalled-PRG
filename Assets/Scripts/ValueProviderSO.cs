@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "HealthProvider")]
+[CreateAssetMenu(menuName = "ValueProviderSO")]
 public class ValueProviderSO : ScriptableObject
 {
     [field: SerializeField] public int MaxValue { get; private set; }

@@ -16,15 +16,15 @@ public class BarScript : MonoBehaviour
 
     private void OnEnable()
     {
-        MaxValue = _valueProvider.Health.MaxValue;
-        Set(_valueProvider.Health.CurrentValue);
+        MaxValue = _valueProvider.Value.MaxValue;
+        Set(_valueProvider.Value.CurrentValue);
 
-        _valueProvider.Health.OnValueChanged += OnValueChanged;
+        _valueProvider.Value.OnValueChanged += OnValueChanged;
     }
 
     private void OnDisable()
     {
-        _valueProvider.Health.OnValueChanged -= OnValueChanged;
+        _valueProvider.Value.OnValueChanged -= OnValueChanged;
     }
 
     float TargetValue => Value / MaxValue;
@@ -43,10 +43,14 @@ public class BarScript : MonoBehaviour
         smoothBar.fillAmount = TargetValue;
     }
 
+    Coroutine progressBarsCoroutine;
     public void Set(float value)
     {
         Value = Mathf.Clamp(value, 0, MaxValue);
-        StartCoroutine(ProgressBars(value));
+
+        if (progressBarsCoroutine != null)
+            StopCoroutine(progressBarsCoroutine);
+        progressBarsCoroutine = StartCoroutine(ProgressBars(value));
     }
 
     public void Change(float value) => Set(Value + value);

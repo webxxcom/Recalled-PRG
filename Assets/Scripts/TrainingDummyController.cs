@@ -1,21 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(HealthProvider))]
 public class TrainingDummyController : MonoBehaviour
 {
     private static readonly int DamageHardHash = Animator.StringToHash("HurtHard");
     private static readonly int DamageMidHash = Animator.StringToHash("HurtMid");
     private static readonly int DamageLightHash = Animator.StringToHash("HurtLight");
 
-    Animator _animator;
-    HealthProvider _healthProvider;
-
-
-    private void Awake()
-    {
-        _animator = Utils.GetComponentInChildrenIfNotPresent<Animator>(gameObject);
-        _healthProvider = GetComponent<HealthProvider>();
-    }
+    [SerializeField] HealthProvider _healthProvider;
+    [SerializeField] Animator _animator;
 
     void OnHurt(GameObject _, int val)
     {
@@ -30,7 +22,6 @@ public class TrainingDummyController : MonoBehaviour
         }
     }
 
-    //TODO
-    //private void OnEnable() => _healthProvider.OnValueChanged += OnHurt;
-    //private void OnDisable() => _healthProvider.OnValueChanged -= OnHurt;
+    private void OnEnable() => _healthProvider.Value.OnValueChanged += OnHurt;
+    private void OnDisable() => _healthProvider.Value.OnValueChanged -= OnHurt;
 }

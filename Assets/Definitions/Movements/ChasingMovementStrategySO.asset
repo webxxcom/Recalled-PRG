@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8db6b3e690d80494d970b0bc41e28ca0, type: 3}
-  m_Name: HPConfig
-  m_EditorClassIdentifier: Assembly-CSharp::ValueProviderConfig
-  <MaximumValue>k__BackingField: 100
-  <CurrentValue>k__BackingField: 100
-  <IsStatic>k__BackingField: 0
+  m_Script: {fileID: 11500000, guid: 7c1114f7e9e43484a919319e26f75933, type: 3}
+  m_Name: ChasingMovementStrategySO
+  m_EditorClassIdentifier: Assembly-CSharp::ChaseMovementComponent
+  _minDistanceToTarget: 1.3

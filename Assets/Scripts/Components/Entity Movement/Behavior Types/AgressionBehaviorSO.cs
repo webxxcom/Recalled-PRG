@@ -1,15 +1,8 @@
 using UnityEngine;
 
-[RequireComponent(typeof(HealthProvider))]
-public class AgressionBehaviorComponent : TargetProvider
+[CreateAssetMenu(menuName = "Behavior / Aggression")]
+public class AgressionBehaviorSO : TargetProvider
 {
-    HealthProvider healthComponent;
-
-    private void Awake()
-    {
-        healthComponent = GetComponent<HealthProvider>();
-    }
-
     private void OnEnable()
     {
         //TODO

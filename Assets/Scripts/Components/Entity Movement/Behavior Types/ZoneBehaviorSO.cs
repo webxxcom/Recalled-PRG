@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class ZoneBehaviorComponent : TargetProvider
+[CreateAssetMenu(menuName = "Behavior / Zone")]
+public class ZoneBehaviorSO : TargetProvider
 {
     [Header("Listens to")]
     [SerializeField] GameobjectGameEvent OnTargetEnteredZone;

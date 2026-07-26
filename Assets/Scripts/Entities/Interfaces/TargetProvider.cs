@@ -1,7 +1,6 @@
-﻿using System.ComponentModel;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class TargetProvider : MonoBehaviour
+public abstract class TargetProvider : ScriptableObject
 {
     public bool HasTarget => CurrentTarget != null;
 

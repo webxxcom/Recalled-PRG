@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c04b146fa92ad429a7793f1f899105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  OnTargetEnteredTheZone: {fileID: 11400000, guid: a7b39d76fc86cd94681f4ec250b577c2, type: 2}
+  OnTargetLeftTheZone: {fileID: 11400000, guid: 0c905749823c153409489db82f1d0cf2, type: 2}
 --- !u!60 &3411111568609641297
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -91,10 +93,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -2.1735346, y: 1.0825396}
-      - {x: -2.0790935, y: -6.5692563}
-      - {x: -10.630065, y: -6.6142797}
-      - {x: -10.573676, y: -13.029779}
-      - {x: 10.409959, y: -12.914778}
-      - {x: 10.41556, y: 1.0518713}
+    - - {x: 0, y: 5}
+      - {x: 5, y: 0}
+      - {x: 0, y: 0}
   m_UseDelaunayMesh: 1

@@ -2,41 +2,23 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(EntityController))]
-[RequireComponent(typeof(BlinkingEffectProvider))]
 public class InvincibilityProvider : MonoBehaviour
 {
-    BlinkingEffectProvider _blinkingEffectProvider;
-    EntityController _entityController;
+    [SerializeField] float _duration;
+    [SerializeField] HealthProvider _healthProvider;
 
-    private void Awake()
+    IEnumerator InvincibleCoroutine()
     {
-        _blinkingEffectProvider = GetComponent<BlinkingEffectProvider>();
-        _entityController = GetComponent<EntityController>();
+        _healthProvider.IsInvincible = true;
+
+        yield return new WaitForSeconds(_duration);
+
+        _healthProvider.IsInvincible = false;
     }
 
-    public void Enter()
+    public void BecomeInvinsibleFor()
     {
-        _entityController.HealthProvider.IsInvincible = true;
-        _blinkingEffectProvider.Enter();
-    }
-
-    public void Exit()
-    {
-        _entityController.HealthProvider.IsInvincible = false;
-        _blinkingEffectProvider.Exit();
-    }
-
-    IEnumerator InvincibleCoroutine(float seconds)
-    {
-        Enter();
-
-        yield return new WaitForSeconds(seconds);
-
-        Exit();
-    }
-
-    public void BecomeInvinsibleFor(float seconds)
-    {
-        StartCoroutine(InvincibleCoroutine(seconds));
+        StopAllCoroutines();
+        StartCoroutine(InvincibleCoroutine());
     }
 }

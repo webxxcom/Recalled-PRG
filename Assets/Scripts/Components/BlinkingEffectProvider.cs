@@ -4,54 +4,27 @@ using UnityEngine;
 [RequireComponent(typeof(EntityController))]
 public class BlinkingEffectProvider : MonoBehaviour
 {
-    private static readonly WaitForSeconds _waitForSeconds0_1 = new(0.1f);
+    [SerializeField] float _duration;
+    [SerializeField] float _blinkInterval;
+    [SerializeField] SpriteRendererGroup _spriteRendererGroup;
 
-    EntityController _entityController;
-    int _referenceCounter = 0;
-
-    private void Awake()
-    {
-        _entityController = GetComponent<EntityController>();
-    }
-
-    Coroutine blinkingCoroutine;
     IEnumerator BlinkCoroutine()
     {
-        while (true)
+        float elapsed = 0;
+        while (elapsed < _duration)
         {
-            _entityController.SpriteRendererGroup.SetAlpha(0);
-            yield return _waitForSeconds0_1;
+            _spriteRendererGroup.gameObject.SetActive
+                (!_spriteRendererGroup.gameObject.activeInHierarchy);
+            yield return new WaitForSeconds(_blinkInterval);
 
-            _entityController.SpriteRendererGroup.SetAlpha(1);
-            yield return _waitForSeconds0_1;
+            elapsed += Time.deltaTime;
         }
+        _spriteRendererGroup.gameObject.SetActive(true);
     }
 
-    public void Enter()
+    public void StartBlinking()
     {
-        _referenceCounter++;
-
-        if (blinkingCoroutine != null)
-            StopCoroutine(blinkingCoroutine);
-
-        blinkingCoroutine = StartCoroutine(BlinkCoroutine());
-    }
-
-    public void Exit()
-    {
-        _referenceCounter--;
-
-        if (_referenceCounter <= 0)
-        {
-            _referenceCounter = 0;
-
-            if (blinkingCoroutine != null)
-            {
-                StopCoroutine(blinkingCoroutine);
-                blinkingCoroutine = null;
-            }
-
-            _entityController.SpriteRendererGroup.SetAlpha(1);
-        }
+        StopAllCoroutines();
+        StartCoroutine(BlinkCoroutine());
     }
 }

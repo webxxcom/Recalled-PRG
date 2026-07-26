@@ -1,12 +1,12 @@
-using System;
 using UnityEngine;
 
 public class ChaseZone : MonoBehaviour
 {
     public GameObject CurrentTarget { get; private set; }
 
-    public event Action<GameObject> OnTargetEnteredTheZone;
-    public event Action<GameObject> OnTargetLeftTheZone;
+    [Header("Broadcasts to")]
+    [SerializeField] GameobjectGameEvent OnTargetEnteredTheZone;
+    [SerializeField] GameobjectGameEvent OnTargetLeftTheZone;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,7 +14,7 @@ public class ChaseZone : MonoBehaviour
         {
             CurrentTarget = collision.gameObject;
 
-            OnTargetEnteredTheZone?.Invoke(collision.gameObject);
+            OnTargetEnteredTheZone.Invoke(collision.gameObject);
         }
     }
 
@@ -24,7 +24,7 @@ public class ChaseZone : MonoBehaviour
         {
             CurrentTarget = null;
 
-            OnTargetLeftTheZone?.Invoke(collision.gameObject);
+            OnTargetLeftTheZone.Invoke(collision.gameObject);
         }
     }
 }

@@ -1317,7 +1317,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6805291076679127406}
-  - component: {fileID: 6730954019777126062}
   - component: {fileID: 8487839362322834453}
   - component: {fileID: 2409675021506303179}
   - component: {fileID: 6836397006442588245}
@@ -1357,14 +1356,6 @@ Transform:
   - {fileID: 8298965540342904238}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &6730954019777126062
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
 --- !u!114 &8487839362322834453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1502,8 +1493,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9837663d5d51566429d97eb93b1c3ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  <Config>k__BackingField: {fileID: 0}
-  <Health>k__BackingField: {fileID: 0}
+  _config: {fileID: 0}
+  _valueProviderSO: {fileID: 0}
 --- !u!114 &3172139938629916995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1542,6 +1533,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a79a0ea00109294d987ca291fa2e781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlinkingEffectProvider
+  _duration: 1
+  _blinkInterval: 0.1
+  _spriteRendererGroup: {fileID: 4980500249380923839}
 --- !u!114 &7477225139193990942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1554,6 +1548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7af567f829480489cb925839780c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InvincibilityComponent
+  _duration: 1
+  _healthProvider: {fileID: 5006608323033705435}
 --- !u!114 &5006608323033705435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1566,8 +1562,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32b0800f4e22ef4380519b4d1a7e6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
-  <Config>k__BackingField: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
-  <Health>k__BackingField: {fileID: 11400000, guid: 1ba4ce36a56f24c40a24d84b02027e78, type: 2}
+  _config: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
+  _valueProviderSO: {fileID: 11400000, guid: 1ba4ce36a56f24c40a24d84b02027e78, type: 2}
   <IsInvincible>k__BackingField: 0
 --- !u!1 &8375044973183638792
 GameObject:

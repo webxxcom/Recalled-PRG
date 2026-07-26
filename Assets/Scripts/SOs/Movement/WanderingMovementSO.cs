@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class WanderingMovementComponent : MovementStrategy
+[CreateAssetMenu(menuName = "Movements/Wandering")]
+public class WanderingMovementSO : MovementStrategy
 {
-    [field: SerializeField] public Collider2D WanderingZone { get; private set; }
-
     private static readonly Vector2[] Directions =
         {
             Vector2.right,
@@ -26,8 +25,13 @@ public class WanderingMovementComponent : MovementStrategy
     bool isIdle = false;
     float CurrentStateDuration = 0f;
 
-    public override Vector2 GetDirection(GameObject _, out bool reachedDestination)
+    public override Vector2 GetDirection(GameObject origin, GameObject _, out bool reachedDestination)
     {
+        if (ShouldChangeDirection)
+            AdvanceState();
+
+        timeSinceChangingDirection += Time.deltaTime;
+
         reachedDestination = false;
 
         return IntermediateDirection;
@@ -44,12 +48,7 @@ public class WanderingMovementComponent : MovementStrategy
 
         IntermediateDirection = newDirection;
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        FindNewDirection();
-    }
-
+    
     void AdvanceState()
     {
         CurrentStateDuration = Random.Range(0.6f, 2.3f);
@@ -62,11 +61,4 @@ public class WanderingMovementComponent : MovementStrategy
     }
 
     bool ShouldChangeDirection => timeSinceChangingDirection >= CurrentStateDuration;
-    private void Update()
-    {
-        if (ShouldChangeDirection)
-            AdvanceState();
-
-        timeSinceChangingDirection += Time.deltaTime;
-    }
 }

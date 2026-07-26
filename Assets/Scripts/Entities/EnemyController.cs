@@ -1,44 +1,15 @@
 using UnityEngine;
 
-[RequireComponent(typeof(MovementBase))]
 [RequireComponent(typeof(EntityMovementComponent))]
-[RequireComponent(typeof(InvincibilityProvider))]
 public class EnemyController : EntityController
 {
-    EnemyAttack entityAttackComponent;
-    Hurtbox hitboxComponent;
-    CanvasHider canvasHiderScript;
-
     public EntityMovementComponent MovementComponent { get; private set; }
-    public InvincibilityProvider InvincibilityProvider { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
 
         MovementComponent = GetComponent<EntityMovementComponent>();
-        InvincibilityProvider = GetComponent<InvincibilityProvider>();
-        entityAttackComponent = GetComponentInChildren<EnemyAttack>();
-        hitboxComponent = GetComponentInChildren<Hurtbox>();
-        canvasHiderScript = GetComponentInChildren<CanvasHider>();
-    }
-
-    void Invinsibility(GameObject _, int val)
-    { if (val < 0) InvincibilityProvider.BecomeInvinsibleFor(1f); }
-
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-
-        HealthProvider.Value.OnValueChanged += Invinsibility;
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-
-        HealthProvider.Value.OnValueChanged -= Invinsibility;
     }
 
     protected override void HandleFixedUpdate()

@@ -44,13 +44,10 @@ public class PlayerController : EntityController
         IsArmed = true;
     }
 
-    void Invinsibility(GameObject _, int _2) => InvincibilityComponent.BecomeInvinsibleFor(1f);
-
     protected override void OnEnable()
     {
         base.OnEnable();
 
-        HealthProvider.Value.OnValueChanged += Invinsibility;
         HealthProvider.Value.OnValueChanged += HandleOnHpChangedGameEvent;
         HealthProvider.Value.OnMinValueReached += HandleOnDeathGameEvent;
     }
@@ -59,7 +56,6 @@ public class PlayerController : EntityController
     {
         base.OnDisable();
 
-        HealthProvider.Value.OnValueChanged -= Invinsibility;
         HealthProvider.Value.OnValueChanged -= HandleOnHpChangedGameEvent;
         HealthProvider.Value.OnMinValueReached -= HandleOnDeathGameEvent;
     }

@@ -52,7 +52,7 @@ public class PlayerAttackStateMachine : StateMachineBehaviour
         _entityAttack.Hitbox.Overlap(_hits);
         foreach (Collider2D hit in _hits)
         {
-            if (_damagedTargets.Contains(hit) && hit.CompareTag(_entityAttack.tag))
+            if (_damagedTargets.Contains(hit) || hit.CompareTag(_entityAttack.tag))
                 continue;
 
             _damagedTargets.Add(hit);

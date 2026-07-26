@@ -8,6 +8,7 @@ public class BarScript : MonoBehaviour
     [SerializeField] Image _bottomBar;
     [SerializeField] float _animationSpeed;
     [SerializeField] ValueProvider _valueProvider;
+    [SerializeField] CanvasGroup _canvasGroup;
 
     public float MaxValue { get; set; }
     public float Value { get; private set; }
@@ -30,27 +31,28 @@ public class BarScript : MonoBehaviour
     float TargetValue => Value / MaxValue;
     IEnumerator ProgressBars(float value)
     {
-        var suddenBar = value > 0 ? _bottomBar : _topBar;
-        var smoothBar = value > 0 ? _topBar : _bottomBar;
+        var suddenBar = value <= 0 ? _topBar : _bottomBar;
+        var smoothBar = value <= 0 ? _bottomBar : _topBar;
 
         suddenBar.fillAmount = TargetValue;
-        while (Mathf.Abs(suddenBar.fillAmount - _bottomBar.fillAmount) > 0.01f)
+        _canvasGroup.alpha = 1;
+        while (Mathf.Abs(suddenBar.fillAmount - smoothBar.fillAmount) > 0.01f)
         {
             smoothBar.fillAmount
                 = Mathf.Lerp(smoothBar.fillAmount, suddenBar.fillAmount, Time.deltaTime * _animationSpeed);
             yield return null;
         }
+        _canvasGroup.alpha = 0;
         smoothBar.fillAmount = TargetValue;
     }
 
-    Coroutine progressBarsCoroutine;
     public void Set(float value)
     {
+        float prevValue = Value;
         Value = Mathf.Clamp(value, 0, MaxValue);
 
-        if (progressBarsCoroutine != null)
-            StopCoroutine(progressBarsCoroutine);
-        progressBarsCoroutine = StartCoroutine(ProgressBars(value));
+        StopAllCoroutines();
+        StartCoroutine(ProgressBars(Value - prevValue));
     }
 
     public void Change(float value) => Set(Value + value);

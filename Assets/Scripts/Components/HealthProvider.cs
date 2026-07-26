@@ -2,16 +2,27 @@ using UnityEngine;
 
 public abstract class ValueProvider : MonoBehaviour
 {
-    [field: SerializeField] public ValueProviderConfig Config { get; private set; }
+    [SerializeField] ValueProviderConfig _config;
     [SerializeField] ValueProviderSO _valueProviderSO;
 
     // Lazy init SO
-    public ValueProviderSO Value => _valueProviderSO = _valueProviderSO != null ? _valueProviderSO : ScriptableObject.CreateInstance<ValueProviderSO>();
+    public ValueProviderSO Value
+    {
+        get
+        {
+            if (_valueProviderSO == null)
+                _valueProviderSO = ScriptableObject.CreateInstance<ValueProviderSO>();
+
+            if (!_valueProviderSO.Initialized)
+                _valueProviderSO.Init(_config);
+            return _valueProviderSO;
+        }
+    }
 }
 
 public class HealthProvider : ValueProvider
 {
-    [field: SerializeField] public bool IsInvincible { get; set; }
+    public bool IsInvincible { get; set; }
 
     public bool IsDead
     {
@@ -23,11 +34,6 @@ public class HealthProvider : ValueProvider
             else
                 Value.Change(gameObject, Value.MaxValue);
         }
-    }
-
-    private void Start()
-    {
-        Value.Init(Config);
     }
 
     public void DealDamage(GameObject changer, int value)

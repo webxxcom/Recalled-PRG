@@ -7,6 +7,7 @@ public class ValueProviderSO : ScriptableObject
     [field: SerializeField] public int MaxValue { get; private set; }
     [field: SerializeField] public int CurrentValue { get; private set; }
     [field: SerializeField] public bool IsStatic { get; private set; }
+    public bool Initialized { get; private set; }
 
     public event Action<GameObject, int> OnValueChanged;
     public event Action<GameObject> OnMinValueReached;
@@ -32,7 +33,7 @@ public class ValueProviderSO : ScriptableObject
                 CurrentValue += value;
         }
 
-        OnValueChanged.Invoke(changer, value);
+        OnValueChanged?.Invoke(changer, value);
     }
 
     public void Init(ValueProviderConfig cfg)
@@ -40,5 +41,7 @@ public class ValueProviderSO : ScriptableObject
         MaxValue = cfg.MaximumValue;
         CurrentValue = cfg.CurrentValue;
         IsStatic = cfg.IsStatic;
+
+        Initialized = true;
     }
 }

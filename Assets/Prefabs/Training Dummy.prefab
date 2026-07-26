@@ -46,10 +46,10 @@ CapsuleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 3959
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -195,11 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32b0800f4e22ef4380519b4d1a7e6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
-  <MaxValue>k__BackingField: 0
-  <MinValue>k__BackingField: 0
-  <Value>k__BackingField: 0
-  <IsStatic>k__BackingField: 1
-  <IsInvincible>k__BackingField: 0
+  _config: {fileID: 11400000, guid: 864889a04087d4d448a4d01d160d960a, type: 2}
+  _valueProviderSO: {fileID: 0}
 --- !u!114 &8080906468532238491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c0fd3485b931c74881c5170f6f28592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  _healthProvider: {fileID: 2106326233406549787}
+  _animator: {fileID: 3784235917605943660}
 --- !u!1001 &2638589704726934692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,6 +280,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8435245712485981826, guid: a9d6d0730f445484c804259218ef4726, type: 3}
+--- !u!95 &3784235917605943660 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1160356261127867848, guid: a9d6d0730f445484c804259218ef4726, type: 3}
+  m_PrefabInstance: {fileID: 2638589704726934692}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5317522475636493225 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7878350319992209165, guid: a9d6d0730f445484c804259218ef4726, type: 3}

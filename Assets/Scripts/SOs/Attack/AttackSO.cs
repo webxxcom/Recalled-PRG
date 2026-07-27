@@ -26,7 +26,7 @@ public class AttackSO : ScriptableObject
 
     public void DealDamage(HealthProvider target, GameObject origin)
     {
-        target.DealDamage(origin, -DealtDamage);
+        target.DealDamage(origin, DealtDamage, Effects);
 
         ApplyKnockback(target);
     }

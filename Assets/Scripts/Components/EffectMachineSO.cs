@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class EffectMachineSO : ScriptableObject
 {
-    readonly List<EffectDefinition> _activeEffects = new();
+    readonly Dictionary<EffectDefinition, Coroutine> _activeEffects = new();
 
     public void ApplyEffect(EntityController entityController, HealthProvider health, EffectDefinition effect)
     {
-        entityController.StartCoroutine(ApplyCoroutine(entityController, health, effect));
+        if (_activeEffects.ContainsKey(effect))
+            entityController.StopCoroutine(_activeEffects[effect]);
+
+        _activeEffects[effect] = entityController.StartCoroutine(ApplyCoroutine(entityController, health, effect));
     }
 
     IEnumerator ApplyCoroutine(EntityController entityController, HealthProvider health, EffectDefinition effect)

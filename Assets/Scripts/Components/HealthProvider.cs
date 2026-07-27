@@ -4,10 +4,13 @@ using UnityEngine.Events;
 
 public class HealthProvider : ValueProvider
 {
+    private static readonly int HurtHash = Animator.StringToHash("Hurt");
+
     public bool IsInvincible { get; set; }
 
     [SerializeField] EntityController _entityController;
     [SerializeField] EffectMachineSO _effectMachine;
+    [SerializeField] Animator _animator;
 
     public event UnityAction<DamageInfo> OnHpChanged;
     public event UnityAction<DamageInfo> OnMinHpReached;
@@ -15,6 +18,22 @@ public class HealthProvider : ValueProvider
     private void Awake()
     {
         _effectMachine = ScriptableObject.CreateInstance<EffectMachineSO>();
+    }
+
+    private void OnEnable()
+    {
+        OnHpChanged += HpChanged;
+    }
+
+    private void OnDisable()
+    {
+        OnHpChanged -= HpChanged;
+    }
+
+    void HpChanged(DamageInfo damageInfo)
+    {
+        _animator.SetTrigger(HurtHash);
+        damageInfo.Effects?.ForEach(e => _effectMachine.ApplyEffect(_entityController, this, e));
     }
 
     public bool IsDead
@@ -29,10 +48,8 @@ public class HealthProvider : ValueProvider
         }
     }
 
-    public void RaiseEvents(GameObject changer, int value)
+    void RaiseEvents(DamageInfo di)
     {
-        DamageInfo di = new() { Amount = value, Source = changer };
-
         OnHpChanged?.Invoke(di);
         if (Value.CurrentValue == 0)
             OnMinHpReached?.Invoke(di);
@@ -43,8 +60,7 @@ public class HealthProvider : ValueProvider
         if (IsInvincible)
             return;
 
-        Value.Change(value);
-        effects?.ForEach(e => _effectMachine.ApplyEffect(_entityController, this, e));
-        RaiseEvents(changer, value);
+        Value.Change(-value);
+        RaiseEvents(new() { Amount = value, Source = changer, Effects = effects });
     }
 }

@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5006608323033705435, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 1523380842}
     - target: {fileID: 6805291076679127406, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.72856
@@ -182,13 +186,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7559287907167481913, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1744431828}
-    - targetCorrespondingSourceObject: {fileID: 7559287907167481913, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1744431829}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
 --- !u!1 &1142178387
 GameObject:
@@ -20851,62 +20849,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7559287907167481913, guid: ef7a4d2f735b5c342b5d27fda3be7ed5, type: 3}
   m_PrefabInstance: {fileID: 668550721}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1744431828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744431815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a870404d866a1c47a9cb5e2fee76f23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DamageInfoGameEventListener
-  Event: {fileID: 11400000, guid: 4eb2943eb5950f54eba48d5bad32d3cd, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1523380842}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Hurt
-          m_BoolArgument: 1
-        m_CallState: 2
---- !u!114 &1744431829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744431815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a870404d866a1c47a9cb5e2fee76f23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameEventListener
-  Event: {fileID: 11400000, guid: 1b2ce962ee3da3c4ca0eb1ac1d6feff8, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1523380842}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Die
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1880129600
 GameObject:
   m_ObjectHideFlags: 0
@@ -20960,6 +20902,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3659476714238881766, guid: a36798c2fab103f4797ce026132d4fc6, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 2071196963}
     - target: {fileID: 6097617918995308611, guid: a36798c2fab103f4797ce026132d4fc6, type: 3}
       propertyPath: m_Name
       value: Slime 1
@@ -21070,6 +21016,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82ab9cfee66e9c645822b20e1f856eea, type: 3}
+--- !u!95 &2071196963 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3120718460063332462, guid: a36798c2fab103f4797ce026132d4fc6, type: 3}
+  m_PrefabInstance: {fileID: 1895368550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5706109015612776274
 PrefabInstance:
   m_ObjectHideFlags: 0

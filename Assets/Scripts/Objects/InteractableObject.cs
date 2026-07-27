@@ -8,10 +8,10 @@ public abstract class InteractableObject : MonoBehaviour, IInteractable
 {
     private static readonly int InteractHash = Animator.StringToHash("Interact");
 
-    [field: SerializeField] public AudioClip FirstStateAudio { get; private set; }
-    [field: SerializeField] public AudioClip SecondStateAudio { get; private set; }
-
-    public GameObject InteractionText { get; protected set; }
+    [SerializeField] AudioClip _firstStateAudio;
+    [SerializeField] AudioClip _secondStateAudio;
+    [SerializeField] string _displayText;
+    [SerializeField] TextMeshProUGUI _interactionTextMesh;
 
     public bool IsInteracted
     {
@@ -20,53 +20,47 @@ public abstract class InteractableObject : MonoBehaviour, IInteractable
         {
             if (value)
             {
-                animator.SetTrigger(InteractHash);
-                audioSource.PlayOneShot(FirstStateAudio);
-                InteractionText.SetActive(false);
+                _animator.SetTrigger(InteractHash);
+                _audioSource.PlayOneShot(_firstStateAudio);
+                _interactionTextMesh.gameObject.SetActive(false);
             }
             else
             {
-                audioSource.PlayOneShot(SecondStateAudio);
+                _audioSource.PlayOneShot(_secondStateAudio);
             }
             _IsInteracted = value;
         }
     }
 
     bool _IsInteracted;
-    Animator animator;
-    AudioSource audioSource;
+    Animator _animator;
+    AudioSource _audioSource;
 
     protected virtual void Awake()
     {
-        animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
-        InteractionText = GetComponentInChildren<TextMeshProUGUI>().gameObject;
+        _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        InteractionText.SetActive(false);
+        _interactionTextMesh.text = _displayText;
+        _interactionTextMesh.gameObject.SetActive(false);
     }
 
     // Method used in the trigger to decide if at the current moment player can interact with the object
     // whether it's an availability of a key in player's inventory to open a chest or a specific looking into the picture
     protected abstract bool PlayerCanInteract();
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void ShowInteractionText()
     {
-        if (!IsInteracted && collision.TryGetComponent(out PlayerInteraction _)
-            && PlayerCanInteract())
-        {
-            InteractionText.SetActive(true);
-        }
+        if (PlayerCanInteract())
+            _interactionTextMesh.gameObject.SetActive(true);
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void HideInteractionText()
     {
-        if (!IsInteracted && collision.TryGetComponent(out PlayerInteraction _))
-        {
-            InteractionText.SetActive(false);
-        }
+        _interactionTextMesh.gameObject.SetActive(false);
     }
 
     public abstract void Interact();

@@ -13,23 +13,26 @@ public abstract class MovementBase : MonoBehaviour
 
     public bool MovementBlocked { get; set; }
     public AggregatedValue SpeedAggregator { get; private set; } = new();
-    public Vector2 LastMovement { get; protected set; }
+    public Vector2 LastMovement { get; set; }
     public Vector2 PrevMovement { get; protected set; }
     public bool IsWalking => MovementIntention != Vector2.zero;
     public float CurrentSpeed => WalkingSpeed * SpeedAggregator.Get();
     public Vector2 FacingDirection => MovementIntention != Vector2.zero ? MovementIntention : LastMovement;
    
-    ExternalVelocityComponent externalVelocityComponent;
+    ExternalVelocityComponent _externalVelocityComponent;
+    protected Rigidbody2D _rigidbody2D;
+    [SerializeField] Animator _animator;
 
     private void Awake()
     {
-        externalVelocityComponent = GetComponent<ExternalVelocityComponent>();
+        _externalVelocityComponent = GetComponent<ExternalVelocityComponent>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     public Vector2 MovementIntention
     {
         get => _movementIntention;
-        protected set
+        set
         {
             _movementIntention = value;
 
@@ -48,23 +51,31 @@ public abstract class MovementBase : MonoBehaviour
     public event Action OnMovementStopped;
     public event Action OnMovement;
 
-    protected abstract Vector2 GetMovementIntention();
+    private void OnDisable() => MovementIntention = Vector2.zero;
 
+    protected abstract Vector2 GetMovementIntention();
     public Vector2 GetFinalMovement()
     {
-        if (!enabled || MovementBlocked)
+        if (!isActiveAndEnabled || MovementBlocked)
             return Vector2.zero;
 
         Vector2 finalMovement = GetMovementIntention();
 
-        return (finalMovement * SpeedAggregator.Get())
-            + (externalVelocityComponent != null ? externalVelocityComponent.TickAndGet(Time.fixedDeltaTime) : Vector2.zero);
+        return (SpeedAggregator.Get() * WalkingSpeed * finalMovement)
+            + (_externalVelocityComponent != null ? _externalVelocityComponent.TickAndGet(Time.fixedDeltaTime) : Vector2.zero);
     }
-
-    private void OnDisable() => MovementIntention = Vector2.zero;
 
     private void FixedUpdate()
     {
         PrevMovement = MovementIntention;
+        
+        Vector2 finalMovement = GetFinalMovement();
+
+        if (finalMovement != Vector2.zero)
+            _rigidbody2D.linearVelocity = finalMovement;
+
+        _animator.SetFloat(MoveXHash, Mathf.Abs(FacingDirection.x) > 0.01f ? FacingDirection.x : 0f);
+        _animator.SetFloat(MoveYHash, Mathf.Abs(FacingDirection.x) < 0.01f ? FacingDirection.y : 0f);
+        _animator.SetFloat(SpeedHash, _rigidbody2D.linearVelocity.magnitude / 4f);
     }
 }

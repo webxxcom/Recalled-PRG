@@ -809,7 +809,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f639d5de991fedd458c68c534e6201d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  interactionText: {fileID: 0}
 --- !u!1 &4510067057338008398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,6 +1462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementComponent
   <WalkingSpeed>k__BackingField: 2
+  _animator: {fileID: 3750387735865093422}
   <SprintingSpeedMultiplier>k__BackingField: 2
   <Stamina>k__BackingField: 100
   <StaminaUsage>k__BackingField: 0
@@ -1564,7 +1564,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
   _config: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
   _valueProviderSO: {fileID: 11400000, guid: 1ba4ce36a56f24c40a24d84b02027e78, type: 2}
-  <IsInvincible>k__BackingField: 0
 --- !u!1 &8375044973183638792
 GameObject:
   m_ObjectHideFlags: 0

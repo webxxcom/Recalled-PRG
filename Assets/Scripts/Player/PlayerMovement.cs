@@ -22,7 +22,6 @@ public class PlayerMovement : MovementBase
 
     void OnSprint(InputValue value)
     {
-        // If we already sprint but the unpress event was not called
         if (IsSprinting && value.isPressed)
             return;
 
@@ -48,6 +47,9 @@ public class PlayerMovement : MovementBase
 
     protected override Vector2 GetMovementIntention()
     {
+        if (!IsWalking)
+            return Vector2.zero;
+
         Vector2 finalMovement = MovementIntention;
 
         if (IsSprinting)
@@ -57,14 +59,6 @@ public class PlayerMovement : MovementBase
             else
                 _currentStamina -= StaminaUsage;
         }
-
-        if (IsWalking)
-        {
-            finalMovement *= WalkingSpeed;
-        }
-        else
-            finalMovement = Vector2.zero;
-
         return finalMovement;
     }
     void Update()

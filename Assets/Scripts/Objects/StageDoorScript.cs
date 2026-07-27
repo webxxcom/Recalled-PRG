@@ -12,13 +12,13 @@ public class StageDoorScript : InteractableObject
         collider2D = GetComponent<Collider2D>();
     }
 
-    public void Open()
+    void Open()
     {
         IsInteracted = true;
         collider2D.enabled = false;
     }
 
-    public override void Interact() { }
+    public override void Interact() => Open();
 
     protected override bool PlayerCanInteract() => true;
 }

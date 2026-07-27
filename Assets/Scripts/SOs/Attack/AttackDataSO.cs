@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Attack/Attack Data")]
-public class AttackData : ScriptableObject
+public class AttackDataSO : ScriptableObject
 {
     [field: SerializeField] public virtual int DealtDamage { get; private set; } = 10;
     [field: SerializeField] public virtual float ReloadTime { get; private set; } = 0.8f;
@@ -11,7 +11,7 @@ public class AttackData : ScriptableObject
     [field: SerializeField] public float ImpactTime { get; private set; } = 0.3f;
     [field: SerializeField] public float RecoveryTime { get; private set; } = 0.8f;
     [field: SerializeField] public float SpeedMultiplier { get; private set; } = 0.3f;
-    [field: SerializeField] public AttackCurves Curves { get; private set; }
+    [field: SerializeField] public AttackCurvesSO Curves { get; private set; }
     [field: SerializeField] public List<EffectDefinition> Effects { get; private set; }
 
     void ApplyKnockback(HealthProvider target)

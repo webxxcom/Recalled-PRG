@@ -6,7 +6,7 @@ public class PlayerAttackStateMachine : StateMachineBehaviour
     EntityController _entityController;
     EntityAttack _entityAttack;
     MovementBase _movementBase;
-    AttackData _attackData;
+    AttackDataSO _attackData;
 
     readonly List<Collider2D> _damagedTargets = new();
     readonly List<Collider2D> _hits = new(4);

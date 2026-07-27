@@ -1770,11 +1770,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityMovementComponent
   <WalkingSpeed>k__BackingField: 1.5
-  _movementStrategies:
-  - {fileID: 11400000, guid: 449bbd93ce4ca9e4393ca8f935643b3b, type: 2}
-  - {fileID: 11400000, guid: 281bd21f73c6ead4fa04de9d56e90d07, type: 2}
-  _targetProviders:
-  - {fileID: 11400000, guid: 24a57d199f458f14c8446c05d716dcaa, type: 2}
+  _animator: {fileID: 3120718460063332462}
+  _movementAI: {fileID: 11400000, guid: 72187b7b600538c4188fb4aa064706ac, type: 2}
 --- !u!114 &3302160121922179893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1832,7 +1829,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
   _config: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
   _valueProviderSO: {fileID: 0}
-  <IsInvincible>k__BackingField: 0
 --- !u!1 &6584024271604664051
 GameObject:
   m_ObjectHideFlags: 0

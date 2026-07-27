@@ -305,6 +305,7 @@ MonoBehaviour:
   _secondStateAudio: {fileID: 0}
   _displayText: Defeat everyone
   _interactionTextMesh: {fileID: 6882434204649071880}
+  OnStageCleared: {fileID: 11400000, guid: c155ba284f3db044bb4f82aa361aa85b, type: 2}
 --- !u!1001 &939117057792512213
 PrefabInstance:
   m_ObjectHideFlags: 0

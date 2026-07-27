@@ -9,31 +9,12 @@ public class ValueProviderSO : ScriptableObject
     [field: SerializeField] public bool IsStatic { get; private set; }
     public bool Initialized { get; private set; }
 
-    public event Action<GameObject, int> OnValueChanged;
-    public event Action<GameObject> OnMinValueReached;
-    public event Action<GameObject> OnMaxValueReached;
-
-    public void Change(GameObject changer, int value)
+    public void Change(int value)
     {
-        if (!IsStatic)
-        {
-            if (CurrentValue + value <= 0)
-            {
-                CurrentValue = 0;
+        if (IsStatic)
+            return;
 
-                OnMinValueReached.Invoke(changer);
-            }
-            else if (CurrentValue + value >= MaxValue)
-            {
-                CurrentValue = MaxValue;
-
-                OnMaxValueReached.Invoke(changer);
-            }
-            else
-                CurrentValue += value;
-        }
-
-        OnValueChanged?.Invoke(changer, value);
+        CurrentValue = Mathf.Clamp(CurrentValue + value, 0, MaxValue);
     }
 
     public void Init(ValueProviderConfig cfg)

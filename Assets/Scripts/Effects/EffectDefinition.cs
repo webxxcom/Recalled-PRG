@@ -2,9 +2,9 @@ using UnityEngine;
 
 public abstract class EffectDefinition : ScriptableObject
 {
-    public float duration;
+    [field: SerializeField] public float Duration { get; private set; }
 
     public abstract void PutOn(EntityController entityController);
-    public abstract void Tick(EntityController entityController);
+    public abstract void Tick(HealthProvider health);
     public abstract void PutOff(EntityController entityController);
 }

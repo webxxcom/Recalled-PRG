@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(EntityController))]
-public class InvincibilityProvider : MonoBehaviour
+public class Invincibility : MonoBehaviour
 {
     [SerializeField] float _duration;
     [SerializeField] HealthProvider _healthProvider;

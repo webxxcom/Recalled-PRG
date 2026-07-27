@@ -9,26 +9,26 @@ public class HealthSound : EntitySoundComponent
 
     void OnEnable()
     {
-        _healthProvider.Value.OnMinValueReached += HandleDeathSound;
-        _healthProvider.Value.OnValueChanged += HandleHurtHealingSound;
+        _healthProvider.OnMinHpReached += HandleDeathSound;
+        _healthProvider.OnHpChanged += HandleHurtHealingSound;
     }
 
     void OnDisable()
     {
-        _healthProvider.Value.OnMinValueReached += HandleDeathSound;
-        _healthProvider.Value.OnValueChanged += HandleHurtHealingSound;
+        _healthProvider.OnMinHpReached += HandleDeathSound;
+        _healthProvider.OnHpChanged += HandleHurtHealingSound;
     }
 
-    public void HandleDeathSound(GameObject _)
+    public void HandleDeathSound(DamageInfo damageInfo)
     {
         _audioSource.PlayOneShot(_deathSound);
     }
 
-    public void HandleHurtHealingSound(GameObject _, int val)
+    public void HandleHurtHealingSound(DamageInfo damageInfo)
     {
-        if (val < 0)
+        if (damageInfo.Amount < 0)
             _audioSource.PlayOneShot(_hurtSound);
-        else if (val > 0)
+        else if (damageInfo.Amount > 0)
             _audioSource.PlayOneShot(_healingSound);
     }
 }

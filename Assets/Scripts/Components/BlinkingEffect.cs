@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(EntityController))]
-public class BlinkingEffectProvider : MonoBehaviour
+public class BlinkingEffect : MonoBehaviour
 {
     [SerializeField] float _duration;
     [SerializeField] float _blinkInterval;

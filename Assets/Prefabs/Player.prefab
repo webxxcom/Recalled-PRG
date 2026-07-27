@@ -1322,8 +1322,6 @@ GameObject:
   - component: {fileID: 7162682655650916106}
   - component: {fileID: 7101408821228708346}
   - component: {fileID: 506384641350915718}
-  - component: {fileID: 3172139938629916995}
-  - component: {fileID: 8895237871161846097}
   - component: {fileID: 7001661983157172225}
   - component: {fileID: 7477225139193990942}
   - component: {fileID: 5006608323033705435}
@@ -1495,32 +1493,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   _config: {fileID: 0}
   _valueProviderSO: {fileID: 0}
---- !u!114 &3172139938629916995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceaf463d0e9df334f82b0cdb6071b029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
---- !u!114 &8895237871161846097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de202badedf79b547a6adbee14277b17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ExternalVelocityComponent
-  decayRate: 8
-  restThreshold: 0.05
 --- !u!114 &7001661983157172225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1563,7 +1535,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
   _config: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
-  _valueProviderSO: {fileID: 11400000, guid: 1ba4ce36a56f24c40a24d84b02027e78, type: 2}
+  _valueProviderSO: {fileID: 0}
+  _entityController: {fileID: 7101408821228708346}
+  _effectMachine: {fileID: 0}
 --- !u!1 &8375044973183638792
 GameObject:
   m_ObjectHideFlags: 0

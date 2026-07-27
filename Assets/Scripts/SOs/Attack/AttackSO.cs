@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Attack/Attack Data")]
-public class AttackDataSO : ScriptableObject
+public class AttackSO : ScriptableObject
 {
     [field: SerializeField] public virtual int DealtDamage { get; private set; } = 10;
     [field: SerializeField] public virtual float ReloadTime { get; private set; } = 0.8f;
@@ -16,11 +16,11 @@ public class AttackDataSO : ScriptableObject
 
     void ApplyKnockback(HealthProvider target)
     {
-        if (target.TryGetComponent(out ExternalVelocityComponent externalVelocityComponent))
+        if (target.TryGetComponent(out MovementBase movementBase))
         {
             Vector2 attackDir = (target.transform.position - KnockbackOriginTransform.position).normalized;
 
-            externalVelocityComponent.Add(attackDir * KnockbackPower);
+            movementBase.AddExternalVelocity(attackDir * KnockbackPower);
         }
     }
 

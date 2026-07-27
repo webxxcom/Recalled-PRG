@@ -10,7 +10,7 @@ public abstract class EntityAttack : MonoBehaviour
 {
     private static readonly int AttackHash = Animator.StringToHash("Attack");
 
-    [field: SerializeField] public AttackDataSO AttackData { get; private set; }
+    [field: SerializeField] public AttackSO AttackData { get; private set; }
     public CapsuleCollider2D Hitbox { get; private set; }
 
 

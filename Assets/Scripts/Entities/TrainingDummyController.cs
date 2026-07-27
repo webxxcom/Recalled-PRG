@@ -9,19 +9,19 @@ public class TrainingDummyController : MonoBehaviour
     [SerializeField] HealthProvider _healthProvider;
     [SerializeField] Animator _animator;
 
-    void OnHurt(GameObject _, int val)
+    void OnHurt(DamageInfo damageInfo)
     {
-        if (val < 0)
+        if (damageInfo.Amount < 0)
         {
-            if (val >= -10)
+            if (damageInfo.Amount >= -10)
                 _animator.SetTrigger(DamageLightHash);
-            else if (val >= -25)
+            else if (damageInfo.Amount >= -25)
                 _animator.SetTrigger(DamageMidHash);
             else
                 _animator.SetTrigger(DamageHardHash);
         }
     }
 
-    private void OnEnable() => _healthProvider.Value.OnValueChanged += OnHurt;
-    private void OnDisable() => _healthProvider.Value.OnValueChanged -= OnHurt;
+    private void OnEnable() => _healthProvider.OnHpChanged += OnHurt;
+    private void OnDisable() => _healthProvider.OnHpChanged -= OnHurt;
 }

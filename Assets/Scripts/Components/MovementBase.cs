@@ -2,7 +2,6 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(ExternalVelocityComponent))]
 public abstract class MovementBase : MonoBehaviour
 {
     public static readonly int MoveYHash = Animator.StringToHash("MoveY");
@@ -19,13 +18,13 @@ public abstract class MovementBase : MonoBehaviour
     public float CurrentSpeed => WalkingSpeed * SpeedAggregator.Get();
     public Vector2 FacingDirection => MovementIntention != Vector2.zero ? MovementIntention : LastMovement;
    
-    ExternalVelocityComponent _externalVelocityComponent;
-    protected Rigidbody2D _rigidbody2D;
     [SerializeField] Animator _animator;
+    ExternalVelocitySO _externalVelocity;
+    protected Rigidbody2D _rigidbody2D;
 
     private void Awake()
     {
-        _externalVelocityComponent = GetComponent<ExternalVelocityComponent>();
+        _externalVelocity = ScriptableObject.CreateInstance<ExternalVelocitySO>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
@@ -51,7 +50,7 @@ public abstract class MovementBase : MonoBehaviour
     public event Action OnMovementStopped;
     public event Action OnMovement;
 
-    private void OnDisable() => MovementIntention = Vector2.zero;
+    public void AddExternalVelocity(Vector2 vec) => _externalVelocity.Add(vec);
 
     protected abstract Vector2 GetMovementIntention();
     public Vector2 GetFinalMovement()
@@ -62,7 +61,7 @@ public abstract class MovementBase : MonoBehaviour
         Vector2 finalMovement = GetMovementIntention();
 
         return (SpeedAggregator.Get() * WalkingSpeed * finalMovement)
-            + (_externalVelocityComponent != null ? _externalVelocityComponent.TickAndGet(Time.fixedDeltaTime) : Vector2.zero);
+            + _externalVelocity.TickAndGet(Time.fixedDeltaTime);
     }
 
     private void FixedUpdate()
@@ -73,6 +72,8 @@ public abstract class MovementBase : MonoBehaviour
 
         if (finalMovement != Vector2.zero)
             _rigidbody2D.linearVelocity = finalMovement;
+        else
+            _rigidbody2D.linearVelocity *= 0.9f;
 
         _animator.SetFloat(MoveXHash, Mathf.Abs(FacingDirection.x) > 0.01f ? FacingDirection.x : 0f);
         _animator.SetFloat(MoveYHash, Mathf.Abs(FacingDirection.x) < 0.01f ? FacingDirection.y : 0f);

@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : EntityAttack
 {
     Collider2D _collider2D;
-    PlayerController _playerController;
     PlayerMovement _playerMovement;
 
     protected override void Awake()
@@ -14,7 +13,6 @@ public class PlayerAttack : EntityAttack
 
         _collider2D = GetComponent<Collider2D>();
         _playerMovement = Utils.FindOrThrow(GetComponentInParent<PlayerMovement>);
-        _playerController = _entityController as PlayerController;
     }
 
     protected virtual void OnEnable()
@@ -40,10 +38,10 @@ public class PlayerAttack : EntityAttack
     void SetAttackCollisionOffset()
     {
         // TODO the same is in the melee attack strategy
-        if (!_playerController.MovementComponent.IsWalking)
+        if (!_playerMovement.IsWalking)
             return;
 
-        float degrees = Vector2.SignedAngle(Vector2.right, _playerController.MovementComponent.MovementIntention);
+        float degrees = Vector2.SignedAngle(Vector2.right, _playerMovement.MovementIntention);
         _collider2D.transform.rotation = Quaternion.Euler(0, 0, degrees);
     }
 

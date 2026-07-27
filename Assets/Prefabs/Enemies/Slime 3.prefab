@@ -490,6 +490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   _walkingSound: {fileID: 8300000, guid: 54c15e2b384bbcf4c92f79cf35c3c9a3, type: 3}
   _delayBetween: 0.8
+  _movementBase: {fileID: 0}
 --- !u!1 &1189511145535284869
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,10 +849,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6adb27a1278eb64c8d4188a4a79a056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BarScript
-  <TopBar>k__BackingField: {fileID: 370142447445774477}
-  <BottomBar>k__BackingField: {fileID: 8180292811091545600}
-  <AnimationSpeed>k__BackingField: 1.5
-  <ValueProvider>k__BackingField: {fileID: 3659476714238881766}
+  _topBar: {fileID: 0}
+  _bottomBar: {fileID: 0}
+  _animationSpeed: 0
+  _valueProvider: {fileID: 0}
+  _canvasGroup: {fileID: 0}
 --- !u!114 &892592156849737773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,9 +866,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146c7b45e04b5a14a83b6c037e6919a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _health: {fileID: 3659476714238881766}
   _aliveBar: {fileID: 7748800164084045486}
   _deadBar: {fileID: 5046599424978369931}
+  _healthProvider: {fileID: 0}
 --- !u!114 &2390632386251594846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -962,88 +964,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe6f3a3319d4c14582e88498e0092bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
---- !u!1 &4280673928685088914
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6823753800305201289}
-  - component: {fileID: 1038280259001241435}
-  - component: {fileID: 3986920333935542544}
-  m_Layer: 9
-  m_Name: Attack Hitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6823753800305201289
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4280673928685088914}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 529466297735456631}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &1038280259001241435
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4280673928685088914}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.04565645, y: 0.02174079}
-  m_Size: {x: 2.2218418, y: 1.0434905}
-  m_Direction: 1
---- !u!114 &3986920333935542544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4280673928685088914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8219e8bcad527234e8f3de609918be75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1 &4336084613961438844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,8 +1086,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.307, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6823753800305201289}
+  m_Children: []
   m_Father: {fileID: 8526230742337842442}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &3436857251089669775
@@ -1220,8 +1139,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityAttackComponent
   <AttackData>k__BackingField: {fileID: 0}
-  <Effects>k__BackingField:
-  - {fileID: 11400000, guid: 43992c6f007da154b8c12aa835d6f296, type: 2}
 --- !u!114 &7012854458007764194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1280,7 +1197,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1816888162444126662}
-  - component: {fileID: 2315378329435920277}
   m_Layer: 9
   m_Name: Audio
   m_TagString: Untagged
@@ -1306,18 +1222,6 @@ Transform:
   - {fileID: 6065534180665094561}
   m_Father: {fileID: 8526230742337842442}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2315378329435920277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5126537152966074101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12bc4c49fc6f39b4081b503fb657a37f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EntityAudioController
 --- !u!1 &5506852461723748314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,6 +1467,7 @@ MonoBehaviour:
   _hurtSound: {fileID: 8300000, guid: 7f4b6fc4e693a7d48a6cab9fd4e750d5, type: 3}
   _healingSound: {fileID: 0}
   _deathSound: {fileID: 8300000, guid: 0fc66c57e15b9594c9f2d0b7a54d3510, type: 3}
+  _healthProvider: {fileID: 0}
 --- !u!1 &6097617918995308611
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,15 +1480,11 @@ GameObject:
   - component: {fileID: 181632092390176455}
   - component: {fileID: 709522701639608767}
   - component: {fileID: 4303295007589574839}
-  - component: {fileID: 1587604659676026480}
   - component: {fileID: 8023279021401798368}
-  - component: {fileID: 7909209022917881383}
-  - component: {fileID: 1176398378409222523}
-  - component: {fileID: 3323902720562264678}
-  - component: {fileID: 2583970441013822405}
   - component: {fileID: 1332064429310887525}
   - component: {fileID: 6414543018664610763}
   - component: {fileID: 3659476714238881766}
+  - component: {fileID: 8962501645842732508}
   m_Layer: 9
   m_Name: Slime 3
   m_TagString: Enemy
@@ -1712,18 +1613,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1587604659676026480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097617918995308611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 267b376786447e94f85c3f58c2047d50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!114 &8023279021401798368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1737,65 +1626,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityMovementComponent
   <WalkingSpeed>k__BackingField: 1.5
-  movementStrategies:
-  - {fileID: 1176398378409222523}
-  - {fileID: 3323902720562264678}
-  targetProviders:
-  - {fileID: 7909209022917881383}
---- !u!114 &7909209022917881383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097617918995308611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d78d9cd4aa9c774fb3e2c54ec8a168b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ZoneBehaviorComponent
-  <CurrentTarget>k__BackingField: {fileID: 0}
-  chaseZoneComponent: {fileID: 0}
---- !u!114 &1176398378409222523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097617918995308611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1114f7e9e43484a919319e26f75933, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChaseMovementComponent
-  minDistanceToTarget: 1.2
---- !u!114 &3323902720562264678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097617918995308611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b89caa6d767f4ab46b81696d6f082865, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  <WanderingZone>k__BackingField: {fileID: 0}
---- !u!114 &2583970441013822405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097617918995308611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de202badedf79b547a6adbee14277b17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ExternalVelocityComponent
-  decayRate: 8
-  restThreshold: 0.05
+  _animator: {fileID: 0}
+  _movementAI: {fileID: 0}
 --- !u!114 &1332064429310887525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1808,6 +1640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a79a0ea00109294d987ca291fa2e781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlinkingEffectProvider
+  _duration: 0
+  _blinkInterval: 0
+  _spriteRendererGroup: {fileID: 0}
 --- !u!114 &6414543018664610763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1820,6 +1655,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7af567f829480489cb925839780c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InvincibilityProvider
+  _duration: 0
+  _healthProvider: {fileID: 0}
 --- !u!114 &3659476714238881766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1832,11 +1669,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32b0800f4e22ef4380519b4d1a7e6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
-  <MaxValue>k__BackingField: 100
-  <MinValue>k__BackingField: 0
-  <Value>k__BackingField: 0
-  <IsStatic>k__BackingField: 0
-  <IsInvincible>k__BackingField: 0
+  _config: {fileID: 0}
+  _valueProviderSO: {fileID: 0}
+  _entityController: {fileID: 0}
+  _effectMachine: {fileID: 0}
+--- !u!114 &8962501645842732508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6097617918995308611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c716f82cffa184fb97b7f38151d5b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EntityController
 --- !u!1 &7283403785417316623
 GameObject:
   m_ObjectHideFlags: 0

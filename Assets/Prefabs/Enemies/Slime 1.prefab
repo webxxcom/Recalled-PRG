@@ -1648,9 +1648,8 @@ GameObject:
   - component: {fileID: 8526230742337842442}
   - component: {fileID: 181632092390176455}
   - component: {fileID: 1807106667663726009}
-  - component: {fileID: 1587604659676026480}
+  - component: {fileID: 6699509137040294474}
   - component: {fileID: 8023279021401798368}
-  - component: {fileID: 3302160121922179893}
   - component: {fileID: 1332064429310887525}
   - component: {fileID: 6414543018664610763}
   - component: {fileID: 3659476714238881766}
@@ -1745,7 +1744,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.083805546, y: 0.051474743}
   m_Size: {x: 0.85711724, y: 0.29794315}
   m_Direction: 1
---- !u!114 &1587604659676026480
+--- !u!114 &6699509137040294474
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1754,9 +1753,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6097617918995308611}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 267b376786447e94f85c3f58c2047d50, type: 3}
+  m_Script: {fileID: 11500000, guid: 92c716f82cffa184fb97b7f38151d5b1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::EntityController
 --- !u!114 &8023279021401798368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1772,20 +1771,6 @@ MonoBehaviour:
   <WalkingSpeed>k__BackingField: 1.5
   _animator: {fileID: 3120718460063332462}
   _movementAI: {fileID: 11400000, guid: 72187b7b600538c4188fb4aa064706ac, type: 2}
---- !u!114 &3302160121922179893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097617918995308611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de202badedf79b547a6adbee14277b17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  decayRate: 8
-  restThreshold: 0.05
 --- !u!114 &1332064429310887525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1829,6 +1814,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
   _config: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
   _valueProviderSO: {fileID: 0}
+  _entityController: {fileID: 6699509137040294474}
+  _effectMachine: {fileID: 0}
 --- !u!1 &6584024271604664051
 GameObject:
   m_ObjectHideFlags: 0

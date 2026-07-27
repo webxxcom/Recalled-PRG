@@ -3,8 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Effects/Fire")]
 public class FireEffectDefinition : EffectDefinition
 {
-    static readonly int DamagePerSecond = 2;
-    static readonly float SpeedMultiplier = 0.8f;
+    [SerializeField] int _damagePerSecond = 2;
+    [SerializeField] float SpeedMultiplier = 0.8f;
+    [SerializeField] float reloadTime = 0.5f;
     static readonly Color Color = new(0.5f, 1f, 1f);
 
     public override void PutOn(EntityController entityController)
@@ -20,16 +21,15 @@ public class FireEffectDefinition : EffectDefinition
         entityController.SpriteRendererGroup.SetColor(Color.white);
 
         if (entityController.TryGetComponent(out MovementBase movementBase))
-            movementBase.SpeedAggregator.Add(SpeedMultiplier);
+            movementBase.SpeedAggregator.Remove(SpeedMultiplier);
     }
 
     float timeSinceDamage = 0;
-    readonly float reloadTime = 0.5f;
-    public override void Tick(EntityController entityController)
+    public override void Tick(HealthProvider health)
     {
         if (timeSinceDamage > reloadTime)
         {
-            entityController.HealthProvider.DealDamage(null, -DamagePerSecond);
+            health.DealDamage(null, -_damagePerSecond);
             timeSinceDamage = 0;
         }
 

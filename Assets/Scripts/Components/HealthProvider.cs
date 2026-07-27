@@ -1,28 +1,21 @@
+using System.Collections.Generic;
 using UnityEngine;
-
-public abstract class ValueProvider : MonoBehaviour
-{
-    [SerializeField] ValueProviderConfig _config;
-    [SerializeField] ValueProviderSO _valueProviderSO;
-
-    // Lazy init SO
-    public ValueProviderSO Value
-    {
-        get
-        {
-            if (_valueProviderSO == null)
-                _valueProviderSO = ScriptableObject.CreateInstance<ValueProviderSO>();
-
-            if (!_valueProviderSO.Initialized)
-                _valueProviderSO.Init(_config);
-            return _valueProviderSO;
-        }
-    }
-}
+using UnityEngine.Events;
 
 public class HealthProvider : ValueProvider
 {
     public bool IsInvincible { get; set; }
+
+    [SerializeField] EntityController _entityController;
+    [SerializeField] EffectMachineSO _effectMachine;
+
+    public event UnityAction<DamageInfo> OnHpChanged;
+    public event UnityAction<DamageInfo> OnMinHpReached;
+
+    private void Awake()
+    {
+        _effectMachine = ScriptableObject.CreateInstance<EffectMachineSO>();
+    }
 
     public bool IsDead
     {
@@ -30,17 +23,28 @@ public class HealthProvider : ValueProvider
         set
         {
             if (value)
-                Value.Change(gameObject, 0);
+                Value.Change(0);
             else
-                Value.Change(gameObject, Value.MaxValue);
+                Value.Change(Value.MaxValue);
         }
     }
 
-    public void DealDamage(GameObject changer, int value)
+    public void RaiseEvents(GameObject changer, int value)
+    {
+        DamageInfo di = new() { Amount = value, Source = changer };
+
+        OnHpChanged?.Invoke(di);
+        if (Value.CurrentValue == 0)
+            OnMinHpReached?.Invoke(di);
+    }
+
+    public void DealDamage(GameObject changer, int value, List<EffectDefinition> effects = null)
     {
         if (IsInvincible)
             return;
 
-        Value.Change(changer, value);
+        Value.Change(value);
+        effects?.ForEach(e => _effectMachine.ApplyEffect(_entityController, this, e));
+        RaiseEvents(changer, value);
     }
 }

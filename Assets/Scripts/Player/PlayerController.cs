@@ -1,19 +1,17 @@
-using CsvHelper.Configuration.Attributes;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(InvincibilityProvider))]
-[RequireComponent(typeof(EffectMachine))]
-[RequireComponent(typeof(MovementBase))]
+[RequireComponent(typeof(Invincibility))]
+[RequireComponent(typeof(BlinkingEffect))]
+[RequireComponent(typeof(HealthProvider))]
 public class PlayerController : EntityController
 {
     private static readonly int IsArmedHash = Animator.StringToHash("IsArmed");
 
+    bool _isArmed;
     public bool IsArmed
     {
         get => _isArmed;
-        
         private set
         {
             _isArmed = value;
@@ -21,77 +19,39 @@ public class PlayerController : EntityController
         }
     }
 
-    bool _isArmed;
-
     [Header("Broadcasts to")]
-    [SerializeField] GameobjectIntGameEvent OnHpChanged;
-    [SerializeField] GameobjectGameEvent OnDeath;
+    [SerializeField] DamageInfoGameEvent OnHpChanged;
+    [SerializeField] DamageInfoGameEvent OnDeath;
 
-    public EffectMachine EffectMachineComponent { get; private set; }
-    public PlayerMovement MovementComponent { get; private set; }
-    public PlayerInteraction InteractionComponent { get; private set; }
-    public InvincibilityProvider InvincibilityComponent { get; private set; }
+    PlayerMovement _movementComponent;
+    Invincibility _invincibility;
+    BlinkingEffect _blinkingEffect;
+    HealthProvider _healthProvider;
 
     protected override void Awake()
     {
         base.Awake();
 
-        MovementComponent = GetComponent<PlayerMovement>();
-        InvincibilityComponent = GetComponent<InvincibilityProvider>();
-        EffectMachineComponent = GetComponent<EffectMachine>();
-        InteractionComponent = Utils.FindOrThrow(GetComponentInChildren<PlayerInteraction>);
+        _movementComponent = GetComponent<PlayerMovement>();
+        _invincibility = GetComponent<Invincibility>();
+        _blinkingEffect = GetComponent<BlinkingEffect>();
+        _healthProvider = GetComponent<HealthProvider>();
 
         IsArmed = true;
     }
 
-    protected override void OnEnable()
+    void OnEnable()
     {
-        base.OnEnable();
-
-        HealthProvider.Value.OnValueChanged += HandleOnHpChangedGameEvent;
-        HealthProvider.Value.OnMinValueReached += HandleOnDeathGameEvent;
+        _healthProvider.OnHpChanged += HandleOnHpChangedGameEvent;
+        _healthProvider.OnMinHpReached += HandleOnDeathGameEvent;
     }
 
-    protected override void OnDisable()
+    void OnDisable()
     {
-        base.OnDisable();
-
-        HealthProvider.Value.OnValueChanged -= HandleOnHpChangedGameEvent;
-        HealthProvider.Value.OnMinValueReached -= HandleOnDeathGameEvent;
+        _healthProvider.OnHpChanged -= HandleOnHpChangedGameEvent;
+        _healthProvider.OnMinHpReached -= HandleOnDeathGameEvent;
     }
 
-    void HandleOnHpChangedGameEvent(GameObject changer, int val) => OnHpChanged.Invoke(changer, val);
-    void HandleOnDeathGameEvent(GameObject changer) => OnDeath.Invoke(changer);
-
-    protected override void OnTriggerEnter2D(Collider2D collision)
-    {
-        base.OnTriggerEnter2D(collision);
-
-        if (collision.CompareTag("Collectible"))
-        {
-            Destroy(collision.gameObject);
-        }
-    }
-
-    protected override void HandleFixedUpdate()
-    {
-        Vector2 movement = MovementComponent.GetFinalMovement(); 
-        
-        if (movement != Vector2.zero)
-        {
-            Rigidbody2D.linearVelocity = movement;
-        }
-        else
-        {
-            Rigidbody2D.linearVelocity *= 0.9f;
-        }
-
-        Animator.SetFloat(MovementBase.MoveXHash, MovementComponent.FacingDirection.x);
-        Animator.SetFloat(MovementBase.MoveYHash, MovementComponent.FacingDirection.y);
-        Animator.SetFloat(MovementBase.SpeedHash,
-            Rigidbody2D.linearVelocity.magnitude / (MovementComponent.WalkingSpeed * MovementComponent.SprintingSpeedMultiplier));
-    }
-    
-    // Input layer
-    void OnInteract(InputValue _) => InteractionComponent.InteractWithCurrent();
+    void HandleOnHpChangedGameEvent(DamageInfo damageInfo) => OnHpChanged.Raise(damageInfo);
+    void HandleOnDeathGameEvent(DamageInfo damageInfo) => OnDeath.Raise(damageInfo);
 }

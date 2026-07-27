@@ -6,7 +6,7 @@ public class BarSwitchComponent : MonoBehaviour
     [SerializeField] GameObject _deadBar;
     [SerializeField] HealthProvider _healthProvider;
 
-    void ToggleBars(GameObject _)
+    void ToggleBars(DamageInfo _)
     {
         _aliveBar.SetActive(!_aliveBar.activeInHierarchy);
         _deadBar.SetActive(!_deadBar.activeInHierarchy);
@@ -14,11 +14,11 @@ public class BarSwitchComponent : MonoBehaviour
 
     private void OnEnable()
     {
-        _healthProvider.Value.OnMinValueReached += ToggleBars;
+        _healthProvider.OnMinHpReached += ToggleBars;
     }
 
     private void OnDisable()
     {
-        _healthProvider.Value.OnMinValueReached -= ToggleBars;
+        _healthProvider.OnMinHpReached -= ToggleBars;
     }
 }

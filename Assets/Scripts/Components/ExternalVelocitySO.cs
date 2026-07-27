@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ExternalVelocityComponent : MonoBehaviour
+public class ExternalVelocitySO : ScriptableObject
 {
     [SerializeField] private float decayRate = 8f;
     [SerializeField] private float restThreshold = 0.05f;

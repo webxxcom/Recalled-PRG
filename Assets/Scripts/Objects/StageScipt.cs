@@ -1,32 +1,27 @@
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class StageScipt : MonoBehaviour
 {
-    [SerializeField] Light2D stageLight;
-    EnemyController[] enemies;
-    StageDoorScript doorScript;
+    EntityController[] _enemies;
+
+    [Header("Broadcasts on")]
+    [SerializeField] VoidGameEvent OnStage1Cleared;
 
     private void Start()
     {
-        stageLight.enabled = false;
-        enemies = GetComponentsInChildren<EnemyController>();
-        doorScript = GetComponentInChildren<StageDoorScript>();
-    }
-
-    void IfAllEnemiesAreDead()
-    {
-        if (!doorScript.IsInteracted && enemies.Count(e => e.HealthProvider.IsDead) == enemies.Length)
-        {
-            doorScript.Interact();
-            stageLight.enabled = true;
-            stageLight.GetComponent<Animator>().SetTrigger("Interact");
-        }
+      
     }
 
     private void Update()
     {
-        IfAllEnemiesAreDead();
+        // TODO
+        //if (_enemies.Count(e => e.HealthProvider.IsDead) == _enemies.Length)
+        //{
+        //    if (OnStage1Cleared != null)
+        //        OnStage1Cleared.Invoke();
+
+        //    enabled = false;
+        //}
     }
 }

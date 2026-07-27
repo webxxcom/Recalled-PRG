@@ -479,7 +479,7 @@ AnimatorStateMachine:
     m_Position: {x: 480, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 878018179350203413}
-    m_Position: {x: 10, y: -40, z: 0}
+    m_Position: {x: -20, y: -80, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -1327,9 +1327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0491a3efefb53a841bd407e9b039fe63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  impactTime: 0.45
-  recoveryTime: 0.8
-  speedMultiplier: 0.3
 --- !u!206 &4119856063336774545
 BlendTree:
   m_ObjectHideFlags: 1

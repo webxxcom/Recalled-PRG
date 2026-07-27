@@ -7,25 +7,25 @@ public class BarScript : MonoBehaviour
     [SerializeField] Image _topBar;
     [SerializeField] Image _bottomBar;
     [SerializeField] float _animationSpeed;
-    [SerializeField] ValueProvider _valueProvider;
+    [SerializeField] HealthProvider _valueProvider;
     [SerializeField] CanvasGroup _canvasGroup;
 
     public float MaxValue { get; set; }
     public float Value { get; private set; }
 
-    void OnValueChanged(GameObject _, int val) => Change(val);
+    void OnValueChanged(DamageInfo damageInfo) => Change(damageInfo.Amount);
 
     private void OnEnable()
     {
         MaxValue = _valueProvider.Value.MaxValue;
         Set(_valueProvider.Value.CurrentValue);
 
-        _valueProvider.Value.OnValueChanged += OnValueChanged;
+        _valueProvider.OnHpChanged += OnValueChanged;
     }
 
     private void OnDisable()
     {
-        _valueProvider.Value.OnValueChanged -= OnValueChanged;
+        _valueProvider.OnHpChanged -= OnValueChanged;
     }
 
     float TargetValue => Value / MaxValue;

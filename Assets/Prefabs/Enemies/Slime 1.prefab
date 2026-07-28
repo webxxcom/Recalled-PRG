@@ -1355,7 +1355,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7085225572803684528}
   - component: {fileID: 8293097748507972211}
-  - component: {fileID: 5272616755474947490}
   m_Layer: 6
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -1414,18 +1413,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.03102684, y: 0.3504212}
   m_Radius: 0.48722434
---- !u!114 &5272616755474947490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3947751842682473356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfe6f3a3319d4c14582e88498e0092bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
 --- !u!1 &4117085876247267688
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,7 +1679,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 100
   m_LinearDamping: 1
   m_AngularDamping: 0
   m_GravityScale: 0
@@ -1786,6 +1773,7 @@ MonoBehaviour:
   _duration: 1
   _blinkInterval: 0.1
   _spriteRendererGroup: {fileID: 7500885327404439899}
+  _healthProvider: {fileID: 3659476714238881766}
 --- !u!114 &6414543018664610763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1815,7 +1803,7 @@ MonoBehaviour:
   _config: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
   _valueProviderSO: {fileID: 0}
   _entityController: {fileID: 6699509137040294474}
-  _effectMachine: {fileID: 0}
+  _animator: {fileID: 3120718460063332462}
 --- !u!1 &6584024271604664051
 GameObject:
   m_ObjectHideFlags: 0

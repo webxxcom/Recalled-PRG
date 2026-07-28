@@ -38,13 +38,23 @@ public class PlayerAttackStateMachine : StateMachineBehaviour
 
         if (_attackData.Curves)
         {
+            
+
             _entityAttack.Hitbox.size = new(
-                _attackData.Curves.ColliderSizeX.Evaluate(stateInfo.normalizedTime),
-                _attackData.Curves.ColliderSizeY.Evaluate(stateInfo.normalizedTime)
+                _attackData.Curves.ColliderSizeX.length > 1
+                ? _attackData.Curves.ColliderSizeX.Evaluate(stateInfo.normalizedTime)
+                : _entityAttack.Hitbox.size.x,
+                _attackData.Curves.ColliderSizeY.length > 1
+                ? _attackData.Curves.ColliderSizeY.Evaluate(stateInfo.normalizedTime)
+                : _entityAttack.Hitbox.size.y
                 );
             _entityAttack.Hitbox.offset = new(
-                _attackData.Curves.ColliderOffsetX.Evaluate(stateInfo.normalizedTime),
-                _attackData.Curves.ColliderOffsetY.Evaluate(stateInfo.normalizedTime)
+                _attackData.Curves.ColliderOffsetX.length > 1
+                ? _attackData.Curves.ColliderOffsetX.Evaluate(stateInfo.normalizedTime)
+                : _entityAttack.Hitbox.offset.x,
+                _attackData.Curves.ColliderOffsetY.length > 1
+                ? _attackData.Curves.ColliderOffsetY.Evaluate(stateInfo.normalizedTime)
+                : _entityAttack.Hitbox.offset.y
                 );
         }
 

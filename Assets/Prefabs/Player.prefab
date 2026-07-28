@@ -1478,7 +1478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   OnHpChanged: {fileID: 11400000, guid: 4eb2943eb5950f54eba48d5bad32d3cd, type: 2}
-  OnDeath: {fileID: 11400000, guid: cec913867d824d3499f559df82d709ca, type: 2}
+  OnDeath: {fileID: 11400000, guid: 1b2ce962ee3da3c4ca0eb1ac1d6feff8, type: 2}
 --- !u!114 &506384641350915718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1508,6 +1508,7 @@ MonoBehaviour:
   _duration: 1
   _blinkInterval: 0.1
   _spriteRendererGroup: {fileID: 4980500249380923839}
+  _healthProvider: {fileID: 5006608323033705435}
 --- !u!114 &7477225139193990942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1537,7 +1538,7 @@ MonoBehaviour:
   _config: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
   _valueProviderSO: {fileID: 0}
   _entityController: {fileID: 7101408821228708346}
-  _effectMachine: {fileID: 0}
+  _animator: {fileID: 3750387735865093422}
 --- !u!1 &8375044973183638792
 GameObject:
   m_ObjectHideFlags: 0

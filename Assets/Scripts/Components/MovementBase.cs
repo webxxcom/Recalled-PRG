@@ -33,13 +33,14 @@ public abstract class MovementBase : MonoBehaviour
         get => _movementIntention;
         set
         {
+            var prevMov = _movementIntention;
             _movementIntention = value;
 
-            if (_movementIntention == Vector2.zero && value != Vector2.zero)
+            if (prevMov == Vector2.zero && value != Vector2.zero)
                 OnMovementStarted?.Invoke();
-            else if (_movementIntention != Vector2.zero && value == Vector2.zero)
+            else if (prevMov != Vector2.zero && value == Vector2.zero)
                 OnMovementStopped?.Invoke();
-            else
+            else if (value != Vector2.zero)
                 OnMovement?.Invoke();
         }
     }

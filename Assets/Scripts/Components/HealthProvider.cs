@@ -9,8 +9,8 @@ public class HealthProvider : ValueProvider
     public bool IsInvincible { get; set; }
 
     [SerializeField] EntityController _entityController;
-    [SerializeField] EffectMachineSO _effectMachine;
     [SerializeField] Animator _animator;
+    EffectMachineSO _effectMachine;
 
     public event UnityAction<DamageInfo> OnHpChanged;
     public event UnityAction<DamageInfo> OnMinHpReached;

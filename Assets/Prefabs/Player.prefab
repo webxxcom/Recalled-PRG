@@ -192,7 +192,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7103029191301751210}
   - component: {fileID: 7648009776092296695}
-  - component: {fileID: 2511745154895722241}
   m_Layer: 6
   m_Name: Hurtbox
   m_TagString: Player
@@ -252,18 +251,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.034803063, y: 0.5794718}
   m_Size: {x: 0.8056588, y: 1.408505}
   m_Direction: 0
---- !u!114 &2511745154895722241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1515305421710409048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfe6f3a3319d4c14582e88498e0092bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
 --- !u!1 &1822602623840076642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,7 +1465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   OnHpChanged: {fileID: 11400000, guid: 4eb2943eb5950f54eba48d5bad32d3cd, type: 2}
-  OnDeath: {fileID: 11400000, guid: 1b2ce962ee3da3c4ca0eb1ac1d6feff8, type: 2}
+  OnDeath: {fileID: 11400000, guid: 4931a3f3f02ec4e4f89d5fbca7242bf4, type: 2}
 --- !u!114 &506384641350915718
 MonoBehaviour:
   m_ObjectHideFlags: 0

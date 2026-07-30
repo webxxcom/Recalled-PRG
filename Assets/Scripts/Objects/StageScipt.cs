@@ -1,27 +1,23 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class StageScipt : MonoBehaviour
 {
-    EntityController[] _enemies;
+    [SerializeField] HealthProvider[] _enemies;
 
     [Header("Broadcasts on")]
     [SerializeField] VoidGameEvent OnStage1Cleared;
 
-    private void Start()
-    {
-      
-    }
-
     private void Update()
     {
         // TODO
-        //if (_enemies.Count(e => e.HealthProvider.IsDead) == _enemies.Length)
-        //{
-        //    if (OnStage1Cleared != null)
-        //        OnStage1Cleared.Invoke();
+        if (_enemies.All(hp => hp == null))
+        {
+            if (OnStage1Cleared != null)
+                OnStage1Cleared.Invoke();
 
-        //    enabled = false;
-        //}
+            enabled = false;
+        }
     }
 }

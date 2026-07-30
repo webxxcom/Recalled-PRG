@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639169743628968169
+  platformSettingsDirtyTick: 639210356611638851
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -631,6 +631,27 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 103, y: 106}
+  - name: face_details
+    originalName: 
+    pivot: {x: -2, y: -5.3999996}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 56
+      y: 121
+      width: 1
+      height: 1
+    spriteID: 021a54fd420f37b4f8ea4728a199c1bd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 56, y: 121}
   spriteSheetImportData: []
   tileSetImportData: []
   asepriteLayers:
@@ -706,6 +727,31 @@ ScriptedImporter:
     parentIndex: -1
   - layerIndex: 1
     uuid:
+      value0: 297589902
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 0
+    name: face_details
+    layerFlags: 3
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: face_details
+      frameIndex: 3
+      additiveSortOrder: 0
+      cellRect:
+        x: 34
+        y: 31
+        width: 1
+        height: 1
+      spriteId: 021a54fd420f37b4f8ea4728a199c1bd
+    linkedCells: []
+    tileCells: []
+    tileSetIndex: 0
+    parentIndex: -1
+  - layerIndex: 2
+    uuid:
       value0: 3383613474
       value1: 0
       value2: 0
@@ -774,7 +820,7 @@ ScriptedImporter:
     tileCells: []
     tileSetIndex: 0
     parentIndex: -1
-  - layerIndex: 2
+  - layerIndex: 3
     uuid:
       value0: 1089231064
       value1: 0
@@ -844,7 +890,7 @@ ScriptedImporter:
     tileCells: []
     tileSetIndex: 0
     parentIndex: -1
-  - layerIndex: 3
+  - layerIndex: 4
     uuid:
       value0: 3457518718
       value1: 0
@@ -921,7 +967,7 @@ ScriptedImporter:
     ignorePlatformSupport: 0
     maxTextureSize: 16384
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 0
     compressionQuality: 50
     forceMaximumCompressionQuality_BC6H_BC7: 0

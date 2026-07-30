@@ -23,17 +23,25 @@ public class HealthProvider : ValueProvider
     private void OnEnable()
     {
         OnHpChanged += HpChanged;
+        OnMinHpReached += OnDeath;
     }
 
     private void OnDisable()
     {
         OnHpChanged -= HpChanged;
+        OnMinHpReached -= OnDeath;
     }
 
     void HpChanged(DamageInfo damageInfo)
     {
         _animator.SetTrigger(HurtHash);
         damageInfo.Effects?.ForEach(e => _effectMachine.ApplyEffect(_entityController, this, e));
+    }
+
+    void OnDeath(DamageInfo damageInfo)
+    {
+        _animator.SetTrigger("Die");
+        Debug.Log($"{gameObject.name} was killed by {damageInfo.Source.name}");
     }
 
     public bool IsDead
@@ -59,8 +67,9 @@ public class HealthProvider : ValueProvider
     {
         if (IsInvincible)
             return;
+        value = -value;
 
-        Value.Change(-value);
+        Value.Change(value);
         RaiseEvents(new() { Amount = value, Source = changer, Effects = effects });
     }
 }

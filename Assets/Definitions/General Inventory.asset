@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a02714c03b9bf41861a50577a99895, type: 3}
   m_Name: General Inventory
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
-  <Items>k__BackingField:
-  - <Definition>k__BackingField: {fileID: 11400000, guid: eaf1831fb346c5a47aeae7be05e9301e, type: 2}
-    <Count>k__BackingField: 0
+  <Items>k__BackingField: []

@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639169743729681046
+  platformSettingsDirtyTick: 639210356512222298
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -799,6 +799,27 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 33, y: 4}
+  - name: face_details
+    originalName: 
+    pivot: {x: 0.5, y: -7.3999996}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 120
+      y: 142
+      width: 2
+      height: 1
+    spriteID: 71c4995a15a883d499eb03f4adc25e60
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 120, y: 142}
   spriteSheetImportData: []
   tileSetImportData: []
   asepriteLayers:
@@ -892,6 +913,31 @@ ScriptedImporter:
     parentIndex: -1
   - layerIndex: 1
     uuid:
+      value0: 297589902
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 0
+    name: face_details
+    layerFlags: 3
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: face_details
+      frameIndex: 3
+      additiveSortOrder: 0
+      cellRect:
+        x: 31
+        y: 33
+        width: 2
+        height: 1
+      spriteId: 71c4995a15a883d499eb03f4adc25e60
+    linkedCells: []
+    tileCells: []
+    tileSetIndex: 0
+    parentIndex: -1
+  - layerIndex: 2
+    uuid:
       value0: 3383613474
       value1: 0
       value2: 0
@@ -978,7 +1024,7 @@ ScriptedImporter:
     tileCells: []
     tileSetIndex: 0
     parentIndex: -1
-  - layerIndex: 2
+  - layerIndex: 3
     uuid:
       value0: 1089231064
       value1: 0
@@ -1066,7 +1112,7 @@ ScriptedImporter:
     tileCells: []
     tileSetIndex: 0
     parentIndex: -1
-  - layerIndex: 3
+  - layerIndex: 4
     uuid:
       value0: 3457518718
       value1: 0
@@ -1161,7 +1207,7 @@ ScriptedImporter:
     ignorePlatformSupport: 0
     maxTextureSize: 16384
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 0
     compressionQuality: 50
     forceMaximumCompressionQuality_BC6H_BC7: 0

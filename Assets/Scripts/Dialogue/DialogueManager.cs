@@ -1,3 +1,4 @@
+using CsvHelper.Configuration.Attributes;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,9 @@ public class DialogueManager : MonoBehaviour
     ConsumableValue<bool >_enterPressed;
     ConsumableValue<DialogueData.Line.Choice> _buttonPressedData;
 
+    [Header("Listens to")]
+    [SerializeField] DialogueSourceGameEvent OnDialogueStarted;
+
     void ResetFields()
     {
         _continueButton.gameObject.SetActive(false);
@@ -50,7 +54,17 @@ public class DialogueManager : MonoBehaviour
         ResetFields();
     }
 
-    public void BeginDialogue(DialogueSource dialogueData, bool left = false)
+    private void OnEnable()
+    {
+        OnDialogueStarted.OnEventRaised += BeginDialogue;
+    }
+
+    private void OnDisable()
+    {
+        OnDialogueStarted.OnEventRaised -= BeginDialogue;
+    }
+
+    public void BeginDialogue(DialogueSource dialogueData)
     {
         _dialogueData = JsonUtility.FromJson<DialogueData>(dialogueData.TextFile.text);
         _canvas.enabled = true;
@@ -58,8 +72,7 @@ public class DialogueManager : MonoBehaviour
         _enterPressed.Value = false;
         _buttonPressedData.Value = null;
         
-        if (left) // TODO should separate the left entity sprite setting
-            _leftEntity.SpriteImage.sprite = dialogueData.EntitySprite;
+        _leftEntity.SpriteImage.sprite = dialogueData.EntitySprite;
 
         StartCoroutine(BeginTalking());
     }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4647231223192459453}
   - component: {fileID: 6885743430467850160}
-  - component: {fileID: 3700614457959958476}
   m_Layer: 6
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -70,18 +69,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.020393372, y: -0.05268395}
   m_Size: {x: 0.62236214, y: 1.4180729}
   m_Direction: 0
---- !u!114 &3700614457959958476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 175039996589242903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfe6f3a3319d4c14582e88498e0092bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
 --- !u!1 &8822795234151242890
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +82,7 @@ GameObject:
   - component: {fileID: 1614906266074812132}
   - component: {fileID: 2106326233406549787}
   - component: {fileID: 8080906468532238491}
+  - component: {fileID: 2106114236986627692}
   m_Layer: 11
   m_Name: Training Dummy
   m_TagString: Untagged
@@ -197,6 +185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
   _config: {fileID: 11400000, guid: 864889a04087d4d448a4d01d160d960a, type: 2}
   _valueProviderSO: {fileID: 0}
+  _entityController: {fileID: 2106114236986627692}
+  _animator: {fileID: 3784235917605943660}
 --- !u!114 &8080906468532238491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +201,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   _healthProvider: {fileID: 2106326233406549787}
   _animator: {fileID: 3784235917605943660}
+--- !u!114 &2106114236986627692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822795234151242890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c716f82cffa184fb97b7f38151d5b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EntityController
 --- !u!1001 &2638589704726934692
 PrefabInstance:
   m_ObjectHideFlags: 0

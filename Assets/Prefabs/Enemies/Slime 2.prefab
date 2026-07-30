@@ -831,8 +831,8 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.2
-      value: 1
+      time: 0.4208557
+      value: 0.99547195
       inSlope: -5.0019917
       outSlope: -5.0019917
       tangentMode: 0
@@ -840,8 +840,8 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.49585572
-      value: 0.71487427
+      time: 0.5871185
+      value: 0.49546814
       inSlope: -1.2504979
       outSlope: -1.2504979
       tangentMode: 0
@@ -849,8 +849,8 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.83704835
-      value: 0.7053833
+      time: 0.8
+      value: 0.25
       inSlope: -0.31262448
       outSlope: -0.31262448
       tangentMode: 0
@@ -858,8 +858,8 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.995636
-      value: 0
+      time: 1
+      value: 0.2
       inSlope: -0.20007975
       outSlope: -0.20007975
       tangentMode: 0
@@ -1184,14 +1184,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6097617918995308611}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12f15cd53b201564699615c7995e984f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityMovementComponent
   <WalkingSpeed>k__BackingField: 1.5
   _animator: {fileID: 6696174316393343614}
-  _movementAI: {fileID: 11400000, guid: 72187b7b600538c4188fb4aa064706ac, type: 2}
+  _movementAIConfig: {fileID: 11400000, guid: 72187b7b600538c4188fb4aa064706ac, type: 2}
 --- !u!114 &3659476714238881766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1637,8 +1637,8 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8533387803823033690}
   m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -563998149
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0

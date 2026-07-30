@@ -14,8 +14,7 @@ public class GameEventRaiseButton : Editor
         {
             VoidGameEvent gameEvent = serializedObject.targetObject as VoidGameEvent;
 
-            //TODO
-            //gameEvent.Invoke();
+            gameEvent.Invoke();
         }
     }
 }

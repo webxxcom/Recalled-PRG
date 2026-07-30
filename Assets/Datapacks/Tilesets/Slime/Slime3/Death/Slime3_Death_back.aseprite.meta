@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639169770025061522
+  platformSettingsDirtyTick: 639210356797867500
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -1030,6 +1030,27 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 223, y: 4}
+  - name: Layer 1
+    originalName: 
+    pivot: {x: 0.6666667, y: -2.3999996}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 237
+      y: 120
+      width: 3
+      height: 1
+    spriteID: e9aa4d588c16a094495adf55fee252c7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 237, y: 120}
   spriteSheetImportData: []
   tileSetImportData: []
   asepriteLayers:
@@ -1141,6 +1162,31 @@ ScriptedImporter:
     parentIndex: -1
   - layerIndex: 1
     uuid:
+      value0: 4287466680
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: 0
+    name: Layer 1
+    layerFlags: 3
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Layer 1
+      frameIndex: 5
+      additiveSortOrder: 0
+      cellRect:
+        x: 30
+        y: 28
+        width: 3
+        height: 1
+      spriteId: e9aa4d588c16a094495adf55fee252c7
+    linkedCells: []
+    tileCells: []
+    tileSetIndex: 0
+    parentIndex: -1
+  - layerIndex: 2
+    uuid:
       value0: 3383613474
       value1: 0
       value2: 0
@@ -1245,7 +1291,7 @@ ScriptedImporter:
     tileCells: []
     tileSetIndex: 0
     parentIndex: -1
-  - layerIndex: 2
+  - layerIndex: 3
     uuid:
       value0: 1089231064
       value1: 0
@@ -1351,7 +1397,7 @@ ScriptedImporter:
     tileCells: []
     tileSetIndex: 0
     parentIndex: -1
-  - layerIndex: 3
+  - layerIndex: 4
     uuid:
       value0: 3457518718
       value1: 0
@@ -1457,7 +1503,7 @@ ScriptedImporter:
     tileCells: []
     tileSetIndex: 0
     parentIndex: -1
-  - layerIndex: 4
+  - layerIndex: 5
     uuid:
       value0: 3490372834
       value1: 0
@@ -1491,7 +1537,7 @@ ScriptedImporter:
     tileCells: []
     tileSetIndex: 0
     parentIndex: -1
-  - layerIndex: 5
+  - layerIndex: 6
     uuid:
       value0: 3893657361
       value1: 0
@@ -1523,7 +1569,7 @@ ScriptedImporter:
     ignorePlatformSupport: 0
     maxTextureSize: 16384
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 0
     compressionQuality: 50
     forceMaximumCompressionQuality_BC6H_BC7: 0

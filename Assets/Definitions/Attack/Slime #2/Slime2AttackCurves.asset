@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93f0c7e91fd7eca43863e6edafc67f72, type: 3}
-  m_Name: SlimeAttackCurves
+  m_Name: Slime2AttackCurves
   m_EditorClassIdentifier: Assembly-CSharp::AttackCurves
   <ColliderSizeX>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.50231934
-      value: 0.892334
-      inSlope: 0.18248713
-      outSlope: 0.18248713
+      time: -0.0039978027
+      value: 1.4266357
+      inSlope: 2.0320873
+      outSlope: 2.0320873
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 0.9831543
-      inSlope: 0.18248713
-      outSlope: 0.18248713
+      time: 0.9879761
+      value: 3.4424133
+      inSlope: 2.0320873
+      outSlope: 2.0320873
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -40,13 +40,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.03817749
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: -0.0052490234
+      value: 0.935791
+      inSlope: 0.8474203
+      outSlope: 0.8474203
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9920044
+      value: 1.7808838
+      inSlope: 0.8474203
+      outSlope: 0.8474203
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -55,19 +64,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.4968872
-      value: 0.68795776
-      inSlope: 0.14843433
-      outSlope: 0.14843433
+      time: 0.0000026966445
+      value: -0.008357763
+      inSlope: 0.0039593764
+      outSlope: 0.0039593764
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.004109
-      value: 0.7632469
-      inSlope: 0.14843433
-      outSlope: 0.14843433
+      time: 1.0009766
+      value: -0.0043945312
+      inSlope: 0.0039593764
+      outSlope: 0.0039593764
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -87,6 +96,15 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.7572632
+      inSlope: 0.40023106
+      outSlope: 0.40023106
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

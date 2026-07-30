@@ -2,19 +2,13 @@
 
 public class NpcController : EntityController, IInteractable
 {
-    [SerializeField] DialogueSource _dialogueData;
+    [SerializeField] DialogueSource _dialogueSource;
 
-    DialogueManager _dialogueManager;
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        _dialogueManager = FindAnyObjectByType<DialogueManager>();
-    }
+    [Header("Broadcasts to")]
+    [SerializeField] DialogueSourceGameEvent OnDialogueStarted;
 
     public void Interact()
     {
-        _dialogueManager.BeginDialogue(_dialogueData, true);
+        OnDialogueStarted.Invoke(_dialogueSource);
     }
 }

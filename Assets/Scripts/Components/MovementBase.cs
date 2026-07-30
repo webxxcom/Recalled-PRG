@@ -22,7 +22,7 @@ public abstract class MovementBase : MonoBehaviour
     ExternalVelocitySO _externalVelocity;
     protected Rigidbody2D _rigidbody2D;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _externalVelocity = ScriptableObject.CreateInstance<ExternalVelocitySO>();
         _rigidbody2D = GetComponent<Rigidbody2D>();

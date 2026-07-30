@@ -294,6 +294,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8023279021401798368, guid: a36798c2fab103f4797ce026132d4fc6, type: 3}
+      propertyPath: _movementAIConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 72187b7b600538c4188fb4aa064706ac, type: 2}
     - target: {fileID: 8526230742337842442, guid: a36798c2fab103f4797ce026132d4fc6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.10019
@@ -21115,6 +21119,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8023279021401798368, guid: b30d2dca2fb456b408b03623c3021dd7, type: 3}
+      propertyPath: _movementAIConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 72187b7b600538c4188fb4aa064706ac, type: 2}
     - target: {fileID: 8526230742337842442, guid: b30d2dca2fb456b408b03623c3021dd7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.4123478

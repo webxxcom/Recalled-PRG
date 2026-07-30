@@ -1,7 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Behavior / Aggression")]
-public class AgressionBehaviorSO : TargetProvider
+public class AggressionTargetProvider : TargetProvider
 {
     private void OnEnable()
     {
@@ -17,5 +16,10 @@ public class AgressionBehaviorSO : TargetProvider
     public void BecomeAgressive(GameObject gameObject, int _)
     {
         CurrentTarget = gameObject;
+    }
+
+    public override TargetProvider Init(TargetProviderSO other)
+    {
+        return this;
     }
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6e31c3a294c65042b1104bad3b5109c, type: 3}
   m_Name: ChaseWanderingMovementAI
   m_EditorClassIdentifier: Assembly-CSharp::MovementAI
-  _movementStrategies:
+  <MovementStrategies>k__BackingField:
   - {fileID: 11400000, guid: 449bbd93ce4ca9e4393ca8f935643b3b, type: 2}
   - {fileID: 11400000, guid: 281bd21f73c6ead4fa04de9d56e90d07, type: 2}
-  _targetProviders:
+  <TargetProviders>k__BackingField:
   - {fileID: 11400000, guid: 24a57d199f458f14c8446c05d716dcaa, type: 2}

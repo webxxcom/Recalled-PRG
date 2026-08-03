@@ -1,7 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(EntityController))]
 public class BlinkingEffect : MonoBehaviour
 {
     [SerializeField] float _duration;
@@ -20,7 +19,7 @@ public class BlinkingEffect : MonoBehaviour
         {
             _spriteRendererGroup.SetAlpha(0);
             yield return new WaitForSeconds(_blinkInterval);
-            
+
             _spriteRendererGroup.SetAlpha(1);
             yield return new WaitForSeconds(_blinkInterval);
 

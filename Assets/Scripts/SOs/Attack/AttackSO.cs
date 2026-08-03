@@ -7,27 +7,19 @@ public class AttackSO : ScriptableObject
     [field: SerializeField] public virtual int DealtDamage { get; private set; } = 10;
     [field: SerializeField] public virtual float ReloadTime { get; private set; } = 0.8f;
     [field: SerializeField] public virtual float KnockbackPower { get; private set; } = 1.6f;
-    [field: SerializeField] public Transform KnockbackOriginTransform { get; set; }
+    [field: SerializeField] public virtual float SpeedMultiplier { get; private set; } = 0.3f;
     [field: SerializeField] public float ImpactTime { get; private set; } = 0.3f;
     [field: SerializeField] public float RecoveryTime { get; private set; } = 0.8f;
-    [field: SerializeField] public float SpeedMultiplier { get; private set; } = 0.3f;
     [field: SerializeField] public AttackCurvesSO Curves { get; private set; }
     [field: SerializeField] public List<EffectDefinition> Effects { get; private set; }
 
-    void ApplyKnockback(HealthProvider target)
+    public void DealDamage(GameObject source, Collider2D hitbox, Collider2D hurtbox)
     {
-        if (target.TryGetComponent(out MovementBase movementBase))
-        {
-            Vector2 attackDir = (target.transform.position - KnockbackOriginTransform.position).normalized;
+        HealthProvider target = hurtbox.GetComponentInParent<HealthProvider>();
 
-            movementBase.AddExternalVelocity(attackDir * KnockbackPower);
-        }
-    }
+        if (!target)
+            return;
 
-    public void DealDamage(HealthProvider target, GameObject origin)
-    {
-        target.DealDamage(origin, DealtDamage, Effects);
-
-        ApplyKnockback(target);
+        target.DealDamage(new DamageInfo(DealtDamage, KnockbackPower, source, hitbox, hurtbox, Effects));
     }
 }

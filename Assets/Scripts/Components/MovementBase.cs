@@ -8,14 +8,13 @@ public abstract class MovementBase : MonoBehaviour
     public static readonly int MoveXHash = Animator.StringToHash("MoveX");
     public static readonly int SpeedHash = Animator.StringToHash("Speed");
 
-    [field: SerializeField] public float WalkingSpeed { get; protected set; }
+    [SerializeField] float _walkingSpeed;
 
     public bool MovementBlocked { get; set; }
     public AggregatedValue SpeedAggregator { get; private set; } = new();
     public Vector2 LastMovement { get; set; }
-    public Vector2 PrevMovement { get; protected set; }
     public bool IsWalking => MovementIntention != Vector2.zero;
-    public float CurrentSpeed => WalkingSpeed * SpeedAggregator.Get();
+    public float CurrentSpeed => _walkingSpeed * SpeedAggregator.Get();
     public Vector2 FacingDirection => MovementIntention != Vector2.zero ? MovementIntention : LastMovement;
    
     [SerializeField] Animator _animator;
@@ -28,10 +27,11 @@ public abstract class MovementBase : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
+    Vector2 _movementIntention;
     public Vector2 MovementIntention
     {
         get => _movementIntention;
-        set
+        protected set
         {
             var prevMov = _movementIntention;
             _movementIntention = value;
@@ -40,12 +40,11 @@ public abstract class MovementBase : MonoBehaviour
                 OnMovementStarted?.Invoke();
             else if (prevMov != Vector2.zero && value == Vector2.zero)
                 OnMovementStopped?.Invoke();
-            else if (value != Vector2.zero)
+
+            if (value != Vector2.zero)
                 OnMovement?.Invoke();
         }
     }
-
-    Vector2 _movementIntention;
 
     public event Action OnMovementStarted;
     public event Action OnMovementStopped;
@@ -61,14 +60,12 @@ public abstract class MovementBase : MonoBehaviour
 
         Vector2 finalMovement = GetMovementIntention();
 
-        return (SpeedAggregator.Get() * WalkingSpeed * finalMovement)
+        return (SpeedAggregator.Get() * _walkingSpeed * finalMovement)
             + _externalVelocity.TickAndGet(Time.fixedDeltaTime);
     }
 
     private void FixedUpdate()
     {
-        PrevMovement = MovementIntention;
-        
         Vector2 finalMovement = GetFinalMovement();
 
         if (finalMovement != Vector2.zero)

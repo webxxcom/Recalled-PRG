@@ -1,5 +1,3 @@
-using CsvHelper.Configuration.Attributes;
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +21,7 @@ public class DialogueManager : MonoBehaviour
     DialogueData _dialogueData;
     AudioSource _audioSource;
     readonly List<Button> _playerButtons = new();
-    ConsumableValue<bool >_enterPressed;
+    ConsumableValue<bool > _enterPressed;
     ConsumableValue<DialogueData.Line.Choice> _buttonPressedData;
 
     [Header("Listens to")]
@@ -95,14 +93,13 @@ public class DialogueManager : MonoBehaviour
         _continueButton.gameObject.SetActive(false);
     }
 
-
     IEnumerator BeginTalking()
     {
         var currentLine = _dialogueData.lines.First(); // The first line is always the opening line
 
         while (true)
         {
-            // Wait until left entity stop talking or is out of space for letters
+            // Wait until left entity stops talking or is out of space for letters
             yield return StartCoroutine(RevealDialogueText(_leftEntity, currentLine.text));
 
             switch (currentLine.Type)

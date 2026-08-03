@@ -1127,7 +1127,7 @@ GameObject:
   - component: {fileID: 3436857251089669775}
   - component: {fileID: 8238773066907892438}
   m_Layer: 7
-  m_Name: Attack
+  m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1198,6 +1198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityAttackComponent
   <AttackData>k__BackingField: {fileID: 11400000, guid: f4155314e6c37254183efe9ffd2a8146, type: 2}
+  _animator: {fileID: 7369017045533857347}
 --- !u!1 &5046599424978369931
 GameObject:
   m_ObjectHideFlags: 0

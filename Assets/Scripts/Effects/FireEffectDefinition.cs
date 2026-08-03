@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Effects/Fire")]
 public class FireEffectDefinition : EffectDefinition
 {
-    [SerializeField] int _damagePerSecond = 2;
+    [SerializeField] int _damagePerSecond = -2;
     [SerializeField] float SpeedMultiplier = 0.8f;
     [SerializeField] float reloadTime = 0.5f;
     static readonly Color Color = new(0.7f, 0.1f, 0.1f);
@@ -29,7 +29,7 @@ public class FireEffectDefinition : EffectDefinition
     {
         if (timeSinceDamage > reloadTime)
         {
-            health.DealDamage(null, _damagePerSecond);
+            health.DealDamage(_damagePerSecond);
             timeSinceDamage = 0;
         }
 

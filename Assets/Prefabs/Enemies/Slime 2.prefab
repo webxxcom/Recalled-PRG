@@ -940,6 +940,7 @@ GameObject:
   - component: {fileID: 529466297735456631}
   - component: {fileID: 986262084679986046}
   - component: {fileID: 8238773066907892438}
+  - component: {fileID: 8236104069978781102}
   m_Layer: 7
   m_Name: Hitbox
   m_TagString: Untagged
@@ -1012,6 +1013,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityAttackComponent
   <AttackData>k__BackingField: {fileID: 11400000, guid: e71c6577981f54f43b354d5516fc1f75, type: 2}
+  _animator: {fileID: 6696174316393343614}
+--- !u!114 &8236104069978781102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4738529277594835524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5c81a1c66ec9d4894984ff189471e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackStrategy
 --- !u!1 &5046599424978369931
 GameObject:
   m_ObjectHideFlags: 0

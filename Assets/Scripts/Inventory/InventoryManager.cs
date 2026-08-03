@@ -23,7 +23,7 @@ public class InventoryManager : MonoBehaviour
     PlayerInput _playerInput;
     DescriptionManager _descriptionManager;
     InventorySlot _selectedInventorySlot;
-    readonly List<GameObject> _createdInventoryItems = new();
+    readonly List<GameObject> _createdInventorySlots = new();
 
     public bool IsActive => _canvas.enabled;
 
@@ -39,6 +39,8 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         _canvas.enabled = false;
+
+
     }
 
     void ToggleInventory(InputAction.CallbackContext cc)
@@ -70,7 +72,7 @@ public class InventoryManager : MonoBehaviour
         GameObject inventoryItem = Instantiate(_inventoryItemPrefab, _basicItemsInventoryGrid.transform);
 
         inventoryItem.GetComponent<InventorySlot>().Initialize(itemInstance);
-        _createdInventoryItems.Add(inventoryItem);
+        _createdInventorySlots.Add(inventoryItem);
     }
     void RefreshGeneralSlots() => _inventory.Items.ForEach(CreateGeneralItemSlot);
 
@@ -100,8 +102,8 @@ public class InventoryManager : MonoBehaviour
 
     public void Close()
     {
-        _createdInventoryItems.ForEach(ii => Destroy(ii));
-        _createdInventoryItems.Clear();
+        _createdInventorySlots.ForEach(ii => Destroy(ii));
+        _createdInventorySlots.Clear();
 
         _canvas.enabled = false;
         _playerInput.SwitchCurrentActionMap("Player");
@@ -114,8 +116,12 @@ public class InventoryManager : MonoBehaviour
         {
             _selectedInventorySlot = inventorySlot;
 
-            _highlighter.SetActive(true);
-            _highlighter.transform.position = gameObject.transform.position;
+            if (gameObject.TryGetComponent(out InventorySlot _))
+            {
+                _highlighter.SetActive(true);
+                _highlighter.transform.position = gameObject.transform.position;
+            }
+
             _descriptionManager.Show(inventorySlot);
         }
     }

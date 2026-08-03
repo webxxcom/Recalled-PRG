@@ -1333,6 +1333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
   <AttackData>k__BackingField: {fileID: 11400000, guid: e71c6577981f54f43b354d5516fc1f75, type: 2}
+  _animator: {fileID: 3120718460063332462}
 --- !u!1 &5046599424978369931
 GameObject:
   m_ObjectHideFlags: 0

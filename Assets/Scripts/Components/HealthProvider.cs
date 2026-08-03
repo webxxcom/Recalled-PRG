@@ -4,44 +4,41 @@ using UnityEngine.Events;
 
 public class HealthProvider : ValueProvider
 {
-    private static readonly int HurtHash = Animator.StringToHash("Hurt");
-
     public bool IsInvincible { get; set; }
 
     [SerializeField] EntityController _entityController;
+    [SerializeField] ParticleSystem _damageParticles;
     [SerializeField] Animator _animator;
-    EffectMachineSO _effectMachine;
+    [SerializeField] Collider2D _hurtbox;
+    public EffectMachineSO EffectMachine { get; private set; }
 
     public event UnityAction<DamageInfo> OnHpChanged;
     public event UnityAction<DamageInfo> OnMinHpReached;
 
     private void Awake()
     {
-        _effectMachine = ScriptableObject.CreateInstance<EffectMachineSO>();
+        EffectMachine = ScriptableObject.CreateInstance<EffectMachineSO>();
     }
 
     private void OnEnable()
     {
-        OnHpChanged += HpChanged;
-        OnMinHpReached += OnDeath;
+        OnHpChanged += Particles;
+        OnHpChanged += ApplyKnockback;
     }
 
-    private void OnDisable()
+    void Particles(DamageInfo di)
     {
-        OnHpChanged -= HpChanged;
-        OnMinHpReached -= OnDeath;
+        Quaternion rot = Quaternion.FromToRotation(Vector3.right, di.Direction);
+
+        Instantiate(_damageParticles, di.Hurtbox.bounds.center, rot);
     }
 
-    void HpChanged(DamageInfo damageInfo)
+    void ApplyKnockback(DamageInfo di)
     {
-        _animator.SetTrigger(HurtHash);
-        damageInfo.Effects?.ForEach(e => _effectMachine.ApplyEffect(_entityController, this, e));
-    }
+        MovementBase movementBase = di.Hurtbox.GetComponentInParent<MovementBase>();
 
-    void OnDeath(DamageInfo damageInfo)
-    {
-        _animator.SetTrigger("Die");
-        Debug.Log($"{gameObject.name} was killed by {damageInfo.Source.name}");
+        if (movementBase)
+            movementBase.AddExternalVelocity(di.Direction * di.KnockbackPower);
     }
 
     public bool IsDead
@@ -63,13 +60,20 @@ public class HealthProvider : ValueProvider
             OnMinHpReached?.Invoke(di);
     }
 
-    public void DealDamage(GameObject changer, int value, List<EffectDefinition> effects = null)
+    public void DealDamage(int damage)
     {
         if (IsInvincible)
             return;
-        value = -value;
 
-        Value.Change(value);
-        RaiseEvents(new() { Amount = value, Source = changer, Effects = effects });
+        Value.Change(damage);
+    }
+
+    public void DealDamage(DamageInfo damageInfo)
+    {
+        if (IsInvincible)
+            return;
+
+        Value.Change(damageInfo.Amount);
+        RaiseEvents(damageInfo);
     }
 }

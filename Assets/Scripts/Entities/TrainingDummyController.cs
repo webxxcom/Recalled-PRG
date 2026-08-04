@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TrainingDummyController : MonoBehaviour
+public class TrainingDummyController : EntityController
 {
     private static readonly int DamageHardHash = Animator.StringToHash("HurtHard");
     private static readonly int DamageMidHash = Animator.StringToHash("HurtMid");

@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class ExternalVelocitySO : ScriptableObject
+[System.Serializable]
+public class ExternalVelocity
 {
     [SerializeField] private float decayRate = 8f;
     [SerializeField] private float restThreshold = 0.05f;

@@ -17,13 +17,15 @@ public abstract class MovementBase : MonoBehaviour
     public float CurrentSpeed => _walkingSpeed * SpeedAggregator.Get();
     public Vector2 FacingDirection => MovementIntention != Vector2.zero ? MovementIntention : LastMovement;
    
+    [SerializeField] ExternalVelocity _externalVelocity;
+
+    [Header("Communicates with")]
     [SerializeField] Animator _animator;
-    ExternalVelocitySO _externalVelocity;
+
     protected Rigidbody2D _rigidbody2D;
 
     protected virtual void Awake()
     {
-        _externalVelocity = ScriptableObject.CreateInstance<ExternalVelocitySO>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 

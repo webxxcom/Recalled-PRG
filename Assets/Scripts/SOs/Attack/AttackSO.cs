@@ -20,6 +20,6 @@ public class AttackSO : ScriptableObject
         if (!target)
             return;
 
-        target.DealDamage(new DamageInfo(DealtDamage, KnockbackPower, source, hitbox, hurtbox, Effects));
+        target.DealDamage(new DamageInfo(-DealtDamage, KnockbackPower, source, hitbox, hurtbox, Effects));
     }
 }

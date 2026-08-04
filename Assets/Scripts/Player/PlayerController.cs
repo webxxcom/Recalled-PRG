@@ -20,21 +20,15 @@ public class PlayerController : EntityController
     }
 
     [Header("Broadcasts to")]
-    [SerializeField] DamageInfoGameEvent OnHpChanged;
-    [SerializeField] DamageInfoGameEvent OnDeath;
+    [SerializeField] DamageInfoGameEvent OnHpChangedChannel;
+    [SerializeField] DamageInfoGameEvent OnDeathChannel;
 
-    PlayerMovement _movementComponent;
-    Invincibility _invincibility;
-    BlinkingEffect _blinkingEffect;
     HealthProvider _healthProvider;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _movementComponent = GetComponent<PlayerMovement>();
-        _invincibility = GetComponent<Invincibility>();
-        _blinkingEffect = GetComponent<BlinkingEffect>();
         _healthProvider = GetComponent<HealthProvider>();
 
         IsArmed = true;
@@ -52,6 +46,6 @@ public class PlayerController : EntityController
         _healthProvider.OnMinHpReached -= HandleOnDeathGameEvent;
     }
 
-    void HandleOnHpChangedGameEvent(DamageInfo damageInfo) => OnHpChanged.Raise(damageInfo);
-    void HandleOnDeathGameEvent(DamageInfo damageInfo) => OnDeath.Raise(damageInfo);
+    void HandleOnHpChangedGameEvent(DamageInfo damageInfo) => OnHpChangedChannel.Raise(damageInfo);
+    void HandleOnDeathGameEvent(DamageInfo damageInfo) => OnDeathChannel.Raise(damageInfo);
 }

@@ -51,8 +51,8 @@ public class InventoryManager : MonoBehaviour
 
     private void OnEnable()
     {
-        _inputActionAsset.FindActionMap("Player").FindAction("InventoryToggle").performed += ToggleInventory;
-        _inputActionAsset.FindActionMap("Inventory").FindAction("InventoryToggle").performed += ToggleInventory;
+        _inputActionAsset.FindActionMap("Player").FindAction("ToggleInventory").performed += ToggleInventory;
+        _inputActionAsset.FindActionMap("Inventory").FindAction("ToggleInventory").performed += ToggleInventory;
 
         _uiEventRaiser.OnUIElementSelected += ItemSelected;
         _uiEventRaiser.OnUIElementDeselected += ItemDeselected;
@@ -60,8 +60,8 @@ public class InventoryManager : MonoBehaviour
 
     private void OnDisable()
     {
-        _inputActionAsset.FindActionMap("Player").FindAction("InventoryToggle").performed -= ToggleInventory;
-        _inputActionAsset.FindActionMap("Inventory").FindAction("InventoryToggle").performed -= ToggleInventory;
+        _inputActionAsset.FindActionMap("Player").FindAction("ToggleInventory").performed -= ToggleInventory;
+        _inputActionAsset.FindActionMap("Inventory").FindAction("ToggleInventory").performed -= ToggleInventory;
 
         _uiEventRaiser.OnUIElementSelected -= ItemSelected;
         _uiEventRaiser.OnUIElementDeselected -= ItemDeselected;

@@ -3,8 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class HealthProvider : ValueProvider<DamageInfo>
 {
-
+    [Header("Prefabs")]
     [SerializeField] ParticleSystem _damageParticles;
+    [SerializeField] PopupDamageText _damagePopup;
     public Collider2D Hurtbox { get; private set; }
     public EffectMachineSO EffectMachine { get; private set; }
     public bool IsInvincible { get; set; }
@@ -20,6 +21,14 @@ public class HealthProvider : ValueProvider<DamageInfo>
     {
         OnValueChanged += Particles;
         OnValueChanged += ApplyKnockback;
+        OnValueChanged += PopupDamage;
+    }
+
+    private void OnDisable()
+    {
+        OnValueChanged -= Particles;
+        OnValueChanged -= ApplyKnockback;
+        OnValueChanged -= PopupDamage;
     }
 
     void Particles(DamageInfo di)
@@ -36,6 +45,12 @@ public class HealthProvider : ValueProvider<DamageInfo>
         if (movementBase)
             movementBase.AddExternalVelocity(di.Direction * di.KnockbackPower);
     }
+
+    void PopupDamage(DamageInfo di)
+    {
+        Instantiate(_damagePopup, Hurtbox.bounds.center, Quaternion.identity).Init(di.Amount + "");
+    }
+
     public bool IsDead => CurrentValue <= 0;
 
     public void DealDamage(DamageInfo damageInfo)
@@ -45,4 +60,5 @@ public class HealthProvider : ValueProvider<DamageInfo>
 
         Change(damageInfo.Amount, damageInfo);
     }
+
 }

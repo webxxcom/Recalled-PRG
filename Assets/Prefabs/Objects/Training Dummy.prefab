@@ -86,8 +86,9 @@ MonoBehaviour:
   <MaxValue>k__BackingField: 0
   <CurrentValue>k__BackingField: 0
   <IsStatic>k__BackingField: 0
-  <IsInfinite>k__BackingField: 0
+  <IsInfinite>k__BackingField: 1
   _damageParticles: {fileID: 2466567890511269386, guid: 80ca15d7024dd724e95d1d3bfd987aba, type: 3}
+  _damagePopup: {fileID: 7535224943969880707, guid: 385f75b1c0c81584c85f5375d9fc8db4, type: 3}
 --- !u!1 &8822795234151242890
 GameObject:
   m_ObjectHideFlags: 0

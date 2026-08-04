@@ -8,16 +8,26 @@ public class PlayerMovement : MovementBase
     [field: SerializeField] public float Stamina { get; private set; }
     [field: SerializeField] public float StaminaUsage { get; private set; }
     [field: SerializeField] public float StaminaRestore { get; private set; }
+    [field: SerializeField] public float DashReloadTime { get; private set; }
+    [field: SerializeField] public float DashForce { get; private set; }
+    [SerializeField] Invincibility _invincibility;
 
     public bool IsSprinting { get; private set; }
 
     float _currentStamina = 100;
     float _staminaRestoreLastTime = 0;
+    float _dashLastTime = 0;
 
     void OnMove(InputValue value)
     {
         LastMovement = MovementIntention;
         MovementIntention = value.Get<Vector2>();
+    }
+
+    void OnDash(InputValue _)
+    {
+        AddExternalVelocity(FacingDirection * DashForce);
+        _invincibility.BecomeInvinsibleFor(0.3f);
     }
 
     void OnSprint(InputValue value)

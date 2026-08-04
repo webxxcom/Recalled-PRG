@@ -278,10 +278,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
   _config: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
-  <MaxValue>k__BackingField: 0
-  <CurrentValue>k__BackingField: 0
+  <MaxValue>k__BackingField: 100
+  <CurrentValue>k__BackingField: 100
   <IsStatic>k__BackingField: 0
+  <IsInfinite>k__BackingField: 0
   _damageParticles: {fileID: 2466567890511269386, guid: 80ca15d7024dd724e95d1d3bfd987aba, type: 3}
+  _damagePopup: {fileID: 7535224943969880707, guid: 385f75b1c0c81584c85f5375d9fc8db4, type: 3}
 --- !u!1 &1822602623840076642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,6 +1502,9 @@ MonoBehaviour:
   <Stamina>k__BackingField: 100
   <StaminaUsage>k__BackingField: 0
   <StaminaRestore>k__BackingField: 0
+  <DashReloadTime>k__BackingField: 0
+  <DashForce>k__BackingField: 20
+  _invincibility: {fileID: 7477225139193990942}
 --- !u!114 &7101408821228708346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1530,6 +1535,7 @@ MonoBehaviour:
   <MaxValue>k__BackingField: 0
   <CurrentValue>k__BackingField: 0
   <IsStatic>k__BackingField: 0
+  <IsInfinite>k__BackingField: 0
 --- !u!114 &7001661983157172225
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,7 +19,6 @@ public abstract class MovementBase : MonoBehaviour
    
     [SerializeField] ExternalVelocity _externalVelocity;
 
-    [Header("Communicates with")]
     [SerializeField] Animator _animator;
 
     protected Rigidbody2D _rigidbody2D;

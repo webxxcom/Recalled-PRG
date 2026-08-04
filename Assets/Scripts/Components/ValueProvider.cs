@@ -13,6 +13,17 @@ public abstract class ValueProvider<T> : MonoBehaviour
     public event UnityAction<T> OnMinValue;
     public event UnityAction<T> OnMaxValue;
 
+    private void OnValidate()
+    {
+        if (_config != null)
+        {
+            MaxValue = _config.MaximumValue;
+            CurrentValue = _config.CurrentValue;
+            IsStatic = _config.IsStatic;
+            IsInfinite = _config.IsInfinite;
+        }
+    }
+
     public void Change(int value, T data)
     {
         if (IsStatic)

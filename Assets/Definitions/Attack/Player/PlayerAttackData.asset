@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c4722edebc8adf4da39dab4a4b09768, type: 3}
   m_Name: PlayerAttackData
   m_EditorClassIdentifier: Assembly-CSharp::AttackData
-  <DealtDamage>k__BackingField: 1000
+  <DealtDamage>k__BackingField: 10
   <ReloadTime>k__BackingField: 0.8
   <KnockbackPower>k__BackingField: 1.6
-  <KnockbackOriginTransform>k__BackingField: {fileID: 0}
+  <SpeedMultiplier>k__BackingField: 0.8
   <ImpactTime>k__BackingField: 0.3
   <RecoveryTime>k__BackingField: 0.8
-  <SpeedMultiplier>k__BackingField: 0.3
   <Curves>k__BackingField: {fileID: 0}
   <Effects>k__BackingField: []

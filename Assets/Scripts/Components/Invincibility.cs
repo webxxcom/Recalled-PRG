@@ -9,20 +9,20 @@ public class Invincibility : MonoBehaviour
 
     private void OnEnable() => _healthProvider.OnValueChanged += OnValueChanged;
     private void OnDisable() => _healthProvider.OnValueChanged -= OnValueChanged;
-    private void OnValueChanged(DamageInfo _) => BecomeInvinsibleFor();
+    private void OnValueChanged(DamageInfo _) => BecomeInvinsibleFor(_duration);
 
-    IEnumerator InvincibleCoroutine()
+    IEnumerator InvincibleCoroutine(float seconds)
     {
         _healthProvider.IsInvincible = true;
 
-        yield return new WaitForSeconds(_duration);
+        yield return new WaitForSeconds(seconds);
 
         _healthProvider.IsInvincible = false;
     }
 
-    public void BecomeInvinsibleFor()
+    public void BecomeInvinsibleFor(float seconds)
     {
         StopAllCoroutines();
-        StartCoroutine(InvincibleCoroutine());
+        StartCoroutine(InvincibleCoroutine(seconds));
     }
 }

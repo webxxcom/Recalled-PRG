@@ -2544,7 +2544,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Pixel Game SDF Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
-  m_Parent: {fileID: 2100000, guid: 522ad00b11e902943b16ee227fc186c8, type: 2}
+  m_Parent: {fileID: 2100000, guid: de8d69cf1b58ac5468bc56d227c31b7b, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -2568,7 +2568,7 @@ Material:
     - _FaceUVSpeedX: 0
     - _GradientScale: 8
     - _OutlineSoftness: 0.098
-    - _OutlineWidth: 0.616
+    - _OutlineWidth: 0.287
     - _ScaleRatioA: 0.875
     - _ScaleRatioB: 0.9121875
     - _ScaleRatioC: 0.9121875
@@ -2576,6 +2576,6 @@ Material:
     - _UnderlayOffsetY: -1
     - _WeightBold: 0.75
     m_Colors:
-    - _FaceColor: {r: 0.86346257, g: 0.759434, b: 1, a: 1}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

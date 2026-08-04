@@ -8,6 +8,7 @@ public class AnimatorRelay : MonoBehaviour
 
     [SerializeField] HealthProvider _health;
     [SerializeField] Animator _animator;
+    [SerializeField] MovementBase _movementBase;
     EntityController _entityController;
 
     private void Awake()
@@ -17,14 +18,14 @@ public class AnimatorRelay : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.OnHpChanged += HpChanged;
-        _health.OnMinHpReached += OnDeath;
+        _health.OnValueChanged += HpChanged;
+        _health.OnMinValue += OnDeath;
     }
 
     private void OnDisable()
     {
-        _health.OnHpChanged -= HpChanged;
-        _health.OnMinHpReached -= OnDeath;
+        _health.OnValueChanged -= HpChanged;
+        _health.OnMinValue -= OnDeath;
     }
 
     void HpChanged(DamageInfo damageInfo)
@@ -37,6 +38,8 @@ public class AnimatorRelay : MonoBehaviour
     void OnDeath(DamageInfo damageInfo)
     {
         _animator.SetTrigger(DieHash);
-        Debug.Log($"{gameObject.name} was killed by {damageInfo.Hitbox.name}");
+        _movementBase.enabled = false;
+
+        Debug.Log($"{gameObject.name} was killed by {damageInfo.Source.name}");
     }
 }

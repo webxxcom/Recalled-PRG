@@ -1,21 +1,47 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
-public abstract class ValueProvider : MonoBehaviour
+public abstract class ValueProvider<T> : MonoBehaviour
 {
     [SerializeField] ValueProviderConfig _config;
-    [SerializeField] ValueProviderSO _valueProviderSO;
+    [field: SerializeField] public int MaxValue { get; private set; }
+    [field: SerializeField] public int CurrentValue { get; private set; }
+    [field: SerializeField] public bool IsStatic { get; private set; }
+    [field: SerializeField] public bool IsInfinite { get; private set; }
 
-    // Lazy init SO
-    public ValueProviderSO Value
+    public event UnityAction<T> OnValueChanged;
+    public event UnityAction<T> OnMinValue;
+    public event UnityAction<T> OnMaxValue;
+
+    public void Change(int value, T data)
     {
-        get
-        {
-            if (_valueProviderSO == null)
-                _valueProviderSO = ScriptableObject.CreateInstance<ValueProviderSO>();
+        if (IsStatic)
+            return;
 
-            if (!_valueProviderSO.Initialized)
-                _valueProviderSO.Init(_config);
-            return _valueProviderSO;
+        if (!IsInfinite)
+        {
+            if (CurrentValue + value >= MaxValue)
+            {
+                CurrentValue = MaxValue;
+                OnMaxValue?.Invoke(data);
+            }
+            else if (CurrentValue + value <= 0)
+            {
+                CurrentValue = 0;
+                OnMinValue?.Invoke(data);
+            }
+            else
+                CurrentValue += value;
         }
+
+        OnValueChanged?.Invoke(data);
+    }
+
+    public void Init()
+    {
+        MaxValue = _config.MaximumValue;
+        CurrentValue = _config.CurrentValue;
+        IsStatic = _config.IsStatic;
+        IsInfinite = _config.IsInfinite;
     }
 }

@@ -22,6 +22,6 @@ public class TrainingDummyController : EntityController
         }
     }
 
-    private void OnEnable() => _healthProvider.OnHpChanged += OnHurt;
-    private void OnDisable() => _healthProvider.OnHpChanged -= OnHurt;
+    private void OnEnable() => _healthProvider.OnValueChanged += OnHurt;
+    private void OnDisable() => _healthProvider.OnValueChanged -= OnHurt;
 }

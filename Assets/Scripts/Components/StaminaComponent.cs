@@ -1,4 +1,4 @@
-public class StaminaComponent : ValueProvider
+public class StaminaComponent : ValueProvider<int>
 {
 
 }

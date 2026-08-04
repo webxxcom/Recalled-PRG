@@ -15,11 +15,7 @@ public class AttackSO : ScriptableObject
 
     public void DealDamage(GameObject source, Collider2D hitbox, Collider2D hurtbox)
     {
-        HealthProvider target = hurtbox.GetComponentInParent<HealthProvider>();
-
-        if (!target)
-            return;
-
-        target.DealDamage(new DamageInfo(-DealtDamage, KnockbackPower, source, hitbox, hurtbox, Effects));
+        if (hurtbox.TryGetComponent(out HealthProvider target))
+            target.DealDamage(new DamageInfo(-DealtDamage, KnockbackPower, source, hitbox, hurtbox, Effects));
     }
 }

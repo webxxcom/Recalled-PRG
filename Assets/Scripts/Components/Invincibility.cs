@@ -7,9 +7,9 @@ public class Invincibility : MonoBehaviour
     [SerializeField] float _duration;
     [SerializeField] HealthProvider _healthProvider;
 
-    private void OnEnable() => _healthProvider.OnHpChanged += OnHpChanged;
-    private void OnDisable() => _healthProvider.OnHpChanged -= OnHpChanged;
-    private void OnHpChanged(DamageInfo _) => BecomeInvinsibleFor();
+    private void OnEnable() => _healthProvider.OnValueChanged += OnValueChanged;
+    private void OnDisable() => _healthProvider.OnValueChanged -= OnValueChanged;
+    private void OnValueChanged(DamageInfo _) => BecomeInvinsibleFor();
 
     IEnumerator InvincibleCoroutine()
     {

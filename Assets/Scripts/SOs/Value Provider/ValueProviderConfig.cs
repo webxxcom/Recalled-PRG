@@ -6,5 +6,5 @@ public class ValueProviderConfig : ScriptableObject
     [field: SerializeField] public int MaximumValue { get; private set; }
     [field: SerializeField] public int CurrentValue { get; private set; }
     [field: SerializeField] public bool IsStatic { get; private set; }
-    [field: SerializeField] public bool IsInvincible { get; private set; }
+    [field: SerializeField] public bool IsInfinite { get; private set; }
 }

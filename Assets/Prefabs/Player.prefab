@@ -192,6 +192,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7103029191301751210}
   - component: {fileID: 7648009776092296695}
+  - component: {fileID: 5803945871818057618}
+  - component: {fileID: 2734471543387787021}
   m_Layer: 6
   m_Name: Hurtbox
   m_TagString: Player
@@ -248,9 +250,38 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.034803063, y: 0.5794718}
-  m_Size: {x: 0.8056588, y: 1.408505}
+  m_Offset: {x: -0.01, y: 0.55}
+  m_Size: {x: 0.7, y: 1.4}
   m_Direction: 0
+--- !u!114 &5803945871818057618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515305421710409048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c23f794e5635bb419bd47e6e16c6f43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!114 &2734471543387787021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515305421710409048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32b0800f4e22ef4380519b4d1a7e6fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
+  _config: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
+  <MaxValue>k__BackingField: 0
+  <CurrentValue>k__BackingField: 0
+  <IsStatic>k__BackingField: 0
+  _damageParticles: {fileID: 2466567890511269386, guid: 80ca15d7024dd724e95d1d3bfd987aba, type: 3}
 --- !u!1 &1822602623840076642
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +294,7 @@ GameObject:
   - component: {fileID: 7249592558409531431}
   - component: {fileID: 6510005132233857990}
   m_Layer: 8
-  m_Name: Locomotion Audio
+  m_Name: Locomotion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -407,7 +438,7 @@ GameObject:
   - component: {fileID: 3562612961479935422}
   - component: {fileID: 1216693112717136754}
   m_Layer: 8
-  m_Name: Reaction Audio
+  m_Name: Reaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -540,7 +571,7 @@ MonoBehaviour:
   _hurtSound: {fileID: 8300000, guid: 8e3ad7af1067fdf40b43f4dfb50ee4e8, type: 3}
   _healingSound: {fileID: 8300000, guid: e637efd8bbe00b6499179c92253380c2, type: 3}
   _deathSound: {fileID: 8300000, guid: 86f39359da3d5ef4e82008b0e51f0190, type: 3}
-  _healthProvider: {fileID: 5006608323033705435}
+  _healthProvider: {fileID: 2734471543387787021}
 --- !u!1 &2511438768263475401
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +583,7 @@ GameObject:
   - component: {fileID: 1589811766139957309}
   - component: {fileID: 7809330539225864080}
   - component: {fileID: 4452931388105062793}
+  - component: {fileID: 1017372488747182917}
   m_Layer: 7
   m_Name: Hitbox
   m_TagString: Player
@@ -624,6 +656,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <AttackData>k__BackingField: {fileID: 11400000, guid: 3874b33b6ce54b849af454eb61ed5ea4, type: 2}
+  _animator: {fileID: 3750387735865093422}
+--- !u!114 &1017372488747182917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2511438768263475401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5c81a1c66ec9d4894984ff189471e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackStrategy
 --- !u!1 &2880830138094642791
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +853,7 @@ GameObject:
   - component: {fileID: 6643250292987981962}
   - component: {fileID: 7008521823602905474}
   m_Layer: 8
-  m_Name: Action Audio
+  m_Name: Action
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1311,7 +1356,7 @@ GameObject:
   - component: {fileID: 506384641350915718}
   - component: {fileID: 7001661983157172225}
   - component: {fileID: 7477225139193990942}
-  - component: {fileID: 5006608323033705435}
+  - component: {fileID: 213586719260208206}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1446,7 +1491,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee9dd943d1e0d54a9d789a014f366f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementComponent
-  <WalkingSpeed>k__BackingField: 2
+  _walkingSpeed: 2
+  _externalVelocity:
+    decayRate: 8
+    restThreshold: 0.05
   _animator: {fileID: 3750387735865093422}
   <SprintingSpeedMultiplier>k__BackingField: 2
   <Stamina>k__BackingField: 100
@@ -1464,8 +1512,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e28ac1af5e01f4da013d12e70509a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  OnHpChanged: {fileID: 11400000, guid: 4eb2943eb5950f54eba48d5bad32d3cd, type: 2}
-  OnDeath: {fileID: 11400000, guid: 4931a3f3f02ec4e4f89d5fbca7242bf4, type: 2}
+  OnHpChangedChannel: {fileID: 11400000, guid: 4eb2943eb5950f54eba48d5bad32d3cd, type: 2}
+  OnDeathChannel: {fileID: 11400000, guid: 1b2ce962ee3da3c4ca0eb1ac1d6feff8, type: 2}
 --- !u!114 &506384641350915718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1479,7 +1527,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _config: {fileID: 0}
-  _valueProviderSO: {fileID: 0}
+  <MaxValue>k__BackingField: 0
+  <CurrentValue>k__BackingField: 0
+  <IsStatic>k__BackingField: 0
 --- !u!114 &7001661983157172225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1495,7 +1545,7 @@ MonoBehaviour:
   _duration: 1
   _blinkInterval: 0.1
   _spriteRendererGroup: {fileID: 4980500249380923839}
-  _healthProvider: {fileID: 5006608323033705435}
+  _healthProvider: {fileID: 2734471543387787021}
 --- !u!114 &7477225139193990942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1509,8 +1559,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InvincibilityComponent
   _duration: 1
-  _healthProvider: {fileID: 5006608323033705435}
---- !u!114 &5006608323033705435
+  _healthProvider: {fileID: 2734471543387787021}
+--- !u!114 &213586719260208206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1519,13 +1569,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7559287907167481913}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f32b0800f4e22ef4380519b4d1a7e6fe, type: 3}
+  m_Script: {fileID: 11500000, guid: bf280afc60b53334b9fa04116c7a1796, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
-  _config: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
-  _valueProviderSO: {fileID: 0}
-  _entityController: {fileID: 7101408821228708346}
+  m_EditorClassIdentifier: '::'
+  _health: {fileID: 2734471543387787021}
   _animator: {fileID: 3750387735865093422}
+  _movementBase: {fileID: 7162682655650916106}
 --- !u!1 &8375044973183638792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1718,7 +1767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2897182995258291296}
   m_Layer: 8
-  m_Name: Sound System
+  m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

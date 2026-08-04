@@ -8,9 +8,9 @@ public class BlinkingEffect : MonoBehaviour
     [SerializeField] SpriteRendererGroup _spriteRendererGroup;
     [SerializeField] HealthProvider _healthProvider;
 
-    private void OnEnable() => _healthProvider.OnHpChanged += OnHpChanged;
-    private void OnDisable() => _healthProvider.OnHpChanged -= OnHpChanged;
-    void OnHpChanged(DamageInfo _) => StartBlinking();
+    private void OnEnable() => _healthProvider.OnValueChanged += OnValueChanged;
+    private void OnDisable() => _healthProvider.OnValueChanged -= OnValueChanged;
+    void OnValueChanged(DamageInfo _) => StartBlinking();
 
     IEnumerator BlinkCoroutine()
     {

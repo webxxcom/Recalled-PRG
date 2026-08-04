@@ -17,15 +17,15 @@ public class BarScript : MonoBehaviour
 
     private void OnEnable()
     {
-        MaxValue = _valueProvider.Value.MaxValue;
-        Set(_valueProvider.Value.CurrentValue);
+        MaxValue = _valueProvider.MaxValue;
+        Set(_valueProvider.CurrentValue);
 
-        _valueProvider.OnHpChanged += OnValueChanged;
+        _valueProvider.OnValueChanged += OnValueChanged;
     }
 
     private void OnDisable()
     {
-        _valueProvider.OnHpChanged -= OnValueChanged;
+        _valueProvider.OnValueChanged -= OnValueChanged;
     }
 
     float TargetValue => Value / MaxValue;

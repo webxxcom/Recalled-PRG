@@ -9,14 +9,14 @@ public class HealthSound : EntitySoundComponent
 
     void OnEnable()
     {
-        _healthProvider.OnMinHpReached += HandleDeathSound;
-        _healthProvider.OnHpChanged += HandleHurtHealingSound;
+        _healthProvider.OnMinValue += HandleDeathSound;
+        _healthProvider.OnValueChanged += HandleHurtHealingSound;
     }
 
     void OnDisable()
     {
-        _healthProvider.OnMinHpReached += HandleDeathSound;
-        _healthProvider.OnHpChanged += HandleHurtHealingSound;
+        _healthProvider.OnMinValue += HandleDeathSound;
+        _healthProvider.OnValueChanged += HandleHurtHealingSound;
     }
 
     public void HandleDeathSound(DamageInfo damageInfo)

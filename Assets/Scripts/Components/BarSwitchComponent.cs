@@ -14,11 +14,11 @@ public class BarSwitchComponent : MonoBehaviour
 
     private void OnEnable()
     {
-        _healthProvider.OnMinHpReached += ToggleBars;
+        _healthProvider.OnMinValue += ToggleBars;
     }
 
     private void OnDisable()
     {
-        _healthProvider.OnMinHpReached -= ToggleBars;
+        _healthProvider.OnMinValue -= ToggleBars;
     }
 }

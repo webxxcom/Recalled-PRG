@@ -29,7 +29,9 @@ public class FireEffectDefinition : EffectDefinition
     {
         if (timeSinceDamage > reloadTime)
         {
-            health.DealDamage(_damagePerSecond);
+            //TODO
+            Debug.Log(_damagePerSecond);
+            //health.DealDamage(new(_damagePerSecond, 0, null, null, health,));
             timeSinceDamage = 0;
         }
 

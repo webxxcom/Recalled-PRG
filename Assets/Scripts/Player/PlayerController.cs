@@ -1,9 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(Invincibility))]
-[RequireComponent(typeof(BlinkingEffect))]
-[RequireComponent(typeof(HealthProvider))]
 public class PlayerController : EntityController
 {
     private static readonly int IsArmedHash = Animator.StringToHash("IsArmed");
@@ -29,21 +25,21 @@ public class PlayerController : EntityController
     {
         base.Awake();
 
-        _healthProvider = GetComponent<HealthProvider>();
+        _healthProvider = GetComponentInChildren<HealthProvider>();
 
         IsArmed = true;
     }
 
     void OnEnable()
     {
-        _healthProvider.OnHpChanged += HandleOnHpChangedGameEvent;
-        _healthProvider.OnMinHpReached += HandleOnDeathGameEvent;
+        _healthProvider.OnValueChanged += HandleOnHpChangedGameEvent;
+        _healthProvider.OnMinValue += HandleOnDeathGameEvent;
     }
 
     void OnDisable()
     {
-        _healthProvider.OnHpChanged -= HandleOnHpChangedGameEvent;
-        _healthProvider.OnMinHpReached -= HandleOnDeathGameEvent;
+        _healthProvider.OnValueChanged -= HandleOnHpChangedGameEvent;
+        _healthProvider.OnMinValue -= HandleOnDeathGameEvent;
     }
 
     void HandleOnHpChangedGameEvent(DamageInfo damageInfo) => OnHpChangedChannel.Raise(damageInfo);

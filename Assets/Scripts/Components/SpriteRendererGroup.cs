@@ -40,4 +40,10 @@ public class SpriteRendererGroup : MonoBehaviour
     {
         _sortingGroup.sortingOrder = order;
     }
+
+    public void SetFlipX(bool flag)
+    {
+        foreach (var sr in _spriteRenderers)
+            sr.flipX = flag;
+    }
 }

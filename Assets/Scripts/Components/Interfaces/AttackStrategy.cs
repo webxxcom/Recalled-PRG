@@ -3,17 +3,9 @@
 [RequireComponent(typeof(EntityAttack))]
 public abstract class AttackStrategy : MonoBehaviour
 {
-    protected MovementBase _movementBase;
-    protected EntityAttack _entityAttack;
-    protected EntityController _entityController;
+    public abstract AttackSO AttackData { get; }
 
-    private void Awake()
-    {
-        _entityAttack = GetComponent<EntityAttack>();
-
-        _entityController = Utils.FindOrThrow(GetComponentInParent<EntityController>);
-        _movementBase = Utils.FindOrThrow(GetComponentInParent<MovementBase>);
-    }
-
-    public abstract void Execute();
+    public abstract void StartExecuting();
+    public abstract void ProcessState(float normalizedTime);
+    public abstract void FinishExecuting();
 }

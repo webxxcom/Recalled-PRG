@@ -14,7 +14,7 @@ public class EntityController : MonoBehaviour
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Collider2D = GetComponent<Collider2D>();
 
-        Animator = Utils.GetComponentInChildrenIfNotPresent<Animator>(gameObject);
+        Animator = GetComponentInChildren<Animator>();
         SpriteRendererGroup = GetComponentInChildren<SpriteRendererGroup>();
     }
 }

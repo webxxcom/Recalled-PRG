@@ -22,9 +22,6 @@ public class EntityMovement : MovementBase
 
     protected override Vector2 GetMovementIntention()
     {
-        if (MovementIntention != Vector2.zero)
-            LastMovement = MovementIntention;
-
         TargetProvider targetProvider = _targetProviders
             .FirstOrDefault(e => e.HasTarget);
 

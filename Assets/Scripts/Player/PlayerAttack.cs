@@ -6,7 +6,7 @@ public class PlayerAttack : EntityAttack
 {
     void OnAttack(InputValue value)
     {
-        if (value.isPressed && _timeSinceLastAttack >= AttackData.ReloadTime)
+        if (value.isPressed && _timeSinceLastAttack >= _attackStrategy.AttackData.ReloadTime)
         {
             _timeSinceLastAttack = 0;
 

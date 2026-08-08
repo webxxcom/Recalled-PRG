@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class StageClearenceLight : MonoBehaviour
 {
-    private static readonly int InteractHash = Animator.StringToHash("Interact");
     Animator _animator;
 
     [Header("Listens to")]
@@ -26,6 +25,6 @@ public class StageClearenceLight : MonoBehaviour
 
     void Interact()
     {
-        _animator.SetTrigger(InteractHash);
+        _animator.SetTrigger(AnimatorParameters.InteractHash);
     }
 }

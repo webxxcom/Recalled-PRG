@@ -4,10 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class MovementBase : MonoBehaviour
 {
-    public static readonly int MoveYHash = Animator.StringToHash("MoveY");
-    public static readonly int MoveXHash = Animator.StringToHash("MoveX");
-    public static readonly int SpeedHash = Animator.StringToHash("Speed");
-
     [SerializeField] float _walkingSpeed;
 
     public bool MovementBlocked { get; set; }
@@ -18,8 +14,7 @@ public abstract class MovementBase : MonoBehaviour
     public Vector2 FacingDirection => MovementIntention != Vector2.zero ? MovementIntention : LastMovement;
    
     [SerializeField] ExternalVelocity _externalVelocity;
-
-    [SerializeField] Animator _animator;
+    [SerializeField] AnimationController _animationController;
 
     protected Rigidbody2D _rigidbody2D;
 
@@ -34,12 +29,15 @@ public abstract class MovementBase : MonoBehaviour
         get => _movementIntention;
         protected set
         {
-            var prevMov = _movementIntention;
+            if (_movementIntention != Vector2.zero)
+                LastMovement = _movementIntention;
+
+            var _prevMov = _movementIntention;
             _movementIntention = value;
 
-            if (prevMov == Vector2.zero && value != Vector2.zero)
+            if (_prevMov == Vector2.zero && value != Vector2.zero)
                 OnMovementStarted?.Invoke();
-            else if (prevMov != Vector2.zero && value == Vector2.zero)
+            else if (_prevMov != Vector2.zero && value == Vector2.zero)
                 OnMovementStopped?.Invoke();
 
             if (value != Vector2.zero)
@@ -74,8 +72,7 @@ public abstract class MovementBase : MonoBehaviour
         else
             _rigidbody2D.linearVelocity *= 0.9f;
 
-        _animator.SetFloat(MoveXHash, Mathf.Abs(FacingDirection.x) > 0.01f ? FacingDirection.x : 0f);
-        _animator.SetFloat(MoveYHash, Mathf.Abs(FacingDirection.x) < 0.01f ? FacingDirection.y : 0f);
-        _animator.SetFloat(SpeedHash, _rigidbody2D.linearVelocity.magnitude / 4f);
+        _animationController.MoveAnimation(FacingDirection,
+            _rigidbody2D.linearVelocity.magnitude / 4f);
     }
 }

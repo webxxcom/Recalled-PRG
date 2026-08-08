@@ -28,7 +28,7 @@ public class PlayerMovementSound : EntitySoundComponent
 
         if (_playerMovementComponent.IsSprinting)
         {
-            return 0.4f / kf * _playerMovementComponent.SprintingSpeedMultiplier;
+            return 0.4f / kf * _playerMovementComponent.SprintingState.SpeedMultiplier;
         }
         else
             return 0.3f / kf;

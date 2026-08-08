@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Attack/Player Attack Data")]
-public class PlayerAttackData : AttackSO
+public class PlayerAttackData : MeleeAttackSO
 {
     [SerializeField] InventorySO _inventory;
 

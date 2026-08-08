@@ -1,34 +1,47 @@
 ﻿using System;
 using UnityEngine;
 
-[RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(AttackStrategy))]
 public abstract class EntityAttack : MonoBehaviour
 {
-    private static readonly int AttackHash = Animator.StringToHash("Attack");
-
-    [field: SerializeField] public AttackSO AttackData { get; private set; }
     [SerializeField] Animator _animator;
-
-    public CapsuleCollider2D Hitbox { get; private set; }
-
+    
+    protected AttackStrategy _attackStrategy;
     protected float _timeSinceLastAttack;
 
     public event Action OnAttackStarted;
+    public event Action OnAttackFinished;
 
     protected virtual void Awake()
     {
-        Hitbox = GetComponent<CapsuleCollider2D>();
+        _attackStrategy = GetComponent<AttackStrategy>();
     }
 
     private void Start()
     {
-        _timeSinceLastAttack = AttackData.ReloadTime;
+        _timeSinceLastAttack = _attackStrategy.AttackData.ReloadTime;
     }
 
     protected void Attack()
     {
-        _animator.SetTrigger(AttackHash);
+        _animator.SetTrigger(AnimatorParameters.AttackHash);
+    }
+
+    public void StartAttack()
+    {
+        _attackStrategy.StartExecuting();
 
         OnAttackStarted?.Invoke();
+    }
+
+    public void ProcessAttack(float normalizedTime)
+    {
+        _attackStrategy.ProcessState(normalizedTime);
+    }
+
+    public void FinishAttack()
+    {
+        _attackStrategy.FinishExecuting();
+        OnAttackFinished?.Invoke();
     }
 }

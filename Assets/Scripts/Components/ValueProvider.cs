@@ -13,6 +13,7 @@ public abstract class ValueProvider<T> : MonoBehaviour
     public event UnityAction<T> OnMinValue;
     public event UnityAction<T> OnMaxValue;
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (_config != null)
@@ -23,12 +24,14 @@ public abstract class ValueProvider<T> : MonoBehaviour
             IsInfinite = _config.IsInfinite;
         }
     }
+#endif
 
     public void Change(int value, T data)
     {
         if (IsStatic)
             return;
 
+        OnValueChanged?.Invoke(data);
         if (!IsInfinite)
         {
             if (CurrentValue + value >= MaxValue)
@@ -44,8 +47,6 @@ public abstract class ValueProvider<T> : MonoBehaviour
             else
                 CurrentValue += value;
         }
-
-        OnValueChanged?.Invoke(data);
     }
 
     public void Init()

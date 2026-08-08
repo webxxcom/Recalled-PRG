@@ -25,7 +25,7 @@ public class EnemyAttack : EntityAttack
     {
         _timeSinceLastAttack += Time.deltaTime;
 
-        if (_wantsAttack && _timeSinceLastAttack > AttackData.ReloadTime)
+        if (_wantsAttack && _timeSinceLastAttack > _attackStrategy.AttackData.ReloadTime)
         {
             Attack();
 

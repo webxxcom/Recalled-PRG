@@ -4,23 +4,50 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MovementBase
 {
-    [field: SerializeField] public float SprintingSpeedMultiplier { get; private set; }
-    [field: SerializeField] public float Stamina { get; private set; }
-    [field: SerializeField] public float StaminaUsage { get; private set; }
-    [field: SerializeField] public float StaminaRestore { get; private set; }
+    [System.Serializable]
+    public class SprintingProperty
+    {
+        [SerializeField] public float _stamina;
+        [SerializeField] public float _staminaUsage;
+        [SerializeField] public float _staminaRestore;
+        [field: SerializeField] public float SpeedMultiplier { get; private set; }
+
+        float _staminaRestoreLastTime = 0;
+        float _currentStamina = 100;
+
+        public void RestoreStaminaWithTime(bool isSprinting)
+        {
+            _staminaRestoreLastTime += Time.deltaTime;
+
+            bool canRestoreStamina = _currentStamina < _stamina && !isSprinting;
+            if (_staminaRestoreLastTime > 0.3 && canRestoreStamina)
+            {
+                _currentStamina += _staminaRestore;
+                _staminaRestoreLastTime = 0;
+            }
+        }
+
+        public bool ProcessSprintingState(bool isSprinting)
+        {
+            // If not sprinting or have no enough stamina we're not sprinting
+            if (!isSprinting || _currentStamina - _staminaUsage <= 0.3)
+                return false;
+
+            // Otherwise subtract stamina usage
+            _currentStamina -= _staminaUsage;
+            return true;
+        }
+    }
+
+    [field: SerializeField] public SprintingProperty SprintingState { get; private set; }
     [field: SerializeField] public float DashReloadTime { get; private set; }
     [field: SerializeField] public float DashForce { get; private set; }
     [SerializeField] Invincibility _invincibility;
 
     public bool IsSprinting { get; private set; }
 
-    float _currentStamina = 100;
-    float _staminaRestoreLastTime = 0;
-    float _dashLastTime = 0;
-
     void OnMove(InputValue value)
     {
-        LastMovement = MovementIntention;
         MovementIntention = value.Get<Vector2>();
     }
 
@@ -36,23 +63,10 @@ public class PlayerMovement : MovementBase
             return;
 
         IsSprinting = value.isPressed;
-
         if (IsSprinting)
-            SpeedAggregator.Add(SprintingSpeedMultiplier);
+            SpeedAggregator.Add(SprintingState.SpeedMultiplier);
         else
-            SpeedAggregator.Remove(SprintingSpeedMultiplier);
-    }
-
-    void RestoreStaminaWithTime()
-    {
-        _staminaRestoreLastTime += Time.deltaTime;
-
-        bool canRestoreStamina = _currentStamina < Stamina && !IsSprinting;
-        if (_staminaRestoreLastTime > 0.3 && canRestoreStamina)
-        {
-            _currentStamina += StaminaRestore;
-            _staminaRestoreLastTime = 0;
-        }
+            SpeedAggregator.Remove(SprintingState.SpeedMultiplier);
     }
 
     protected override Vector2 GetMovementIntention()
@@ -62,17 +76,11 @@ public class PlayerMovement : MovementBase
 
         Vector2 finalMovement = MovementIntention;
 
-        if (IsSprinting)
-        {
-            if (_currentStamina - StaminaUsage <= 0.3)
-                IsSprinting = false;
-            else
-                _currentStamina -= StaminaUsage;
-        }
+        SprintingState.ProcessSprintingState(IsSprinting);
         return finalMovement;
     }
     void Update()
     {
-        RestoreStaminaWithTime();
+        SprintingState.RestoreStaminaWithTime(IsSprinting);
     }
 }

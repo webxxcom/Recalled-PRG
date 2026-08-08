@@ -9,25 +9,19 @@ public class ProjectileScript : MonoBehaviour
     [field: SerializeField] public float KnockbackPower { get; private set; }
     [field: SerializeField] public float TimeToLive { get; private set; }
 
-    public Vector2 Destination { get; private set; }
-    public EntityController Owner { get; private set; }
+    public Vector2 Direction { get; private set; }
 
-    float totalLivingTime = 0;
-    Vector2 direction;
     new Rigidbody2D rigidbody2D;
 
     void InitRotation()
     {
-        direction = (Destination - (Vector2)transform.position).normalized;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
         transform.Rotate(0,0, angle);
     }
 
-    public void Initialize(EntityController owner, Vector2 destination)
+    public void Initialize(string owner, Vector2 destination)
     {
-        Destination = destination;
-        Owner = owner;
+        Direction = destination;
 
         InitRotation();
     }
@@ -39,7 +33,7 @@ public class ProjectileScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidbody2D.linearVelocity = direction * AdvancingSpeed;
+        rigidbody2D.linearVelocity = Direction * AdvancingSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -51,14 +45,15 @@ public class ProjectileScript : MonoBehaviour
         //}
     }
 
+    float elapsedLivingTime = 0;
     private void Update()
     {
-        if (totalLivingTime >= TimeToLive)
+        if (elapsedLivingTime >= TimeToLive)
         {
             Destroy(gameObject);
             return;
         }
 
-        totalLivingTime += Time.deltaTime;
+        elapsedLivingTime += Time.deltaTime;
     }
 }

@@ -1,47 +1,51 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AttackStrategy))]
 public abstract class EntityAttack : MonoBehaviour
 {
-    [SerializeField] Animator _animator;
-    
-    protected AttackStrategy _attackStrategy;
-    protected float _timeSinceLastAttack;
+    [SerializeField] protected Animator _animator;
+    [SerializeField] protected List<AttackStrategy> _attackStrategies = new();
+
+    [SerializeField] protected float _timeSinceLastAttack;
 
     public event Action OnAttackStarted;
     public event Action OnAttackFinished;
 
-    protected virtual void Awake()
+    protected void Attack(AttackStrategy attackStrategy)
     {
-        _attackStrategy = GetComponent<AttackStrategy>();
+        _currentAttack = attackStrategy;
+
+        _animator.SetTrigger(attackStrategy.AnimatorHash);
     }
 
-    private void Start()
-    {
-        _timeSinceLastAttack = _attackStrategy.AttackData.ReloadTime;
-    }
-
-    protected void Attack()
-    {
-        _animator.SetTrigger(AnimatorParameters.AttackHash);
-    }
-
+    AttackStrategy _currentAttack;
     public void StartAttack()
     {
-        _attackStrategy.StartExecuting();
+        _currentAttack.StartExecuting();
 
         OnAttackStarted?.Invoke();
     }
 
     public void ProcessAttack(float normalizedTime)
     {
-        _attackStrategy.ProcessState(normalizedTime);
+        _currentAttack.ProcessState(normalizedTime);
     }
 
     public void FinishAttack()
     {
-        _attackStrategy.FinishExecuting();
+        _currentAttack.FinishExecuting();
+
         OnAttackFinished?.Invoke();
     }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (_attackStrategies.Count == 0)
+             GetComponents(_attackStrategies);
+    }
+
+#endif
 }

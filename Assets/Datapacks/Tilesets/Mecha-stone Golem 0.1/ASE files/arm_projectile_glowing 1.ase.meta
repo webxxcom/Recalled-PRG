@@ -33,7 +33,7 @@ ScriptedImporter:
     sRGBTexture: 1
     spriteMode: 2
     spriteExtrude: 1
-    spriteMeshType: 0
+    spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
     spritePixelsToUnits: 16
@@ -75,8 +75,8 @@ ScriptedImporter:
     fileImportMode: 1
     importHiddenLayers: 0
     layerImportMode: 0
-    defaultPivotSpace: 0
-    defaultPivotAlignment: 9
+    defaultPivotSpace: 1
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.2}
     mosaicPadding: 4
     spritePadding: 0
@@ -90,8 +90,8 @@ ScriptedImporter:
     fileImportMode: 1
     importHiddenLayers: 0
     layerImportMode: 0
-    defaultPivotSpace: 0
-    defaultPivotAlignment: 9
+    defaultPivotSpace: 1
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.2}
     mosaicPadding: 4
     spritePadding: 0
@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639218164489916221
+  platformSettingsDirtyTick: 639218926246340586
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -129,8 +129,8 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Layer_Frame_0
     originalName: 
-    pivot: {x: -0.28571436, y: -2.5714285}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.2}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -150,8 +150,8 @@ ScriptedImporter:
     uvTransform: {x: -56, y: -52}
   - name: Layer_Frame_1
     originalName: 
-    pivot: {x: -0.28571436, y: -2.5714285}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.2}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -171,8 +171,8 @@ ScriptedImporter:
     uvTransform: {x: 47, y: 4}
   - name: Layer_Frame_2
     originalName: 
-    pivot: {x: -0.28571436, y: -2.5714285}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.2}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -192,8 +192,8 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 26}
   - name: Layer_Frame_3
     originalName: 
-    pivot: {x: -0.28571436, y: -2.5714285}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.2}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -213,8 +213,8 @@ ScriptedImporter:
     uvTransform: {x: 47, y: 26}
   - name: Layer_Frame_4
     originalName: 
-    pivot: {x: -0.28571436, y: -2.5714285}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.2}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -234,8 +234,8 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 48}
   - name: Layer_Frame_5
     originalName: 
-    pivot: {x: -0.28571436, y: -2.5714285}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.2}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:

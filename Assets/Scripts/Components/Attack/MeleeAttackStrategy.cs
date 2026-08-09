@@ -7,6 +7,8 @@ public class MeleeAttackStrategy : AttackStrategy
     [field: SerializeField] public MeleeAttackSO MeleeAttackSO { get; protected set; }
     public override AttackSO AttackData => MeleeAttackSO;
     public CapsuleCollider2D Hitbox { get; private set; }
+    protected override bool WithinAttackRange { get; set; }
+    public override int AnimatorHash => AnimatorParameters.MeleeHash;
 
     MovementBase _movementBase;
 
@@ -20,7 +22,6 @@ public class MeleeAttackStrategy : AttackStrategy
     {
         _movementBase.OnMovement += SetAttackCollisionOffset;
     }
-
     private void OnDisable()
     {
         _movementBase.OnMovement -= SetAttackCollisionOffset;
@@ -32,11 +33,24 @@ public class MeleeAttackStrategy : AttackStrategy
             = Quaternion.FromToRotation(Vector2.right, _movementBase.MovementIntention);
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+            WithinAttackRange = true;
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+            WithinAttackRange = false;
+    }
+
     readonly List<Collider2D> _damagedTargets = new();
     readonly List<Collider2D> _hits = new(10);
 
     public override void StartExecuting()
     {
+        _elapsedSinceAttack = 0;
     }
 
     void AdjustHitbox(float normalizedTime)

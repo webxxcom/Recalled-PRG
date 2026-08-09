@@ -6,11 +6,12 @@ public class PlayerAttack : EntityAttack
 {
     void OnAttack(InputValue value)
     {
-        if (value.isPressed && _timeSinceLastAttack >= _attackStrategy.AttackData.ReloadTime)
+        //TODO player attack strategy
+        if (value.isPressed && _timeSinceLastAttack >= _attackStrategies[0].AttackData.ReloadTime)
         {
             _timeSinceLastAttack = 0;
 
-            Attack();
+            Attack(_attackStrategies[0]);
         }
     }
 

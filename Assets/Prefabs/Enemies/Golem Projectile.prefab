@@ -151,8 +151,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.7313043, y: 3.9030044}
-  m_Size: {x: 1.8390708, y: 0.483779}
+  m_Offset: {x: 0.055186752, y: -0.023454854}
+  m_Size: {x: 1.8067212, y: 0.585278}
   m_Direction: 1
 --- !u!50 &7731062374065890232
 Rigidbody2D:
@@ -193,7 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7f7a64bd8e6c146b4194dce9602b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileScript
-  <AdvancingSpeed>k__BackingField: 1
+  <AdvancingSpeed>k__BackingField: 3
   <DealtDamage>k__BackingField: 10
   <KnockbackPower>k__BackingField: 0
-  <TimeToLive>k__BackingField: 5
+  <TimeToLive>k__BackingField: 4
+  _offset: {x: 1.72, y: 2.31}

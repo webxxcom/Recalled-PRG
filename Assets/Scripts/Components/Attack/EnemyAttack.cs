@@ -1,35 +1,23 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-/// <summary>
-/// EnemyAttack requires detection zone for the enemy to start attacking when their target is in the range
-/// </summary>
 public class EnemyAttack : EntityAttack
 {
-    bool _wantsAttack;
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-            _wantsAttack = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-            _wantsAttack = false;
-    }
+    [SerializeField] float _intervalBetweenStates;
 
     void Update()
     {
-        _timeSinceLastAttack += Time.deltaTime;
-
-        if (_wantsAttack && _timeSinceLastAttack > _attackStrategy.AttackData.ReloadTime)
+        if (_timeSinceLastAttack > _intervalBetweenStates)
         {
-            Attack();
-
-            _timeSinceLastAttack = 0;
+            foreach (var attackStrategy in _attackStrategies)
+            {
+                if (attackStrategy.Ready)
+                {
+                    Attack(attackStrategy);
+                    _timeSinceLastAttack = 0;
+                    break;
+                }
+            }
         }
+        _timeSinceLastAttack += Time.deltaTime;
     }
 }

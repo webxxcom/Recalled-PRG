@@ -18,5 +18,4 @@ public class ExternalVelocity
             _velocity = Vector2.zero;
         return _velocity;
     }
-
 }

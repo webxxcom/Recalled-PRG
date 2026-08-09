@@ -3,25 +3,25 @@
 class ProjectileAttackStrategy : AttackStrategy
 {
     [field: SerializeField] public ProjectileAttackDataSO ProjectileAttackData { get; private set; }
-    [SerializeField] Animator _animator;
     public override AttackSO AttackData => ProjectileAttackData;
-
     protected override bool WithinAttackRange { get; set; } = true;
-
     public override int AnimatorHash => AnimatorParameters.ShootHash;
 
-    public override void FinishExecuting()
-    {
-    }
+    [SerializeField] AnimationController _animationController;
 
     bool _completed;
     public override void ProcessState(float normalizedTime)
     {
         if (normalizedTime >= ProjectileAttackData.NormalizedSpawnPoint && !_completed)
         {
-            GameObject projectile = Instantiate(ProjectileAttackData.ProjectilePrefab, _animator.transform.position, Quaternion.identity);
+            GameObject projectile = Instantiate(ProjectileAttackData.ProjectilePrefab, transform.position, Quaternion.identity);
 
-            projectile.GetComponent<ProjectileScript>().Initialize(transform.parent.gameObject, FindAnyObjectByType<PlayerController>().transform.position);
+            // TODO trashy init
+            projectile.GetComponent<ProjectileScript>().Initialize(
+                transform.parent.gameObject,
+                FindAnyObjectByType<PlayerController>().transform.position,
+                _animationController.FlippedX);
+
             _completed = true;
         }
     }
@@ -32,11 +32,15 @@ class ProjectileAttackStrategy : AttackStrategy
         _elapsedSinceAttack = 0;
     }
 
+    public override void FinishExecuting()
+    {
+    }
+
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        if (_animator == null)
-            _animator = transform.root.GetComponentInChildren<Animator>();
+        if (_animationController == null)
+            _animationController = transform.parent.GetComponentInChildren<AnimationController>();
     }
 #endif
 }

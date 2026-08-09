@@ -12,16 +12,11 @@ public abstract class MovementBase : MonoBehaviour
     public bool IsWalking => MovementIntention != Vector2.zero;
     public float CurrentSpeed => _walkingSpeed * SpeedAggregator.Get();
     public Vector2 FacingDirection => MovementIntention != Vector2.zero ? MovementIntention : LastMovement;
-   
-    [SerializeField] ExternalVelocity _externalVelocity;
-    [SerializeField] AnimationController _animationController;
 
-    protected Rigidbody2D _rigidbody2D;
-
-    protected virtual void Awake()
-    {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-    }
+    [Header("Uses")]
+    [SerializeField] protected ExternalVelocity _externalVelocity;
+    [SerializeField] protected AnimationController _animationController;
+    [SerializeField] protected Rigidbody2D _rigidbody2D;
 
     Vector2 _movementIntention;
     public Vector2 MovementIntention
@@ -75,4 +70,14 @@ public abstract class MovementBase : MonoBehaviour
         _animationController.MoveAnimation(FacingDirection,
             _rigidbody2D.linearVelocity.magnitude / 4f);
     }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (_rigidbody2D == null)
+            _rigidbody2D = GetComponent<Rigidbody2D>();
+        if (_animationController == null)
+            _animationController = GetComponentInChildren<AnimationController>();
+    }
+#endif
 }

@@ -147,7 +147,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -169,7 +169,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -193,8 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7f7a64bd8e6c146b4194dce9602b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileScript
-  <AdvancingSpeed>k__BackingField: 3
+  <AdvancingSpeed>k__BackingField: 4
   <DealtDamage>k__BackingField: 10
-  <KnockbackPower>k__BackingField: 0
+  <KnockbackPower>k__BackingField: 1
   <TimeToLive>k__BackingField: 4
   _offset: {x: 1.72, y: 2.31}

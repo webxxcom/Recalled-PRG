@@ -4,5 +4,5 @@ using UnityEngine;
 public class WanderingMovementSO : MovementStrategySO
 {
     public override MovementStrategy CreateInstance()
-        => new WanderingMovement().Init(this);
+        => new WanderingMovement(this);
 }

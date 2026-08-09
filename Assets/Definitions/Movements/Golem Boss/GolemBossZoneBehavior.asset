@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d78d9cd4aa9c774fb3e2c54ec8a168b, type: 3}
+  m_Name: GolemBossZoneBehavior
+  m_EditorClassIdentifier: Assembly-CSharp::ZoneTargetProviderSO
+  OnTargetEnteredZone: {fileID: 11400000, guid: 6c6fef5aaabb05245a79e0688f04bcae, type: 2}
+  OnTargetLeftZone: {fileID: 11400000, guid: 1f1f5439e75d5ac449cda69c0e1c7200, type: 2}

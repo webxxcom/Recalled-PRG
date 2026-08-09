@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -9,17 +8,18 @@ public class ProjectileScript : MonoBehaviour
     [field: SerializeField] public int DealtDamage { get; private set; }
     [field: SerializeField] public float KnockbackPower { get; private set; }
     [field: SerializeField] public float TimeToLive { get; private set; }
-    [field: SerializeField] Vector2 _offset;
+    [SerializeField] Vector2 _offset;
 
     Vector3 _direction;
     GameObject _owner;
     Rigidbody2D _rigidbody2D;
     Collider2D _collider2D;
 
-    public void Initialize(GameObject owner, Vector3 destination)
+    public void Initialize(GameObject owner, Vector3 destination, bool flipX)
     {
         _owner = owner;
-        Vector3 pos = (Vector2)transform.position + _offset;
+        Vector3 pos = (Vector2)transform.position + new Vector2(_offset.x * (flipX ? -1 : 1), _offset.y);
+
         _direction = (destination - pos).normalized;
         transform.SetPositionAndRotation(
             pos,
@@ -39,24 +39,25 @@ public class ProjectileScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag(_owner.tag) && collision.TryGetComponent(out HealthProvider hp))
+        if (collision.CompareTag(_owner.tag))
+            return;
+
+        if (collision.TryGetComponent(out HealthProvider hp))
         {
-            // TODO the hurtbox and effects
             hp.DealDamage(new(DealtDamage, KnockbackPower, _owner, _collider2D, hp.Hurtbox, null));
         }
-
         Destroy(gameObject);
     }
 
-    float elapsedLivingTime = 0;
+    float _elapsedLivingTime;
     private void Update()
     {
-        if (elapsedLivingTime >= TimeToLive)
+        if (_elapsedLivingTime >= TimeToLive)
         {
             Destroy(gameObject);
             return;
         }
 
-        elapsedLivingTime += Time.deltaTime;
+        _elapsedLivingTime += Time.deltaTime;
     }
 }

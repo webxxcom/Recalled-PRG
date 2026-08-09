@@ -6,33 +6,38 @@ public class EntityMovement : MovementBase
 {
     [SerializeField] MovementAIConfig _movementAIConfig;
 
+    MovementStrategy _idleMovementStrategy;
     readonly List<MovementStrategy> _movementStrategies = new();
     readonly List<TargetProvider> _targetProviders = new();
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
+        _idleMovementStrategy = _movementAIConfig.IdleMovementStrategy.CreateInstance();
 
         foreach (var item in _movementAIConfig.MovementStrategies)
             _movementStrategies.Add(item.CreateInstance());
-
         foreach (var item in _movementAIConfig.TargetProviders)
             _targetProviders.Add(item.CreateInstance());
     }
 
     protected override Vector2 GetMovementIntention()
     {
-        TargetProvider targetProvider = _targetProviders
-            .FirstOrDefault(e => e.HasTarget);
+        GameObject target = _targetProviders
+            .FirstOrDefault(e => e.HasTarget)?.CurrentTarget;
 
         Vector2 dir = Vector2.zero;
-        foreach (var item in _movementStrategies)
+        if (target != null)
         {
-            dir = item.GetDirection(gameObject, targetProvider?.CurrentTarget, out bool reachedDestination);
+            foreach (var movementStrategy in _movementStrategies)
+            {
+                dir = movementStrategy.GetDirection(gameObject, target);
 
-            if (reachedDestination || dir != Vector2.zero)
-                break;
+                if (dir != Vector2.zero)
+                    break;
+            }
         }
+        else
+            dir = _idleMovementStrategy.GetDirection(gameObject, target);
 
         MovementIntention = dir;
         return MovementIntention;

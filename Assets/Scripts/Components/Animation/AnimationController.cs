@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRendererGroup))]
 public class AnimationController : MonoBehaviour
 {
+    public bool FlippedX { get; private set; }
+
     [SerializeField] bool _isXFlippable;
 
     protected Animator _animator;
@@ -26,9 +28,15 @@ public class AnimationController : MonoBehaviour
         if (_isXFlippable)
         {
             if (direction.x > float.Epsilon)
+            {
                 _spriteRendererGroup.SetFlipX(false);
+                FlippedX = false;
+            }
             else if (direction.y < -float.Epsilon)
+            {
                 _spriteRendererGroup.SetFlipX(true);
+                FlippedX = true;
+            }
         }
     }
 }

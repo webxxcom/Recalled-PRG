@@ -167,7 +167,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Attack
+    m_ConditionEvent: Melee
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7737979891603256477}
@@ -415,7 +415,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: Attack
+  - m_Name: Melee
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -743,120 +743,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0491a3efefb53a841bd407e9b039fe63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackStateMachine
-  impactTime: 0.5
-  recoveryTime: 0.8
-  speedMultiplier: 0.3
-  _colliderSize:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1.0458362
-      value: 0.9068626
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 2.2089593
-      value: 1.3726797
-      inSlope: 0.34574705
-      outSlope: 0.34574705
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 3.4012778
-      value: 1.7212496
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _colliderSizeX:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.009481601
-      value: 1.4325082
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5163958
-      value: 2.378655
-      inSlope: 1.9976859
-      outSlope: 1.9976859
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.99626374
-      value: 3.403789
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _colliderSizeY:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0008430481
-      value: 0.90771484
-      inSlope: 0.86633515
-      outSlope: 0.86633515
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9912878
-      value: 1.765772
-      inSlope: 0.86633515
-      outSlope: 0.86633515
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _colliderOffsetY:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.004180908
-      value: 0.3522644
-      inSlope: 0.4058228
-      outSlope: 0.4058228
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.0020752
-      value: 0.75723267
-      inSlope: 0.4058228
-      outSlope: 0.4058228
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4

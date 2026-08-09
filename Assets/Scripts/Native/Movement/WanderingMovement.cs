@@ -24,14 +24,12 @@ public class WanderingMovement : MovementStrategy
     bool isIdle = false;
     float CurrentStateDuration = 0f;
 
-    public override Vector2 GetDirection(GameObject origin, GameObject _, out bool reachedDestination)
+    public override Vector2 GetDirection(GameObject origin, GameObject _)
     {
         if (ShouldChangeDirection)
             AdvanceState();
 
         timeSinceChangingDirection += Time.deltaTime;
-
-        reachedDestination = false;
 
         return IntermediateDirection;
     }
@@ -59,14 +57,8 @@ public class WanderingMovement : MovementStrategy
             IntermediateDirection = Vector2.zero;
     }
 
-    public override MovementStrategy Init(MovementStrategySO other)
-    {
-        WanderingMovementSO wanderingMovementSO = other as WanderingMovementSO;
-
-        //..
-
-        return this;
-    }
+    public override void Init(MovementStrategySO other) { }
+    public WanderingMovement(MovementStrategySO other) : base(other) { }
 
     bool ShouldChangeDirection => timeSinceChangingDirection >= CurrentStateDuration;
 }

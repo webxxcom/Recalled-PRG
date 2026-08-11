@@ -2,8 +2,8 @@
 
 class ProjectileAttackStrategy : AttackStrategy
 {
-    [field: SerializeField] public ProjectileAttackDataSO ProjectileAttackData { get; private set; }
-    public override AttackSO AttackData => ProjectileAttackData;
+    [SerializeField] ProjectileAttackDataSO _projectileAttackData;
+    public override AttackSO AttackData => _projectileAttackData;
     protected override bool WithinAttackRange { get; set; } = true;
     public override int AnimatorHash => AnimatorParameters.ShootHash;
 
@@ -12,9 +12,9 @@ class ProjectileAttackStrategy : AttackStrategy
     bool _completed;
     public override void ProcessState(float normalizedTime)
     {
-        if (normalizedTime >= ProjectileAttackData.NormalizedSpawnPoint && !_completed)
+        if (normalizedTime >= _projectileAttackData.NormalizedSpawnPoint && !_completed)
         {
-            GameObject projectile = Instantiate(ProjectileAttackData.ProjectilePrefab, transform.position, Quaternion.identity);
+            GameObject projectile = Instantiate(_projectileAttackData.ProjectilePrefab, transform.position, Quaternion.identity);
 
             // TODO trashy init
             projectile.GetComponent<ProjectileScript>().Initialize(

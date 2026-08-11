@@ -16,4 +16,27 @@ public class MeleeAttackSO : AttackSO
         if (hurtbox.TryGetComponent(out HealthProvider target))
             target.DealDamage(new DamageInfo(-DealtDamage, KnockbackPower, source, hitbox, hurtbox, Effects));
     }
+
+    public void HitboxOverTime(CapsuleCollider2D hitbox, float normalizedTime)
+    {
+        if (!Curves)
+            return;
+
+        hitbox.size = new(
+                Curves.ColliderSizeX.length > 1
+                ? Curves.ColliderSizeX.Evaluate(normalizedTime)
+                : hitbox.size.x,
+                Curves.ColliderSizeY.length > 1
+                ? Curves.ColliderSizeY.Evaluate(normalizedTime)
+                : hitbox.size.y
+                );
+        hitbox.offset = new(
+            Curves.ColliderOffsetX.length > 1
+            ? Curves.ColliderOffsetX.Evaluate(normalizedTime)
+            : hitbox.offset.x,
+              Curves.ColliderOffsetY.length > 1
+            ? Curves.ColliderOffsetY.Evaluate(normalizedTime)
+            : hitbox.offset.y
+            );
+    }
 }

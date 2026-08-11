@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Movements/Chasing")]
+[CreateAssetMenu(menuName = "Movement/Chasing")]
 public class ChaseMovementSO : MovementStrategySO
 {
     [field: SerializeField] public float MinDistanceToTarget { get; private set; }

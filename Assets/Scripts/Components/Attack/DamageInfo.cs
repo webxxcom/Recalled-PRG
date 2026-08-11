@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageInfo
+public struct DamageInfo
 {
     public float KnockbackPower { get; private set; }
     public int Amount { get; private set; }
@@ -9,7 +9,7 @@ public class DamageInfo
     public Collider2D Hitbox { get; private set; }
     public Collider2D Hurtbox { get; private set; }
     public List<EffectDefinition> Effects { get; private set; }
-    public Vector2 Direction => ((Vector2)Hurtbox.bounds.center - _origin).normalized;
+    public readonly Vector2 Direction => ((Vector2)Hurtbox.bounds.center - _origin).normalized;
     Vector2 _origin;
 
     public DamageInfo(int quantity, float knockbackPower, GameObject source,
@@ -18,10 +18,10 @@ public class DamageInfo
         Amount = quantity;
         KnockbackPower = knockbackPower;
         Source = source;
-        Hurtbox = hurtbox;
         Hitbox = hitbox;
+        Hurtbox = hurtbox;
         Effects = effects;
 
-        _origin = source.GetComponentInChildren<Hurtbox>().Collider2D.bounds.center;
+        _origin = source.GetComponentInChildren<HealthProvider>().Hurtbox.bounds.center;
     }
 }

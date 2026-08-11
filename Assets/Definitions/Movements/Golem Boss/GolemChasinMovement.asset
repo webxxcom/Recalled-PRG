@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c1114f7e9e43484a919319e26f75933, type: 3}
   m_Name: GolemChasinMovement
   m_EditorClassIdentifier: Assembly-CSharp::ChaseMovementSO
-  <MinDistanceToTarget>k__BackingField: 7
+  <MinDistanceToTarget>k__BackingField: 9

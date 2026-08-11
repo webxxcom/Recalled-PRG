@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EntityMovementSound : EntitySoundComponent
+public class EntityMovementSound : EntitySound
 {
     [SerializeField] AudioClip _walkingSound;
     [SerializeField] float _delayBetween;

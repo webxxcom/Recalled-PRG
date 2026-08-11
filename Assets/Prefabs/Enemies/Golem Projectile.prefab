@@ -193,8 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7f7a64bd8e6c146b4194dce9602b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileScript
-  <AdvancingSpeed>k__BackingField: 4
-  <DealtDamage>k__BackingField: 10
-  <KnockbackPower>k__BackingField: 1
-  <TimeToLive>k__BackingField: 4
+  _advancingSpeed: 9
+  _dealtDamage: 12
+  _knockbackPower: 5
+  _timeToLive: 5
   _offset: {x: 1.72, y: 2.31}

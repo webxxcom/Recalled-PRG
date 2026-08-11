@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public abstract class EntitySoundComponent : MonoBehaviour
+public abstract class EntitySound : MonoBehaviour
 {
     protected AudioSource _audioSource;
 

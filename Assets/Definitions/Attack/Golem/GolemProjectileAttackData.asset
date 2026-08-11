@@ -16,3 +16,4 @@ MonoBehaviour:
   <SpeedMultiplier>k__BackingField: 0
   <ProjectilePrefab>k__BackingField: {fileID: 4751478546648777822, guid: 998adf1ffe523ed4da4b693e3c926393, type: 3}
   <NormalizedSpawnPoint>k__BackingField: 0.9
+  <Range>k__BackingField: 10

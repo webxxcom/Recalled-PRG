@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HealthSound : EntitySoundComponent
+public class HealthSound : EntitySound
 {
     [SerializeField] AudioClip _hurtSound;
     [SerializeField] AudioClip _healingSound;

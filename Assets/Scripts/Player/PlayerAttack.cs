@@ -11,7 +11,7 @@ public class PlayerAttack : EntityAttack
         {
             _timeSinceLastAttack = 0;
 
-            Attack(_attackStrategies[0]);
+            Attack(_attackStrategies[0], new(null));
         }
     }
 

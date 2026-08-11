@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovementSound : EntitySoundComponent
+public class PlayerMovementSound : EntitySound
 {
     [SerializeField] AudioClip _walkingSound;
     [SerializeField] PlayerMovement _playerMovementComponent;

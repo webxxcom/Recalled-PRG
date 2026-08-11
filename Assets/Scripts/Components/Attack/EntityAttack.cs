@@ -8,34 +8,36 @@ public abstract class EntityAttack : MonoBehaviour
     [SerializeField] protected Animator _animator;
     [SerializeField] protected List<AttackStrategy> _attackStrategies = new();
 
-    [SerializeField] protected float _timeSinceLastAttack;
+    protected float _timeSinceLastAttack;
 
     public event Action OnAttackStarted;
     public event Action OnAttackFinished;
 
-    protected void Attack(AttackStrategy attackStrategy)
+    AttackStrategy _currentAttack;
+    AttackContext _attackContext;
+    protected void Attack(AttackStrategy attackStrategy, AttackContext attackContext)
     {
         _currentAttack = attackStrategy;
+        _attackContext = attackContext;
 
         _animator.SetTrigger(attackStrategy.AnimatorHash);
     }
 
-    AttackStrategy _currentAttack;
     public void StartAttack()
     {
-        _currentAttack.StartExecuting();
+        _currentAttack.StartExecuting(_attackContext);
 
         OnAttackStarted?.Invoke();
     }
 
     public void ProcessAttack(float normalizedTime)
     {
-        _currentAttack.ProcessState(normalizedTime);
+        _currentAttack.ProcessState(normalizedTime, _attackContext);
     }
 
     public void FinishAttack()
     {
-        _currentAttack.FinishExecuting();
+        _currentAttack.FinishExecuting(_attackContext);
 
         OnAttackFinished?.Invoke();
     }

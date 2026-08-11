@@ -192,7 +192,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7103029191301751210}
   - component: {fileID: 7648009776092296695}
-  - component: {fileID: 5803945871818057618}
   - component: {fileID: 2734471543387787021}
   m_Layer: 6
   m_Name: Hurtbox
@@ -232,7 +231,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 3959
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -253,18 +252,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.01, y: 0.55}
   m_Size: {x: 0.7, y: 1.4}
   m_Direction: 0
---- !u!114 &5803945871818057618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1515305421710409048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c23f794e5635bb419bd47e6e16c6f43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!114 &2734471543387787021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,8 +644,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d3dd6f5182aeea4f99d8a6d956c5a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  <AttackData>k__BackingField: {fileID: 11400000, guid: 3874b33b6ce54b849af454eb61ed5ea4, type: 2}
   _animator: {fileID: 3750387735865093422}
+  _attackStrategies:
+  - {fileID: 1017372488747182917}
 --- !u!114 &1017372488747182917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,6 +659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5c81a1c66ec9d4894984ff189471e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackStrategy
+  _meleeAttackData: {fileID: 0}
 --- !u!1 &2880830138094642791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,6 +1163,7 @@ GameObject:
   - component: {fileID: 7606323976608832147}
   - component: {fileID: 3750387735865093422}
   - component: {fileID: 4980500249380923839}
+  - component: {fileID: 5525736473637658669}
   m_Layer: 8
   m_Name: Renderer
   m_TagString: Untagged
@@ -1250,6 +1240,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7699cbe8594eeaf4090d45b836375986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteRendererGroup
+--- !u!114 &5525736473637658669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7130390927852763233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60fbbcdaabffcd74a8547c3b82891592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationController
+  _isXFlippable: 0
 --- !u!1 &7496814900927814349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,13 +1500,15 @@ MonoBehaviour:
   _externalVelocity:
     decayRate: 8
     restThreshold: 0.05
-  _animator: {fileID: 3750387735865093422}
-  <SprintingSpeedMultiplier>k__BackingField: 2
-  <Stamina>k__BackingField: 100
-  <StaminaUsage>k__BackingField: 0
-  <StaminaRestore>k__BackingField: 0
+  _animationController: {fileID: 5525736473637658669}
+  _rigidbody2D: {fileID: 2409675021506303179}
+  <SprintingState>k__BackingField:
+    _stamina: 100
+    _staminaUsage: 0
+    _staminaRestore: 0
+    <SpeedMultiplier>k__BackingField: 1.8
   <DashReloadTime>k__BackingField: 0
-  <DashForce>k__BackingField: 20
+  <DashForce>k__BackingField: 15
   _invincibility: {fileID: 7477225139193990942}
 --- !u!114 &7101408821228708346
 MonoBehaviour:
@@ -1581,6 +1586,8 @@ MonoBehaviour:
   _health: {fileID: 2734471543387787021}
   _animator: {fileID: 3750387735865093422}
   _movementBase: {fileID: 7162682655650916106}
+  _entityAttack: {fileID: 4452931388105062793}
+  _entityController: {fileID: 7101408821228708346}
 --- !u!1 &8375044973183638792
 GameObject:
   m_ObjectHideFlags: 0

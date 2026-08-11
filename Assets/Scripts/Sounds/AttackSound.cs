@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AttackSound : EntitySoundComponent
+public class AttackSound : EntitySound
 {
     [SerializeField] AudioClip _attackSound;
     [SerializeField] EntityAttack entityAttackComponent;

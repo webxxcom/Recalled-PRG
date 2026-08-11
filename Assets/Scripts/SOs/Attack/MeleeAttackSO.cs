@@ -11,7 +11,7 @@ public class MeleeAttackSO : AttackSO
     [field: SerializeField] public AttackCurvesSO Curves { get; private set; }
     [field: SerializeField] public List<EffectDefinition> Effects { get; private set; }
 
-    public void DealDamage(GameObject source, Collider2D hitbox, Collider2D hurtbox)
+    public void DealDamage(EntityController source, Collider2D hitbox, Collider2D hurtbox)
     {
         if (hurtbox.TryGetComponent(out HealthProvider target))
             target.DealDamage(new DamageInfo(-DealtDamage, KnockbackPower, source, hitbox, hurtbox, Effects));

@@ -1,5 +1,4 @@
 using UnityEngine;
-using Yarn.Unity;
 
 [RequireComponent(typeof(Collider2D))]
 public class HealthProvider : ValueProvider<DamageInfo>

@@ -192,7 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7103029191301751210}
   - component: {fileID: 7648009776092296695}
-  - component: {fileID: 2734471543387787021}
+  - component: {fileID: 4202473506490510331}
   m_Layer: 6
   m_Name: Hurtbox
   m_TagString: Player
@@ -252,7 +252,7 @@ CapsuleCollider2D:
   m_Offset: {x: -0.01, y: 0.55}
   m_Size: {x: 0.7, y: 1.4}
   m_Direction: 0
---- !u!114 &2734471543387787021
+--- !u!114 &4202473506490510331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,14 +261,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1515305421710409048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f32b0800f4e22ef4380519b4d1a7e6fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 418a9a8b047a1c843aecb9bd700ae752, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
+  m_EditorClassIdentifier: Assembly-CSharp::HealthResource
   _config: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
-  <MaxValue>k__BackingField: 100
-  <CurrentValue>k__BackingField: 100
-  <IsStatic>k__BackingField: 0
-  <IsInfinite>k__BackingField: 0
+  _maxValue: 100
+  _currentValue: 100
+  _isStatic: 0
   _damageParticles: {fileID: 2466567890511269386, guid: 80ca15d7024dd724e95d1d3bfd987aba, type: 3}
   _damagePopup: {fileID: 7535224943969880707, guid: 385f75b1c0c81584c85f5375d9fc8db4, type: 3}
 --- !u!1 &1822602623840076642
@@ -560,7 +559,7 @@ MonoBehaviour:
   _hurtSound: {fileID: 8300000, guid: 8e3ad7af1067fdf40b43f4dfb50ee4e8, type: 3}
   _healingSound: {fileID: 8300000, guid: e637efd8bbe00b6499179c92253380c2, type: 3}
   _deathSound: {fileID: 8300000, guid: 86f39359da3d5ef4e82008b0e51f0190, type: 3}
-  _healthProvider: {fileID: 2734471543387787021}
+  _healthProvider: {fileID: 4202473506490510331}
 --- !u!1 &2511438768263475401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,7 +1443,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &6836397006442588245
 CapsuleCollider2D:
@@ -1538,7 +1537,7 @@ MonoBehaviour:
   _duration: 1
   _blinkInterval: 0.1
   _spriteRendererGroup: {fileID: 4980500249380923839}
-  _healthProvider: {fileID: 2734471543387787021}
+  _healthProvider: {fileID: 4202473506490510331}
 --- !u!114 &7477225139193990942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1552,7 +1551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InvincibilityComponent
   _duration: 1
-  _healthProvider: {fileID: 2734471543387787021}
+  _healthProvider: {fileID: 4202473506490510331}
 --- !u!114 &213586719260208206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1565,7 +1564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf280afc60b53334b9fa04116c7a1796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _health: {fileID: 2734471543387787021}
+  _health: {fileID: 4202473506490510331}
   _animator: {fileID: 3750387735865093422}
   _movementBase: {fileID: 7162682655650916106}
   _entityAttack: {fileID: 4452931388105062793}

@@ -541,7 +541,7 @@ MonoBehaviour:
   _hurtSound: {fileID: 8300000, guid: 1a4a2f380f7e8054e8f62c4ce9501526, type: 3}
   _healingSound: {fileID: 0}
   _deathSound: {fileID: 8300000, guid: 0fc66c57e15b9594c9f2d0b7a54d3510, type: 3}
-  _healthProvider: {fileID: 6639603442709549823}
+  _healthProvider: {fileID: 6943032192117191510}
 --- !u!1 &3607005986500035745
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   _aliveBar: {fileID: 7748800164084045486}
   _deadBar: {fileID: 5046599424978369931}
-  _healthProvider: {fileID: 6639603442709549823}
+  _healthProvider: {fileID: 0}
 --- !u!114 &2390632386251594846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1226,10 +1226,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a79a0ea00109294d987ca291fa2e781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlinkingEffectProvider
-  _duration: 0
-  _blinkInterval: 0
+  _duration: 1
+  _blinkInterval: 0.1
   _spriteRendererGroup: {fileID: 3745270315054445371}
-  _healthProvider: {fileID: 6639603442709549823}
+  _healthProvider: {fileID: 6943032192117191510}
 --- !u!114 &6414543018664610763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1242,8 +1242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7af567f829480489cb925839780c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InvincibilityProvider
-  _duration: 0
-  _healthProvider: {fileID: 6639603442709549823}
+  _duration: 1
+  _healthProvider: {fileID: 6943032192117191510}
 --- !u!114 &1966484261230437501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1256,7 +1256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf280afc60b53334b9fa04116c7a1796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimatorRelay
-  _health: {fileID: 6639603442709549823}
+  _health: {fileID: 6943032192117191510}
   _animator: {fileID: 6696174316393343614}
   _movementBase: {fileID: 8023279021401798368}
   _entityAttack: {fileID: 8238773066907892438}
@@ -1387,7 +1387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6adb27a1278eb64c8d4188a4a79a056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BarScript
-  _valueProvider: {fileID: 6639603442709549823}
+  _valueResource: {fileID: 0}
   _topBar: {fileID: 370142447445774477}
   _bottomBar: {fileID: 8180292811091545600}
   _animationSpeed: 1
@@ -1477,7 +1477,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8360089165876447319}
   - component: {fileID: 6488757093396217294}
-  - component: {fileID: 6639603442709549823}
+  - component: {fileID: 6943032192117191510}
   m_Layer: 6
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -1537,7 +1537,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.032055378, y: 0.34616578}
   m_Size: {x: 0.97208786, y: 0.97208786}
   m_Direction: 0
---- !u!114 &6639603442709549823
+--- !u!114 &6943032192117191510
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1546,14 +1546,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8085504045215601404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f32b0800f4e22ef4380519b4d1a7e6fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 418a9a8b047a1c843aecb9bd700ae752, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
+  m_EditorClassIdentifier: Assembly-CSharp::HealthResource
   _config: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
-  <MaxValue>k__BackingField: 100
-  <CurrentValue>k__BackingField: 100
-  <IsStatic>k__BackingField: 0
-  <IsInfinite>k__BackingField: 0
+  _maxValue: 100
+  _currentValue: 100
+  _isStatic: 0
   _damageParticles: {fileID: 2466567890511269386, guid: 80ca15d7024dd724e95d1d3bfd987aba, type: 3}
   _damagePopup: {fileID: 7535224943969880707, guid: 385f75b1c0c81584c85f5375d9fc8db4, type: 3}
 --- !u!1 &8533387803823033690

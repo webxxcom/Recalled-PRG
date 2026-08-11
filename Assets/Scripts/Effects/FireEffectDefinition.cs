@@ -25,7 +25,7 @@ public class FireEffectDefinition : EffectDefinition
     }
 
     float timeSinceDamage = 0;
-    public override void Tick(HealthProvider health)
+    public override void Tick(HealthResource health)
     {
         if (timeSinceDamage > reloadTime)
         {

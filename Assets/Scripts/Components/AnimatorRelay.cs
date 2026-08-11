@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(EntityController))]
 public class AnimatorRelay : MonoBehaviour
 {
-    [SerializeField] HealthProvider _health;
+    [SerializeField] HealthResource _health;
     [SerializeField] Animator _animator;
     [SerializeField] MovementBase _movementBase;
     [SerializeField] EntityAttack _entityAttack;
@@ -11,16 +11,16 @@ public class AnimatorRelay : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.OnValueChanged += HpChanged;
-        _health.OnMinValue += OnDeath;
+        _health.OnHpChanged += HpChanged;
+        _health.OnDeath += OnDeath;
         _entityAttack.OnAttackStarted += AttackStart;
         _entityAttack.OnAttackFinished += AttackFinish;
     }
 
     private void OnDisable()
     {
-        _health.OnValueChanged -= HpChanged;
-        _health.OnMinValue -= OnDeath;
+        _health.OnHpChanged -= HpChanged;
+        _health.OnDeath -= OnDeath;
         _entityAttack.OnAttackStarted -= AttackStart;
         _entityAttack.OnAttackFinished -= AttackFinish;
     }
@@ -60,7 +60,7 @@ public class AnimatorRelay : MonoBehaviour
         if (_entityController == null)
             _entityController = GetComponent<EntityController>();
         if (_health == null)
-            _health = GetComponentInChildren<HealthProvider>();
+            _health = GetComponentInChildren<HealthResource>();
         if (_animator == null)
             _animator = GetComponentInChildren<Animator>();
     }

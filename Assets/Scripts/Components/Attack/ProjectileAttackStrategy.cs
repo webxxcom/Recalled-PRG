@@ -11,7 +11,7 @@ class ProjectileAttackStrategy : AttackStrategy
     protected override bool WithinAttackRange(AttackContext attackContext)
     {
         _attackContext = attackContext;
-        return (attackContext.Target.GetComponentInChildren<HealthProvider>().Hurtbox.bounds.center - transform.position).sqrMagnitude
+        return (attackContext.Target.GetComponentInChildren<HealthResource>().Hurtbox.bounds.center - transform.position).sqrMagnitude
             <= _projectileAttackData.Range * _projectileAttackData.Range;
     }
 
@@ -67,6 +67,6 @@ class ProjectileAttackStrategy : AttackStrategy
         Gizmos.DrawWireSphere(transform.position, _projectileAttackData.Range);
 
         if (_attackContext != null)
-            Gizmos.DrawLine(_attackContext.Target.GetComponentInChildren<HealthProvider>().Hurtbox.bounds.center, transform.position);
+            Gizmos.DrawLine(_attackContext.Target.GetComponentInChildren<HealthResource>().Hurtbox.bounds.center, transform.position);
     }
 }

@@ -10,7 +10,7 @@ public class MeleeAttackStrategy : AttackStrategy
 
     protected override bool WithinAttackRange(AttackContext attackContext)
     {
-        return _hitbox.IsTouching(attackContext.Target.GetComponentInChildren<HealthProvider>().Hurtbox);
+        return _hitbox.IsTouching(attackContext.Target.GetComponentInChildren<HealthResource>().Hurtbox);
     }
 
     CapsuleCollider2D _hitbox;

@@ -22,6 +22,6 @@ public struct DamageInfo
         Hurtbox = hurtbox;
         Effects = effects;
 
-        _origin = source.GetComponentInChildren<HealthProvider>().Hurtbox.bounds.center;
+        _origin = source.GetComponentInChildren<HealthResource>().Hurtbox.bounds.center;
     }
 }

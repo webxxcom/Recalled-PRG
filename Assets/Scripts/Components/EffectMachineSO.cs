@@ -6,7 +6,7 @@ public class EffectMachineSO : ScriptableObject
 {
     readonly Dictionary<EffectDefinition, Coroutine> _activeEffects = new();
 
-    public void ApplyEffect(EntityController entityController, HealthProvider health, EffectDefinition effect)
+    public void ApplyEffect(EntityController entityController, HealthResource health, EffectDefinition effect)
     {
         if (_activeEffects.ContainsKey(effect))
             entityController.StopCoroutine(_activeEffects[effect]);
@@ -14,7 +14,7 @@ public class EffectMachineSO : ScriptableObject
         _activeEffects[effect] = entityController.StartCoroutine(ApplyCoroutine(entityController, health, effect));
     }
 
-    IEnumerator ApplyCoroutine(EntityController entityController, HealthProvider health, EffectDefinition effect)
+    IEnumerator ApplyCoroutine(EntityController entityController, HealthResource health, EffectDefinition effect)
     {
         effect.PutOn(entityController);
 

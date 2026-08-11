@@ -5,7 +5,7 @@ public class HealthSound : EntitySound
     [SerializeField] AudioClip _hurtSound;
     [SerializeField] AudioClip _healingSound;
     [SerializeField] AudioClip _deathSound;
-    [SerializeField] HealthProvider _healthProvider;
+    [SerializeField] HealthResource _healthProvider;
 
     void OnEnable()
     {
@@ -19,16 +19,17 @@ public class HealthSound : EntitySound
         _healthProvider.OnValueChanged += HandleHurtHealingSound;
     }
 
-    public void HandleDeathSound(DamageInfo damageInfo)
+    public void HandleDeathSound(int _)
     {
         _audioSource.PlayOneShot(_deathSound);
     }
 
-    public void HandleHurtHealingSound(DamageInfo damageInfo)
+    public void HandleHurtHealingSound(int oldVal, int newVal)
     {
-        if (damageInfo.Amount < 0)
+        int amount = oldVal - newVal;
+        if (amount > 0)
             _audioSource.PlayOneShot(_hurtSound);
-        else if (damageInfo.Amount > 0)
+        else if (amount < 0)
             _audioSource.PlayOneShot(_healingSound);
     }
 }

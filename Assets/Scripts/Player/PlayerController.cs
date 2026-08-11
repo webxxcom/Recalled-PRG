@@ -19,27 +19,27 @@ public class PlayerController : EntityController
     [SerializeField] DamageInfoGameEvent OnHpChangedChannel;
     [SerializeField] DamageInfoGameEvent OnDeathChannel;
 
-    HealthProvider _healthProvider;
+    HealthResource _healthProvider;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _healthProvider = GetComponentInChildren<HealthProvider>();
+        _healthProvider = GetComponentInChildren<HealthResource>();
 
         IsArmed = true;
     }
 
     void OnEnable()
     {
-        _healthProvider.OnValueChanged += HandleOnHpChangedGameEvent;
-        _healthProvider.OnMinValue += HandleOnDeathGameEvent;
+        _healthProvider.OnHpChanged += HandleOnHpChangedGameEvent;
+        _healthProvider.OnDeath += HandleOnDeathGameEvent;
     }
 
     void OnDisable()
     {
-        _healthProvider.OnValueChanged -= HandleOnHpChangedGameEvent;
-        _healthProvider.OnMinValue -= HandleOnDeathGameEvent;
+        _healthProvider.OnHpChanged -= HandleOnHpChangedGameEvent;
+        _healthProvider.OnDeath -= HandleOnDeathGameEvent;
     }
 
     void HandleOnHpChangedGameEvent(DamageInfo damageInfo) => OnHpChangedChannel.Raise(damageInfo);

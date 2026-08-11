@@ -9,7 +9,7 @@ public class BossStart : MonoBehaviour
 
     public void BeginBoss()
     {
-        BossStartData bsd = new(_boss.GetComponentInChildren<HealthProvider>(), _boss.name);
+        BossStartData bsd = new(_boss.GetComponentInChildren<HealthResource>(), _boss.name);
         
         OnPlayerEntered.Invoke(bsd);
     }

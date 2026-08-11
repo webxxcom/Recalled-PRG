@@ -6,11 +6,11 @@ public class BlinkingEffect : MonoBehaviour
     [SerializeField] float _duration;
     [SerializeField] float _blinkInterval;
     [SerializeField] SpriteRendererGroup _spriteRendererGroup;
-    [SerializeField] HealthProvider _healthProvider;
+    [SerializeField] HealthResource _healthProvider;
 
     private void OnEnable() => _healthProvider.OnValueChanged += OnValueChanged;
     private void OnDisable() => _healthProvider.OnValueChanged -= OnValueChanged;
-    void OnValueChanged(DamageInfo _) => StartBlinking();
+    void OnValueChanged(int _, int _1) => StartBlinking();
 
     IEnumerator BlinkCoroutine()
     {

@@ -5,11 +5,11 @@ using UnityEngine;
 public class Invincibility : MonoBehaviour
 {
     [SerializeField] float _duration;
-    [SerializeField] HealthProvider _healthProvider;
+    [SerializeField] HealthResource _healthProvider;
 
     private void OnEnable() => _healthProvider.OnValueChanged += OnValueChanged;
     private void OnDisable() => _healthProvider.OnValueChanged -= OnValueChanged;
-    private void OnValueChanged(DamageInfo _) => BecomeInvinsibleFor(_duration);
+    private void OnValueChanged(int _, int _1) => BecomeInvinsibleFor(_duration);
 
     IEnumerator InvincibleCoroutine(float seconds)
     {

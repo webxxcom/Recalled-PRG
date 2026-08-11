@@ -22,7 +22,7 @@ public class FreezeEffectDefinition : EffectDefinition
             movementBase.SpeedAggregator.Add(_speedMultiplier);
     }
 
-    public override void Tick(HealthProvider health)
+    public override void Tick(HealthResource health)
     {
     }
 }

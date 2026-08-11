@@ -8,58 +8,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3411111568609641297, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3411111568609641297, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
-      value: -1.9678755
-      objectReference: {fileID: 0}
-    - target: {fileID: 3411111568609641297, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
-      value: 8.187693
-      objectReference: {fileID: 0}
-    - target: {fileID: 3411111568609641297, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
-      value: 20.777298
-      objectReference: {fileID: 0}
-    - target: {fileID: 3411111568609641297, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
-      value: 8.148016
-      objectReference: {fileID: 0}
-    - target: {fileID: 3411111568609641297, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
-      value: 20.799967
-      objectReference: {fileID: 0}
-    - target: {fileID: 3411111568609641297, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
-      value: -6.6348243
-      objectReference: {fileID: 0}
-    - target: {fileID: 3411111568609641297, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
-      value: -0.6130657
-      objectReference: {fileID: 0}
-    - target: {fileID: 3411111568609641297, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
-      value: -6.6840944
-      objectReference: {fileID: 0}
-    - target: {fileID: 3411111568609641297, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
-      value: -0.65659904
-      objectReference: {fileID: 0}
-    - target: {fileID: 3411111568609641297, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].y
-      value: -4.647935
-      objectReference: {fileID: 0}
-    - target: {fileID: 3411111568609641297, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].x
-      value: -2.1122303
-      objectReference: {fileID: 0}
-    - target: {fileID: 3411111568609641297, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].y
-      value: -4.640011
-      objectReference: {fileID: 0}
     - target: {fileID: 6453734993217065438, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -104,31 +52,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss Zone Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1586700335982974785, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8002015954905908050, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 4796155449414572533}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
---- !u!1 &6780662886994906129 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8002015954905908050, guid: 6fe1cbc7f5b15b34ca07b30bdd08b627, type: 3}
-  m_PrefabInstance: {fileID: 3536768151552085827}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4796155449414572533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6780662886994906129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbe4a5064f8d59748a0a1903ca073294, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossStart
-  _boss: {fileID: 0}
-  OnPlayerEntered: {fileID: 11400000, guid: c4910f56955043b4a853a29158c74dbd, type: 2}

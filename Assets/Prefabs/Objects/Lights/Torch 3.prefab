@@ -105,7 +105,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -123,8 +123,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.10591921, y: -0.1638372}
-  m_Size: {x: 1.2386348, y: 1.2386348}
+  m_Offset: {x: -0.07311006, y: -0.53569394}
+  m_Size: {x: 0.8792815, y: 0.45117575}
   m_Direction: 1
 --- !u!82 &5811298438806022443
 AudioSource:

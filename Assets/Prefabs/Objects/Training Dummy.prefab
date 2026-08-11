@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4647231223192459453}
   - component: {fileID: 6885743430467850160}
-  - component: {fileID: 6936077835425192106}
+  - component: {fileID: 2486069124411795992}
   m_Layer: 6
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -70,7 +70,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.6201514, y: 0.6249275}
   m_Size: {x: 0.5127704, y: 1.2969136}
   m_Direction: 0
---- !u!114 &6936077835425192106
+--- !u!114 &2486069124411795992
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,16 +79,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 175039996589242903}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f32b0800f4e22ef4380519b4d1a7e6fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 418a9a8b047a1c843aecb9bd700ae752, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthProvider
+  m_EditorClassIdentifier: Assembly-CSharp::HealthResource
   _config: {fileID: 11400000, guid: 864889a04087d4d448a4d01d160d960a, type: 2}
-  <MaxValue>k__BackingField: 0
-  <CurrentValue>k__BackingField: 0
-  <IsStatic>k__BackingField: 0
-  <IsInfinite>k__BackingField: 1
+  _maxValue: 0
+  _currentValue: 0
+  _isStatic: 0
   _damageParticles: {fileID: 2466567890511269386, guid: 80ca15d7024dd724e95d1d3bfd987aba, type: 3}
   _damagePopup: {fileID: 7535224943969880707, guid: 385f75b1c0c81584c85f5375d9fc8db4, type: 3}
+  _isInfinite: 1
 --- !u!1 &8822795234151242890
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c0fd3485b931c74881c5170f6f28592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _healthProvider: {fileID: 6936077835425192106}
+  _health: {fileID: 2486069124411795992}
   _animator: {fileID: 3784235917605943660}
 --- !u!1001 &2638589704726934692
 PrefabInstance:

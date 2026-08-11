@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StageScipt : MonoBehaviour
 {
-    [SerializeField] HealthProvider[] _enemies;
+    [SerializeField] HealthResource[] _enemies;
 
     [Header("Broadcasts on")]
     [SerializeField] VoidGameEvent OnStage1Cleared;

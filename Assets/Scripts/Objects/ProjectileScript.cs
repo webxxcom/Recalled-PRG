@@ -39,9 +39,9 @@ public class ProjectileScript : MonoBehaviour
         if (collision.CompareTag(_owner.tag))
             return;
 
-        if (collision.TryGetComponent(out HealthProvider hp))
+        if (collision.TryGetComponent(out HealthResource hp))
         {
-            hp.DealDamage(new(_dealtDamage, _knockbackPower, _owner, _collider2D, hp.Hurtbox, null));
+            hp.ApplyDamage(new(_dealtDamage, _knockbackPower, _owner, _collider2D, hp.Hurtbox, null));
         }
         Destroy(gameObject);
     }

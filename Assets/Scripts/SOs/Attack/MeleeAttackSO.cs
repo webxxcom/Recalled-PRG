@@ -13,8 +13,8 @@ public class MeleeAttackSO : AttackSO
 
     public void DealDamage(EntityController source, Collider2D hitbox, Collider2D hurtbox)
     {
-        if (hurtbox.TryGetComponent(out HealthProvider target))
-            target.DealDamage(new DamageInfo(-DealtDamage, KnockbackPower, source, hitbox, hurtbox, Effects));
+        if (hurtbox.TryGetComponent(out HealthResource target))
+            target.ApplyDamage(new DamageInfo(DealtDamage, KnockbackPower, source, hitbox, hurtbox, Effects));
     }
 
     public void HitboxOverTime(CapsuleCollider2D hitbox, float normalizedTime)

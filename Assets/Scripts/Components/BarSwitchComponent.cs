@@ -4,9 +4,9 @@ public class BarSwitchComponent : MonoBehaviour
 {
     [SerializeField] GameObject _aliveBar;
     [SerializeField] GameObject _deadBar;
-    [SerializeField] HealthProvider _healthProvider;
+    [SerializeField] ValueResource _healthProvider;
 
-    void ToggleBars(DamageInfo _)
+    void ToggleBars(int _)
     {
         _aliveBar.SetActive(!_aliveBar.activeInHierarchy);
         _deadBar.SetActive(!_deadBar.activeInHierarchy);

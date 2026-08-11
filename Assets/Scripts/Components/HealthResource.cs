@@ -1,34 +1,43 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class HealthProvider : ValueProvider<DamageInfo>
+public class HealthResource : ValueResource
 {
+    [SerializeField] bool _isInfinite;
+    
     [Header("Prefabs")]
     [SerializeField] ParticleSystem _damageParticles;
     [SerializeField] PopupDamageText _damagePopup;
+
     public Collider2D Hurtbox { get; private set; }
     public EffectMachineSO EffectMachine { get; private set; }
     public bool IsInvincible { get; set; }
 
-    private void Awake()
+    public Action<DamageInfo> OnHpChanged;
+    public Action<DamageInfo> OnDeath;
+    public Action<DamageInfo> OnMax;
+
+    protected override void Awake()
     {
+        base.Awake();
+
         EffectMachine = ScriptableObject.CreateInstance<EffectMachineSO>();
         Hurtbox = GetComponent<Collider2D>();
-        Init();
     }
 
     private void OnEnable()
     {
-        OnValueChanged += Particles;
-        OnValueChanged += ApplyKnockback;
-        OnValueChanged += PopupDamage;
+        OnHpChanged += Particles;
+        OnHpChanged += ApplyKnockback;
+        OnHpChanged += PopupDamage;
     }
 
     private void OnDisable()
     {
-        OnValueChanged -= Particles;
-        OnValueChanged -= ApplyKnockback;
-        OnValueChanged -= PopupDamage;
+        OnHpChanged -= Particles;
+        OnHpChanged -= ApplyKnockback;
+        OnHpChanged -= PopupDamage;
     }
 
     void Particles(DamageInfo di)
@@ -53,12 +62,23 @@ public class HealthProvider : ValueProvider<DamageInfo>
 
     public bool IsDead => CurrentValue <= 0;
 
-    public void DealDamage(DamageInfo damageInfo)
+    public void ApplyDamage(DamageInfo damageInfo)
     {
         if (IsInvincible)
             return;
 
-        Change(damageInfo.Amount, damageInfo);
-    }
+        int applied = Change(-damageInfo.Amount);
+        if (applied == 0 && !_isInfinite)
+            return;
 
+        OnHpChanged?.Invoke(damageInfo);
+
+        if (!_isInfinite)
+        {
+            if (CurrentValue == 0)
+                OnDeath?.Invoke(damageInfo);
+            if (CurrentValue == MaxValue)
+                OnMax?.Invoke(damageInfo);
+        }
+    }
 }

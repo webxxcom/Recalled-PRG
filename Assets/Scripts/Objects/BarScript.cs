@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class BarScript : MonoBehaviour
 {
-    [SerializeField] HealthProvider _valueProvider;
+    [SerializeField] ValueResource _valueResource;
     [SerializeField] Image _topBar;
     [SerializeField] Image _bottomBar;
     [SerializeField] float _animationSpeed;
@@ -13,37 +13,37 @@ public class BarScript : MonoBehaviour
     public float MaxValue { get; set; }
     public float Value { get; private set; }
 
-    public void Init(HealthProvider healthProvider)
+    public void Init(HealthResource healthProvider)
     {
-        _valueProvider = healthProvider;
+        _valueResource = healthProvider;
 
         enabled = true;
     }
 
-    void OnValueChanged(DamageInfo damageInfo) => Change(damageInfo.Amount);
+    void OnValueChanged(int oldValue, int newValue) => Set(newValue);
 
     private void OnEnable()
     {
-        if (_valueProvider)
+        if (_valueResource)
         {
-            MaxValue = _valueProvider.MaxValue;
-            Set(_valueProvider.CurrentValue);
+            MaxValue = _valueResource.MaxValue;
+            Set(_valueResource.CurrentValue);
 
-            _valueProvider.OnValueChanged += OnValueChanged;
+            _valueResource.OnValueChanged += OnValueChanged;
         }
     }
 
     private void OnDisable()
     {
-        if (_valueProvider)
-            _valueProvider.OnValueChanged -= OnValueChanged;
+        if (_valueResource)
+            _valueResource.OnValueChanged -= OnValueChanged;
     }
 
     float TargetValue => Value / MaxValue;
-    IEnumerator ProgressBars(float value)
+    IEnumerator ProgressBars(float delta)
     {
-        var suddenBar = value <= 0 ? _topBar : _bottomBar;
-        var smoothBar = value <= 0 ? _bottomBar : _topBar;
+        var suddenBar = delta <= 0 ? _topBar : _bottomBar;
+        var smoothBar = delta <= 0 ? _bottomBar : _topBar;
 
         if (_canvasGroup)
             _canvasGroup.alpha = 1;
@@ -67,6 +67,4 @@ public class BarScript : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(ProgressBars(Value - prevValue));
     }
-
-    public void Change(float value) => Set(Value + value);
 }

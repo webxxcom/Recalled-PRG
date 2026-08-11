@@ -659,7 +659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5c81a1c66ec9d4894984ff189471e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackStrategy
-  _meleeAttackData: {fileID: 0}
+  _meleeAttackData: {fileID: 11400000, guid: 3874b33b6ce54b849af454eb61ed5ea4, type: 2}
 --- !u!1 &2880830138094642791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,7 +1358,6 @@ GameObject:
   - component: {fileID: 6836397006442588245}
   - component: {fileID: 7162682655650916106}
   - component: {fileID: 7101408821228708346}
-  - component: {fileID: 506384641350915718}
   - component: {fileID: 7001661983157172225}
   - component: {fileID: 7477225139193990942}
   - component: {fileID: 213586719260208206}
@@ -1524,23 +1523,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   OnHpChangedChannel: {fileID: 11400000, guid: 4eb2943eb5950f54eba48d5bad32d3cd, type: 2}
   OnDeathChannel: {fileID: 11400000, guid: 1b2ce962ee3da3c4ca0eb1ac1d6feff8, type: 2}
---- !u!114 &506384641350915718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9837663d5d51566429d97eb93b1c3ea0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  _config: {fileID: 0}
-  <MaxValue>k__BackingField: 0
-  <CurrentValue>k__BackingField: 0
-  <IsStatic>k__BackingField: 0
-  <IsInfinite>k__BackingField: 0
 --- !u!114 &7001661983157172225
 MonoBehaviour:
   m_ObjectHideFlags: 0

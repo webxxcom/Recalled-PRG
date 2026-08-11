@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6453734993217065438}
   - component: {fileID: 770404971102883668}
   - component: {fileID: 3411111568609641297}
+  - component: {fileID: 1586700335982974785}
   m_Layer: 0
   m_Name: Chase Zone
   m_TagString: Untagged
@@ -97,3 +98,17 @@ PolygonCollider2D:
       - {x: 24.648613, y: -9.844071}
       - {x: -18.58118, y: -9.844071}
   m_UseDelaunayMesh: 1
+--- !u!114 &1586700335982974785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8002015954905908050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe4a5064f8d59748a0a1903ca073294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _boss: {fileID: 0}
+  OnPlayerEntered: {fileID: 11400000, guid: c4910f56955043b4a853a29158c74dbd, type: 2}

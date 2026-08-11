@@ -1058,7 +1058,6 @@ GameObject:
   - component: {fileID: 7085225572803684528}
   - component: {fileID: 8293097748507972211}
   - component: {fileID: 6719562468489306160}
-  - component: {fileID: 964184607443087599}
   m_Layer: 6
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -1136,18 +1135,6 @@ MonoBehaviour:
   <IsInfinite>k__BackingField: 0
   _damageParticles: {fileID: 2466567890511269386, guid: 80ca15d7024dd724e95d1d3bfd987aba, type: 3}
   _damagePopup: {fileID: 7535224943969880707, guid: 385f75b1c0c81584c85f5375d9fc8db4, type: 3}
---- !u!114 &964184607443087599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3947751842682473356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c23f794e5635bb419bd47e6e16c6f43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Hurtbox
 --- !u!1 &4738529277594835524
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,6 +1146,7 @@ GameObject:
   - component: {fileID: 529466297735456631}
   - component: {fileID: 3436857251089669775}
   - component: {fileID: 8238773066907892438}
+  - component: {fileID: 8011551335146223041}
   m_Layer: 7
   m_Name: Hitbox
   m_TagString: Untagged
@@ -1230,8 +1218,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0e163c60faf474ba274d75ee2ac1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityAttackComponent
-  <AttackData>k__BackingField: {fileID: 11400000, guid: f4155314e6c37254183efe9ffd2a8146, type: 2}
   _animator: {fileID: 7369017045533857347}
+  _attackStrategies:
+  - {fileID: 8011551335146223041}
+  _targetProviderSO: {fileID: 11400000, guid: 24a57d199f458f14c8446c05d716dcaa, type: 2}
+  _intervalBetweenStates: 0
+--- !u!114 &8011551335146223041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4738529277594835524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5c81a1c66ec9d4894984ff189471e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackStrategy
+  _meleeAttackData: {fileID: 0}
 --- !u!1 &5046599424978369931
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,7 +1606,8 @@ MonoBehaviour:
   _externalVelocity:
     decayRate: 8
     restThreshold: 0.05
-  _animator: {fileID: 7369017045533857347}
+  _animationController: {fileID: 0}
+  _rigidbody2D: {fileID: 181632092390176455}
   _movementAIConfig: {fileID: 11400000, guid: 72187b7b600538c4188fb4aa064706ac, type: 2}
 --- !u!114 &1332064429310887525
 MonoBehaviour:
@@ -1649,6 +1654,8 @@ MonoBehaviour:
   _health: {fileID: 6719562468489306160}
   _animator: {fileID: 7369017045533857347}
   _movementBase: {fileID: 8023279021401798368}
+  _entityAttack: {fileID: 8238773066907892438}
+  _entityController: {fileID: 8962501645842732508}
 --- !u!1 &6428286076280884639
 GameObject:
   m_ObjectHideFlags: 0
@@ -2320,10 +2327,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6adb27a1278eb64c8d4188a4a79a056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BarScript
+  _valueProvider: {fileID: 6719562468489306160}
   _topBar: {fileID: 370142447445774477}
   _bottomBar: {fileID: 8180292811091545600}
   _animationSpeed: 1
-  _valueProvider: {fileID: 6719562468489306160}
   _canvasGroup: {fileID: 3505502132724376593}
 --- !u!1 &7782828945365421310
 GameObject:

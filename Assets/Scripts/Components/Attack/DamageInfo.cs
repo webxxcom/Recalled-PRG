@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public struct DamageInfo
+public class DamageInfo
 {
     public float KnockbackPower { get; private set; }
-    public int Amount { get; private set; }
+    public int Amount { get; set; }
     public EntityController Source { get; private set; }
     public Collider2D Hitbox { get; private set; }
     public Collider2D Hurtbox { get; private set; }
     public List<EffectDefinition> Effects { get; private set; }
-    public readonly Vector2 Direction => ((Vector2)Hurtbox.bounds.center - _origin).normalized;
-    Vector2 _origin;
+    public Vector2 Direction { get; private set; }
 
     public DamageInfo(int quantity, float knockbackPower, EntityController source,
         Collider2D hitbox, Collider2D hurtbox, List<EffectDefinition> effects)
@@ -21,7 +20,7 @@ public struct DamageInfo
         Hitbox = hitbox;
         Hurtbox = hurtbox;
         Effects = effects;
-
-        _origin = source.GetComponentInChildren<HealthResource>().Hurtbox.bounds.center;
+        Direction =
+            (Hurtbox.bounds.center - source.GetComponentInChildren<HealthResource>().Hurtbox.bounds.center).normalized;
     }
 }

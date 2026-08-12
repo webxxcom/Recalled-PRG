@@ -5,6 +5,7 @@ public class EntityMovementSound : EntitySound
     [SerializeField] AudioClip _walkingSound;
     [SerializeField] float _delayBetween;
     [SerializeField] MovementBase _movementBase;
+    [SerializeField] SpeedAggregator _speedAggregator;
 
     bool _isPlaying;
 
@@ -23,19 +24,19 @@ public class EntityMovementSound : EntitySound
     void StartPlaying() => _isPlaying = true;
     void StopPlaying() => _isPlaying = false;
 
-    float timeSince = 0;
+    float _elapsed = 0;
     void UpdateMovementSound()
     {
-        if (timeSince > _delayBetween / _movementBase.SpeedAggregator.Get() && _movementBase.IsWalking)
+        if (_elapsed > _delayBetween / (_speedAggregator != null ? _speedAggregator.Get() : 1f) && _movementBase.IsWalking)
         {
             _audioSource.PlayOneShot(_walkingSound);
-            timeSince = 0;
+            _elapsed = 0;
         }
     }
 
     private void Update()
     {
-        timeSince += Time.deltaTime;
+        _elapsed += Time.deltaTime;
 
         if (_isPlaying)
             UpdateMovementSound();

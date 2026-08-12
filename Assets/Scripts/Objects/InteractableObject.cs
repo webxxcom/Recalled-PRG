@@ -1,13 +1,11 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
 public abstract class InteractableObject : MonoBehaviour, IInteractable
 {
-    private static readonly int InteractHash = Animator.StringToHash("Interact");
-
     [SerializeField] AudioClip _firstStateAudio;
     [SerializeField] AudioClip _secondStateAudio;
     [SerializeField] string _displayText;
@@ -20,25 +18,24 @@ public abstract class InteractableObject : MonoBehaviour, IInteractable
         {
             if (value)
             {
-                _animator.SetTrigger(InteractHash);
                 _audioSource.PlayOneShot(_firstStateAudio);
                 _interactionTextMesh.gameObject.SetActive(false);
             }
             else
             {
-                _audioSource.PlayOneShot(_secondStateAudio);
+                if (_secondStateAudio) _audioSource.PlayOneShot(_secondStateAudio);
             }
             _IsInteracted = value;
         }
     }
 
     bool _IsInteracted;
-    Animator _animator;
     AudioSource _audioSource;
+
+    public event Action OnInteract;
 
     protected virtual void Awake()
     {
-        _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
     }
 

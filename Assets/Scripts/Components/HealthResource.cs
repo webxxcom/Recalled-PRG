@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -6,17 +7,15 @@ public class HealthResource : ValueResource
 {
     [SerializeField] bool _isInfinite;
     
-    [Header("Prefabs")]
-    [SerializeField] ParticleSystem _damageParticles;
-    [SerializeField] PopupDamageText _damagePopup;
-
     public Collider2D Hurtbox { get; private set; }
     public EffectMachineSO EffectMachine { get; private set; }
-    public bool IsInvincible { get; set; }
+    public bool IsInvincible => _invincibilityTimer > 0f;
+    float _invincibilityTimer;
 
-    public Action<DamageInfo> OnHpChanged;
-    public Action<DamageInfo> OnDeath;
-    public Action<DamageInfo> OnMax;
+    public event Action<DamageInfo> OnHpChangeApplied;
+    public event Action<DamageInfo> OnHpChange;
+    public event Action<DamageInfo> OnDeath;
+    public event Action<DamageInfo> OnMax;
 
     protected override void Awake()
     {
@@ -26,40 +25,6 @@ public class HealthResource : ValueResource
         Hurtbox = GetComponent<Collider2D>();
     }
 
-    private void OnEnable()
-    {
-        OnHpChanged += Particles;
-        OnHpChanged += ApplyKnockback;
-        OnHpChanged += PopupDamage;
-    }
-
-    private void OnDisable()
-    {
-        OnHpChanged -= Particles;
-        OnHpChanged -= ApplyKnockback;
-        OnHpChanged -= PopupDamage;
-    }
-
-    void Particles(DamageInfo di)
-    {
-        Quaternion rot = Quaternion.FromToRotation(Vector3.right, di.Direction);
-
-        Instantiate(_damageParticles, di.Hurtbox.bounds.center, rot);
-    }
-
-    void ApplyKnockback(DamageInfo di)
-    {
-        MovementBase movementBase = di.Hurtbox.GetComponentInParent<MovementBase>();
-
-        if (movementBase)
-            movementBase.AddExternalVelocity(di.Direction * di.KnockbackPower);
-    }
-
-    void PopupDamage(DamageInfo di)
-    {
-        Instantiate(_damagePopup, Hurtbox.bounds.center, Quaternion.identity).Init(di.Amount + "");
-    }
-
     public bool IsDead => CurrentValue <= 0;
 
     public void ApplyDamage(DamageInfo damageInfo)
@@ -67,11 +32,13 @@ public class HealthResource : ValueResource
         if (IsInvincible)
             return;
 
+        OnHpChange?.Invoke(damageInfo);
         int applied = Change(-damageInfo.Amount);
         if (applied == 0 && !_isInfinite)
             return;
 
-        OnHpChanged?.Invoke(damageInfo);
+        damageInfo.Amount = applied;
+        OnHpChangeApplied?.Invoke(damageInfo);
 
         if (!_isInfinite)
         {
@@ -80,5 +47,14 @@ public class HealthResource : ValueResource
             if (CurrentValue == MaxValue)
                 OnMax?.Invoke(damageInfo);
         }
+    }
+
+    public void GrantInvincibility(float time)
+        => _invincibilityTimer = Mathf.Max(_invincibilityTimer, time);
+
+    private void Update()
+    {
+        if (_invincibilityTimer > 0f)
+            _invincibilityTimer -= Time.deltaTime;
     }
 }

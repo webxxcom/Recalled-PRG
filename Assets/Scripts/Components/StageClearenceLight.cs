@@ -9,22 +9,12 @@ public class StageClearenceLight : MonoBehaviour
     [SerializeField] VoidGameEvent OnStageCleared;
 
     private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
-
+        => _animator = GetComponent<Animator>();
     private void OnEnable()
-    {
-        OnStageCleared.OnEventRaised += Interact;
-    }
-
+        => OnStageCleared.OnEventRaised += Interact;
     private void OnDisable()
-    {
-        OnStageCleared.OnEventRaised -= Interact;
-    }
+        => OnStageCleared.OnEventRaised -= Interact;
 
     void Interact()
-    {
-        _animator.SetTrigger(AnimatorParameters.InteractHash);
-    }
+        => _animator.SetTrigger(AnimatorParameters.InteractHash);
 }

@@ -12,16 +12,16 @@ public class FireEffectDefinition : EffectDefinition
     {
         entityController.SpriteRendererGroup.SetColor(Color);
 
-        if (entityController.TryGetComponent(out MovementBase movementBase))
-            movementBase.SpeedAggregator.Add(SpeedMultiplier);
+        if (entityController.TryGetComponent(out SpeedAggregator speedAggregator))
+            speedAggregator.Add(SpeedMultiplier);
     }
 
     public override void PutOff(EntityController entityController)
     {
         entityController.SpriteRendererGroup.SetColor(Color.white);
 
-        if (entityController.TryGetComponent(out MovementBase movementBase))
-            movementBase.SpeedAggregator.Remove(SpeedMultiplier);
+        if (entityController.TryGetComponent(out SpeedAggregator speedAggregator))
+            speedAggregator.Remove(SpeedMultiplier);
     }
 
     float timeSinceDamage = 0;

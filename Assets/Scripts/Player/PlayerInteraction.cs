@@ -6,11 +6,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Collider2D))]
 public class PlayerInteraction : MonoBehaviour
 {
-    readonly List<IInteractable> _interactables = new();
+    readonly List<IInteractable> _interactables = new(16);
 
-    public void InteractWithCurrent() => _interactables.FirstOrDefault()?.Interact();
-
-    void OnInteract(InputValue _) => InteractWithCurrent();
+    void OnInteract(InputValue _) => _interactables.FirstOrDefault()?.Interact();
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

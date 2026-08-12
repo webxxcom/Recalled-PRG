@@ -4,6 +4,8 @@ public class PlayerMovementSound : EntitySound
 {
     [SerializeField] AudioClip _walkingSound;
     [SerializeField] PlayerMovement _playerMovementComponent;
+    [SerializeField] SpeedAggregator _speedAggregator;
+    [SerializeField] PlayerSprinting _playerSprinting;
 
     bool _isPlaying;
 
@@ -24,31 +26,39 @@ public class PlayerMovementSound : EntitySound
 
     float DelayBeetweenPlays()
     {
-        float kf = _playerMovementComponent.SpeedAggregator.Get();
+        float kf = _speedAggregator.Get();
 
-        if (_playerMovementComponent.IsSprinting)
+        if (_playerSprinting.IsActive)
         {
-            return 0.4f / kf * _playerMovementComponent.SprintingState.SpeedMultiplier;
+            return 0.4f / kf * _playerSprinting.SpeedMultiplier;
         }
         else
             return 0.3f / kf;
     }
 
-    float timeSince = 0;
+    float _elapsed = 0;
     void UpdateMovementSound()
     {
-        if (timeSince > DelayBeetweenPlays() && _playerMovementComponent.IsWalking)
+        if (_elapsed > DelayBeetweenPlays() && _playerMovementComponent.IsWalking)
         {
             _audioSource.PlayOneShot(_walkingSound);
-            timeSince = 0;
+            _elapsed = 0;
         }
     }
 
     private void Update()
     {
-        timeSince += Time.deltaTime;
+        _elapsed += Time.deltaTime;
 
         if (_isPlaying)
             UpdateMovementSound();
     }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (_speedAggregator == null)
+            _speedAggregator = GetComponentInParent<SpeedAggregator>();
+    }
+#endif
 }

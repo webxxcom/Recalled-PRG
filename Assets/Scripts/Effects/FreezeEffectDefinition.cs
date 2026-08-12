@@ -10,16 +10,16 @@ public class FreezeEffectDefinition : EffectDefinition
     {
         entityController.SpriteRendererGroup.SetColor(Color);
 
-        if (entityController.TryGetComponent(out MovementBase movementBase))
-            movementBase.SpeedAggregator.Add(_speedMultiplier);
+        if (entityController.TryGetComponent(out SpeedAggregator speedAggregator))
+            speedAggregator.Add(_speedMultiplier);
     }
 
     public override void PutOff(EntityController entityController)
     {
         entityController.SpriteRendererGroup.SetColor(Color.white);
 
-        if (entityController.TryGetComponent(out MovementBase movementBase))
-            movementBase.SpeedAggregator.Add(_speedMultiplier);
+        if (entityController.TryGetComponent(out SpeedAggregator speedAggregator))
+            speedAggregator.Remove(_speedMultiplier);
     }
 
     public override void Tick(HealthResource health)

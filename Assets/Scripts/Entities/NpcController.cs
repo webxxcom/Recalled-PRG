@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class NpcController : EntityController, IInteractable
 {
@@ -7,8 +8,11 @@ public class NpcController : EntityController, IInteractable
     [Header("Broadcasts to")]
     [SerializeField] DialogueSourceGameEvent OnDialogueStarted;
 
+    public event Action OnInteract;
+
     public void Interact()
     {
         OnDialogueStarted.Invoke(_dialogueSource);
+        OnInteract?.Invoke();
     }
 }

@@ -11,7 +11,7 @@ public class AnimatorRelay : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.OnHpChanged += HpChanged;
+        _health.OnHpChangeApplied += HpChanged;
         _health.OnDeath += OnDeath;
         _entityAttack.OnAttackStarted += AttackStart;
         _entityAttack.OnAttackFinished += AttackFinish;
@@ -19,7 +19,7 @@ public class AnimatorRelay : MonoBehaviour
 
     private void OnDisable()
     {
-        _health.OnHpChanged -= HpChanged;
+        _health.OnHpChangeApplied -= HpChanged;
         _health.OnDeath -= OnDeath;
         _entityAttack.OnAttackStarted -= AttackStart;
         _entityAttack.OnAttackFinished -= AttackFinish;

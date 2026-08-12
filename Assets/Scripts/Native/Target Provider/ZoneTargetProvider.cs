@@ -3,12 +3,12 @@
 public class ZoneTargetProvider : TargetProvider
 {
     [Header("Listens to")]
-    [SerializeField] GameobjectGameEvent OnTargetEnteredZone;
-    [SerializeField] GameobjectGameEvent OnTargetLeftZone;
+    [SerializeField] VoidGameEvent OnTargetEnteredZone;
+    [SerializeField] VoidGameEvent OnTargetLeftZone;
 
-    void SetTarget(GameObject trgt) => CurrentTarget = trgt;
+    void SetTarget() => CurrentTarget = GameObject.FindAnyObjectByType<PlayerController>().gameObject;
 
-    void UnsetTarget(GameObject _) => CurrentTarget = null;
+    void UnsetTarget() => CurrentTarget = null;
 
     public override TargetProvider Init(TargetProviderSO other)
     {
@@ -16,8 +16,8 @@ public class ZoneTargetProvider : TargetProvider
 
         OnTargetEnteredZone = zoneTargetProviderSO.OnTargetEnteredZone;
         OnTargetLeftZone = zoneTargetProviderSO.OnTargetLeftZone;
-        OnTargetEnteredZone.OnEventRaised += SetTarget;
-        OnTargetLeftZone.OnEventRaised += UnsetTarget;
+        if (OnTargetEnteredZone) OnTargetEnteredZone.OnEventRaised += SetTarget;
+        if (OnTargetLeftZone) OnTargetLeftZone.OnEventRaised += UnsetTarget;
 
         return this;
     }

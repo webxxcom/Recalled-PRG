@@ -9,23 +9,21 @@ public class TrainingDummyController : EntityController
     [SerializeField] HealthResource _health;
     [SerializeField] Animator _animator;
 
-    void HpChanged(int oldVal, int newVal)
+    void HpChanged(DamageInfo damageInfo)
     {
-        // Calcualte this way to avoid healing improper animation
-        int amount = newVal - oldVal;
-        if (amount < 0)
+        if (damageInfo.Amount > 0)
         {
-            if (amount >= -10)
+            if (damageInfo.Amount <= 10)
                 _animator.SetTrigger(DamageLightHash);
-            else if (amount >= -25)
+            else if (damageInfo.Amount <= 25)
                 _animator.SetTrigger(DamageMidHash);
             else
                 _animator.SetTrigger(DamageHardHash);
         }
     }
 
-    private void OnEnable() => _health.OnValueChanged += HpChanged;
-    private void OnDisable() => _health.OnValueChanged -= HpChanged;
+    private void OnEnable() => _health.OnHpChange += HpChanged;
+    private void OnDisable() => _health.OnHpChange -= HpChanged;
 
 #if UNITY_EDITOR
     private void OnValidate()

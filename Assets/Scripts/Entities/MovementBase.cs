@@ -5,12 +5,11 @@ using UnityEngine;
 public abstract class MovementBase : MonoBehaviour
 {
     [SerializeField] float _walkingSpeed;
+    [SerializeField] SpeedAggregator _speedAggregator;
 
     public bool MovementBlocked { get; set; }
-    public AggregatedValue SpeedAggregator { get; private set; } = new();
     public Vector2 LastMovement { get; set; }
     public bool IsWalking => MovementIntention != Vector2.zero;
-    public float CurrentSpeed => _walkingSpeed * SpeedAggregator.Get();
     public Vector2 FacingDirection => MovementIntention != Vector2.zero ? MovementIntention : LastMovement;
 
     [Header("Uses")]
@@ -44,18 +43,16 @@ public abstract class MovementBase : MonoBehaviour
     public event Action OnMovementStopped;
     public event Action OnMovement;
 
-    public void AddExternalVelocity(Vector2 vec) => _externalVelocity.Add(vec);
-
     protected abstract Vector2 GetMovementIntention();
     public Vector2 GetFinalMovement()
     {
         if (!isActiveAndEnabled || MovementBlocked)
             return Vector2.zero;
 
+        float speedCoeficient = _speedAggregator != null ? _speedAggregator.Get() : 1f;
+        Vector2 externalVelocity = _externalVelocity != null ? _externalVelocity.TickAndGet(Time.fixedDeltaTime) : Vector2.zero;
         Vector2 finalMovement = GetMovementIntention();
-
-        return (SpeedAggregator.Get() * _walkingSpeed * finalMovement)
-            + _externalVelocity.TickAndGet(Time.fixedDeltaTime);
+        return (speedCoeficient * _walkingSpeed * finalMovement) + externalVelocity;
     }
 
     private void FixedUpdate()

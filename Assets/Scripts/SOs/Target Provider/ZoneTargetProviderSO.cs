@@ -4,8 +4,8 @@ using UnityEngine;
 public class ZoneTargetProviderSO : TargetProviderSO
 {
     [Header("Listens to")]
-    [SerializeField] public GameobjectGameEvent OnTargetEnteredZone;
-    [SerializeField] public GameobjectGameEvent OnTargetLeftZone;
+    public VoidGameEvent OnTargetEnteredZone;
+    public VoidGameEvent OnTargetLeftZone;
 
     public override TargetProvider CreateInstance()
         => new ZoneTargetProvider().Init(this);

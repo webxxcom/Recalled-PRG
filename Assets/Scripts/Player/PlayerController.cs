@@ -32,13 +32,13 @@ public class PlayerController : EntityController
 
     void OnEnable()
     {
-        _healthProvider.OnHpChanged += HandleOnHpChangedGameEvent;
+        _healthProvider.OnHpChangeApplied += HandleOnHpChangedGameEvent;
         _healthProvider.OnDeath += HandleOnDeathGameEvent;
     }
 
     void OnDisable()
     {
-        _healthProvider.OnHpChanged -= HandleOnHpChangedGameEvent;
+        _healthProvider.OnHpChangeApplied -= HandleOnHpChangedGameEvent;
         _healthProvider.OnDeath -= HandleOnDeathGameEvent;
     }
 

@@ -7,22 +7,10 @@ public class Invincibility : MonoBehaviour
     [SerializeField] float _duration;
     [SerializeField] HealthResource _healthProvider;
 
-    private void OnEnable() => _healthProvider.OnValueChanged += OnValueChanged;
-    private void OnDisable() => _healthProvider.OnValueChanged -= OnValueChanged;
-    private void OnValueChanged(int _, int _1) => BecomeInvinsibleFor(_duration);
-
-    IEnumerator InvincibleCoroutine(float seconds)
-    {
-        _healthProvider.IsInvincible = true;
-
-        yield return new WaitForSeconds(seconds);
-
-        _healthProvider.IsInvincible = false;
-    }
+    private void OnEnable() => _healthProvider.OnHpChangeApplied += OnValueChanged;
+    private void OnDisable() => _healthProvider.OnHpChangeApplied -= OnValueChanged;
+    private void OnValueChanged(DamageInfo _) => BecomeInvinsibleFor(_duration);
 
     public void BecomeInvinsibleFor(float seconds)
-    {
-        StopAllCoroutines();
-        StartCoroutine(InvincibleCoroutine(seconds));
-    }
+        => _healthProvider.GrantInvincibility(seconds);
 }

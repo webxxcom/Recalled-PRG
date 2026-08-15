@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] InventorySO _inventory;
-    [SerializeField] InputActionAsset _inputActionAsset;
 
     [Header("UI")]
     [SerializeField] GameObject _basicItemsInventoryGrid;
@@ -18,9 +17,11 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] Sprite _absentBootsSprite;
     [SerializeField] GameObject _highlighter;
 
+    [Header("Listens to")]
+    [SerializeField] VoidGameEvent OnInventory;
+
     UIEventRaiser _uiEventRaiser;
     Canvas _canvas;
-    PlayerInput _playerInput;
     DescriptionManager _descriptionManager;
     InventorySlot _selectedInventorySlot;
     readonly List<GameObject> _createdInventorySlots = new();
@@ -41,18 +42,13 @@ public class InventoryManager : MonoBehaviour
 
         _uiEventRaiser = Utils.FindOrThrow(FindAnyObjectByType<UIEventRaiser>);
         _descriptionManager = Utils.FindOrThrow(FindAnyObjectByType<DescriptionManager>);
-        _playerInput = Utils.FindOrThrow(FindAnyObjectByType<PlayerInput>);
     }
 
-    private void Start()
-        => _canvas.enabled = false;
-    void ToggleInventory(InputAction.CallbackContext cc)
-        => IsActive = !IsActive;
+    void ToggleInventory() => IsActive = !IsActive;
 
     private void OnEnable()
     {
-        _inputActionAsset.FindActionMap("Player").FindAction("ToggleInventory").performed += ToggleInventory;
-        _inputActionAsset.FindActionMap("Inventory").FindAction("ToggleInventory").performed += ToggleInventory;
+        OnInventory.OnEventRaised += ToggleInventory;
 
         _uiEventRaiser.OnUIElementSelected += ItemSelected;
         _uiEventRaiser.OnUIElementDeselected += ItemDeselected;
@@ -60,8 +56,7 @@ public class InventoryManager : MonoBehaviour
 
     private void OnDisable()
     {
-        _inputActionAsset.FindActionMap("Player").FindAction("ToggleInventory").performed -= ToggleInventory;
-        _inputActionAsset.FindActionMap("Inventory").FindAction("ToggleInventory").performed -= ToggleInventory;
+        OnInventory.OnEventRaised -= ToggleInventory;
 
         _uiEventRaiser.OnUIElementSelected -= ItemSelected;
         _uiEventRaiser.OnUIElementDeselected -= ItemDeselected;
@@ -78,24 +73,18 @@ public class InventoryManager : MonoBehaviour
 
     void RefreshEquipSlots()
     {
-        if (_inventory.Sword != null)
-            _swordInventoryItem.Initialize(_inventory.Sword, false, true);
+        if (_inventory.Sword != null) _swordInventoryItem.Initialize(_inventory.Sword, false, true);
         else _swordInventoryItem.Absent(_absentSwordSprite);
 
-        if (_inventory.Armor != null)
-            _armorInventoryItem.Initialize(_inventory.Armor, false, true);
+        if (_inventory.Armor != null) _armorInventoryItem.Initialize(_inventory.Armor, false, true);
         else _armorInventoryItem.Absent(_absentArmorSprite);
 
-        if (_inventory.Boots != null)
-            _bootsInventoryItem.Initialize(_inventory.Boots, false, true);
+        if (_inventory.Boots != null) _bootsInventoryItem.Initialize(_inventory.Boots, false, true);
         else _bootsInventoryItem.Absent(_absentBootsSprite);
     }
 
     public void Open()
     {
-        _canvas.enabled = true;
-        _playerInput.SwitchCurrentActionMap("Inventory");
-
         RefreshGeneralSlots();
         RefreshEquipSlots();
     }
@@ -105,8 +94,6 @@ public class InventoryManager : MonoBehaviour
         _createdInventorySlots.ForEach(ii => Destroy(ii));
         _createdInventorySlots.Clear();
 
-        _canvas.enabled = false;
-        _playerInput.SwitchCurrentActionMap("Player");
         _highlighter.SetActive(false);
     }
 
@@ -116,12 +103,14 @@ public class InventoryManager : MonoBehaviour
         {
             _selectedInventorySlot = inventorySlot;
 
+            if (inventorySlot.Item == null)
+                return;
+
             if (gameObject.TryGetComponent(out InventorySlot _))
             {
                 _highlighter.SetActive(true);
                 _highlighter.transform.position = gameObject.transform.position;
             }
-
             _descriptionManager.Show(inventorySlot);
         }
     }

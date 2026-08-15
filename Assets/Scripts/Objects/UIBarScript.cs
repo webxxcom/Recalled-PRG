@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class BarScriptUI : MonoBehaviour
 {
+    [Tooltip("Do not set if used with Init method")]
     [SerializeField] IntVariable _valueVariable;
     [SerializeField] Image _bar;
     [SerializeField] float _animationSpeed;

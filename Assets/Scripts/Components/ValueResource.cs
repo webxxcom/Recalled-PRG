@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Antlr4.Runtime.Tree;
+using System;
 using UnityEngine;
 
 public abstract class ValueResource : MonoBehaviour
@@ -6,11 +7,11 @@ public abstract class ValueResource : MonoBehaviour
     [SerializeField] ValueProviderConfig _config;
 
     [SerializeField] int _maxValue;
-    [SerializeField] int _currentValue;
-    [SerializeField] bool _isStatic;
+    [SerializeField] IntVariable _currentValue;
+    [SerializeField] bool _isInfinite;
 
     public int MaxValue => _maxValue;
-    public int CurrentValue => _currentValue;
+    public int CurrentValue => _currentValue.Value;
 
     /// <summary> (oldVal, newVal) after the change </summary>
     public event Action<int, int> OnValueChanged;
@@ -19,30 +20,35 @@ public abstract class ValueResource : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _maxValue = _config.MaximumValue;
-        _currentValue = _config.CurrentValue;
-        _isStatic = _config.IsStatic;
+        //TODO ???
+        //_maxValue = _config.MaximumValue;
+        //_currentValue = _config.CurrentValue;
+        //_isStatic = _config.IsStatic;
+
+        _currentValue.Value = MaxValue;
     }
 
     /// <returns>The delta actually applied, after clamping</returns>
     public int Change(int delta)
     {
-        if (_isStatic || delta == 0)
+        if (delta == 0)
             return 0;
 
-        int prevVal = _currentValue;
-        _currentValue = Mathf.Clamp(_currentValue + delta, 0, _maxValue);
+        int oldVal = _currentValue.Value;
+        int newVal = Mathf.Clamp(_currentValue.Value + delta, 0, _maxValue);
+        if (!_isInfinite)
+            _currentValue.Value = newVal;
 
-        int applied = prevVal - _currentValue;
+        int applied = oldVal - newVal;
         if (applied == 0)
             return 0;
 
-        OnValueChanged?.Invoke(prevVal, _currentValue);
+        OnValueChanged?.Invoke(oldVal, newVal);
 
-        if (prevVal != 0 && _currentValue == 0)
-            OnMinValue?.Invoke(prevVal);
-        else if (prevVal != MaxValue && _currentValue == _maxValue)
-            OnMaxValue?.Invoke(prevVal);
+        if (oldVal != 0 && newVal == 0)
+            OnMinValue?.Invoke(oldVal);
+        else if (oldVal != MaxValue && newVal == _maxValue)
+            OnMaxValue?.Invoke(oldVal);
 
         return applied;
     }
@@ -52,9 +58,12 @@ public abstract class ValueResource : MonoBehaviour
     {
         if (_config != null)
         {
+            if (_currentValue == null)
+                _currentValue = ScriptableObject.CreateInstance<IntVariable>();
+
             _maxValue = _config.MaximumValue;
-            _currentValue = _config.CurrentValue;
-            _isStatic = _config.IsStatic;
+            _currentValue.Value = _maxValue;
+            _isInfinite = _config.IsInfinite;
         }
     }
 #endif

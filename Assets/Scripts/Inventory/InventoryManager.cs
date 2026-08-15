@@ -25,7 +25,15 @@ public class InventoryManager : MonoBehaviour
     InventorySlot _selectedInventorySlot;
     readonly List<GameObject> _createdInventorySlots = new();
 
-    public bool IsActive => _canvas.enabled;
+    public bool IsActive
+    {
+        get => _canvas.enabled;
+        set
+        {
+            if (value) Open();
+            else Close();
+        }
+    }
 
     private void Awake()
     {
@@ -37,17 +45,9 @@ public class InventoryManager : MonoBehaviour
     }
 
     private void Start()
-    {
-        _canvas.enabled = false;
-
-
-    }
-
+        => _canvas.enabled = false;
     void ToggleInventory(InputAction.CallbackContext cc)
-    {
-        if (IsActive) Close();
-        else Open();
-    }
+        => IsActive = !IsActive;
 
     private void OnEnable()
     {

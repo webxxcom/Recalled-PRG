@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class HealthResource : ValueResource
 {
-    [SerializeField] bool _isInfinite;
-    
     public Collider2D Hurtbox { get; private set; }
     public EffectMachineSO EffectMachine { get; private set; }
     public bool IsInvincible => _invincibilityTimer > 0f;
@@ -34,19 +32,16 @@ public class HealthResource : ValueResource
 
         OnHpChange?.Invoke(damageInfo);
         int applied = Change(-damageInfo.Amount);
-        if (applied == 0 && !_isInfinite)
+        if (applied == 0)
             return;
 
         damageInfo.Amount = applied;
         OnHpChangeApplied?.Invoke(damageInfo);
 
-        if (!_isInfinite)
-        {
-            if (CurrentValue == 0)
-                OnDeath?.Invoke(damageInfo);
-            if (CurrentValue == MaxValue)
-                OnMax?.Invoke(damageInfo);
-        }
+        if (CurrentValue == 0)
+            OnDeath?.Invoke(damageInfo);
+        if (CurrentValue == MaxValue)
+            OnMax?.Invoke(damageInfo);
     }
 
     public void GrantInvincibility(float time)

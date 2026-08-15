@@ -10,7 +10,7 @@ public class PlayerDash : MonoBehaviour
 
     public void Dash(Vector2 direction)
     {
-        if (_externalVelocity != null) _externalVelocity.Add(direction * _dashForce);
-        if (_health != null) _health.GrantInvincibility(_dashInvincibilityDuration);
+        _externalVelocity.Add(direction * _dashForce);
+        _health.GrantInvincibility(_dashInvincibilityDuration);
     }
 }

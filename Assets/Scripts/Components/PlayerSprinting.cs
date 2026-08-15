@@ -29,9 +29,10 @@ public class PlayerSprinting : MonoBehaviour
     }
     float _current;
 
-    private void Awake() => _current = _initValue;
-
-    public void Sprint(bool isPressed) => IsActive = isPressed;
+    private void Awake()
+        => _current = _initValue;
+    public void Sprint(bool isPressed)
+        => IsActive = isPressed;
 
     private void Update()
     {

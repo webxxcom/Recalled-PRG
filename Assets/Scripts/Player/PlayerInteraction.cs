@@ -13,23 +13,19 @@ public class PlayerInteraction : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out IInteractable interactable))
-        {
             _interactables.Add(interactable);
 
-            if (interactable is InteractableObject interactableObject)
-                interactableObject.ShowInteractionText();
-        }
+        if (collision.TryGetComponent<ApproachTextPopup>(out var popup))
+            popup.Show();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out IInteractable interactable)
                 && _interactables.Contains(interactable))
-        {
             _interactables.Remove(interactable);
 
-            if (interactable is InteractableObject interactableObject)
-                interactableObject.HideInteractionText();
-        }
+        if (collision.TryGetComponent<ApproachTextPopup>(out var popup))
+            popup.Hide();
     }
 }

@@ -52,9 +52,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _bossText: {fileID: 45676735980543205}
-  _fillHpBar: {fileID: 2657688775649497836}
+  _fillHpBar: {fileID: 6553148090746645429}
   _canvasGroup: {fileID: 6933292507830024995}
   OnBossStarted: {fileID: 11400000, guid: c4910f56955043b4a853a29158c74dbd, type: 2}
+  OnBossDefeat: {fileID: 11400000, guid: fe319d728939d544fb0e0d882528f5d7, type: 2}
 --- !u!225 &6933292507830024995
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -263,7 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3101294770275892006}
-  - component: {fileID: 2657688775649497836}
+  - component: {fileID: 6553148090746645429}
   m_Layer: 0
   m_Name: Bar
   m_TagString: Untagged
@@ -280,30 +281,28 @@ Transform:
   m_GameObject: {fileID: 3970720725198281582}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 62.945618, y: 246.29187, z: 0}
+  m_LocalPosition: {x: 62.945618, y: 206.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7610743322081387334}
   m_Father: {fileID: 9028402120805114007}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2657688775649497836
+--- !u!114 &6553148090746645429
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3970720725198281582}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6adb27a1278eb64c8d4188a4a79a056, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b140818d9d6a2c46b0595e43023a238, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BarScript
-  _valueProvider: {fileID: 0}
-  _topBar: {fileID: 8135176062350409485}
-  _bottomBar: {fileID: 8135176062350409485}
+  m_EditorClassIdentifier: Assembly-CSharp::BarScriptUI
+  _valueVariable: {fileID: 0}
+  _bar: {fileID: 8135176062350409485}
   _animationSpeed: 1
-  _canvasGroup: {fileID: 0}
 --- !u!1 &5686308651392472768
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +418,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
+  m_ActiveFontFeatures: 6e72656bu
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1

@@ -13,12 +13,10 @@ public class ProjectileScript : MonoBehaviour
     Vector3 _direction;
     EntityController _owner;
     Rigidbody2D _rigidbody2D;
-    Collider2D _collider2D;
 
     public void Initialize(EntityController owner, Vector3 destination, bool flipX)
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _collider2D = GetComponent<Collider2D>();
         _owner = owner;
 
         Vector3 pos = (Vector2)transform.position + new Vector2(_offset.x * (flipX ? -1 : 1), _offset.y);
@@ -40,9 +38,7 @@ public class ProjectileScript : MonoBehaviour
             return;
 
         if (collision.TryGetComponent(out HealthResource hp))
-        {
-            hp.ApplyDamage(new(_dealtDamage, _knockbackPower, _owner, _collider2D, hp.Hurtbox, null));
-        }
+            hp.ApplyDamage(new(_dealtDamage, _knockbackPower, _owner, hp.Hurtbox, null));
         Destroy(gameObject);
     }
 

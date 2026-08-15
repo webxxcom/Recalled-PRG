@@ -13,50 +13,34 @@ public class BarScript : MonoBehaviour
     public float MaxValue { get; set; }
     public float Value { get; private set; }
 
-    public void Init(HealthResource healthProvider)
-    {
-        _valueResource = healthProvider;
-
-        enabled = true;
-    }
-
-    void OnValueChanged(int oldValue, int newValue) => Set(newValue);
+    void OnValueChanged(int _, int newValue) => Set(newValue);
 
     private void OnEnable()
     {
-        if (_valueResource)
-        {
-            MaxValue = _valueResource.MaxValue;
-            Set(_valueResource.CurrentValue);
+        Set(_valueResource.CurrentValue);
 
-            _valueResource.OnValueChanged += OnValueChanged;
-        }
+        _valueResource.OnValueChanged += OnValueChanged;
     }
 
     private void OnDisable()
-    {
-        if (_valueResource)
-            _valueResource.OnValueChanged -= OnValueChanged;
-    }
+        => _valueResource.OnValueChanged -= OnValueChanged;
 
-    float TargetValue => Value / MaxValue;
     IEnumerator ProgressBars(float delta)
     {
+        var targetValue = Value / MaxValue;
         var suddenBar = delta <= 0 ? _topBar : _bottomBar;
         var smoothBar = delta <= 0 ? _bottomBar : _topBar;
 
-        if (_canvasGroup)
-            _canvasGroup.alpha = 1;
-        suddenBar.fillAmount = TargetValue;
+        _canvasGroup.alpha = 1;
+        suddenBar.fillAmount = targetValue;
         while (Mathf.Abs(suddenBar.fillAmount - smoothBar.fillAmount) > 0.01f)
         {
             smoothBar.fillAmount
                 = Mathf.Lerp(smoothBar.fillAmount, suddenBar.fillAmount, Time.deltaTime * _animationSpeed);
             yield return null;
         }
-        if (_canvasGroup)
-            _canvasGroup.alpha = 0;
-        smoothBar.fillAmount = TargetValue;
+        _canvasGroup.alpha = 0;
+        smoothBar.fillAmount = targetValue;
     }
 
     public void Set(float value)

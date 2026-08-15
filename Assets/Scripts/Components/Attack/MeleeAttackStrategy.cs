@@ -10,7 +10,9 @@ public class MeleeAttackStrategy : AttackStrategy
 
     protected override bool WithinAttackRange(AttackContext attackContext)
     {
-        return _hitbox.IsTouching(attackContext.Target.GetComponentInChildren<HealthResource>().Hurtbox);
+        HealthResource v = attackContext.Target.GetComponentInChildren<HealthResource>();
+
+        return _hitbox.IsTouching(v.Hurtbox) && false;
     }
 
     CapsuleCollider2D _hitbox;
@@ -25,13 +27,9 @@ public class MeleeAttackStrategy : AttackStrategy
     }
 
     private void OnEnable()
-    {
-        _movementBase.OnMovement += SetAttackCollisionOffset;
-    }
+        => _movementBase.OnMovement += SetAttackCollisionOffset;
     private void OnDisable()
-    {
-        _movementBase.OnMovement -= SetAttackCollisionOffset;
-    }
+        => _movementBase.OnMovement -= SetAttackCollisionOffset;
 
     void SetAttackCollisionOffset()
     {
@@ -39,7 +37,7 @@ public class MeleeAttackStrategy : AttackStrategy
             = Quaternion.FromToRotation(Vector2.right, _movementBase.MovementIntention);
     }
 
-    readonly List<Collider2D> _damagedTargets = new();
+    readonly List<Collider2D> _processedTargets = new();
     readonly List<Collider2D> _hits = new(10);
 
     public override void StartExecuting(AttackContext attackContext)
@@ -57,17 +55,17 @@ public class MeleeAttackStrategy : AttackStrategy
         _hitbox.Overlap(_hits);
         foreach (Collider2D hit in _hits)
         {
-            if (_damagedTargets.Contains(hit) || hit.CompareTag(_hitbox.tag))
+            if (_processedTargets.Contains(hit) || hit.CompareTag(_hitbox.tag))
                 continue;
 
-            _damagedTargets.Add(hit);
+            _processedTargets.Add(hit);
 
-            _meleeAttackData.DealDamage(_entityController, _hitbox, hit);
+            _meleeAttackData.DealDamage(_entityController, hit);
         }
     }
 
     public override void FinishExecuting(AttackContext attackContext)
     {
-        _damagedTargets.Clear();
+        _processedTargets.Clear();
     }
 }

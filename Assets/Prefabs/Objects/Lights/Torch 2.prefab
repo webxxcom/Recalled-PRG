@@ -24,6 +24,18 @@ PrefabInstance:
       propertyPath: m_PointLightOuterRadius
       value: 13.49
       objectReference: {fileID: 0}
+    - target: {fileID: 2280282210381555843, guid: c26c1777bd24f274f8afd2389f1676a4, type: 3}
+      propertyPath: 'managedReferences[8701615663312797788]'
+      value: 'Unity.RenderPipelines.Universal.2D.Runtime UnityEngine.Rendering.Universal.Provider2DCache`1[[UnityEngine.Rendering.Universal.Light2DProvider, Unity.RenderPipelines.Universal.2D.Runtime]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280282210381555843, guid: c26c1777bd24f274f8afd2389f1676a4, type: 3}
+      propertyPath: managedReferences[1000].m_Provider2DCache
+      value: 8701615663312797788
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280282210381555843, guid: c26c1777bd24f274f8afd2389f1676a4, type: 3}
+      propertyPath: managedReferences[8701615663312797788].m_Cache.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2801740844161678784, guid: c26c1777bd24f274f8afd2389f1676a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.33
@@ -124,8 +136,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.06454475, y: -0.58720726}
-  m_Size: {x: 1.0619124, y: 0.5325871}
+  m_Offset: {x: 0.09569775, y: -0.149591}
+  m_Size: {x: 1.1598208, y: 0.66016865}
   m_Direction: 1
 --- !u!82 &5652416203489760724
 AudioSource:

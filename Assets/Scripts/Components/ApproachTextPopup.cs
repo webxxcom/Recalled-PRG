@@ -4,7 +4,7 @@ using UnityEngine;
 public class ApproachTextPopup : MonoBehaviour
 {
     [SerializeField] string _displayText;
-    [SerializeField] TextMeshProUGUI _textMeshPro;
+    [SerializeField] protected TextMeshProUGUI _textMeshPro;
 
     private void Start()
     {
@@ -12,14 +12,14 @@ public class ApproachTextPopup : MonoBehaviour
         _textMeshPro.text = _displayText;
     }
 
-    public void Show()
+    public virtual void Show()
     {
         _textMeshPro.enabled = true;
     }
 
-    public void Hide()
+    public virtual void Hide()
     {
-        _textMeshPro.enabled = false;
+        if (_textMeshPro) _textMeshPro.enabled = false;
     }
 
 #if UNITY_EDITOR

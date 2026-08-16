@@ -1,27 +1,26 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class DescriptionManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _mainText;
     [SerializeField] GameObject _buttons;
-
     [SerializeField] GameObject _equipButton;
     [SerializeField] GameObject _unequipButton;
     [SerializeField] GameObject _removeButton;
 
-    public bool IsActive => gameObject.activeInHierarchy;
+    public bool IsActive
+    {
+        get => gameObject.activeInHierarchy;
+        set => gameObject.SetActive(value);
+    }
 
     private void Start()
-    {
-        gameObject.SetActive(false);
-    }
+        => IsActive = false;
 
     void ShowButtons(InventorySlot inventorySlot)
     {
-        if (inventorySlot.Item is IEquippable)
+        if (inventorySlot.IsEquippable)
         {
             if (inventorySlot.IsEquipped)
             {
@@ -34,26 +33,28 @@ public class DescriptionManager : MonoBehaviour
                 _unequipButton.SetActive(false);
             }
         }
+        else
+        {
+            _equipButton.SetActive(false);
+            _unequipButton.SetActive(false);
+        }
 
         if (inventorySlot.IsRemovable)
             _removeButton.SetActive(true);
         else
             _removeButton.SetActive(false);
-
     }
 
     void HideButtons()
     {
         _equipButton.SetActive(false);
+        _unequipButton.SetActive(false);
         _removeButton.SetActive(false);
     }
 
     public void Show(InventorySlot inventorySlot)
     {
-        if (!IsActive)
-        {
-            gameObject.SetActive(true);
-        }
+        IsActive = true;
         _mainText.text = inventorySlot.Item.Description;
 
         ShowButtons(inventorySlot);
@@ -61,8 +62,9 @@ public class DescriptionManager : MonoBehaviour
 
     public void Hide()
     {
-        gameObject.SetActive(false);
+        IsActive = false;
         _mainText.text = null;
+
         HideButtons();
     }
 }

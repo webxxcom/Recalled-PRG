@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameState
   <ActionMap>k__BackingField: Inventory
   <CursorMode>k__BackingField: 2
-  <FreezeTime>k__BackingField: 0
+  <FreezeTime>k__BackingField: 1

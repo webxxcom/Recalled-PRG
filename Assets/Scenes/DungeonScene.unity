@@ -26593,7 +26593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChestScript
   _firstStateAudio: {fileID: 8300000, guid: 883d1dbeb0f103f4d999608a711cd58f, type: 3}
   _secondStateAudio: {fileID: 0}
-  <RequiredKey>k__BackingField: {fileID: 0}
+  _requiredKey: {fileID: 0}
   _lootTable:
     _loots:
     - _item: {fileID: 11400000, guid: b3777d1dc5c60ea4f91fc14a3964a784, type: 2}
@@ -32124,7 +32124,6 @@ GameObject:
   - component: {fileID: 1863377900}
   - component: {fileID: 1863377899}
   - component: {fileID: 1863377898}
-  - component: {fileID: 1863377897}
   - component: {fileID: 1863377896}
   - component: {fileID: 1863377895}
   - component: {fileID: 1863377894}
@@ -32164,7 +32163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChestScript
   _firstStateAudio: {fileID: 8300000, guid: 883d1dbeb0f103f4d999608a711cd58f, type: 3}
   _secondStateAudio: {fileID: 0}
-  <RequiredKey>k__BackingField: {fileID: 11400000, guid: eaf1831fb346c5a47aeae7be05e9301e, type: 2}
+  _requiredKey: {fileID: 0}
   _lootTable:
     _loots:
     - _item: {fileID: 11400000, guid: e9eb1697ef0bf4846b5420bd6ab75501, type: 2}
@@ -32238,33 +32237,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.2007985, y: 0.4623301}
   m_EdgeRadius: 0
---- !u!50 &1863377897
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863377892}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!212 &1863377898
 SpriteRenderer:
   serializedVersion: 3
@@ -32447,9 +32419,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1863377892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9928754adf4e7ce4798741c684369cab, type: 3}
+  m_Script: {fileID: 11500000, guid: 753cac83cf30c0e4f94a54bd15d8a700, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ApproachTextPopup
+  m_EditorClassIdentifier: '::'
   _displayText: open me
   _textMeshPro: {fileID: 1969980285}
 --- !u!4 &1868815473 stripped

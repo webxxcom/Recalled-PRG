@@ -2,26 +2,25 @@ using UnityEngine;
 
 public class Chest : InteractableObject
 {
-    [field: SerializeField] public ItemDefinition RequiredKey { get; private set; }
-
+    [SerializeField] ItemDefinition _requiredKey;
     [SerializeField] LootTable _lootTable;
     [SerializeField] InventorySO _inventory;
 
     public override void Interact()
     {
-        if (!IsInteracted && PlayerCanInteract())
+        if (PlayerCanInteract())
             Open();
     }
 
     void Open()
     {
         IsInteracted = true;
-        _inventory.Remove(RequiredKey);
+        _inventory.Remove(_requiredKey);
         _inventory.Add(_lootTable.GetItem());
     }
 
-    protected override bool PlayerCanInteract()
+    public override bool PlayerCanInteract()
     {
-        return RequiredKey == null || _inventory.Contains(RequiredKey);
+        return (_requiredKey == null || _inventory.Contains(_requiredKey)) && !IsInteracted;
     }
 }

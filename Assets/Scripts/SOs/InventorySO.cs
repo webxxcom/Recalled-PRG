@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "InventorySO", menuName = "InventorySO")]
+[CreateAssetMenu(menuName = "Inventory/Player Inventory")]
 public class InventorySO : ScriptableObject
 {
     [field: SerializeField] public List<ItemInstance> Items { get; private set; }
@@ -38,18 +38,6 @@ public class InventorySO : ScriptableObject
 
     public bool Contains(ItemDefinition item) => Items.Any(ii => ii.Definition == item);
 
-    public void RemoveAll(ItemDefinition item)
-    {
-        foreach (var ii in Items)
-        {
-            if (ii.Definition == item)
-            {
-                Items.Remove(ii);
-                return;
-            }
-        }
-    }
-
     public void Remove(ItemDefinition item, int count = 1)
     {
         if (count <= 0)
@@ -70,4 +58,14 @@ public class InventorySO : ScriptableObject
     }
 
     public void Remove(ItemInstance itemInstance) => Items.Remove(itemInstance);
+
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        for (int i = 0; i < Items.Count; i++)
+            if (Items[i].Definition != null)
+                Items[i] = Items[i].Definition.CreateInstance();
+    }
+#endif
 }

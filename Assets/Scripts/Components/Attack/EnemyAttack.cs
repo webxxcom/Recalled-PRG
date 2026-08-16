@@ -14,11 +14,12 @@ public class EnemyAttack : EntityAttack
 
     void Update()
     {
-        if (_timeSinceLastAttack > _intervalBetweenStates && _targetProviderInstance.HasTarget)
+        var trgt = FindAnyObjectByType<PlayerController>().gameObject;
+        if (_timeSinceLastAttack > _intervalBetweenStates)// && _targetProviderInstance.HasTarget)
         {
             foreach (var attackStrategy in _attackStrategies)
             {
-                AttackContext attackContext = new(_targetProviderInstance.CurrentTarget);
+                AttackContext attackContext = new(trgt);// _targetProviderInstance.CurrentTarget);
                 if (attackStrategy.CanAttack(attackContext))
                 {
                     Attack(attackStrategy, attackContext);

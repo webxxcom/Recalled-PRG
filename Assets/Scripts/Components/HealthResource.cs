@@ -1,10 +1,10 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class HealthResource : ValueResource
 {
+    [SerializeField] PlayerCombatData _combatData;
     public Collider2D Hurtbox { get; private set; }
     public EffectMachineSO EffectMachine { get; private set; }
     public bool IsInvincible => _invincibilityTimer > 0f;
@@ -30,6 +30,7 @@ public class HealthResource : ValueResource
         if (IsInvincible)
             return;
 
+        if (_combatData) damageInfo.Amount = Mathf.RoundToInt(damageInfo.Amount / _combatData.Protection);
         OnHpChange?.Invoke(damageInfo);
         int applied = Change(-damageInfo.Amount);
         if (applied == 0)

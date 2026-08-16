@@ -1,20 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Attack / Melee Attack Data")]
+[CreateAssetMenu(menuName = "ApplyAttack/Melee Data")]
 public class MeleeAttackSO : AttackSO
 {
-    [field: SerializeField] public virtual int DealtDamage { get; private set; } = 10;
-    [field: SerializeField] public virtual float KnockbackPower { get; private set; } = 1.6f;
+    [field: SerializeField] public int DealtDamage { get; private set; } = 10;
+    [field: SerializeField] public float KnockbackPower { get; private set; } = 1.6f;
     [field: SerializeField] public float ImpactTime { get; private set; } = 0.3f;
     [field: SerializeField] public float RecoveryTime { get; private set; } = 0.8f;
     [field: SerializeField] public AttackCurvesSO Curves { get; private set; }
     [field: SerializeField] public List<EffectDefinition> Effects { get; private set; }
+    [SerializeField] PlayerCombatData _combatData;
 
-    public void DealDamage(EntityController source, Collider2D hurtbox)
+    public void ApplyAttack(EntityController source, Collider2D hurtbox)
     {
         if (hurtbox.TryGetComponent(out HealthResource target))
-            target.ApplyDamage(new DamageInfo(DealtDamage, KnockbackPower, source, hurtbox, Effects));
+        {
+            DamageInfo di = _combatData != null 
+                ? new(_combatData.DealtDamage, _combatData.KnockbackPower, source, hurtbox, Effects)
+                : new(DealtDamage, KnockbackPower, source, hurtbox, Effects);
+
+            target.ApplyDamage(di);
+        }
     }
 
     public void HitboxOverTime(CapsuleCollider2D hitbox, float normalizedTime)

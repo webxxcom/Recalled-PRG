@@ -12,7 +12,7 @@ public class MeleeAttackStrategy : AttackStrategy
     {
         HealthResource v = attackContext.Target.GetComponentInChildren<HealthResource>();
 
-        return _hitbox.IsTouching(v.Hurtbox) && false;
+        return _hitbox.IsTouching(v.Hurtbox);
     }
 
     CapsuleCollider2D _hitbox;
@@ -60,7 +60,7 @@ public class MeleeAttackStrategy : AttackStrategy
 
             _processedTargets.Add(hit);
 
-            _meleeAttackData.DealDamage(_entityController, hit);
+            _meleeAttackData.ApplyAttack(_entityController, hit);
         }
     }
 

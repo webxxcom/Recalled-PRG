@@ -1464,7 +1464,7 @@ GameObject:
   - component: {fileID: 213586719260208206}
   - component: {fileID: 1255662501661695068}
   - component: {fileID: 1351050608480426200}
-  - component: {fileID: 3167150972814595269}
+  - component: {fileID: 8222544664920742108}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1697,7 +1697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b8ebd41bcd4c443a146d40bfc706b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpeedAggregator
---- !u!114 &3167150972814595269
+--- !u!114 &8222544664920742108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1708,7 +1708,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88919415d7170df4aa35aa9e4aeed9a7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputBroadcast
+  m_EditorClassIdentifier: '::'
   OnInventory: {fileID: 11400000, guid: 4604c42548b19bf498c44dc741a3dda2, type: 2}
   OnPauseMenu: {fileID: 11400000, guid: 1488ef76c18cdfe4d9ab67f05904969f, type: 2}
 --- !u!1 &8375044973183638792

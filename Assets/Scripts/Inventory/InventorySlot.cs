@@ -6,6 +6,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class InventorySlot : MonoBehaviour
 {
+    [SerializeField] Sprite _absentSprite;
+
     public ItemInstance Item { get; private set; }
     public TextMeshProUGUI CountText { get; private set; }
     public bool IsRemovable { get; private set; }
@@ -23,12 +25,12 @@ public class InventorySlot : MonoBehaviour
         CountText = Utils.FindOrThrow(GetComponentInChildren<TextMeshProUGUI>);
     }
 
-    public void Absent(Sprite sprite)
+    public void Absent()
     {
         _button.enabled = false;
         IsRemovable = false;
         IsEquipped = true;
-        _image.sprite = sprite;
+        _image.sprite = _absentSprite;
         CountText.text = null;
     }
 

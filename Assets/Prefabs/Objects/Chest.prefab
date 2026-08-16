@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7668946856023401083}
   - component: {fileID: 7902337379961306339}
   - component: {fileID: 5815247881039778510}
+  - component: {fileID: 7523212520969363591}
   m_Layer: 11
   m_Name: Chest
   m_TagString: Untagged
@@ -304,14 +305,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChestScript
   _firstStateAudio: {fileID: 8300000, guid: 883d1dbeb0f103f4d999608a711cd58f, type: 3}
   _secondStateAudio: {fileID: 0}
-  _displayText: open me
-  _interactionTextMesh: {fileID: 7777105793691107785}
   <RequiredKey>k__BackingField: {fileID: 0}
   _lootTable:
     _loots:
     - _item: {fileID: 11400000, guid: e9eb1697ef0bf4846b5420bd6ab75501, type: 2}
       _weight: 100
   _inventory: {fileID: 11400000, guid: c1a2f0f5e6e68d343a75a6474e974407, type: 2}
+--- !u!114 &7523212520969363591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8404636505150484711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a00a0c20b5c0b954885354466915820d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableAnimation
+  _animator: {fileID: 7902337379961306339}
 --- !u!1001 &4136252859030696980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -470,14 +482,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7280376149637396771, guid: 2d100914eafa8a34fbad323cb322e08a, type: 3}
   m_PrefabInstance: {fileID: 4136252859030696980}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7777105793691107785 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5947909910277699037, guid: 2d100914eafa8a34fbad323cb322e08a, type: 3}
-  m_PrefabInstance: {fileID: 4136252859030696980}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI

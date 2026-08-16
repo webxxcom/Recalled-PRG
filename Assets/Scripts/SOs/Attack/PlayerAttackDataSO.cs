@@ -1,31 +1,25 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Attack/Player Attack Data")]
-public class PlayerAttackData : MeleeAttackSO
+[CreateAssetMenu(menuName = "Combat Data/Player")]
+public sealed class PlayerCombatData : ScriptableObject
 {
     [SerializeField] InventorySO _inventory;
+    [SerializeField] MeleeAttackSO _playerMelee;
 
-    public override int DealtDamage
-    {
-        get
-        {
-            int totalDamage = base.DealtDamage;
-            if (_inventory.Sword != null)
-                totalDamage += _inventory.Sword.Definition.Damage;
-            return totalDamage;
-        }
-    }
+    public int DealtDamage
+        => _inventory.Sword?.Definition.Damage ?? _playerMelee.DealtDamage;
 
-    public override float KnockbackPower
-    {
-        get
-        {
-            float totalKnockback = base.KnockbackPower;
-            if (_inventory.Sword != null)
-                totalKnockback *= _inventory.Sword.Definition.KnockbackPower;
-            return totalKnockback;
-        }
-    }
-    // TODO figure out what to do with the sword weight
-    public override float ReloadTime => base.ReloadTime;
+    public float Weight
+        => (_inventory.Armor?.Definition.Weight ?? 1)
+                * (_inventory.Sword?.Definition.Weight ?? 1)
+                * (_inventory.Boots?.Definition.SpeedMultiplier ?? 1);
+
+    public float Protection
+        => (_inventory.Armor?.Definition.Protection ?? 1)
+                * (_inventory.Boots?.Definition.Protection ?? 1);
+
+    public float KnockbackPower
+        => _inventory.Sword?.Definition.KnockbackPower ?? _playerMelee.KnockbackPower;
+    public float ReloadTime
+        => _inventory.Sword?.Definition.ReloadTime ?? _playerMelee.ReloadTime;
 }

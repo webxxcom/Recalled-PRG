@@ -20,3 +20,4 @@ MonoBehaviour:
   <RecoveryTime>k__BackingField: 0.8
   <Curves>k__BackingField: {fileID: 0}
   <Effects>k__BackingField: []
+  _combatData: {fileID: 11400000, guid: dae60ef3747aed242a63d444fce3392e, type: 2}

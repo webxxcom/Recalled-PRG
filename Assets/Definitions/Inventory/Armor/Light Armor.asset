@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Light Armor
   m_EditorClassIdentifier: Assembly-CSharp::ArmorInventoryItem
   <Name>k__BackingField: Light Armor
-  <Icon>k__BackingField: {fileID: -6730011014630177073, guid: 0daa3ba3dddbbca448bb810d864562d8, type: 3}
+  <Icon>k__BackingField: {fileID: -2407785993354806246, guid: 1a65b3f4372800f40a20f414fbed9cc7, type: 3}
   <Description>k__BackingField: Allows you to move around faster at the cost of decreased protection.\nSometimes worth it..
   <IsStockable>k__BackingField: 0
   <Protection>k__BackingField: 0.6

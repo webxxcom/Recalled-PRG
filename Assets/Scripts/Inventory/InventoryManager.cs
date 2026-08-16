@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Canvas))]
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] InventorySO _inventory;
@@ -12,19 +14,19 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] InventorySlot _swordInventoryItem;
     [SerializeField] InventorySlot _armorInventoryItem;
     [SerializeField] InventorySlot _bootsInventoryItem;
-    [SerializeField] Sprite _absentSwordSprite;
-    [SerializeField] Sprite _absentArmorSprite;
-    [SerializeField] Sprite _absentBootsSprite;
-    [SerializeField] GameObject _highlighter;
+    [SerializeField] Highlighter _highlighter;
 
     [Header("Listens to")]
     [SerializeField] VoidGameEvent OnInventory;
+    [SerializeField] GameobjectGameEvent OnUIElementSelected;
+    [SerializeField] VoidGameEvent OnUIElementDeselected;
 
-    UIEventRaiser _uiEventRaiser;
     Canvas _canvas;
     DescriptionManager _descriptionManager;
     InventorySlot _selectedInventorySlot;
     readonly List<GameObject> _createdInventorySlots = new();
+
+    public event Action OnEquippedItems;
 
     public bool IsActive
     {
@@ -38,9 +40,9 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        _canvas = Utils.FindOrThrow(GetComponentInChildren<Canvas>);
+        _canvas = GetComponent<Canvas>();
+        _canvas.enabled = false;
 
-        _uiEventRaiser = Utils.FindOrThrow(FindAnyObjectByType<UIEventRaiser>);
         _descriptionManager = Utils.FindOrThrow(FindAnyObjectByType<DescriptionManager>);
     }
 
@@ -49,17 +51,15 @@ public class InventoryManager : MonoBehaviour
     private void OnEnable()
     {
         OnInventory.OnEventRaised += ToggleInventory;
-
-        _uiEventRaiser.OnUIElementSelected += ItemSelected;
-        _uiEventRaiser.OnUIElementDeselected += ItemDeselected;
+        OnUIElementSelected.OnEventRaised += ItemSelected;
+        OnUIElementDeselected.OnEventRaised += ItemDeselected;
     }
 
     private void OnDisable()
     {
         OnInventory.OnEventRaised -= ToggleInventory;
-
-        _uiEventRaiser.OnUIElementSelected -= ItemSelected;
-        _uiEventRaiser.OnUIElementDeselected -= ItemDeselected;
+        OnUIElementSelected.OnEventRaised -= ItemSelected;
+        OnUIElementDeselected.OnEventRaised -= ItemDeselected;
     }
 
     void CreateGeneralItemSlot(ItemInstance itemInstance)
@@ -74,27 +74,30 @@ public class InventoryManager : MonoBehaviour
     void RefreshEquipSlots()
     {
         if (_inventory.Sword != null) _swordInventoryItem.Initialize(_inventory.Sword, false, true);
-        else _swordInventoryItem.Absent(_absentSwordSprite);
+        else _swordInventoryItem.Absent();
 
         if (_inventory.Armor != null) _armorInventoryItem.Initialize(_inventory.Armor, false, true);
-        else _armorInventoryItem.Absent(_absentArmorSprite);
+        else _armorInventoryItem.Absent();
 
         if (_inventory.Boots != null) _bootsInventoryItem.Initialize(_inventory.Boots, false, true);
-        else _bootsInventoryItem.Absent(_absentBootsSprite);
+        else _bootsInventoryItem.Absent();
     }
 
     public void Open()
     {
+        _canvas.enabled = true;
+
         RefreshGeneralSlots();
         RefreshEquipSlots();
     }
 
     public void Close()
     {
+        _canvas.enabled = false;
+
         _createdInventorySlots.ForEach(ii => Destroy(ii));
         _createdInventorySlots.Clear();
-
-        _highlighter.SetActive(false);
+        _highlighter.Hide();
     }
 
     public void ItemSelected(GameObject gameObject)
@@ -107,10 +110,7 @@ public class InventoryManager : MonoBehaviour
                 return;
 
             if (gameObject.TryGetComponent(out InventorySlot _))
-            {
-                _highlighter.SetActive(true);
-                _highlighter.transform.position = gameObject.transform.position;
-            }
+                _highlighter.Show(gameObject);
             _descriptionManager.Show(inventorySlot);
         }
     }
@@ -119,13 +119,20 @@ public class InventoryManager : MonoBehaviour
     {
         _selectedInventorySlot = null;
 
-        _highlighter.SetActive(false);
+        _highlighter.Hide();
         _descriptionManager.Hide();
     }
 
     public void OnRemoveButtonClick() => RemoveItem(_selectedInventorySlot);
     public void OnEquipButtonClick() => EquipItem(_selectedInventorySlot);
     public void OnUnequipButtonClick() => UnequipItem(_selectedInventorySlot);
+
+    void RemoveItem(InventorySlot inventorySlot)
+    {
+        _inventory.Remove(inventorySlot.Item);
+        Destroy(inventorySlot.gameObject);
+        ItemDeselected();
+    }
 
     void UnequipItem(InventorySlot inventorySlot)
     {
@@ -136,14 +143,8 @@ public class InventoryManager : MonoBehaviour
             CreateGeneralItemSlot(unequipped);
             ItemDeselected();
             RefreshEquipSlots();
+            OnEquippedItems?.Invoke();
         }
-    }
-
-    void RemoveItem(InventorySlot inventorySlot)
-    {
-        _inventory.Remove(inventorySlot.Item);
-        Destroy(inventorySlot.gameObject);
-        ItemDeselected();
     }
 
     void EquipItem(InventorySlot inventorySlot)
@@ -158,6 +159,7 @@ public class InventoryManager : MonoBehaviour
                 RemoveItem(inventorySlot);
 
             RefreshEquipSlots();
+            OnEquippedItems?.Invoke();
         }
     }
 }

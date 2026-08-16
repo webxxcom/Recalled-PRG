@@ -5,7 +5,6 @@ public class StateHandler : MonoBehaviour
     [SerializeField] StateStackHandler _stateManager;
     [SerializeField] GameState _definition;
     [SerializeField] VoidGameEvent OnGameEventRaised;
-    [SerializeField] Canvas _uiCanvasRoot;
 
     bool _isActive;
     public bool IsActive
@@ -28,13 +27,11 @@ public class StateHandler : MonoBehaviour
 
     void Show()
     {
-        _uiCanvasRoot.enabled = true;
         _stateManager.Add(_definition);
     }
 
     void Hide()
     {
-        _uiCanvasRoot.enabled = false;
         _stateManager.Remove();
     }
 }

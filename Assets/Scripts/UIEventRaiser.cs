@@ -1,33 +1,28 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(EventSystem))]
 public class UIEventRaiser : MonoBehaviour
 {
-    public GameObject SelectedObject { get; private set; }
+    [Header("Broadcasts to")]
+    [SerializeField] GameobjectGameEvent OnUIElementSelected;
+    [SerializeField] VoidGameEvent OnUIElementDeselected;
 
+    GameObject _selectedObject;
     EventSystem _eventSystem;
 
-    public Action<GameObject> OnUIElementSelected;
-    public Action OnUIElementDeselected;
-
     private void Awake()
-    {
-        _eventSystem = Utils.FindOrThrow(FindAnyObjectByType<EventSystem>);
-    }
+        => _eventSystem = GetComponent<EventSystem>();
 
     private void Update()
     {
-        if (_eventSystem.currentSelectedGameObject && SelectedObject != _eventSystem.currentSelectedGameObject)
+        if (_selectedObject != _eventSystem.currentSelectedGameObject)
         {
-            SelectedObject = _eventSystem.currentSelectedGameObject;
+            _selectedObject = _eventSystem.currentSelectedGameObject;
 
-            OnUIElementSelected?.Invoke(SelectedObject);
-        }
-        else if (!_eventSystem.currentSelectedGameObject && SelectedObject)
-        {
-            OnUIElementDeselected?.Invoke();
-            SelectedObject = null;
+            if (_eventSystem.currentSelectedGameObject != null)
+                OnUIElementSelected.Invoke(_selectedObject);
+            else OnUIElementDeselected.Invoke();
         }
     }
 }

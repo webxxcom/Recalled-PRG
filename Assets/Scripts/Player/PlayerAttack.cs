@@ -9,7 +9,7 @@ public class PlayerAttack : EntityAttack
     void OnAttack(InputValue value)
     {
         //TODO player attack strategy
-        if (value.isPressed && _timeSinceLastAttack >= _attackStrategies[0].AttackData.ReloadTime)
+        if (value.isPressed && _timeSinceLastAttack >= _playerCombatData.ReloadTime)
         {
             _timeSinceLastAttack = 0;
 

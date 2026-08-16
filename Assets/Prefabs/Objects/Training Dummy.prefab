@@ -85,9 +85,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthResource
   _config: {fileID: 11400000, guid: 864889a04087d4d448a4d01d160d960a, type: 2}
   _maxValue: 0
-  _currentValue: 0
-  _isStatic: 0
+  _currentValue: {fileID: 0}
   _isInfinite: 1
+  _combatData: {fileID: 0}
 --- !u!114 &1916765318523927302
 MonoBehaviour:
   m_ObjectHideFlags: 0

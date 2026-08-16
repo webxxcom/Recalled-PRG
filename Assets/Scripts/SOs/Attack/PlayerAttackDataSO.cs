@@ -12,7 +12,7 @@ public sealed class PlayerCombatData : ScriptableObject
     public float Weight
         => (_inventory.Armor?.Definition.Weight ?? 1)
                 * (_inventory.Sword?.Definition.Weight ?? 1)
-                * (_inventory.Boots?.Definition.SpeedMultiplier ?? 1);
+                / (_inventory.Boots?.Definition.SpeedMultiplier ?? 1);
 
     public float Protection
         => (_inventory.Armor?.Definition.Protection ?? 1)

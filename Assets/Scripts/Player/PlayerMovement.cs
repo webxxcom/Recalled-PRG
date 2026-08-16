@@ -5,6 +5,7 @@ public class PlayerMovement : MovementBase
 {
     [SerializeField] PlayerSprinting _playerSprinting;
     [SerializeField] PlayerDash _playerDash;
+    [SerializeField] PlayerCombatData _playerCombat; 
 
     void OnMove(InputValue value)
         => MovementIntention = value.Get<Vector2>();
@@ -25,6 +26,6 @@ public class PlayerMovement : MovementBase
             return Vector2.zero;
 
         Vector2 finalMovement = MovementIntention;
-        return finalMovement;
+        return finalMovement / _playerCombat.Weight;
     }
 }

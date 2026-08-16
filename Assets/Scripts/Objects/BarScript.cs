@@ -17,6 +17,7 @@ public class BarScript : MonoBehaviour
 
     private void OnEnable()
     {
+        MaxValue = _valueResource.MaxValue;
         Set(_valueResource.CurrentValue);
 
         _valueResource.OnValueChanged += OnValueChanged;

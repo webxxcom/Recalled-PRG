@@ -6,7 +6,8 @@
     {
         get
         {
-            return $"{Definition.Description}\n\n" +
+            return $"{Definition.Name}\n" +
+                $"{Definition.Description}\n\n" +
                 $"Protection: {Definition.Protection}\n" +
                 $"Weight: {Definition.Weight}";
         }

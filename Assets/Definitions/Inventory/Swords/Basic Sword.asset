@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f0dc4f1a071746449f47efca7b283ad, type: 3}
   m_Name: Basic Sword
   m_EditorClassIdentifier: Assembly-CSharp::SwordInventoryItem
-  <Name>k__BackingField: Default Sword
+  <Name>k__BackingField: Basic Sword
   <Icon>k__BackingField: {fileID: 1144251756838540918, guid: 1a65b3f4372800f40a20f414fbed9cc7, type: 3}
   <Description>k__BackingField: Base of the base, huh.\nDon't you think it's bad, it's just new.
   <IsStockable>k__BackingField: 0

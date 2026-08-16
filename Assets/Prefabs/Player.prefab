@@ -275,6 +275,7 @@ MonoBehaviour:
   _maxValue: 100
   _currentValue: {fileID: 0}
   _isInfinite: 0
+  _combatData: {fileID: 11400000, guid: dae60ef3747aed242a63d444fce3392e, type: 2}
 --- !u!114 &8594877766703153062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -725,6 +726,7 @@ MonoBehaviour:
   _animator: {fileID: 3750387735865093422}
   _attackStrategies:
   - {fileID: 1017372488747182917}
+  _playerCombatData: {fileID: 11400000, guid: dae60ef3747aed242a63d444fce3392e, type: 2}
 --- !u!114 &1017372488747182917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1606,6 +1608,7 @@ MonoBehaviour:
   _rigidbody2D: {fileID: 2409675021506303179}
   _playerSprinting: {fileID: 2708507066674380346}
   _playerDash: {fileID: 6443777087678772007}
+  _playerCombat: {fileID: 11400000, guid: dae60ef3747aed242a63d444fce3392e, type: 2}
 --- !u!114 &7101408821228708346
 MonoBehaviour:
   m_ObjectHideFlags: 0

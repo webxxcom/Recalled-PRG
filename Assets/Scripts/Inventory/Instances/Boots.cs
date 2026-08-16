@@ -7,8 +7,10 @@ public class Boots : ItemInstance, IEquippable
     {
         get
         {
-            return $"{Definition.Description}\n\n" +
-                $"Speed Multiplier: {Definition.SpeedMultiplier}";
+            return $"{Definition.Name}\n" +
+                $"{Definition.Description}\n\n" +
+                $"Speed Multiplier: {Definition.SpeedMultiplier}\n" +
+                $"Protection: {Definition.Protection}";
         }
     }
     public Boots(ItemDefinition itemDefinition) : base(itemDefinition) { }

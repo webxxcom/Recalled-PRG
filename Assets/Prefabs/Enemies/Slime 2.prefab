@@ -1029,7 +1029,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5c81a1c66ec9d4894984ff189471e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackStrategy
-  _desiredDistance: 0
   _meleeAttackData: {fileID: 11400000, guid: ff6ba34e4d873794fa7248aadfbc7793, type: 2}
 --- !u!1 &5046599424978369931
 GameObject:
@@ -1461,6 +1460,7 @@ GameObject:
   - component: {fileID: 866168371520611136}
   - component: {fileID: 5578210211533363240}
   - component: {fileID: 7958631696725362405}
+  - component: {fileID: 4683975601714653088}
   m_Layer: 6
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -1609,6 +1609,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageParticles
   _health: {fileID: 6943032192117191510}
   _particles: {fileID: 2466567890511269386, guid: 80ca15d7024dd724e95d1d3bfd987aba, type: 3}
+--- !u!114 &4683975601714653088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8085504045215601404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a921302f7a41f3468ca0d18ff689b06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageDeath
+  _health: {fileID: 6943032192117191510}
+  _animator: {fileID: 6696174316393343614}
 --- !u!1 &8533387803823033690
 GameObject:
   m_ObjectHideFlags: 0

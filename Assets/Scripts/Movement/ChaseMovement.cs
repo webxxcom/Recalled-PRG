@@ -24,12 +24,12 @@ public class ChaseMovement : MovementStrategy
         return Vector2.zero;
     }
 
-    public override void Init(MovementStrategySO other)
+    public override void Init(MovementStrategySO other, GameObject root)
     {
         ChaseMovementSO chaseMovementSO = other as ChaseMovementSO;
 
         _distanceToTarget = chaseMovementSO.MinDistanceToTarget;
         _delta = chaseMovementSO.Delta;
     }
-    public ChaseMovement(MovementStrategySO other) : base(other) { }
+    public ChaseMovement(MovementStrategySO other, GameObject root) : base(other, root) { }
 }

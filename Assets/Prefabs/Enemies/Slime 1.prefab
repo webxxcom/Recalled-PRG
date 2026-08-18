@@ -1202,6 +1202,7 @@ GameObject:
   - component: {fileID: 7862802822524356559}
   - component: {fileID: 2966692405290835508}
   - component: {fileID: 2339780574607546230}
+  - component: {fileID: 7765137045458581782}
   m_Layer: 6
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -1349,6 +1350,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageParticles
   _health: {fileID: 3686550405581697464}
   _particles: {fileID: 2466567890511269386, guid: 80ca15d7024dd724e95d1d3bfd987aba, type: 3}
+--- !u!114 &7765137045458581782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3947751842682473356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a921302f7a41f3468ca0d18ff689b06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &4117085876247267688
 GameObject:
   m_ObjectHideFlags: 0

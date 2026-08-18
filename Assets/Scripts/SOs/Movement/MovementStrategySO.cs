@@ -2,5 +2,5 @@
 
 public abstract class MovementStrategySO : ScriptableObject
 {
-    public abstract MovementStrategy CreateInstance();
+    public abstract MovementStrategy CreateInstance(GameObject root);
 }

@@ -13,10 +13,10 @@ public class EntityMovement : MovementBase
 
     void Awake()
     {
-        _idleMovementStrategy = _movementAIConfig.IdleMovementStrategy.CreateInstance();
+        _idleMovementStrategy = _movementAIConfig.IdleMovementStrategy.CreateInstance(gameObject);
 
         foreach (var item in _movementAIConfig.MovementStrategies)
-            _movementStrategies.Add(item.CreateInstance());
+            _movementStrategies.Add(item.CreateInstance(gameObject));
         foreach (var item in _movementAIConfig.TargetProviders)
             _targetProviders.Add(item.CreateInstance());
     }

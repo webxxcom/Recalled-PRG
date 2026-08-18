@@ -491,9 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementSound
   _walkingSound: {fileID: 8300000, guid: 1bca49e9e54fd094fa5b46805cbfbdee, type: 3}
-  _playerMovementComponent: {fileID: 7162682655650916106}
-  _speedAggregator: {fileID: 1351050608480426200}
-  _playerSprinting: {fileID: 2708507066674380346}
+  _playerMovement: {fileID: 7162682655650916106}
 --- !u!1 &1852675207412296864
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +650,7 @@ GameObject:
   - component: {fileID: 7809330539225864080}
   - component: {fileID: 4452931388105062793}
   - component: {fileID: 1017372488747182917}
+  - component: {fileID: 6527412316840103686}
   m_Layer: 7
   m_Name: Hitbox
   m_TagString: Player
@@ -740,6 +739,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeAttackStrategy
   _meleeAttackData: {fileID: 11400000, guid: 3874b33b6ce54b849af454eb61ed5ea4, type: 2}
+--- !u!114 &6527412316840103686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2511438768263475401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e545928541b874e8053cd626410a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _movementBase: {fileID: 7162682655650916106}
+  _hitbox: {fileID: 7809330539225864080}
 --- !u!1 &2880830138094642791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,7 +1212,7 @@ Transform:
   m_GameObject: {fileID: 6065834716011429035}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1463,9 +1476,7 @@ GameObject:
   - component: {fileID: 7101408821228708346}
   - component: {fileID: 2708507066674380346}
   - component: {fileID: 6443777087678772007}
-  - component: {fileID: 213586719260208206}
   - component: {fileID: 1255662501661695068}
-  - component: {fileID: 1351050608480426200}
   - component: {fileID: 8222544664920742108}
   m_Layer: 8
   m_Name: Player
@@ -1602,7 +1613,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementComponent
   _walkingSpeed: 2
-  _speedAggregator: {fileID: 1351050608480426200}
   _externalVelocity: {fileID: 1255662501661695068}
   _animationController: {fileID: 5525736473637658669}
   _rigidbody2D: {fileID: 2409675021506303179}
@@ -1639,7 +1649,6 @@ MonoBehaviour:
   _usage: 0
   _restore: 0
   _speedMultiplier: 1.8
-  _speedAggregator: {fileID: 1351050608480426200}
 --- !u!114 &6443777087678772007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1657,23 +1666,6 @@ MonoBehaviour:
   _dashInvincibilityDuration: 1
   _externalVelocity: {fileID: 1255662501661695068}
   _health: {fileID: 4202473506490510331}
---- !u!114 &213586719260208206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf280afc60b53334b9fa04116c7a1796, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  _health: {fileID: 4202473506490510331}
-  _animator: {fileID: 3750387735865093422}
-  _movementBase: {fileID: 7162682655650916106}
-  _entityAttack: {fileID: 4452931388105062793}
-  _entityController: {fileID: 7101408821228708346}
 --- !u!114 &1255662501661695068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1688,18 +1680,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExternalVelocity
   decayRate: 8
   restThreshold: 0.05
---- !u!114 &1351050608480426200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559287907167481913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b8ebd41bcd4c443a146d40bfc706b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpeedAggregator
 --- !u!114 &8222544664920742108
 MonoBehaviour:
   m_ObjectHideFlags: 0

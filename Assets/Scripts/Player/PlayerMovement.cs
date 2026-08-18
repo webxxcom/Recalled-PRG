@@ -5,7 +5,9 @@ public class PlayerMovement : MovementBase
 {
     [SerializeField] PlayerSprinting _playerSprinting;
     [SerializeField] PlayerDash _playerDash;
-    [SerializeField] PlayerCombatData _playerCombat; 
+    [SerializeField] PlayerCombatData _playerCombat;
+
+    public bool IsSprinting => _playerSprinting.IsActive;
 
     void OnMove(InputValue value)
         => MovementIntention = value.Get<Vector2>();

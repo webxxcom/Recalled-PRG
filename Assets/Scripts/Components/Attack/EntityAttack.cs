@@ -13,8 +13,8 @@ public abstract class EntityAttack : MonoBehaviour
     public event Action OnAttackStarted;
     public event Action OnAttackFinished;
 
-    AttackStrategy _currentAttack;
-    AttackContext _attackContext;
+    protected AttackStrategy _currentAttack;
+    protected AttackContext _attackContext;
     protected void Attack(AttackStrategy attackStrategy, AttackContext attackContext)
     {
         _currentAttack = attackStrategy;

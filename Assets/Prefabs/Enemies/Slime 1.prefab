@@ -1742,7 +1742,6 @@ MonoBehaviour:
   _walkingSound: {fileID: 8300000, guid: 54c15e2b384bbcf4c92f79cf35c3c9a3, type: 3}
   _delayBetween: 0.8
   _movementBase: {fileID: 2853014250811514214}
-  _speedAggregator: {fileID: 3008148837239758149}
 --- !u!1 &6097617918995308611
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,9 +1755,7 @@ GameObject:
   - component: {fileID: 1807106667663726009}
   - component: {fileID: 6699509137040294474}
   - component: {fileID: 2853014250811514214}
-  - component: {fileID: 2669649551017139641}
   - component: {fileID: 4598033842935235403}
-  - component: {fileID: 3008148837239758149}
   - component: {fileID: 6254559109632540528}
   m_Layer: 11
   m_Name: Slime 1
@@ -1876,28 +1873,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityMovement
   _walkingSpeed: 1.6
-  _speedAggregator: {fileID: 3008148837239758149}
   _externalVelocity: {fileID: 4598033842935235403}
   _animationController: {fileID: 7181884925184514871}
   _rigidbody2D: {fileID: 181632092390176455}
   _movementAIConfig: {fileID: 11400000, guid: 72187b7b600538c4188fb4aa064706ac, type: 2}
---- !u!114 &2669649551017139641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097617918995308611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf280afc60b53334b9fa04116c7a1796, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimatorRelay
-  _health: {fileID: 3686550405581697464}
-  _animator: {fileID: 3120718460063332462}
-  _movementBase: {fileID: 2853014250811514214}
-  _entityAttack: {fileID: 7912021147809363513}
-  _entityController: {fileID: 6699509137040294474}
 --- !u!114 &4598033842935235403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1912,18 +1891,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExternalVelocity
   decayRate: 8
   restThreshold: 0.05
---- !u!114 &3008148837239758149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097617918995308611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b8ebd41bcd4c443a146d40bfc706b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpeedAggregator
 --- !u!114 &6254559109632540528
 MonoBehaviour:
   m_ObjectHideFlags: 0

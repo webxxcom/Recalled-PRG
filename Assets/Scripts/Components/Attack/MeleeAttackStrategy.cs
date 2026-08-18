@@ -10,31 +10,16 @@ public class MeleeAttackStrategy : AttackStrategy
 
     protected override bool WithinAttackRange(AttackContext attackContext)
     {
-        HealthResource v = attackContext.Target.GetComponentInChildren<HealthResource>();
-
-        return _hitbox.IsTouching(v.Hurtbox);
+        return _hitbox.IsTouching(attackContext.Target.GetComponent<Collider2D>());
     }
 
     CapsuleCollider2D _hitbox;
-    MovementBase _movementBase;
     EntityController _entityController;
 
     private void Awake()
     {
         _hitbox = GetComponent<CapsuleCollider2D>();
         _entityController = GetComponentInParent<EntityController>();
-        _movementBase = GetComponentInParent<MovementBase>();
-    }
-
-    private void OnEnable()
-        => _movementBase.OnMovement += SetAttackCollisionOffset;
-    private void OnDisable()
-        => _movementBase.OnMovement -= SetAttackCollisionOffset;
-
-    void SetAttackCollisionOffset()
-    {
-        _hitbox.transform.rotation
-            = Quaternion.FromToRotation(Vector2.right, _movementBase.MovementIntention);
     }
 
     readonly List<Collider2D> _processedTargets = new();

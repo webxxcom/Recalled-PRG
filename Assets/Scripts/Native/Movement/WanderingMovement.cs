@@ -24,7 +24,7 @@ public class WanderingMovement : MovementStrategy
     bool isIdle = false;
     float CurrentStateDuration = 0f;
 
-    public override Vector2 GetDirection(GameObject origin, GameObject _)
+    public override Vector2 GetDirection(GameObject _, GameObject _1)
     {
         if (ShouldChangeDirection)
             AdvanceState();

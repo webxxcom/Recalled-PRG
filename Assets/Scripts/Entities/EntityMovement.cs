@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EntityMovement : MovementBase
 {
+    [Header("Config")]
     [SerializeField] MovementAIConfig _movementAIConfig;
 
     MovementStrategy _idleMovementStrategy;

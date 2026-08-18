@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class PlayerDash : MonoBehaviour
 {
     [SerializeField] float _dashReloadTime;

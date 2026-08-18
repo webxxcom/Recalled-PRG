@@ -1,17 +1,19 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpeedAggregator))]
+[DisallowMultipleComponent]
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerSprinting : MonoBehaviour
 {
     [SerializeField] float _initValue;
     [SerializeField] float _usage;
     [SerializeField] float _restore;
     [SerializeField] float _speedMultiplier;
-    [SerializeField] SpeedAggregator _speedAggregator;
 
     public float SpeedMultiplier => _speedMultiplier;
 
+    PlayerMovement _playerMovement;
     bool _isActive;
+    
     public bool IsActive
     {
         get => _isActive;
@@ -20,9 +22,9 @@ public class PlayerSprinting : MonoBehaviour
             if (_isActive != value)
             {
                 if (value)
-                    _speedAggregator.Add(_speedMultiplier);
+                    _playerMovement.AddSpeedCoef(_speedMultiplier);
                 else
-                    _speedAggregator.Remove(_speedMultiplier);
+                    _playerMovement.RemoveSpeedCoef(_speedMultiplier);
             }
             _isActive = value;
         }
@@ -30,7 +32,11 @@ public class PlayerSprinting : MonoBehaviour
     float _current;
 
     private void Awake()
-        => _current = _initValue;
+    {
+        _playerMovement = GetComponent<PlayerMovement>();
+        _current = _initValue;
+    }
+
     public void Sprint(bool isPressed)
         => IsActive = isPressed;
 
@@ -58,12 +64,4 @@ public class PlayerSprinting : MonoBehaviour
                 _current += _restore;
         }
     }
-
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        if (_speedAggregator == null)
-            _speedAggregator = GetComponent<SpeedAggregator>();
-    }
-#endif
 }

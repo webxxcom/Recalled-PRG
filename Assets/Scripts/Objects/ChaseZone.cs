@@ -1,30 +1,33 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ChaseZone : MonoBehaviour
 {
-    public GameObject CurrentTarget { get; private set; }
+    [SerializeField] LayerMask _trackedLayers;
+    public GameObject CurrentTarget => _targets.FirstOrDefault();
 
     [Header("Broadcasts to")]
     [SerializeField] GameobjectGameEvent OnTargetEnteredTheZone;
     [SerializeField] GameobjectGameEvent OnTargetLeftTheZone;
 
+    readonly List<GameObject> _targets = new(10);
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if ((_trackedLayers.value & (1 << collision.gameObject.layer)) != 0)
         {
-            CurrentTarget = collision.gameObject;
+            _targets.Add(collision.gameObject);
 
-            OnTargetEnteredTheZone.Invoke(collision.gameObject);
+            OnTargetEnteredTheZone.Invoke(CurrentTarget);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (_targets.Remove(collision.gameObject))
         {
-            CurrentTarget = null;
-
-            OnTargetLeftTheZone.Invoke(collision.gameObject);
+            OnTargetLeftTheZone.Invoke(CurrentTarget);
         }
     }
 }

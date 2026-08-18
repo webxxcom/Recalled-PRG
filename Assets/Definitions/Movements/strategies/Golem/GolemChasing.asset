@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c1114f7e9e43484a919319e26f75933, type: 3}
-  m_Name: ChasingMovementStrategySO
+  m_Name: GolemChasing
   m_EditorClassIdentifier: Assembly-CSharp::ChaseMovementComponent
-  <MinDistanceToTarget>k__BackingField: 1.2
-  <Delta>k__BackingField: 0
+  <MinDistanceToTarget>k__BackingField: 7
+  <Delta>k__BackingField: 2

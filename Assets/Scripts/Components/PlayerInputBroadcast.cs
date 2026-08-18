@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class PlayerInputBroadcast : MonoBehaviour
 {
     [Header("Broadcasts to")]

@@ -3,12 +3,15 @@
 public class ZoneTargetProvider : TargetProvider
 {
     [Header("Listens to")]
-    [SerializeField] VoidGameEvent OnTargetEnteredZone;
-    [SerializeField] VoidGameEvent OnTargetLeftZone;
+    [SerializeField] GameobjectGameEvent OnTargetEnteredZone;
+    [SerializeField] GameobjectGameEvent OnTargetLeftZone;
 
-    void SetTarget() => CurrentTarget = GameObject.FindAnyObjectByType<PlayerController>().gameObject;
-
-    void UnsetTarget() => CurrentTarget = null;
+    void SetTarget(GameObject gameObject)
+    {
+        CurrentTarget = gameObject != null
+            ? gameObject.GetComponentInChildren<HealthResource>().gameObject
+            : null;
+    }
 
     public override TargetProvider Init(TargetProviderSO other)
     {
@@ -17,7 +20,7 @@ public class ZoneTargetProvider : TargetProvider
         OnTargetEnteredZone = zoneTargetProviderSO.OnTargetEnteredZone;
         OnTargetLeftZone = zoneTargetProviderSO.OnTargetLeftZone;
         if (OnTargetEnteredZone) OnTargetEnteredZone.OnEventRaised += SetTarget;
-        if (OnTargetLeftZone) OnTargetLeftZone.OnEventRaised += UnsetTarget;
+        if (OnTargetLeftZone) OnTargetLeftZone.OnEventRaised += SetTarget;
 
         return this;
     }

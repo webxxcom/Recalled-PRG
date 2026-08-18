@@ -5,19 +5,20 @@ using UnityEngine;
 public abstract class MovementBase : MonoBehaviour
 {
     [SerializeField] float _walkingSpeed;
-    [SerializeField] SpeedAggregator _speedAggregator;
 
-    public bool MovementBlocked { get; set; }
     public Vector2 LastMovement { get; set; }
     public bool IsWalking => MovementIntention != Vector2.zero;
     public Vector2 FacingDirection => MovementIntention != Vector2.zero ? MovementIntention : LastMovement;
+    public float CurrentSpeed => _rigidbody2D.linearVelocity.magnitude;
 
     [Header("Uses")]
-    [SerializeField] protected ExternalVelocity _externalVelocity;
-    [SerializeField] protected AnimationController _animationController;
-    [SerializeField] protected Rigidbody2D _rigidbody2D;
+    [SerializeField] ExternalVelocity _externalVelocity;
+    [SerializeField] AnimationController _animationController;
+    [SerializeField] Rigidbody2D _rigidbody2D;
 
+    readonly SpeedAggregator _speedAggregator = new();
     Vector2 _movementIntention;
+
     public Vector2 MovementIntention
     {
         get => _movementIntention;
@@ -46,10 +47,10 @@ public abstract class MovementBase : MonoBehaviour
     protected abstract Vector2 GetMovementIntention();
     public Vector2 GetFinalMovement()
     {
-        if (!isActiveAndEnabled || MovementBlocked)
+        if (!isActiveAndEnabled)
             return Vector2.zero;
 
-        float speedCoeficient = _speedAggregator != null ? _speedAggregator.Get() : 1f;
+        float speedCoeficient = _speedAggregator.Get();
         Vector2 externalVelocity = _externalVelocity != null ? _externalVelocity.TickAndGet(Time.fixedDeltaTime) : Vector2.zero;
         Vector2 finalMovement = GetMovementIntention();
         return (speedCoeficient * _walkingSpeed * finalMovement) + externalVelocity;
@@ -67,6 +68,9 @@ public abstract class MovementBase : MonoBehaviour
         _animationController.MoveAnimation(FacingDirection,
             _rigidbody2D.linearVelocity.magnitude / 4f);
     }
+
+    public void AddSpeedCoef(float coef) => _speedAggregator.Add(coef);
+    public void RemoveSpeedCoef(float coef) => _speedAggregator.Remove(coef);
 
 #if UNITY_EDITOR
     private void OnValidate()

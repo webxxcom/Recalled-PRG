@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class ExternalVelocity : MonoBehaviour
 {
-    [SerializeField] private float decayRate = 8f;
-    [SerializeField] private float restThreshold = 0.05f;
+    [SerializeField] float decayRate = 8f;
+    [SerializeField] float restThreshold = 0.05f;
 
-    private Vector2 _velocity;
+    Vector2 _velocity;
 
     public void Add(Vector2 velocity) => _velocity += velocity;
 

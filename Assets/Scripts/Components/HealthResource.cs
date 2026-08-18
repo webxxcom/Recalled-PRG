@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 [RequireComponent(typeof(Collider2D))]
 public class HealthResource : ValueResource
 {

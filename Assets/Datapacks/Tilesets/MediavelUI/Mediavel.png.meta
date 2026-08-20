@@ -4085,50 +4085,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mediavel_10
-      rect:
-        serializedVersion: 2
-        x: 321
-        y: 737
-        width: 92
-        height: 29
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 717a191317e6a97b0800000000000000
-      internalID: -5216735785913309417
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mediavel_11
-      rect:
-        serializedVersion: 2
-        x: 418
-        y: 737
-        width: 92
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 41f4fcf2a6906c7f0800000000000000
-      internalID: -592775949279342828
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Mediavel_12
       rect:
         serializedVersion: 2
@@ -4908,7 +4864,7 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 3, y: 5, z: 3, w: 3}
       customData: 
       outline: []
       physicsShape: []
@@ -4930,7 +4886,7 @@ TextureImporter:
         height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 3, y: 4, z: 3, w: 3}
       customData: 
       outline: []
       physicsShape: []
@@ -5642,50 +5598,6 @@ TextureImporter:
       bones: []
       spriteID: 232f5af87d95007c0800000000000000
       internalID: -4107184077799034318
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mediavel_81
-      rect:
-        serializedVersion: 2
-        x: 321
-        y: 706
-        width: 92
-        height: 29
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ee35734d169addb10800000000000000
-      internalID: 2007947246514426862
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mediavel_82
-      rect:
-        serializedVersion: 2
-        x: 418
-        y: 706
-        width: 92
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8dbb233899cbc02d0800000000000000
-      internalID: -3311064258506998824
       vertices: []
       indices: 
       edges: []
@@ -7209,50 +7121,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mediavel_152
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 673
-        width: 92
-        height: 29
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: acb1b4cf1d49c5390800000000000000
-      internalID: -7828218422674908214
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mediavel_153
-      rect:
-        serializedVersion: 2
-        x: 417
-        y: 673
-        width: 92
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 52c0fb01e2d200f70800000000000000
-      internalID: 9151364118689549349
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Mediavel_154
       rect:
         serializedVersion: 2
@@ -8524,28 +8392,6 @@ TextureImporter:
       bones: []
       spriteID: f6756dea2dceedc90800000000000000
       internalID: -7143011569342458001
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mediavel_212
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 559
-        width: 73
-        height: 114
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 27ef6f162386385e0800000000000000
-      internalID: -1908567251473727886
       vertices: []
       indices: 
       edges: []
@@ -12555,28 +12401,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mediavel_396
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 465
-        width: 73
-        height: 94
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d57225e6b8971ebb0800000000000000
-      internalID: -4908508479098837155
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Mediavel_397
       rect:
         serializedVersion: 2
@@ -12888,13 +12712,13 @@ TextureImporter:
       name: Mediavel_411
       rect:
         serializedVersion: 2
-        x: 271
-        y: 511
-        width: 50
-        height: 18
+        x: 272
+        y: 512
+        width: 48
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 6, y: 5, z: 6, w: 2}
       customData: 
       outline: []
       physicsShape: []
@@ -12910,13 +12734,13 @@ TextureImporter:
       name: Mediavel_412
       rect:
         serializedVersion: 2
-        x: 328
-        y: 511
-        width: 34
-        height: 18
+        x: 329
+        y: 512
+        width: 32
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 7, y: 6, z: 6, w: 3}
       customData: 
       outline: []
       physicsShape: []
@@ -12932,10 +12756,10 @@ TextureImporter:
       name: Mediavel_413
       rect:
         serializedVersion: 2
-        x: 367
-        y: 511
-        width: 18
-        height: 18
+        x: 368
+        y: 512
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -12954,13 +12778,13 @@ TextureImporter:
       name: Mediavel_414
       rect:
         serializedVersion: 2
-        x: 399
-        y: 511
-        width: 50
-        height: 20
+        x: 400
+        y: 512
+        width: 48
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 6, y: 5, z: 6, w: 3}
       customData: 
       outline: []
       physicsShape: []
@@ -12976,13 +12800,13 @@ TextureImporter:
       name: Mediavel_415
       rect:
         serializedVersion: 2
-        x: 455
-        y: 511
-        width: 34
-        height: 18
+        x: 456
+        y: 512
+        width: 32
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 6, y: 5, z: 6, w: 3}
       customData: 
       outline: []
       physicsShape: []
@@ -12998,10 +12822,10 @@ TextureImporter:
       name: Mediavel_416
       rect:
         serializedVersion: 2
-        x: 495
-        y: 511
-        width: 18
-        height: 18
+        x: 496
+        y: 512
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -13290,7 +13114,7 @@ TextureImporter:
         height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 6, y: 5, z: 6, w: 3}
       customData: 
       outline: []
       physicsShape: []
@@ -13306,13 +13130,13 @@ TextureImporter:
       name: Mediavel_430
       rect:
         serializedVersion: 2
-        x: 328
-        y: 447
-        width: 34
-        height: 18
+        x: 329
+        y: 448
+        width: 32
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 6, y: 5, z: 5, w: 1}
       customData: 
       outline: []
       physicsShape: []
@@ -27520,11 +27344,11 @@ TextureImporter:
         serializedVersion: 2
         x: 833
         y: 84
-        width: 152
+        width: 151
         height: 91
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 14, y: 31, z: 13, w: 28}
       customData: 
       outline: []
       physicsShape: []
@@ -28118,7 +27942,7 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 2, y: 2, z: 2, w: 2}
       customData: 
       outline: []
       physicsShape: []
@@ -28184,7 +28008,7 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 2, y: 2, z: 2, w: 2}
       customData: 
       outline: []
       physicsShape: []
@@ -28206,7 +28030,7 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 2, y: 2, z: 2, w: 2}
       customData: 
       outline: []
       physicsShape: []

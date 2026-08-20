@@ -33,7 +33,7 @@ public class HealthResource : ValueResource
 
         if (_combatData) damageInfo.Amount = Mathf.RoundToInt(damageInfo.Amount / _combatData.Protection);
         OnHpChange?.Invoke(damageInfo);
-        int applied = Change(-damageInfo.Amount);
+        int applied = Replenish(-damageInfo.Amount);
         if (applied == 0)
             return;
 

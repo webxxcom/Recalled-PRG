@@ -9,7 +9,7 @@ public class BarScriptUI : MonoBehaviour
     [SerializeField] Image _bar;
     [SerializeField] float _animationSpeed;
 
-    public float MaxValue { get; set; }
+    public float MaxValue { get; private set; }
     public float Value { get; private set; }
 
     public void Init(IntVariable intVariable, int max)
@@ -24,7 +24,8 @@ public class BarScriptUI : MonoBehaviour
 
     private void OnEnable()
     {
-        Set(_valueVariable.Value);
+        MaxValue = _valueVariable.Value;
+        Set(MaxValue);
 
         _valueVariable.OnValueChanged += OnValueChanged;
     }
@@ -35,7 +36,7 @@ public class BarScriptUI : MonoBehaviour
     IEnumerator ProgressBars()
     {
         float targetValue = Value / MaxValue;
-        while (_bar.fillAmount - targetValue > float.Epsilon)
+        while (!Mathf.Approximately(_bar.fillAmount, targetValue))
         {
             _bar.fillAmount
                 = Mathf.Lerp(_bar.fillAmount, targetValue, Time.deltaTime * _animationSpeed);

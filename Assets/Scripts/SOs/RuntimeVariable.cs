@@ -16,4 +16,16 @@ public abstract class RuntimeVariable<T> : ScriptableObject
     }
 
     public event Action<T> OnValueChanged;
+
+#if UNITY_EDITOR
+    T _prev;
+    private void OnValidate()
+    {
+        if (!_prev.Equals(_value))
+        {
+            Value = _value;
+            _prev = _value;
+        }
+    }
+#endif
 }

@@ -86,7 +86,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.875, y: 0.875}
+  m_Size: {x: 0.5, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -271,9 +271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418a9a8b047a1c843aecb9bd700ae752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthResource
-  _config: {fileID: 11400000, guid: 8c7025ebdf498ce49baf01dcca61e655, type: 2}
+  _config: {fileID: 11400000, guid: caa89fe73ce9c384c967b866d6283b80, type: 2}
   _maxValue: 100
-  _currentValue: {fileID: 0}
+  _currentValue: {fileID: 11400000, guid: 060557ec0ac49624abeae20083c92407, type: 2}
   _isInfinite: 0
   _combatData: {fileID: 11400000, guid: dae60ef3747aed242a63d444fce3392e, type: 2}
 --- !u!114 &8594877766703153062
@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 2047893682118185401}
   - component: {fileID: 7249592558409531431}
   - component: {fileID: 6510005132233857990}
+  - component: {fileID: 8385557649447130205}
   m_Layer: 8
   m_Name: Locomotion
   m_TagString: Untagged
@@ -492,6 +493,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MovementSound
   _walkingSound: {fileID: 8300000, guid: 1bca49e9e54fd094fa5b46805cbfbdee, type: 3}
   _playerMovement: {fileID: 7162682655650916106}
+  _walkingCoef: 0.61
+  _runningCoef: 1.3
+--- !u!114 &8385557649447130205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822602623840076642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accc2a51c5101a541ac6c655e6d48853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _sound: {fileID: 8300000, guid: 44f0744d827eb87458b7b34564810f6f, type: 3}
 --- !u!1 &1852675207412296864
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,8 +651,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthSound
   _hurtSound: {fileID: 8300000, guid: 8e3ad7af1067fdf40b43f4dfb50ee4e8, type: 3}
-  _healingSound: {fileID: 8300000, guid: e637efd8bbe00b6499179c92253380c2, type: 3}
-  _deathSound: {fileID: 8300000, guid: 86f39359da3d5ef4e82008b0e51f0190, type: 3}
+  _healingSound: {fileID: 8300000, guid: c56233f9bd3518743bf8b78cbe9f106e, type: 3}
+  _deathSound: {fileID: 8300000, guid: bf11a0f453f20ad4ebde085a610fdd1a, type: 3}
   _healthProvider: {fileID: 4202473506490510331}
 --- !u!1 &2511438768263475401
 GameObject:
@@ -987,7 +1003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8e95f4803037e04e8a20f4ec090c4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackSound
-  _attackSound: {fileID: 8300000, guid: 9bd366d050895464bbd71947b93864cf, type: 3}
+  _attackSound: {fileID: 8300000, guid: 8f45c114636290a4f999670c540994b2, type: 3}
   entityAttackComponent: {fileID: 4452931388105062793}
 --- !u!1 &4729381507060339331
 GameObject:
@@ -1597,7 +1613,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.026332354, y: 0.037299313}
+  m_Offset: {x: -0.03, y: 0.06}
   m_Size: {x: 0.7548744, y: 0.3412516}
   m_Direction: 1
 --- !u!114 &7162682655650916106
@@ -1615,7 +1631,6 @@ MonoBehaviour:
   _walkingSpeed: 2
   _externalVelocity: {fileID: 1255662501661695068}
   _animationController: {fileID: 5525736473637658669}
-  _rigidbody2D: {fileID: 2409675021506303179}
   _playerSprinting: {fileID: 2708507066674380346}
   _playerDash: {fileID: 6443777087678772007}
   _playerCombat: {fileID: 11400000, guid: dae60ef3747aed242a63d444fce3392e, type: 2}
@@ -1645,9 +1660,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff72821c3f6d694b9378707447cb063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _initValue: 100
-  _usage: 0
-  _restore: 0
+  _config: {fileID: 11400000, guid: 76f4a1503ab62c04986250e1c1ff5811, type: 2}
+  _maxValue: 1000
+  _currentValue: {fileID: 11400000, guid: 152dda9ce74a4254aaee34009d4ca0b7, type: 2}
+  _isInfinite: 1
+  _usage: 4
+  _restore: 3
   _speedMultiplier: 1.8
 --- !u!114 &6443777087678772007
 MonoBehaviour:
@@ -1661,11 +1679,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7818f74abb967154ab32c1b710102006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _dashReloadTime: 0
-  _dashForce: 15
-  _dashInvincibilityDuration: 1
-  _externalVelocity: {fileID: 1255662501661695068}
-  _health: {fileID: 4202473506490510331}
+  _consumeSprntNorm: 0.2
+  _force: 10
+  _invincibilityDuration: 1
+  _vfx: {fileID: 3972245231873520521, guid: 178e4fbad5d09b24eb7efa71e5f00356, type: 3}
 --- !u!114 &1255662501661695068
 MonoBehaviour:
   m_ObjectHideFlags: 0

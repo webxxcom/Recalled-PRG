@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Canvas))]
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : UIScreen
 {
     [SerializeField] InventorySO _inventory;
 
@@ -21,43 +20,29 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] GameobjectGameEvent OnUIElementSelected;
     [SerializeField] VoidGameEvent OnUIElementDeselected;
 
-    Canvas _canvas;
     DescriptionManager _descriptionManager;
     InventorySlot _selectedInventorySlot;
     readonly List<GameObject> _createdInventorySlots = new();
 
     public event Action OnEquippedItems;
 
-    public bool IsActive
+    protected override void Awake()
     {
-        get => _canvas.enabled;
-        set
-        {
-            if (value) Open();
-            else Close();
-        }
-    }
-
-    private void Awake()
-    {
-        _canvas = GetComponent<Canvas>();
-        _canvas.enabled = false;
-
         _descriptionManager = Utils.FindOrThrow(FindAnyObjectByType<DescriptionManager>);
     }
 
-    void ToggleInventory() => IsActive = !IsActive;
-
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        OnInventory.OnEventRaised += ToggleInventory;
+        base.OnEnable();
+
         OnUIElementSelected.OnEventRaised += ItemSelected;
         OnUIElementDeselected.OnEventRaised += ItemDeselected;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
-        OnInventory.OnEventRaised -= ToggleInventory;
+        base.OnDisable();
+
         OnUIElementSelected.OnEventRaised -= ItemSelected;
         OnUIElementDeselected.OnEventRaised -= ItemDeselected;
     }
@@ -83,18 +68,14 @@ public class InventoryManager : MonoBehaviour
         else _bootsInventoryItem.Absent();
     }
 
-    public void Open()
+    public override void Open()
     {
-        _canvas.enabled = true;
-
         RefreshGeneralSlots();
         RefreshEquipSlots();
     }
 
-    public void Close()
+    public override void Close()
     {
-        _canvas.enabled = false;
-
         _createdInventorySlots.ForEach(ii => Destroy(ii));
         _createdInventorySlots.Clear();
         _highlighter.Hide();

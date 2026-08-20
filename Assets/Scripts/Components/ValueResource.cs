@@ -1,5 +1,4 @@
-﻿using Antlr4.Runtime.Tree;
-using System;
+﻿using System;
 using UnityEngine;
 
 public abstract class ValueResource : MonoBehaviour
@@ -7,6 +6,7 @@ public abstract class ValueResource : MonoBehaviour
     [SerializeField] ValueProviderConfig _config;
 
     [SerializeField] int _maxValue;
+    [Tooltip("Set the value variable in the config")]
     [SerializeField] IntVariable _currentValue;
     [SerializeField] bool _isInfinite;
 
@@ -29,7 +29,7 @@ public abstract class ValueResource : MonoBehaviour
     }
 
     /// <returns>The delta actually applied, after clamping</returns>
-    public int Change(int delta)
+    public int Replenish(int delta)
     {
         if (delta == 0)
             return 0;
@@ -52,14 +52,17 @@ public abstract class ValueResource : MonoBehaviour
 
         return applied;
     }
+    public int Consume(int amount) => Replenish(-amount);
 
 #if UNITY_EDITOR
     private void OnValidate()
     {
         if (_config != null)
         {
-            if (_currentValue == null)
+            if (_config.CurrentValue == null) // CurrentValue is absent - it's not set in the config - create it
                 _currentValue = ScriptableObject.CreateInstance<IntVariable>();
+            else // The Variable is set for bosses and Player
+                _currentValue = _config.CurrentValue;
 
             _maxValue = _config.MaximumValue;
             _currentValue.Value = _maxValue;

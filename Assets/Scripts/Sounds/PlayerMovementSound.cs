@@ -4,6 +4,8 @@ public class PlayerMovementSound : EntitySound
 {
     [SerializeField] AudioClip _walkingSound;
     [SerializeField] PlayerMovement _playerMovement;
+    [SerializeField] float _walkingCoef;
+    [SerializeField] float _runningCoef;
 
     bool _isPlaying;
 
@@ -25,7 +27,7 @@ public class PlayerMovementSound : EntitySound
     float _elapsed = 0;
     void UpdateMovementSound()
     {
-        float DelayBeetweenPlays = (_playerMovement.IsSprinting ? 0.4f : 0.3f) / _playerMovement.CurrentSpeed;
+        float DelayBeetweenPlays = (_playerMovement.IsSprinting ? _runningCoef : _walkingCoef) / _playerMovement.CurrentSpeed;
         _elapsed += Time.deltaTime;
 
         if (_elapsed > DelayBeetweenPlays && _playerMovement.IsWalking)

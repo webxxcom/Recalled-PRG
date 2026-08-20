@@ -2,8 +2,8 @@
 
 public class ChaseMovement : MovementStrategy
 {
-    float _distanceToTarget;
-    float _delta;
+    [SerializeField] float _distanceToTarget;
+    [SerializeField] float _delta;
 
     public override Vector2 GetDirection(GameObject origin, GameObject target)
     {

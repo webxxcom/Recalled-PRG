@@ -19,10 +19,10 @@ public class WanderingMovement : MovementStrategy
             _elapsedSinceChangingDirection = 0;
         }
     }
-    float _elapsedSinceChangingDirection = 0;
-    Vector2 _intermediateDirection;
+    [SerializeField] float _elapsedSinceChangingDirection = 0;
+    [SerializeField] Vector2 _intermediateDirection;
     bool _isIdle;
-    float _currentStateDuration;
+    [SerializeField] float _currentStateDuration;
     Collider2D _collider2D;
 
     bool ShouldChangeDirection => _elapsedSinceChangingDirection >= _currentStateDuration;

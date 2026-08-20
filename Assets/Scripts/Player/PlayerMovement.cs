@@ -3,8 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MovementBase
 {
-    [SerializeField] PlayerSprinting _playerSprinting;
-    [SerializeField] PlayerDash _playerDash;
+    [SerializeField] SprintingResource _playerSprinting;
+    [SerializeField] Dash _playerDash;
     [SerializeField] PlayerCombatData _playerCombat;
 
     public bool IsSprinting => _playerSprinting.IsActive;
@@ -14,12 +14,12 @@ public class PlayerMovement : MovementBase
 
     void OnDash(InputValue _)
     {
-        if (_playerDash != null) _playerDash.Dash(FacingDirection);
+        if (_playerDash != null) _playerDash.TryDash(FacingDirection);
     }
 
     void OnSprint(InputValue value)
     {
-        if (_playerSprinting != null) _playerSprinting.Sprint(value.isPressed);
+        if (_playerSprinting != null) _playerSprinting.Toggle(value.isPressed);
     }
 
     protected override Vector2 GetMovementIntention()

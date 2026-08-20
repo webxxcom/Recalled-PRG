@@ -14,8 +14,8 @@ public abstract class MovementBase : MonoBehaviour
     [Header("Uses")]
     [SerializeField] ExternalVelocity _externalVelocity;
     [SerializeField] AnimationController _animationController;
-    [SerializeField] Rigidbody2D _rigidbody2D;
 
+    Rigidbody2D _rigidbody2D;
     readonly SpeedAggregator _speedAggregator = new();
     Vector2 _movementIntention;
 

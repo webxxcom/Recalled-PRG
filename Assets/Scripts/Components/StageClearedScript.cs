@@ -20,7 +20,6 @@ public class StageScript : MonoBehaviour
 
     private void Awake()
         => _collider2D = GetComponent<Collider2D>();
-
     private void OnEnable()
         => _enemies.OnChanged += CheckStageClear;
     private void OnDisable()
